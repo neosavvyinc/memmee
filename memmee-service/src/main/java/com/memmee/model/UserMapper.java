@@ -1,7 +1,6 @@
-package com.neosavvy.model;
+package com.memmee.model;
 
 import org.skife.jdbi.v2.StatementContext;
-import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
 import java.sql.ResultSet;

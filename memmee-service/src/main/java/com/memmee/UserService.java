@@ -1,4 +1,4 @@
-package com.neosavvy;
+package com.memmee;
 
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Environment;

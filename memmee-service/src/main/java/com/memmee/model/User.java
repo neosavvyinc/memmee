@@ -1,4 +1,4 @@
-package com.neosavvy.model;
+package com.memmee.model;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 

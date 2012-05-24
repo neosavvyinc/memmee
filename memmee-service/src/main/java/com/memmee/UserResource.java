@@ -1,6 +1,6 @@
-package com.neosavvy;
+package com.memmee;
 
-import com.neosavvy.model.User;
+import com.memmee.model.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

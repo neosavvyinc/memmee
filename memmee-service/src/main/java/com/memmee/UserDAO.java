@@ -1,7 +1,7 @@
-package com.neosavvy;
+package com.memmee;
 
-import com.neosavvy.model.User;
-import com.neosavvy.model.UserMapper;
+import com.memmee.model.User;
+import com.memmee.model.UserMapper;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
