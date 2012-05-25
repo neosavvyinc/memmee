@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-//eclipse
+
 public class MemmeeConfiguration extends Configuration {
 
     @Valid
