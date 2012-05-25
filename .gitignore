@@ -1,1 +1,8 @@
 *.iml
+target
+*.ipr
+*.iws
+.eclipse
+.project
+.m2
+.DS_Store
