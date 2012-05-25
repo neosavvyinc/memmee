@@ -1,7 +1,7 @@
-package com.memmee;
+package com.memmee.user.dao;
 
-import com.memmee.model.User;
-import com.memmee.model.UserMapper;
+import com.memmee.user.dto.MemmeeUser;
+import com.memmee.user.dto.MemmeeUserMapper;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
@@ -16,11 +16,11 @@ import java.util.List;
  * Time: 2:08 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface MemmeeDAO {
+public interface MemmeeUserDAO {
 
     @SqlQuery("select * from user")
-    @Mapper(UserMapper.class)
-    List<User> findAll();
+    @Mapper(MemmeeUserMapper.class)
+    List<MemmeeUser> findAll();
 
     @SqlUpdate("insert into user (id, firstName, lastName, email) values (:id, :firstName, :lastName, :email)")
     void insert(
