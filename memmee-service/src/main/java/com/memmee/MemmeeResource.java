@@ -1,7 +1,7 @@
 package com.memmee;
 
-import com.memmee.user.dao.MemmeeUserDAO;
-import com.memmee.user.dto.MemmeeUser;
+import com.memmee.user.dao.UserDAO;
+import com.memmee.user.dto.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -18,9 +18,9 @@ import java.util.List;
 @Path("/backend")
 public class MemmeeResource {
 
-    private MemmeeUserDAO memmeeDAO;
+    private UserDAO memmeeDAO;
 
-    public MemmeeResource(MemmeeUserDAO memmeeDAO) {
+    public MemmeeResource(UserDAO memmeeDAO) {
         super();
         this.memmeeDAO = memmeeDAO;
     }
@@ -29,7 +29,7 @@ public class MemmeeResource {
     @Path("/user")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public List<MemmeeUser> fetch(){
+    public List<User> fetch(){
 
         return memmeeDAO.findAll();
     }
@@ -38,7 +38,7 @@ public class MemmeeResource {
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public int update(@PathParam("id") Long id, MemmeeUser user)
+    public int update(@PathParam("id") Long id, User user)
     {
         return memmeeDAO.update(
                 id,
@@ -52,7 +52,7 @@ public class MemmeeResource {
     @Path("/user")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public void add(MemmeeUser user)
+    public void add(User user)
     {
     	memmeeDAO.insert(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail());
     }

@@ -14,11 +14,11 @@ import java.sql.SQLException;
  * Time: 2:17 PM
  * To change this template use File | Settings | File Templates.
  */
-public class MemmeeUserMapper implements ResultSetMapper<MemmeeUser> {
+public class UserMapper implements ResultSetMapper<User> {
 
     @Override
-    public MemmeeUser map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
-        MemmeeUser user = new MemmeeUser();
+    public User map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
+        User user = new User();
 
         user.setEmail(resultSet.getString("email"));
         user.setFirstName(resultSet.getString("firstName"));

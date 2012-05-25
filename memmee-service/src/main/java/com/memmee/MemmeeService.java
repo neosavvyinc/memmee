@@ -1,6 +1,6 @@
 package com.memmee;
 
-import com.memmee.user.dao.MemmeeUserDAO;
+import com.memmee.user.dao.UserDAO;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.Database;
@@ -33,7 +33,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
 
         final DatabaseFactory factory = new DatabaseFactory(environment);
         final Database db = factory.build(userConfiguration.getDatabase(), "mysql");
-        final MemmeeUserDAO dao = db.onDemand(MemmeeUserDAO.class);
+        final UserDAO dao = db.onDemand(UserDAO.class);
         environment.addResource(new MemmeeResource(dao));
     }
 }
