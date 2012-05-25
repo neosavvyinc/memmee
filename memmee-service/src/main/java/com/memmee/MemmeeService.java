@@ -13,6 +13,8 @@ import com.yammer.dropwizard.db.DatabaseFactory;
  * Time: 11:49 AM
  * To change this template use File | Settings | File Templates.
  */
+
+//test from home 3
 public class MemmeeService extends Service<MemmeeConfiguration> {
 
     public static void main(String[] args) throws Exception
