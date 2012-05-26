@@ -1,15 +1,20 @@
-package com.memmee.memmes.dto;
+package com.memmee.memmees.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Memmee {
+import com.memmee.attachment.dto.Attachment;
+
+public class Memmee implements Serializable{
 	
 
 	    private Long id;
 
 	    private Long userId;
+	    
+	    private String title;
 
-	    private Long attachmentId;
+	    private Attachment attachment;
 	    
 	    private Date date;
 	    
@@ -38,12 +43,20 @@ public class Memmee {
 			this.date = date;
 		}
 
-		public Long getAttachmentId() {
-			return attachmentId;
+		public Attachment getAttachment() {
+			return attachment;
 		}
 
-		public void setAttachmentId(Long attachmentId) {
-			this.attachmentId = attachmentId;
+		public void setAttachment(Attachment attachment) {
+			this.attachment = attachment;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
 		}
 
 

@@ -1,6 +1,9 @@
 package com.memmee.user.dto;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.UUID;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,20 +12,24 @@ import org.codehaus.jackson.annotate.JsonProperty;
  * Time: 1:31 PM
  * To change this template use File | Settings | File Templates.
  */
-public class User {
+public class User implements Serializable{
 
-    @JsonProperty
     private Long id;
 
-    @JsonProperty
     private String email;
+    
+    private String password;
 
-    @JsonProperty
     private String firstName;
 
-    @JsonProperty
     private String lastName;
-
+    
+    private String apiKey;
+    
+    private Date apiCreationDate;
+    
+    
+    
     public Long getId() {
         return id;
     }
@@ -54,4 +61,28 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+	public String getApiKey() {
+		return apiKey;
+	}
+
+	public void setApiKey(String apiKey) {   
+		this.apiKey = UUID.randomUUID().toString();
+	}
+
+	public Date getApiCreationDate() {
+		return apiCreationDate;
+	}
+
+	public void setApiCreationDate(Date apiCreationDate) {
+		this.apiCreationDate = apiCreationDate;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

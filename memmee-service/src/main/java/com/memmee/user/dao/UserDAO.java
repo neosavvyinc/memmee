@@ -43,4 +43,5 @@ public interface UserDAO {
         @Bind("id") Long id
     );
 
+    void close();
 }
