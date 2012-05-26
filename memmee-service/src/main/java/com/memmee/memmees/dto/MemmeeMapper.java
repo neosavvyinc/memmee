@@ -18,6 +18,7 @@ import java.sql.SQLException;
 
 	    	memmee.setId(resultSet.getLong("id"));
 	    	memmee.setTitle(resultSet.getString("title"));
+	    	memmee.setText(resultSet.getString("text"));
 	    	memmee.setUserId(resultSet.getLong("userId"));
 	    	memmee.setDate(resultSet.getDate("date"));
 	   

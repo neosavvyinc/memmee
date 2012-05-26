@@ -16,7 +16,6 @@ import java.sql.SQLException;
 	    	attachment.setId(resultSet.getLong("id"));
 	    	attachment.setMediaUrl(resultSet.getString("mediaUrl"));
 	    	attachment.setMemmeeId(resultSet.getLong("memmeeId"));
-	    	attachment.setText(resultSet.getString("text"));
 	    	attachment.setType(resultSet.getString("type"));
 	    	
 	        return attachment;

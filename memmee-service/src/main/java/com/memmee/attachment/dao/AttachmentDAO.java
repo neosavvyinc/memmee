@@ -13,19 +13,17 @@ public interface AttachmentDAO {
     @Mapper(AttachmentMapper.class)
     Attachment getAttachment(@Bind("memmeeId") Long memmeeId);
 
-    @SqlUpdate("insert into attachment (id, memmeeId, text, mediaUrl, type) values (:id, :memmeeId, :text, :mediaUrl, :type)")
+    @SqlUpdate("insert into attachment (id, memmeeId, mediaUrl, type) values (:id, :memmeeId, mediaUrl, :type)")
     void insert(
          @Bind("id") Long id
         ,@Bind("memmeeId") Long memmeeId
-        ,@Bind("text") String text
         ,@Bind("mediaUrl") String mediaUrl
         ,@Bind("type") String type
     );
     
-    @SqlUpdate("update attachment set text = :text, mediaUrl = :mediaUrl, type = :type where id = :id")
+    @SqlUpdate("update attachment mediaUrl = :mediaUrl, type = :type where id = :id")
     int update(
         @Bind("id") Long id
-        ,@Bind("text") String text
         ,@Bind("mediaUrl") String mediaUrl
         ,@Bind("type") String type
     );

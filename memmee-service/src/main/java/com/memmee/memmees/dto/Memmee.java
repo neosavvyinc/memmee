@@ -8,11 +8,18 @@ import com.memmee.attachment.dto.Attachment;
 public class Memmee implements Serializable{
 	
 
-	    private Long id;
+	    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2311129046798681911L;
+
+		private Long id;
 
 	    private Long userId;
 	    
 	    private String title;
+	    
+	    private String text;
 
 	    private Attachment attachment;
 	    
@@ -57,6 +64,14 @@ public class Memmee implements Serializable{
 
 		public void setTitle(String title) {
 			this.title = title;
+		}
+
+		public String getText() {
+			return text;
+		}
+
+		public void setText(String text) {
+			this.text = text;
 		}
 
 

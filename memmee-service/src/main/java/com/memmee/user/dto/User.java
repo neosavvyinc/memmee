@@ -4,17 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-
-/**
- * Created with IntelliJ IDEA.
- * User: waparrish
- * Date: 5/2/12
- * Time: 1:31 PM
- * To change this template use File | Settings | File Templates.
- */
 public class User implements Serializable{
 
-    private Long id;
+	private static final long serialVersionUID = 7080674511686049053L;
+
+	private Long id;
 
     private String email;
     

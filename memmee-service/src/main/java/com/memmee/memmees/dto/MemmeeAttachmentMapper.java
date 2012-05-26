@@ -18,6 +18,7 @@ import java.sql.SQLException;
 
 	    	memmee.setId(resultSet.getLong("id"));
 	    	memmee.setTitle(resultSet.getString("title"));
+	    	memmee.setText(resultSet.getString("text"));
 	    	memmee.setUserId(resultSet.getLong("userId"));
 	    	memmee.setDate(resultSet.getDate("date"));
 	    	
@@ -26,7 +27,6 @@ import java.sql.SQLException;
 	    	attachment.setId(resultSet.getLong("attachmentId"));
 	    	attachment.setMediaUrl(resultSet.getString("mediaUrl"));
 	    	attachment.setMemmeeId(resultSet.getLong("id"));
-	    	attachment.setText(resultSet.getString("text"));
 	    	attachment.setType(resultSet.getString("type"));
 	    	
 	    	memmee.setAttachment(attachment);

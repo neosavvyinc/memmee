@@ -5,12 +5,15 @@ import java.io.Serializable;
 
 public class Attachment implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5360464163625623532L;
+
 	private Long id;
 
     private Long memmeeId;
 
-    private String text;
-    
     private String mediaUrl;
     
     private String type;
@@ -31,15 +34,7 @@ public class Attachment implements Serializable{
 	public void setMemmeeId(Long memmeeId) {
 		this.memmeeId = memmeeId;
 	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
+	
 	public String getMediaUrl() {
 		return mediaUrl;
 	}
