@@ -5,6 +5,10 @@ import com.memmee.user.dto.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
+import org.skife.jdbi.v2.sqlobject.Bind;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +19,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 
-@Path("/backend")
+@Path("/memmeerest")
 public class MemmeeResource {
 
     private UserDAO memmeeDAO;
@@ -44,19 +48,29 @@ public class MemmeeResource {
                 id,
                 user.getFirstName(),
                 user.getLastName(),
-                user.getEmail()
+                user.getEmail(),
+                user.getApiKey(),
+                user.getApiDate()
         );
     }
 
+    
     @POST
     @Path("/user")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public void add(User user)
     {
-    	memmeeDAO.insert(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail());
+    	memmeeDAO.insert(user.getId(),
+    			user.getFirstName(),
+    			user.getLastName(),
+    			user.getEmail(),
+    			user.getApiKey(),
+    			user.getApiDate(),
+    			user.getCreationDate());
     }
 
+    
     @DELETE
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
