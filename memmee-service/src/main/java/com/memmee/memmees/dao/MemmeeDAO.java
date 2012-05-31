@@ -15,39 +15,48 @@ public interface MemmeeDAO {
 	
 	
 	
-	   @SqlQuery("select m.id, m.userId, m.title, m.date, m.text" +
-	   		     " a.id as attachmentId, a.mediaUrl, a.type from memmee m " +
-	   		     "INNER JOIN attachment a on m.id = a.memmeeID where m.id = :id")
+	   @SqlQuery("select m.id, m.userId, m.title, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey" +
+	   " a.id as attachmentId, a.filePath, a.type from memmee m " +
+	   "INNER JOIN attachment a on m.id = a.memmeeID where m.id = :id")
 	    @Mapper(MemmeeAttachmentMapper.class)
 	    List<Memmee> getMemmees(@Bind("id") Long id);
 
 
-	   @SqlUpdate("insert into memmee (id, userId, title, text, date) values (:id, :userId, :title, :text, :date)")
+	   @SqlUpdate("insert into memmee (id, userId, title, text, lastUpdateDate, creationDate, displayDate, shareKey)" +
+	   		" values (:id, :userId, :title, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey)")
 	    void insert(
 	         @Bind("id") Long id
 	        ,@Bind("userId") Long userId
 	        ,@Bind("title") String title
 	        ,@Bind("text") String text
-	        ,@Bind("date") Date date
+	        ,@Bind("lastUpdateDate") Date lastUpdateDate
+	        ,@Bind("creationDate") Date creationDate
+	        ,@Bind("displayDate") Date displayDate
+	        ,@Bind("shareKey") String shareKey
 	    );
 	    
-	    @SqlUpdate("update memmee set title = :title, text = :text, date = :date  where id = :id")
+	    @SqlUpdate("update memmee set title = :title, text = :text, lastUpdateDate = :lastUpdateDate, shareKey = :shareKey" +
+	    		" where id = :id")
 	    int update(
 	        @Bind("id") Long id
 	        ,@Bind("title") String title
 	        ,@Bind("text") String text
-	        ,@Bind("date") String date
+	        ,@Bind("lastUpdateDate") String lastUpdateDate
+	        ,@Bind("shareKey") String shareKey
 	    );
+	    
+	    @SqlUpdate("update memmee set shareKey = :shareKey where id = :id")
+	    int updateShareKey(
+	        @Bind("id") Long id
+	        ,@Bind("shareKey") String shareKey
+	    );
+	    
 
 	    @SqlUpdate("delete from memmee where id = :id")
 	    void delete(
 	        @Bind("id") Long id
 	    );
 	    
-	   
-	   
-	   
-	   
 	   
 	/*
 	public List<Memmee> getMemmeeTitles(Long userId,  Database db){

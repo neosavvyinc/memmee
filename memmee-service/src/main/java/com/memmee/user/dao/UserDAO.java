@@ -7,6 +7,7 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,20 +23,27 @@ public interface UserDAO {
     @Mapper(UserMapper.class)
     List<User> findAll();
 
-    @SqlUpdate("insert into user (id, firstName, lastName, email) values (:id, :firstName, :lastName, :email)")
+    @SqlUpdate("insert into user (id, firstName, lastName, email, apiKey, apiDate, creationDate)" +
+    		" values (:id, :firstName, :lastName, :email, :apiKey, :apiDate, :creationDate)")
     void insert(
         @Bind("id") Long id
         ,@Bind("firstName") String firstName
         ,@Bind("lastName") String lastName
         ,@Bind("email") String email
+        ,@Bind("apiKey") String apiKey
+        ,@Bind("apiDate") Date apiDate
+        ,@Bind("creationDate") Date creationDate
     );
 
-    @SqlUpdate("update user set firstName = :firstName, lastName = :lastName, email = :email where id = :id")
+    @SqlUpdate("update user set firstName = :firstName, lastName = :lastName, email = :email, apiKey = :apiKey, apiDate = :apiDate" +
+    		" where id = :id")
     int update(
         @Bind("id") Long id
         ,@Bind("firstName") String firstName
         ,@Bind("lastName") String lastName
         ,@Bind("email") String email
+        ,@Bind("apiKey") String apiKey
+        ,@Bind("apiDate") Date apiDate
     );
 
     @SqlUpdate("delete from user where id = :id")

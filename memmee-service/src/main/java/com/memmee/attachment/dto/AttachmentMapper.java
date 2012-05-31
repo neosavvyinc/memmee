@@ -14,7 +14,7 @@ import java.sql.SQLException;
 	    	Attachment attachment = new Attachment();
 
 	    	attachment.setId(resultSet.getLong("id"));
-	    	attachment.setMediaUrl(resultSet.getString("mediaUrl"));
+	    	attachment.setFilePath(resultSet.getString("filePath"));
 	    	attachment.setMemmeeId(resultSet.getLong("memmeeId"));
 	    	attachment.setType(resultSet.getString("type"));
 	    	

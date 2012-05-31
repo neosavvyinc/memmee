@@ -23,7 +23,15 @@ public class Memmee implements Serializable{
 
 	    private Attachment attachment;
 	    
-	    private Date date;
+	    private Date creationDate;
+	    
+	    private Date lastUpdateDate;
+	    
+	    private Date displayDate;
+	    
+	    private String shareKey;
+	    
+	    
 	    
 	    
 	    public Long getId() {
@@ -40,14 +48,6 @@ public class Memmee implements Serializable{
 
 		public void setUserId(Long userId) {
 			this.userId = userId;
-		}
-
-		public Date getDate() {
-			return date;
-		}
-
-		public void setDate(Date date) {
-			this.date = date;
 		}
 
 		public Attachment getAttachment() {
@@ -72,6 +72,38 @@ public class Memmee implements Serializable{
 
 		public void setText(String text) {
 			this.text = text;
+		}
+
+		public Date getCreationDate() {
+			return creationDate;
+		}
+
+		public void setCreationDate(Date creationDate) {
+			this.creationDate = creationDate;
+		}
+
+		public Date getLastUpdateDate() {
+			return lastUpdateDate;
+		}
+
+		public void setLastUpdateDate(Date lastUpdateDate) {
+			this.lastUpdateDate = lastUpdateDate;
+		}
+
+		public Date getDisplayDate() {
+			return displayDate;
+		}
+
+		public void setDisplayDate(Date displayDate) {
+			this.displayDate = displayDate;
+		}
+
+		public String getShareKey() {
+			return shareKey;
+		}
+
+		public void setShareKey(String shareKey) {
+			this.shareKey = shareKey;
 		}
 
 

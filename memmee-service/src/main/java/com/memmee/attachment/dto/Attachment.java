@@ -14,7 +14,7 @@ public class Attachment implements Serializable{
 
     private Long memmeeId;
 
-    private String mediaUrl;
+    private String filePath;
     
     private String type;
     
@@ -35,20 +35,20 @@ public class Attachment implements Serializable{
 		this.memmeeId = memmeeId;
 	}
 	
-	public String getMediaUrl() {
-		return mediaUrl;
-	}
-
-	public void setMediaUrl(String mediaUrl) {
-		this.mediaUrl = mediaUrl;
-	}
-
 	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
 

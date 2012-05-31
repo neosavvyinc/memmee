@@ -20,12 +20,16 @@ import java.sql.SQLException;
 	    	memmee.setTitle(resultSet.getString("title"));
 	    	memmee.setText(resultSet.getString("text"));
 	    	memmee.setUserId(resultSet.getLong("userId"));
-	    	memmee.setDate(resultSet.getDate("date"));
+	    	memmee.setCreationDate(resultSet.getDate("creationDate"));
+	    	memmee.setLastUpdateDate(resultSet.getDate("lastUpdateDate"));
+	    	memmee.setDisplayDate(resultSet.getDate("creationDate"));
+	    	memmee.setShareKey(resultSet.getString("shareKey"));
+	    	
 	    	
 	    	Attachment attachment  = new Attachment();
 	    	
 	    	attachment.setId(resultSet.getLong("attachmentId"));
-	    	attachment.setMediaUrl(resultSet.getString("mediaUrl"));
+	    	attachment.setFilePath(resultSet.getString("filePath"));
 	    	attachment.setMemmeeId(resultSet.getLong("id"));
 	    	attachment.setType(resultSet.getString("type"));
 	    	

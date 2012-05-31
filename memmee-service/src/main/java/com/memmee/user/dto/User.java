@@ -20,7 +20,9 @@ public class User implements Serializable{
     
     private String apiKey;
     
-    private Date apiCreationDate;
+    private Date apiDate;
+    
+    private Date creationDate;
     
     
     
@@ -64,19 +66,27 @@ public class User implements Serializable{
 		this.apiKey = UUID.randomUUID().toString();
 	}
 
-	public Date getApiCreationDate() {
-		return apiCreationDate;
-	}
-
-	public void setApiCreationDate(Date apiCreationDate) {
-		this.apiCreationDate = apiCreationDate;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Date getApiDate() {
+		return apiDate;
+	}
+
+	public void setApiDate(Date apiDate) {
+		this.apiDate = apiDate;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 }
