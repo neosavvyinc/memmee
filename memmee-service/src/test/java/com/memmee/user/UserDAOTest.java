@@ -8,13 +8,17 @@ import com.yammer.dropwizard.db.DatabaseConfiguration;
 import com.yammer.dropwizard.db.DatabaseFactory;
 import org.skife.jdbi.v2.Handle;
 
+import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.skife.jdbi.v2.Query;
+import org.skife.jdbi.v2.util.StringMapper;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
@@ -107,6 +111,11 @@ public class UserDAOTest {
         final Handle handle = database.open();
         final UserDAO dao = database.open(UserDAO.class);
         dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
+
+        final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
+
+        assertThat(1, equalTo(Integer.parseInt(result)));
+
     }
 
     @Test
@@ -138,15 +147,15 @@ public class UserDAOTest {
 //        }
 //    }
 
-//    @Test
-//    @SuppressWarnings("CallToPrintStackTrace")
-//    public void pingWorks() throws Exception {
-//        try {
-//            database.ping();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            fail("shouldn't have thrown an exception but did");
-//        }
-//    }
+    @Test
+    @SuppressWarnings("CallToPrintStackTrace")
+    public void pingWorks() throws Exception {
+        try {
+            database.ping();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            fail("shouldn't have thrown an exception but did");
+        }
+    }
 }
 
