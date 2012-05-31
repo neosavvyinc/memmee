@@ -73,6 +73,27 @@
             <artifactId>dropwizard-db</artifactId>
             <version>0.4.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.yammer.dropwizard</groupId>
+            <artifactId>dropwizard-testing</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.9.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.1</version>
+        </dependency>
 
         <dependency>
             <groupId>mysql</groupId>
@@ -85,6 +106,7 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.2.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.clapper</groupId>
             <artifactId>util</artifactId>

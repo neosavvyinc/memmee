@@ -1,19 +1,5 @@
-Neosavvy Commons User Angular and Backbone
+Memmee.com Setup Instructions
 ==========================================
-
-Purpose
--------
-
-The purpose of this little sample is to provide a quick analysis of two common
-javascript frameworks in use today. Angular is a new framework from some guys
-at Google and Backbone is from a bright young fellow at the NY Times.
-
-The sample includes a simple Java based CRUD implementation for Users and was
-built using the DropWizard framework of Yammer
-
-Read about DropWizard [here](http://dropwizard.codahale.com/)
-Read about Angular JS [here](http://angularjs.org/)
-Read about Backbone JS [here](http://documentcloud.github.com/backbone/)
 
 Setup
 -----
@@ -38,16 +24,23 @@ I also set my server up to be called local.commons-user.com and hopefully I
 don't have any hard coded references to that NameVirtualHost, however if I do
 please point them out.
 
+To create your user use the following commands:
+
+CREATE USER 'commons'@'%' IDENTIFIED BY 'commons';
+CREATE USER 'commons'@'localhost' IDENTIFIED BY 'commons';
+GRANT ALL PRIVILEGES ON commons.* TO 'commons'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON commons.* TO 'commons'@'localhost' WITH GRANT OPTION;
+
 To create your database use the following create table script:
 
 CREATE commons;
 USE commons;
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(1024) DEFAULT NULL,
-  `lastName` varchar(1024) DEFAULT NULL,
-  `email` varchar(4096) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE user (
+id int(11) NOT NULL AUTO_INCREMENT,
+firstName varchar(1024) DEFAULT NULL,
+lastName varchar(1024) DEFAULT NULL,
+email varchar(4096) DEFAULT NULL,
+PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=10;
 
 I also created a user with name "commons" password "commons" with full rights
