@@ -1,6 +1,7 @@
 package com.memmee.user;
 
 import com.memmee.user.dao.UserDAO;
+import com.memmee.util.MemmeeDAOTest;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.config.LoggingFactory;
 import com.yammer.dropwizard.db.Database;
@@ -25,29 +26,16 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class UserDAOTest {
-    private final DatabaseConfiguration mysqlConfig = new DatabaseConfiguration();
-    {
-        LoggingFactory.bootstrap();
-        mysqlConfig.setUrl("jdbc:mysql://localhost:8889/commons");
-        mysqlConfig.setUser("commons");
-        mysqlConfig.setPassword("commons");
-        mysqlConfig.setDriverClass("com.mysql.jdbc.Driver");
-        mysqlConfig.setValidationQuery("SELECT 1 FROM commons.user");
-    }
-    private final Environment environment = mock(Environment.class);
-    private final DatabaseFactory factory = new DatabaseFactory(environment);
-    private Database database;
+public class UserDAOTest extends MemmeeDAOTest{
+
 
     @Before
     public void setUp() throws Exception {
         this.database = factory.build(mysqlConfig, "mysql");
         final Handle handle = database.open();
         try {
+        	
             handle.createCall("DROP TABLE IF EXISTS user").invoke();
-//            handle.createCall(
-//                    "CREATE TABLE user ( id int(11) NOT NULL AUTO_INCREMENT, firstName varchar(1024) DEFAULT NULL, lastName varchar(1024) DEFAULT NULL, email varchar(4096) DEFAULT NULL, PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=10")
-//                    .invoke();
 
             handle.createCall(
                     "CREATE TABLE `user` (\n" +
@@ -62,21 +50,6 @@ public class UserDAOTest {
                             ") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1"
             ).invoke();
 
-//            handle.createStatement("INSERT INTO people VALUES (?, ?, ?)")
-//                    .bind(0, "Coda Hale")
-//                    .bind(1, "chale@yammer-inc.com")
-//                    .bind(2, 30)
-//                    .execute();
-//            handle.createStatement("INSERT INTO people VALUES (?, ?, ?)")
-//                    .bind(0, "Kris Gale")
-//                    .bind(1, "kgale@yammer-inc.com")
-//                    .bind(2, 32)
-//                    .execute();
-//            handle.createStatement("INSERT INTO people VALUES (?, ?, ?)")
-//                    .bind(0, "Old Guy")
-//                    .bindNull(1, Types.VARCHAR)
-//                    .bind(2, 99)
-//                    .execute();
         } catch (Exception e)
         {
             System.err.println(e);
@@ -117,7 +90,30 @@ public class UserDAOTest {
         assertThat(1, equalTo(Integer.parseInt(result)));
 
     }
+    
+    @Test
+    public void testUpdate() throws Exception {
+        final UserDAO dao = database.open(UserDAO.class);
+        
+        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
+         int result = dao.update(new Long(1), "Luke", "Lappin", "lukelappin@gmail.com", "apiKey", new Date());
 
+        assertThat(1, equalTo(result));
+    }
+    
+    
+    @Test
+    public void testDelete() throws Exception {
+        final Handle handle = database.open();
+        final UserDAO dao = database.open(UserDAO.class);
+        dao.delete(new Long(1));
+        final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
+
+        assertThat(0, equalTo(Integer.parseInt(result)));
+
+    }
+   
+    
     @Test
     public void managesTheDatabaseWithTheEnvironment() throws Exception {
         final Database db = factory.build(mysqlConfig, "hsql");
