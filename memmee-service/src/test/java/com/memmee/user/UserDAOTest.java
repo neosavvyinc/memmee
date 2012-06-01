@@ -1,6 +1,7 @@
 package com.memmee.user;
 
 import com.memmee.user.dao.UserDAO;
+import com.memmee.user.dto.User;
 import com.memmee.util.MemmeeDAOTest;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.config.LoggingFactory;
@@ -12,6 +13,7 @@ import org.skife.jdbi.v2.Handle;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
@@ -79,37 +81,87 @@ public class UserDAOTest extends MemmeeDAOTest{
 //        }
 //    }
 
+    
+    
+    
+    
     @Test
     public void testSave() throws Exception {
-        final Handle handle = database.open();
-        final UserDAO dao = database.open(UserDAO.class);
-        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
-
-        final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
-
-        assertThat(1, equalTo(Integer.parseInt(result)));
+    	
+    	final Handle handle = database.open();
+    	final UserDAO dao = database.open(UserDAO.class);
+    	
+    	try {
+	      
+	        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
+	        final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
+	
+	        assertThat(1, equalTo(Integer.parseInt(result)));
+        
+    	}finally{
+    		dao.close();
+    		handle.close();
+    	}
+        
+        
 
     }
+    
+    
+    @Test
+    public void testRead() throws Exception {
+        final Handle handle = database.open();
+        final UserDAO dao = database.open(UserDAO.class);
+        
+    try{
+
+        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
+        final List<User> userList = dao.findAll();
+        final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
+
+        assertThat(Integer.parseInt(result), equalTo(userList.size()));
+        
+    }finally{
+    	dao.close();
+		handle.close();
+	}
+
+    }
+    
     
     @Test
     public void testUpdate() throws Exception {
         final UserDAO dao = database.open(UserDAO.class);
         
-        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
-         int result = dao.update(new Long(1), "Luke", "Lappin", "lukelappin@gmail.com", "apiKey", new Date());
+        try{
+        	
+         dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
+         final int result = dao.update(new Long(1), "Luke", "Lappin", "lukelappin@gmail.com", "apiKey", new Date());
 
         assertThat(1, equalTo(result));
+        }finally{
+        	dao.close();
+        }
     }
     
     
     @Test
     public void testDelete() throws Exception {
-        final Handle handle = database.open();
-        final UserDAO dao = database.open(UserDAO.class);
+    
+    final Handle handle = database.open();	    
+    final UserDAO dao = database.open(UserDAO.class);
+    	
+    try{
+
         dao.delete(new Long(1));
         final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
 
         assertThat(0, equalTo(Integer.parseInt(result)));
+        
+    }finally{
+    	dao.close();
+		handle.close();
+	}
 
     }
    
