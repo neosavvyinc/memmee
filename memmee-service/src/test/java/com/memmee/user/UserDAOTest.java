@@ -45,6 +45,7 @@ public class UserDAOTest extends MemmeeDAOTest{
                             "  `firstName` varchar(1024) DEFAULT NULL,\n" +
                             "  `lastName` varchar(1024) DEFAULT NULL,\n" +
                             "  `email` varchar(4096) NOT NULL,\n" +
+                            "  `password` varchar(4096) NOT NULL,\n" +
                             "  `apiKey` varchar(1024) DEFAULT NULL,\n" +
                             "  `apiDate` date DEFAULT NULL,\n" +
                             "  `creationDate` date NOT NULL,\n" +
@@ -93,7 +94,7 @@ public class UserDAOTest extends MemmeeDAOTest{
     	
     	try {
 	      
-	        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
+	        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
 	        final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
 	
 	        assertThat(Integer.parseInt(result), equalTo(1));
@@ -115,11 +116,9 @@ public class UserDAOTest extends MemmeeDAOTest{
         
     try{
 
-        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
-        final List<User> userList = dao.findAll();
-        final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
-
-        assertThat(Integer.parseInt(result), equalTo(userList.size()));
+        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+        final User user = dao.getUser(new Long(1));
+        assertThat(user.getId(), equalTo(new Long(1)));
         
     }finally{
     	dao.close();
@@ -135,8 +134,8 @@ public class UserDAOTest extends MemmeeDAOTest{
         
         try{
         	
-         dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
-         final int result = dao.update(new Long(1), "Luke", "Lappin", "lukelappin@gmail.com", "apiKey", new Date());
+         dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+         final int result = dao.update(new Long(1), "Luke", "Lappin", "lukelappin@gmail.com", "password", "apiKey", new Date());
 
         assertThat(result,equalTo(1));
         }finally{

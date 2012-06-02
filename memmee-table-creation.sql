@@ -28,8 +28,10 @@ CREATE TABLE `user` (
   `apiKey` varchar(1024) DEFAULT NULL,
   `apiDate` date DEFAULT NULL,
   `creationDate` date NOT NULL,
+  `password` varchar(4096) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 CREATE TABLE `theme` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
