@@ -6,22 +6,30 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.memmees.dto.MemmeeAttachmentMapper;
 
-public interface MemmeeDAO {
+public interface MemmeeDAO //extends Transactional<MemmeeDAO>
+{
 	
-	
-	
-	
+	   @SqlQuery("select m.id, m.userId, m.title, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey," +
+			   " a.id as attachmentId, a.filePath, a.type, t.id as themeId, t.name, t.stylePath from memmee m " +
+			   "INNER JOIN attachment a on m.id = a.memmeeId " +
+			   "INNER JOIN theme t on m.id = t.memmeeId where m.id = :id"
+			   )
+	   @Mapper(MemmeeAttachmentMapper.class)
+	   Memmee getMemmee(@Bind("id") Long id);
+	   
+	   
 	   @SqlQuery("select m.id, m.userId, m.title, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey," +
 	   " a.id as attachmentId, a.filePath, a.type, t.id as themeId, t.name, t.stylePath from memmee m " +
 	   "INNER JOIN attachment a on m.id = a.memmeeId " +
-	   "INNER JOIN theme t on m.id = t.memmeeId where m.id = :id"
+	   "INNER JOIN theme t on m.id = t.memmeeId where m.userId = :userId"
 	   )
 	    @Mapper(MemmeeAttachmentMapper.class)
-	    List<Memmee> getMemmees(@Bind("id") Long id);
+	    List<Memmee> getMemmeesbyUser(@Bind("userId") Long userId);
 
 
 	   @SqlUpdate("insert into memmee (id, userId, title, text, lastUpdateDate, creationDate, displayDate, shareKey, attachmentId, themeId)" +
