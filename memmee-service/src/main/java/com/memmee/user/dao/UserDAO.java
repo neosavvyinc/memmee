@@ -22,6 +22,14 @@ public interface UserDAO {
     @SqlQuery("select * from user")
     @Mapper(UserMapper.class)
     List<User> findAll();
+    
+	@SqlQuery("select * from user where id = :id")
+    @Mapper(UserMapper.class)
+    User getUser(@Bind("id") Long id);
+	
+	@SqlQuery("select * from user where apiKey = :apiKey")
+    @Mapper(UserMapper.class)
+    User getUserByApiKey(@Bind("apiKey") Long apiKey);
 
     @SqlUpdate("insert into user (id, firstName, lastName, email, apiKey, apiDate, creationDate)" +
     		" values (:id, :firstName, :lastName, :email, :apiKey, :apiDate, :creationDate)")
