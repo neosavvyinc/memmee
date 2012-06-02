@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.memmee.attachment.dto.Attachment;
+import com.memmee.theme.dto.Theme;
 
 public class Memmee implements Serializable{
 	
@@ -30,6 +31,8 @@ public class Memmee implements Serializable{
 	    private Date displayDate;
 	    
 	    private String shareKey;
+	    
+	    private Theme theme;
 	    
 	    
 	    
@@ -104,6 +107,14 @@ public class Memmee implements Serializable{
 
 		public void setShareKey(String shareKey) {
 			this.shareKey = shareKey;
+		}
+
+		public Theme getTheme() {
+			return theme;
+		}
+
+		public void setTheme(Theme theme) {
+			this.theme = theme;
 		}
 
 

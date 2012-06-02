@@ -21,7 +21,7 @@ public interface AttachmentDAO {
         ,@Bind("type") String type
     );
     
-    @SqlUpdate("update attachment filePath = :filePath, type = :type where id = :id")
+    @SqlUpdate("update attachment set filePath = :filePath, type = :type where id = :id")
     int update(
         @Bind("id") Long id
         ,@Bind("filePath") String filePath

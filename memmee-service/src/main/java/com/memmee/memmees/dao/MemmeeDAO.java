@@ -15,15 +15,17 @@ public interface MemmeeDAO {
 	
 	
 	
-	   @SqlQuery("select m.id, m.userId, m.title, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey" +
-	   " a.id as attachmentId, a.filePath, a.type from memmee m " +
-	   "INNER JOIN attachment a on m.id = a.memmeeID where m.id = :id")
+	   @SqlQuery("select m.id, m.userId, m.title, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey," +
+	   " a.id as attachmentId, a.filePath, a.type, t.id as themeId, t.name, t.stylePath from memmee m " +
+	   "INNER JOIN attachment a on m.id = a.memmeeId " +
+	   "INNER JOIN theme t on m.id = t.memmeeId where m.id = :id"
+	   )
 	    @Mapper(MemmeeAttachmentMapper.class)
 	    List<Memmee> getMemmees(@Bind("id") Long id);
 
 
-	   @SqlUpdate("insert into memmee (id, userId, title, text, lastUpdateDate, creationDate, displayDate, shareKey)" +
-	   		" values (:id, :userId, :title, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey)")
+	   @SqlUpdate("insert into memmee (id, userId, title, text, lastUpdateDate, creationDate, displayDate, shareKey, attachmentId, themeId)" +
+	   		" values (:id, :userId, :title, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey, :attachmentId, :themeId)")
 	    void insert(
 	         @Bind("id") Long id
 	        ,@Bind("userId") Long userId
@@ -33,16 +35,20 @@ public interface MemmeeDAO {
 	        ,@Bind("creationDate") Date creationDate
 	        ,@Bind("displayDate") Date displayDate
 	        ,@Bind("shareKey") String shareKey
+	        ,@Bind("attachmentId") Long attachmentId
+	        ,@Bind("themeId") Long themeId
 	    );
 	    
-	    @SqlUpdate("update memmee set title = :title, text = :text, lastUpdateDate = :lastUpdateDate, shareKey = :shareKey" +
-	    		" where id = :id")
+	    @SqlUpdate("update memmee set title = :title, text = :text, lastUpdateDate = :lastUpdateDate, shareKey = :shareKey, " +
+	    		"attachmentId = :attachmentId, themeId = :themeId where id = :id")
 	    int update(
 	        @Bind("id") Long id
 	        ,@Bind("title") String title
 	        ,@Bind("text") String text
 	        ,@Bind("lastUpdateDate") String lastUpdateDate
 	        ,@Bind("shareKey") String shareKey
+	        ,@Bind("attachmentId") Long attachmentId
+	        ,@Bind("themeId") Long themeId
 	    );
 	    
 	    @SqlUpdate("update memmee set shareKey = :shareKey where id = :id")

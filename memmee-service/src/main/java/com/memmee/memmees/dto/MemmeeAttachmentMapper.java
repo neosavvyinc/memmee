@@ -4,6 +4,7 @@ import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
 import com.memmee.attachment.dto.Attachment;
+import com.memmee.theme.dto.Theme;
 
 
 import java.sql.ResultSet;
@@ -32,8 +33,16 @@ import java.sql.SQLException;
 	    	attachment.setFilePath(resultSet.getString("filePath"));
 	    	attachment.setMemmeeId(resultSet.getLong("id"));
 	    	attachment.setType(resultSet.getString("type"));
-	    	
 	    	memmee.setAttachment(attachment);
+	    	
+	    	Theme theme = new Theme();
+	    	
+	    	theme.setId(resultSet.getLong("themeId"));
+	    	theme.setMemmeeId(resultSet.getLong("id"));
+	    	theme.setName(resultSet.getString("name"));
+	    	theme.setStylePath(resultSet.getString("stylePath"));
+	    	
+	    	
 	    	
 	        return memmee;
 	    }

@@ -96,7 +96,7 @@ public class UserDAOTest extends MemmeeDAOTest{
 	        dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
 	        final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
 	
-	        assertThat(1, equalTo(Integer.parseInt(result)));
+	        assertThat(Integer.parseInt(result), equalTo(1));
         
     	}finally{
     		dao.close();
@@ -138,7 +138,7 @@ public class UserDAOTest extends MemmeeDAOTest{
          dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "apiKey", new Date(), new Date());
          final int result = dao.update(new Long(1), "Luke", "Lappin", "lukelappin@gmail.com", "apiKey", new Date());
 
-        assertThat(1, equalTo(result));
+        assertThat(result,equalTo(1));
         }finally{
         	dao.close();
         }
@@ -156,7 +156,7 @@ public class UserDAOTest extends MemmeeDAOTest{
         dao.delete(new Long(1));
         final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
 
-        assertThat(0, equalTo(Integer.parseInt(result)));
+        assertThat(Integer.parseInt(result),equalTo(0));
         
     }finally{
     	dao.close();
