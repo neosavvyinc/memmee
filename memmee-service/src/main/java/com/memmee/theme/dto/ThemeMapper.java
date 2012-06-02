@@ -15,7 +15,6 @@ import java.sql.SQLException;
 
 	    	theme.setId(resultSet.getLong("id"));
 	    	theme.setStylePath(resultSet.getString("stylePath"));
-	    	theme.setMemmeeId(resultSet.getLong("memmeeId"));
 	    	theme.setName(resultSet.getString("name"));
 	    	
 	        return theme;

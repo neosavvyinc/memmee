@@ -44,9 +44,8 @@ public class ThemeDAOTest extends MemmeeDAOTest{
             handle.createCall(
             		"CREATE TABLE `theme` (\n" +
             				  " `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-            				  " `memmeeId` int(11) NOT NULL,\n" + 
-            				  " `stylePath` varchar(1024) DEFAULT NULL,\n" + 
             				  " `name` varchar(100) DEFAULT NULL,\n" +
+            				  " `stylePath` varchar(1024) DEFAULT NULL,\n" + 
             				  " PRIMARY KEY (`id`)\n" +
             				  ") ENGINE=InnoDB DEFAULT CHARSET=latin1").invoke();
             		
@@ -75,7 +74,7 @@ public class ThemeDAOTest extends MemmeeDAOTest{
     	
     	try {
 	      
-	        dao.insert(new Long(1), new Long(1), "name", "stylePath");
+    		dao.insert(new Long(1), "name", "stylePath");
 	        final String result = handle.createQuery("SELECT COUNT(*) FROM theme").map(StringMapper.FIRST).first();
 	
 	        assertThat(Integer.parseInt(result), equalTo(1));
@@ -97,7 +96,7 @@ public class ThemeDAOTest extends MemmeeDAOTest{
         
     try{
 
-    	dao.insert(new Long(1), new Long(1), "name", "stylePath");
+    	dao.insert(new Long(1), "name", "stylePath");
         final Theme theme = dao.getTheme(new Long(1));
        
 
@@ -117,7 +116,7 @@ public class ThemeDAOTest extends MemmeeDAOTest{
         
         try{
         	
-         dao.insert(new Long(1), new Long(1), "name", "stylePath");
+         dao.insert(new Long(1), "name", "stylePath");
          final int result = dao.update(new Long(1), "name2", "stylePath2");
 
          assertThat(result,equalTo(1));

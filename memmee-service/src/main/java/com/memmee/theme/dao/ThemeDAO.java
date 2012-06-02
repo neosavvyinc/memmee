@@ -14,14 +14,9 @@ public interface ThemeDAO {
     @Mapper(ThemeMapper.class)
     Theme getTheme(@Bind("id") Long id);
 
-    @SqlQuery("select * from theme where memmeeId = :memmeeId")
-    @Mapper(ThemeMapper.class)
-    Theme getThemeByMemmeeId(@Bind("memmeeId") Long memmeeId);
-
-    @SqlUpdate("insert into theme (id, memmeeId, name, stylePath) values (:id, :memmeeId, :name, :stylePath)")
+    @SqlUpdate("insert into theme (id, name, stylePath) values (:id, :name, :stylePath)")
     void insert(
          @Bind("id") Long id
-        ,@Bind("memmeeId") Long memmeeId
         ,@Bind("name") String name
         ,@Bind("stylePath") String stylePath
     );

@@ -37,7 +37,6 @@ CREATE TABLE `theme` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `stylePath` varchar(1024) NOT NULL,
-  `memmeeId` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

@@ -9,8 +9,6 @@ public class Theme implements Serializable{
 
 	private Long id;
 	
-	private Long memmeeId;
-	
 	private String name;
 	
 	private String stylePath;
@@ -37,17 +35,6 @@ public class Theme implements Serializable{
 
 	public void setStylePath(String stylePath) {
 		this.stylePath = stylePath;
-	}
-
-	public Long getMemmeeId() {
-		return memmeeId;
-	}
-
-	public void setMemmeeId(Long memmeeId) {
-		this.memmeeId = memmeeId;
-	}
-
-			    
-			   
+	}   
 
 }

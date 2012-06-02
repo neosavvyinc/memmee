@@ -38,7 +38,6 @@ import java.sql.SQLException;
 	    	Theme theme = new Theme();
 	    	
 	    	theme.setId(resultSet.getLong("themeId"));
-	    	theme.setMemmeeId(resultSet.getLong("id"));
 	    	theme.setName(resultSet.getString("name"));
 	    	theme.setStylePath(resultSet.getString("stylePath"));
 	    	
