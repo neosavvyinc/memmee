@@ -11,5 +11,58 @@
 
     <artifactId>memmee-db</artifactId>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <db.url>jdbc:mysql://localhost:3306/memmee</db.url>
+                <db.username>memmee</db.username>
+                <db.password>memmee</db.password>
+                <db.schema>memmee</db.schema>
+                <test.db.url>jdbc:mysql://localhost:3306/memmeetest</test.db.url>
+                <test.db.username>memmeetest</test.db.username>
+                <test.db.password>memmeetest</test.db.password>
+                <test.db.schema>memmeetest</test.db.schema>
+            </properties>
+        </profile>
+    </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.6</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>2.0.1</version>
+                <configuration>
+                    <changeLogFile>src/main/db/liquibase.xml</changeLogFile>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>${db.url}</url>
+                    <username>${db.username}</username>
+                    <password>${db.password}</password>
+                    <verbose>true</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 
 </project>
