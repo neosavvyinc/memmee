@@ -2,25 +2,15 @@ package com.memmee.theme;
 
 import com.memmee.theme.dao.ThemeDAO;
 import com.memmee.theme.dto.Theme;
-import com.memmee.memmees.dao.MemmeeDAO;
-import com.memmee.user.dto.User;
-import com.memmee.util.MemmeeDAOTest;
-import com.yammer.dropwizard.config.Environment;
-import com.yammer.dropwizard.config.LoggingFactory;
+import com.memmee.memmees.MemmeeDAOTest;
 import com.yammer.dropwizard.db.Database;
-import com.yammer.dropwizard.db.DatabaseConfiguration;
-import com.yammer.dropwizard.db.DatabaseFactory;
 import org.skife.jdbi.v2.Handle;
 
 import java.sql.SQLException;
-import java.sql.Types;
-import java.util.Date;
-import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.skife.jdbi.v2.Query;
 import org.skife.jdbi.v2.util.StringMapper;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -157,6 +147,7 @@ public class ThemeDAOTest extends MemmeeDAOTest{
     @Test
     @SuppressWarnings("CallToPrintStackTrace")
     public void pingWorks() throws Exception {
+        mysqlConfig.setValidationQuery("SELECT 1 FROM memmeetest.attachment");
         try {
             database.ping();
         } catch (SQLException e) {

@@ -3,10 +3,11 @@ function UserController($scope, $resource) {
     $scope.user = {
         firstName: '',
         lastName: '',
+        password: '',
         email: ''
     };
 
-    var User = $resource('/backend/user/:userId',
+    var User = $resource('/memmeerest/user/:userId',
         null,
         {'remove': {method:'DELETE', params: {userId: '@id'}, isArray:false},
          'update': {method:'PUT', params: {userId: '@id'}, isArray:false}
@@ -69,7 +70,8 @@ function UserController($scope, $resource) {
         $scope.user = {
             firstName: '',
             lastName: '',
-            email: ''
+            email: '',
+            password: ''
         }
     }
 

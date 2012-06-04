@@ -6,15 +6,6 @@ import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.Database;
 import com.yammer.dropwizard.db.DatabaseFactory;
 
-/**
- * Created with IntelliJ IDEA.
- * User: waparrish
- * Date: 5/2/12
- * Time: 11:49 AM
- * To change this template use File | Settings | File Templates.
- */
-
-
 public class MemmeeService extends Service<MemmeeConfiguration> {
 
     public static void main(String[] args) throws Exception

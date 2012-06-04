@@ -70,51 +70,5 @@ public interface MemmeeDAO //extends Transactional<MemmeeDAO>
 	    void delete(
 	        @Bind("id") Long id
 	    );
-	    
-	   
-	/*
-	public List<Memmee> getMemmeeTitles(Long userId,  Database db){
-		
-	    MemmeeMapper mapper = new MemmeeMapper();
-	    Handle h = db.open();
-	    AttachmentDAO attachmentDAO = db.open(AttachmentDAO.class);
-	    
-		List<Memmee> memmees = h.createQuery("select * from memmee where userId = :userId")
-		.bind("userId", userId)
-		.map(mapper)
-		.list();
-		
-		for(Memmee memmee : memmees){
-			memmee.setAttachment(attachmentDAO.getAttachment(memmee.getId()));
-		}
-	
-		attachmentDAO.close();
-		h.close();
-		
-		return memmees;
-	}
-	
-	public List<Memmee> getMemmees(Long userId, Database db){
-			
-		    MemmeeMapper mapper = new MemmeeMapper();
-		    Handle h = db.open();
-		    AttachmentDAO attachmentDAO = db.open(AttachmentDAO.class);
-		    
-			List<Memmee> memmees = h.createQuery("select * from memmee where userId = :userId")
-			.bind("userId", userId)
-			.map(mapper)
-			.list();
-			
-			
-			for(Memmee memmee : memmees){
-				memmee.setAttachment(attachmentDAO.getAttachment(memmee.getId()));
-			}
-		
-			attachmentDAO.close();
-			h.close();
-			
-			return memmees;
-		}
-	*/
 
 }

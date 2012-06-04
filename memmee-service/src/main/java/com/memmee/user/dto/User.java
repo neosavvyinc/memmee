@@ -12,7 +12,7 @@ public class User implements Serializable{
 
     private String email;
     
-    private String password;
+    private String pass;
 
     private String firstName;
 
@@ -66,15 +66,15 @@ public class User implements Serializable{
 		this.apiKey = UUID.randomUUID().toString();
 	}
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPass() {
+        return pass;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
 
-	public Date getApiDate() {
+    public Date getApiDate() {
 		return apiDate;
 	}
 

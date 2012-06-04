@@ -39,10 +39,6 @@
                     <configuration>
                         <source>1.6</source>
                         <target>1.6</target>
-                        <!--
-                        Use value below for target Java 1.4 builds (backward compatibility)
-                        <target>jsr14</target>
-                        -->
                     </configuration>
                 </plugin>
             </plugins>
@@ -51,5 +47,6 @@
     <modules>
         <module>memmee-service</module>
         <module>memmee-client</module>
+        <module>memmee-db</module>
     </modules>
 </project>

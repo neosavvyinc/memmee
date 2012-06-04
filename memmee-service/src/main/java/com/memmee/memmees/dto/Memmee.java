@@ -8,114 +8,109 @@ import com.memmee.theme.dto.Theme;
 
 public class Memmee implements Serializable{
 	
+    private static final long serialVersionUID = -2311129046798681911L;
 
-	    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2311129046798681911L;
+    private Long id;
 
-		private Long id;
+    private Long userId;
 
-	    private Long userId;
-	    
-	    private String title;
-	    
-	    private String text;
+    private String title;
 
-	    private Attachment attachment;
-	    
-	    private Date creationDate;
-	    
-	    private Date lastUpdateDate;
-	    
-	    private Date displayDate;
-	    
-	    private String shareKey;
-	    
-	    private Theme theme;
-	    
-	    
-	    
-	    
-	    public Long getId() {
-	        return id;
-	    }
+    private String text;
 
-	    public void setId(Long id) {
-	        this.id = id;
-	    }
+    private Attachment attachment;
 
-		public Long getUserId() {
-			return userId;
-		}
+    private Date creationDate;
 
-		public void setUserId(Long userId) {
-			this.userId = userId;
-		}
+    private Date lastUpdateDate;
 
-		public Attachment getAttachment() {
-			return attachment;
-		}
+    private Date displayDate;
 
-		public void setAttachment(Attachment attachment) {
-			this.attachment = attachment;
-		}
+    private String shareKey;
 
-		public String getTitle() {
-			return title;
-		}
+    private Theme theme;
 
-		public void setTitle(String title) {
-			this.title = title;
-		}
 
-		public String getText() {
-			return text;
-		}
 
-		public void setText(String text) {
-			this.text = text;
-		}
 
-		public Date getCreationDate() {
-			return creationDate;
-		}
+    public Long getId() {
+        return id;
+    }
 
-		public void setCreationDate(Date creationDate) {
-			this.creationDate = creationDate;
-		}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-		public Date getLastUpdateDate() {
-			return lastUpdateDate;
-		}
+    public Long getUserId() {
+        return userId;
+    }
 
-		public void setLastUpdateDate(Date lastUpdateDate) {
-			this.lastUpdateDate = lastUpdateDate;
-		}
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
-		public Date getDisplayDate() {
-			return displayDate;
-		}
+    public Attachment getAttachment() {
+        return attachment;
+    }
 
-		public void setDisplayDate(Date displayDate) {
-			this.displayDate = displayDate;
-		}
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
 
-		public String getShareKey() {
-			return shareKey;
-		}
+    public String getTitle() {
+        return title;
+    }
 
-		public void setShareKey(String shareKey) {
-			this.shareKey = shareKey;
-		}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-		public Theme getTheme() {
-			return theme;
-		}
+    public String getText() {
+        return text;
+    }
 
-		public void setTheme(Theme theme) {
-			this.theme = theme;
-		}
+    public void setText(String text) {
+        this.text = text;
+    }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getLastUpdateDate() {
+        return lastUpdateDate;
+    }
+
+    public void setLastUpdateDate(Date lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
+    }
+
+    public Date getDisplayDate() {
+        return displayDate;
+    }
+
+    public void setDisplayDate(Date displayDate) {
+        this.displayDate = displayDate;
+    }
+
+    public String getShareKey() {
+        return shareKey;
+    }
+
+    public void setShareKey(String shareKey) {
+        this.shareKey = shareKey;
+    }
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
 
 }

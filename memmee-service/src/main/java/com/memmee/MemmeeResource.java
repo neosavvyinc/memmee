@@ -11,14 +11,6 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: waparrish
- * Date: 5/2/12
- * Time: 11:52 AM
- * To change this template use File | Settings | File Templates.
- */
-
 @Path("/memmeerest")
 public class MemmeeResource {
 
@@ -49,6 +41,7 @@ public class MemmeeResource {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
+                user.getPass(),
                 user.getApiKey(),
                 user.getApiDate()
         );
@@ -65,6 +58,7 @@ public class MemmeeResource {
     			user.getFirstName(),
     			user.getLastName(),
     			user.getEmail(),
+                user.getPass(),
     			user.getApiKey(),
     			user.getApiDate(),
     			user.getCreationDate());

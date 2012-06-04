@@ -11,7 +11,7 @@ function UserController($xhr) {
 
     var self = this;
     self.loadUsers = function() {
-        $xhr('GET', 'http://local.commons-user.com/backend/user'
+        $xhr('GET', '/memmeerest/user'
             ,function(code, response) {
                 self.response = response;
                 self.code = code;
@@ -30,7 +30,7 @@ function UserController($xhr) {
     self.registerUser = function()
     {
         $xhr.defaults.headers.post['Content-Type']='application/json';
-        $xhr('POST', 'http://local.commons-user.com/backend/user', self.user,
+        $xhr('POST', '/memmeerest/user', self.user,
             function(code, response) {
                 self.response = response;
                 self.code = code;

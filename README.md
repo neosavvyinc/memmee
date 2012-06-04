@@ -26,15 +26,19 @@ please point them out.
 
 To create your user use the following commands:
 
-CREATE USER 'commons'@'%' IDENTIFIED BY 'commons';
-CREATE USER 'commons'@'localhost' IDENTIFIED BY 'commons';
-GRANT ALL PRIVILEGES ON commons.* TO 'commons'@'%' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON commons.* TO 'commons'@'localhost' WITH GRANT OPTION;
+CREATE memmee
+CREATE memmeetest
+
+CREATE USER 'memmee'@'%' IDENTIFIED BY 'memmee';
+CREATE USER 'memmee'@'localhost' IDENTIFIED BY 'memmee';
+GRANT ALL PRIVILEGES ON memmee.* TO 'memmee'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON memmee.* TO 'memmee'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'localhost' WITH GRANT OPTION;
 
 To create your database use the following create table script:
 
-CREATE commons;
-USE commons;
+USE memmee;
 CREATE TABLE user (
 id int(11) NOT NULL AUTO_INCREMENT,
 firstName varchar(1024) DEFAULT NULL,

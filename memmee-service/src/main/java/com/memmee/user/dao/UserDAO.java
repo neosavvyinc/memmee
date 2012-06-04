@@ -10,13 +10,6 @@ import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA.
- * User: waparrish
- * Date: 5/2/12
- * Time: 2:08 PM
- * To change this template use File | Settings | File Templates.
- */
 public interface UserDAO {
 
     @SqlQuery("select * from user")
@@ -31,33 +24,33 @@ public interface UserDAO {
     @Mapper(UserMapper.class)
     User getUserByApiKey(@Bind("apiKey") Long apiKey);
 	
-	@SqlQuery("select * from user where email = :email and password = :password")
+	@SqlQuery("select * from user where email = :email and pass = :pass")
     @Mapper(UserMapper.class)
     User loginUser(
     	@Bind("email") String email,
-    	@Bind("password") String password);
+    	@Bind("pass") String password);
 
-    @SqlUpdate("insert into user (id, firstName, lastName, email, password, apiKey, apiDate, creationDate)" +
-    		" values (:id, :firstName, :lastName, :email, :password, :apiKey, :apiDate, :creationDate)")
+    @SqlUpdate("insert into user (id, firstName, lastName, email, pass, apiKey, apiDate, creationDate)" +
+    		" values (:id, :firstName, :lastName, :email, :pass, :apiKey, :apiDate, :creationDate)")
     void insert(
         @Bind("id") Long id
         ,@Bind("firstName") String firstName
         ,@Bind("lastName") String lastName
         ,@Bind("email") String email
-        ,@Bind("password") String password
+        ,@Bind("pass") String password
         ,@Bind("apiKey") String apiKey
         ,@Bind("apiDate") Date apiDate
         ,@Bind("creationDate") Date creationDate
     );
 
-    @SqlUpdate("update user set firstName = :firstName, lastName = :lastName, email = :email, password = :password, " +
+    @SqlUpdate("update user set firstName = :firstName, lastName = :lastName, email = :email, pass = :pass, " +
     		"apiKey = :apiKey, apiDate = :apiDate where id = :id")
     int update(
         @Bind("id") Long id
         ,@Bind("firstName") String firstName
         ,@Bind("lastName") String lastName
         ,@Bind("email") String email
-        ,@Bind("password") String password
+        ,@Bind("pass") String password
         ,@Bind("apiKey") String apiKey
         ,@Bind("apiDate") Date apiDate
     );
