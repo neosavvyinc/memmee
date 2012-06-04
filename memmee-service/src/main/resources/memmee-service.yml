@@ -3,13 +3,13 @@ database:
   driverClass: com.mysql.jdbc.Driver
 
   # the username
-  user: commons
+  user: memmee
 
   # the password
-  password: commons
+  password: memmee
 
   # the JDBC URL
-  url: jdbc:mysql://localhost:3306/commons
+  url: jdbc:mysql://localhost:3306/memmee
 
   # any properties specific to your JDBC driver:
   properties:

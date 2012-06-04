@@ -33,7 +33,7 @@ public class UserDAOTest extends MemmeeDAOTest {
                             "  `firstName` varchar(1024) DEFAULT NULL,\n" +
                             "  `lastName` varchar(1024) DEFAULT NULL,\n" +
                             "  `email` varchar(4096) NOT NULL,\n" +
-                            "  `pass` varchar(4096) NOT NULL,\n" +
+                            "  `password` varchar(4096) NOT NULL,\n" +
                             "  `apiKey` varchar(1024) DEFAULT NULL,\n" +
                             "  `apiDate` date DEFAULT NULL,\n" +
                             "  `creationDate` date NOT NULL,\n" +

@@ -3,7 +3,7 @@ function UserController($scope, $resource) {
     $scope.user = {
         firstName: '',
         lastName: '',
-        password: '',
+        pass: '',
         email: ''
     };
 
@@ -60,7 +60,8 @@ function UserController($scope, $resource) {
             $scope.user = {
                 firstName: '',
                 lastName: '',
-                email: ''
+                email: '',
+                pass:''
             }
         })
     }
@@ -71,7 +72,7 @@ function UserController($scope, $resource) {
             firstName: '',
             lastName: '',
             email: '',
-            password: ''
+            pass: ''
         }
     }
 

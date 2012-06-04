@@ -23,9 +23,7 @@ public class User implements Serializable{
     private Date apiDate;
     
     private Date creationDate;
-    
-    
-    
+
     public Long getId() {
         return id;
     }

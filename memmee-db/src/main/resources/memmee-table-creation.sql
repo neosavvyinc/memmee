@@ -25,7 +25,7 @@ CREATE TABLE `user` (
   `firstName` varchar(1024) DEFAULT NULL,
   `lastName` varchar(1024) DEFAULT NULL,
   `email` varchar(4096) NOT NULL,
-  `pass` varchar(4096) DEFAULT NULL,
+  `password` varchar(4096) DEFAULT NULL,
   `apiKey` varchar(1024) DEFAULT NULL,
   `apiDate` date DEFAULT NULL,
   `creationDate` date NOT NULL,

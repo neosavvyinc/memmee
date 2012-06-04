@@ -42,8 +42,8 @@ public class MemmeeResource {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPass(),
-                user.getApiKey(),
-                user.getApiDate()
+                user.getApiKey(), //TODO: LL probably needs to not be passed in from client - hack potential?
+                user.getApiDate() //TODO: LL probably needs to be server generated?
         );
     }
 
@@ -59,9 +59,9 @@ public class MemmeeResource {
     			user.getLastName(),
     			user.getEmail(),
                 user.getPass(),
-    			user.getApiKey(),
-    			user.getApiDate(),
-    			user.getCreationDate());
+                user.getApiKey(), //TODO: LL probably needs to not be passed in from client - hack potential?
+                user.getApiDate(), //TODO: LL probably needs to be server generated?
+    			new Date()); //server generated?
     }
 
     
