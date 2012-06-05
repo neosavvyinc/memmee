@@ -10,9 +10,15 @@ import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.memmees.dto.MemmeeAttachmentMapper;
+import com.memmee.memmees.dto.MemmeeMapper;
 
 public interface MemmeeDAO //extends Transactional<MemmeeDAO>
 {
+	
+	
+	@SqlQuery("select * from memmee where id = :id")
+    @Mapper(MemmeeMapper.class)
+    Memmee getMemmeeNoAttachment(@Bind("id") Long id);
 	
 	   @SqlQuery("select m.id, m.userId, m.title, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey," +
 			   " a.id as attachmentId, a.filePath, a.type, t.id as themeId, t.name, t.stylePath from memmee m " +
@@ -29,9 +35,8 @@ public interface MemmeeDAO //extends Transactional<MemmeeDAO>
 	   "INNER JOIN theme t on m.themeId = t.id where m.userId = :userId"
 	   )
 	    @Mapper(MemmeeAttachmentMapper.class)
-	    List<Memmee> getMemmeesbyUser(@Bind("userId") Long userId);
-
-
+	    List<Memmee> getMemmeesbyUser(@Bind("userId") Long userId);  
+	   
 	   @SqlUpdate("insert into memmee (id, userId, title, text, lastUpdateDate, creationDate, displayDate, shareKey, attachmentId, themeId)" +
 	   		" values (:id, :userId, :title, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey, :attachmentId, :themeId)")
 	    void insert(
@@ -47,13 +52,14 @@ public interface MemmeeDAO //extends Transactional<MemmeeDAO>
 	        ,@Bind("themeId") Long themeId
 	    );
 	    
-	    @SqlUpdate("update memmee set title = :title, text = :text, lastUpdateDate = :lastUpdateDate, shareKey = :shareKey, " +
+	    @SqlUpdate("update memmee set title = :title, text = :text, lastUpdateDate = :lastUpdateDate, displayDate = :displayDate, shareKey = :shareKey, " +
 	    		"attachmentId = :attachmentId, themeId = :themeId where id = :id")
 	    int update(
 	        @Bind("id") Long id
 	        ,@Bind("title") String title
 	        ,@Bind("text") String text
-	        ,@Bind("lastUpdateDate") String lastUpdateDate
+	        ,@Bind("lastUpdateDate") Date lastUpdateDate
+	        ,@Bind("displayDate") Date displayDate
 	        ,@Bind("shareKey") String shareKey
 	        ,@Bind("attachmentId") Long attachmentId
 	        ,@Bind("themeId") Long themeId
@@ -71,4 +77,5 @@ public interface MemmeeDAO //extends Transactional<MemmeeDAO>
 	        @Bind("id") Long id
 	    );
 
+	    void close();
 }

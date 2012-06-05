@@ -1,6 +1,6 @@
 package com.memmee.user;
 
-import com.memmee.memmees.MemmeeDAOTest;
+import com.memmee.memmees.AbstractMemmeeDAOTest;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
 import org.junit.After;
@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-public class UserDAOTest extends MemmeeDAOTest {
+public class UserDAOTest extends AbstractMemmeeDAOTest {
 
 
     @Before

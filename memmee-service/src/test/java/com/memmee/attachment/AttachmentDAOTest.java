@@ -2,7 +2,7 @@ package com.memmee.attachment;
 
 import com.memmee.attachment.dao.AttachmentDAO;
 import com.memmee.attachment.dto.Attachment;
-import com.memmee.memmees.MemmeeDAOTest;
+import com.memmee.memmees.AbstractMemmeeDAOTest;
 import com.yammer.dropwizard.db.Database;
 import org.skife.jdbi.v2.Handle;
 
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 
-public class AttachmentDAOTest extends MemmeeDAOTest{
+public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
 
 
     @Before

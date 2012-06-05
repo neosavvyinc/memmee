@@ -2,7 +2,7 @@ package com.memmee.theme;
 
 import com.memmee.theme.dao.ThemeDAO;
 import com.memmee.theme.dto.Theme;
-import com.memmee.memmees.MemmeeDAOTest;
+import com.memmee.memmees.AbstractMemmeeDAOTest;
 import com.yammer.dropwizard.db.Database;
 import org.skife.jdbi.v2.Handle;
 
@@ -20,7 +20,7 @@ import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class ThemeDAOTest extends MemmeeDAOTest{
+public class ThemeDAOTest extends AbstractMemmeeDAOTest{
 
 
     @Before
