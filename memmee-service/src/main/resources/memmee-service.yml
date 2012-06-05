@@ -1,3 +1,6 @@
+#http:
+#    rootPath: "/memmeerest/*"
+
 database:
   # the name of your JDBC driver
   driverClass: com.mysql.jdbc.Driver
