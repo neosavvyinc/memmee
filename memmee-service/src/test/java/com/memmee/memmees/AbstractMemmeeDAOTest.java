@@ -17,8 +17,8 @@ public abstract class AbstractMemmeeDAOTest {
     {
         LoggingFactory.bootstrap();
         mysqlConfig.setUrl("jdbc:mysql://localhost:3306/memmeetest");
-        mysqlConfig.setUser("memmee");
-        mysqlConfig.setPassword("memmee");
+        mysqlConfig.setUser("commons");
+        mysqlConfig.setPassword("commons");
         mysqlConfig.setDriverClass("com.mysql.jdbc.Driver");
     }
     protected final Environment environment = mock(Environment.class);

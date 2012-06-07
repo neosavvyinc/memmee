@@ -3,10 +3,12 @@ package com.memmee.attachment;
 import com.memmee.attachment.dao.AttachmentDAO;
 import com.memmee.attachment.dto.Attachment;
 import com.memmee.memmees.AbstractMemmeeDAOTest;
+import com.memmee.memmees.dao.MemmeeDAO;
 import com.yammer.dropwizard.db.Database;
 import org.skife.jdbi.v2.Handle;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 import org.junit.After;
 import org.junit.Before;
@@ -63,7 +65,7 @@ public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
     	
     	try {
 	      
-	        dao.insert(new Long(1), new Long(1), "filePath", "Image");
+	        dao.insert(new Long(1), "filePath", "Image");
 	        final String result = handle.createQuery("SELECT COUNT(*) FROM attachment").map(StringMapper.FIRST).first();
 	
 	        assertThat(Integer.parseInt(result), equalTo(1));
@@ -85,11 +87,11 @@ public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
         
     try{
 
-    	dao.insert(new Long(1), new Long(1), "filePath", "Image");
+    	Long id = dao.insert(new Long(1), "filePath", "Image");
         final Attachment attachment = dao.getAttachment(new Long(1));
        
 
-        assertThat(attachment.getId(), equalTo(new Long(1)));
+        assertThat(attachment.getId(), equalTo(id));
         
     }finally{
     	dao.close();
@@ -105,8 +107,8 @@ public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
         
         try{
         	
-         dao.insert(new Long(1), new Long(1), "filePath", "Image");
-         final int result = dao.update(new Long(1), "filePath2", "Image2");
+         Long id  = dao.insert(new Long(1), "filePath", "Image");
+         final int result = dao.update(id, "filePath2", "Image2");
 
          assertThat(result,equalTo(1));
         }finally{

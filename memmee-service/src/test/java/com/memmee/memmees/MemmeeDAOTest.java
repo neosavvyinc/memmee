@@ -5,6 +5,7 @@ import com.memmee.memmees.AbstractMemmeeDAOTest;
 import com.memmee.memmees.dao.MemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.theme.dao.ThemeDAO;
+import com.memmee.user.dao.UserDAO;
 
 import org.junit.After;
 import org.junit.Before;
@@ -32,7 +33,7 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
             
             
             handle.createCall("CREATE TABLE `memmee` (\n" +
-            		  " `id` int(11) NOT NULL DEFAULT '0',\n" +
+            		  " `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             		  " `userId` int(11) NOT NULL,\n" + 
             		  " `attachmentId` int(11) DEFAULT NULL,\n" +
             		  " `lastUpdateDate` date NOT NULL,\n" + 
@@ -67,7 +68,7 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            dao.insert(new Long(1), new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+            dao.insert(new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
             final String result = handle.createQuery("SELECT COUNT(*) FROM memmee").map(StringMapper.FIRST).first();
 
             assertThat(Integer.parseInt(result), equalTo(1));
@@ -82,16 +83,14 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
     public void testRead() throws Exception {
         final Handle handle = database.open();
         final MemmeeDAO dao = database.open(MemmeeDAO.class);
-        final AttachmentDAO attachmentdao = database.open(AttachmentDAO.class);
-        final ThemeDAO themedao = database.open(ThemeDAO.class);
         
         try{
         	
-        	themedao.insert(new Long(1), "name", "stylePath");
-        	attachmentdao.insert(new Long(1), new Long(1), "filePath", "Image");
-        	dao.insert(new Long(1), new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
-            final Memmee memmee = dao.getMemmee(new Long(1));
-            assertThat(memmee.getId(), equalTo(new Long(1)));
+        	
+        	Long id = dao.insert(new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+        	
+            final Memmee memmee = dao.getMemmeeNoAttachment(id);
+            assertThat(memmee.getId(), equalTo(id));
 
         } finally {
             dao.close();
@@ -107,7 +106,7 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-        	dao.insert(new Long(1), new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+        	dao.insert(new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
             final int result = dao.update(new Long(1), "title2", "text2", new Date(), new Date(), "shareKey2", new Long(2), new Long(2));
 
             assertThat(result, equalTo(1));

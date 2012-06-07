@@ -63,7 +63,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+            dao.insert("Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
             final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
 
             assertThat(Integer.parseInt(result), equalTo(1));
@@ -81,9 +81,9 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
-            final User user = dao.getUser(new Long(1));
-            assertThat(user.getId(), equalTo(new Long(1)));
+            Long id = dao.insert("Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+            final User user = dao.getUser(id);
+            assertThat(user.getId(), equalTo(id));
 
         } finally {
             dao.close();
@@ -99,8 +99,8 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            dao.insert(new Long(1), "Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
-            final int result = dao.update(new Long(1), "Luke", "Lappin", "lukelappin@gmail.com", "password", "apiKey", new Date());
+            Long id = dao.insert("Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+            final int result = dao.update(id, "Luke", "Lappin", "lukelappin@gmail.com", "password", "apiKey", new Date());
 
             assertThat(result, equalTo(1));
         } finally {

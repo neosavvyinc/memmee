@@ -13,7 +13,7 @@ import com.memmee.memmees.dto.Memmee;
 import com.memmee.memmees.dto.MemmeeAttachmentMapper;
 import com.memmee.memmees.dto.MemmeeMapper;
 
-public interface MemmeeDAO //extends Transactional<MemmeeDAO>
+public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemmeeDAO>
 {
 	
 	
@@ -42,7 +42,7 @@ public interface MemmeeDAO //extends Transactional<MemmeeDAO>
 	   		" values (:userId, :title, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey, :attachmentId, :themeId)")
 	   @GetGeneratedKeys
 	   Long insert(
-			 @Bind("userId") Long userId
+	         @Bind("userId") Long userId
 	        ,@Bind("title") String title
 	        ,@Bind("text") String text
 	        ,@Bind("lastUpdateDate") Date lastUpdateDate

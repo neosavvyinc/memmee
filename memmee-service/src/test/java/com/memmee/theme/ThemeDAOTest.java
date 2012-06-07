@@ -64,7 +64,7 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest{
     	
     	try {
 	      
-    		dao.insert(new Long(1), "name", "stylePath");
+    		dao.insert("name", "stylePath");
 	        final String result = handle.createQuery("SELECT COUNT(*) FROM theme").map(StringMapper.FIRST).first();
 	
 	        assertThat(Integer.parseInt(result), equalTo(1));
@@ -86,11 +86,11 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest{
         
     try{
 
-    	dao.insert(new Long(1), "name", "stylePath");
-        final Theme theme = dao.getTheme(new Long(1));
+    	Long id = dao.insert("name", "stylePath");
+        final Theme theme = dao.getTheme(id);
        
 
-        assertThat(theme.getId(), equalTo(new Long(1)));
+        assertThat(theme.getId(), equalTo(id));
         
     }finally{
     	dao.close();
@@ -106,8 +106,8 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest{
         
         try{
         	
-         dao.insert(new Long(1), "name", "stylePath");
-         final int result = dao.update(new Long(1), "name2", "stylePath2");
+         Long id = dao.insert("name", "stylePath");
+         final int result = dao.update(id, "name2", "stylePath2");
 
          assertThat(result,equalTo(1));
         }finally{

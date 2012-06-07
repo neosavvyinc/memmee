@@ -3,15 +3,15 @@ package com.memmee.user.dao;
 import com.memmee.user.dto.User;
 import com.memmee.user.dto.UserMapper;
 import org.skife.jdbi.v2.sqlobject.Bind;
-import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
 import java.util.Date;
 import java.util.List;
 
-public interface UserDAO {
+public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO>{
 
     @SqlQuery("select * from user")
     @Mapper(UserMapper.class)
@@ -23,7 +23,7 @@ public interface UserDAO {
 	
 	@SqlQuery("select * from user where apiKey = :apiKey")
     @Mapper(UserMapper.class)
-    User getUserByApiKey(@Bind("apiKey") String apiKey);
+    User getUserByApiKey(@Bind("apiKey") Long apiKey);
 	
 	@SqlQuery("select * from user where email = :email and password = :password")
     @Mapper(UserMapper.class)
@@ -31,11 +31,11 @@ public interface UserDAO {
     	@Bind("email") String email,
     	@Bind("password") String password);
 
-    @SqlUpdate("insert into user (firstName, lastName, email, password, apiKey, apiDate, creationDate)" +
-    		" values (:firstName, :lastName, :email, :password, :apiKey, :apiDate, :creationDate)")
-    @GetGeneratedKeys
-    Long insert(
-         @Bind("firstName") String firstName
+    @SqlUpdate("insert into user (id, firstName, lastName, email, password, apiKey, apiDate, creationDate)" +
+    		" values (:id, :firstName, :lastName, :email, :password, :apiKey, :apiDate, :creationDate)")
+    void insert(
+        @Bind("id") Long id
+        ,@Bind("firstName") String firstName
         ,@Bind("lastName") String lastName
         ,@Bind("email") String email
         ,@Bind("password") String password

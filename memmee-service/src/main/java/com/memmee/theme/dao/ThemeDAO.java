@@ -1,6 +1,7 @@
 package com.memmee.theme.dao;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
@@ -14,10 +15,10 @@ public interface ThemeDAO {
     @Mapper(ThemeMapper.class)
     Theme getTheme(@Bind("id") Long id);
 
-    @SqlUpdate("insert into theme (id, name, stylePath) values (:id, :name, :stylePath)")
-    void insert(
-         @Bind("id") Long id
-        ,@Bind("name") String name
+    @SqlUpdate("insert into theme (name, stylePath) values (:name, :stylePath)")
+    @GetGeneratedKeys
+    Long insert(
+         @Bind("name") String name
         ,@Bind("stylePath") String stylePath
     );
     

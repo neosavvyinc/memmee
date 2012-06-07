@@ -7,8 +7,9 @@ import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
-public interface AttachmentDAO {
+public interface TransactionalAttachmentDAO extends Transactional<TransactionalAttachmentDAO>{
 
     @SqlQuery("select * from attachment where memmeeId = :memmeeId")
     @Mapper(AttachmentMapper.class)
@@ -16,7 +17,7 @@ public interface AttachmentDAO {
 
     @SqlUpdate("insert into attachment (memmeeId, filePath, type) values (:memmeeId, :filePath, :type)")
     @GetGeneratedKeys
-    Long insert(
+    long insert(
          @Bind("memmeeId") Long memmeeId
         ,@Bind("filePath") String filePath
         ,@Bind("type") String type
