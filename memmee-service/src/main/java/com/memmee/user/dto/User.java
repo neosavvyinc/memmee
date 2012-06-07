@@ -57,11 +57,11 @@ public class User implements Serializable{
     }
 
 	public String getApiKey() {
-		return apiKey;
+		return UUID.randomUUID().toString();
 	}
 
 	public void setApiKey(String apiKey) {   
-		this.apiKey = UUID.randomUUID().toString();
+		this.apiKey = apiKey;
 	}
 
     public String getPass() {

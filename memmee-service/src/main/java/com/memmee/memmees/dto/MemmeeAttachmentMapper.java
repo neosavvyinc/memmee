@@ -36,6 +36,7 @@ public class MemmeeAttachmentMapper implements ResultSetMapper<Memmee> {
         theme.setId(resultSet.getLong("themeId"));
         theme.setName(resultSet.getString("name"));
         theme.setStylePath(resultSet.getString("stylePath"));
+        memmee.setTheme(theme);
 
         return memmee;
     }

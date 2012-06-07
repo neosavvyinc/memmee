@@ -29,8 +29,18 @@ public class UserResource {
 
         return userDao.findAll();
     }
+        
+    @GET
+    @Path("/user/login")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public User loginUser(@QueryParam("email") String email,@QueryParam("password") String password){
+
+        return userDao.loginUser(email, password);
+    }
     
     
+    /*
     @GET
     @Path("/sessiontest")
     @Consumes({MediaType.APPLICATION_JSON})
@@ -51,7 +61,9 @@ public class UserResource {
     	
         return returnValue;
     }
-
+*/
+    
+    
     @PUT
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
@@ -65,7 +77,7 @@ public class UserResource {
                 user.getEmail(),
                 user.getPass(),
                 user.getApiKey(), //TODO: LL probably needs to not be passed in from client - hack potential?
-                user.getApiDate() //TODO: LL probably needs to be server generated?
+                new Date()//TODO: LL probably needs to be server generated?
         );
     }
 
@@ -76,13 +88,16 @@ public class UserResource {
     @Produces({MediaType.APPLICATION_JSON})
     public void add(User user)
     {
+    	
+    	if(userDao.getUserCount(user.getEmail()) < 1){
     	userDao.insert(user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
                 user.getPass(),
                 user.getApiKey(), //TODO: LL probably needs to not be passed in from client - hack potential?
-                user.getApiDate(), //TODO: LL probably needs to be server generated?
+                new Date(), //TODO: LL probably needs to be server generated?
                 new Date()); //server generated?
+    	}
     }
 
     

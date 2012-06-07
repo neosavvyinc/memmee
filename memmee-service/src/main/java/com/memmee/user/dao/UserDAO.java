@@ -30,6 +30,12 @@ public interface UserDAO {
     User loginUser(
     	@Bind("email") String email,
     	@Bind("password") String password);
+	
+	@SqlQuery("select * from user where email = :email")
+    @Mapper(UserMapper.class)
+    User userFirstLogin(
+    	@Bind("email") String email);
+	
 
     @SqlUpdate("insert into user (firstName, lastName, email, password, apiKey, apiDate, creationDate)" +
     		" values (:firstName, :lastName, :email, :password, :apiKey, :apiDate, :creationDate)")
@@ -60,6 +66,12 @@ public interface UserDAO {
     void delete(
         @Bind("id") Long id
     );
+    
+    @SqlUpdate("select count(*) from user where email = :email")
+    int getUserCount(
+        @Bind("email") String email
+    );
+    
 
     void close();
 }
