@@ -6,12 +6,14 @@ import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import org.skife.jdbi.v2.sqlobject.mixins.CloseMe;
+import org.skife.jdbi.v2.sqlobject.mixins.GetHandle;
 import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
 import java.util.Date;
 import java.util.List;
 
-public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO>{
+public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO>,GetHandle,CloseMe{
 
     @SqlQuery("select * from user")
     @Mapper(UserMapper.class)

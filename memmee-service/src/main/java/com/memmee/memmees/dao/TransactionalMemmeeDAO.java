@@ -7,13 +7,15 @@ import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import org.skife.jdbi.v2.sqlobject.mixins.CloseMe;
+import org.skife.jdbi.v2.sqlobject.mixins.GetHandle;
 import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.memmees.dto.MemmeeAttachmentMapper;
 import com.memmee.memmees.dto.MemmeeMapper;
 
-public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemmeeDAO>
+public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemmeeDAO>,GetHandle,CloseMe
 {
 	
 	

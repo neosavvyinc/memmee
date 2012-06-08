@@ -7,9 +7,11 @@ import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+import org.skife.jdbi.v2.sqlobject.mixins.CloseMe;
+import org.skife.jdbi.v2.sqlobject.mixins.GetHandle;
 import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
-public interface TransactionalAttachmentDAO extends Transactional<TransactionalAttachmentDAO>{
+public interface TransactionalAttachmentDAO extends Transactional<TransactionalAttachmentDAO>,GetHandle,CloseMe{
 
     @SqlQuery("select * from attachment where memmeeId = :memmeeId")
     @Mapper(AttachmentMapper.class)

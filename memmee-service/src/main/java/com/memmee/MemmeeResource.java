@@ -10,7 +10,6 @@ import com.memmee.memmees.dao.MemmeeDAO;
 import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.theme.dto.Theme;
-import com.memmee.user.dao.TransactionalUserDAO;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
 import com.yammer.dropwizard.db.Database;
@@ -22,7 +21,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.exceptions.DBIException;
-import org.skife.jdbi.v2.exceptions.TransactionException;
+
 
 
 @Path("/memmeetest")
@@ -122,7 +121,6 @@ public class MemmeeResource {
     		attachmentDao.commit();
     		memmeeDao.close();
     		attachmentDao.close();
-    		h.close();
     	}
     	
     	return readMemmeeDao.getMemmee(memmeeId);
@@ -170,7 +168,6 @@ public class MemmeeResource {
     		attachmentDao.commit();
     		memmeeDao.close();
     		attachmentDao.close();
-    		h.close();
     	}
     	
     	return readMemmeeDao.getMemmee(memmeeId);
@@ -182,7 +179,7 @@ public class MemmeeResource {
           try{
           	h.getConnection().setAutoCommit(false);
           }catch(SQLException se){
-          	
+          	LOG.error(se.getMessage());
           }
           return h;
     }
