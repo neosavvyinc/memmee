@@ -32,9 +32,9 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         final DatabaseFactory factory = new DatabaseFactory(environment);
         final Database db = factory.build(userConfiguration.getDatabase(), "mysql");
         final UserDAO userDao = db.onDemand(UserDAO.class);
-        final MemmeeDAO memmeeDao = db.onDemand(MemmeeDAO.class);
+        final TransactionalMemmeeDAO memmeeDao = db.onDemand(TransactionalMemmeeDAO.class);
         final ThemeDAO themeDao = db.onDemand(ThemeDAO.class);
         environment.addResource(new UserResource(userDao));
-        environment.addResource(new MemmeeResource(db,userDao,memmeeDao));
+        environment.addResource(new MemmeeResource(userDao,memmeeDao));
     }
 }
