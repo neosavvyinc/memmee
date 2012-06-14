@@ -25,7 +25,9 @@ import org.skife.jdbi.v2.exceptions.DBIException;
 import org.skife.jdbi.v2.exceptions.TransactionException;
 import org.skife.jdbi.v2.TransactionStatus;
 
-@Path("/memmeerest")
+
+
+@Path("/memmeetest")
 public class MemmeeResource {
     private final UserDAO userDao;
 	private final TransactionalMemmeeDAO memmeeDao;
@@ -76,7 +78,7 @@ public class MemmeeResource {
     @Path("/insertmemmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee, final Attachment attachment, final Theme theme) 
+    public Memmee add(@QueryParam("apiKey") String apiKey, final Memmee memmee, final Attachment attachment, final Theme theme) 
     {
     	
     	long memmeeId = -1;
@@ -115,7 +117,6 @@ public class MemmeeResource {
     	}
     	
     	}catch(DBIException dbException){
-    		LOG.error("DB EXCEPTION",dbException);
     		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
     	}
     	
@@ -123,95 +124,8 @@ public class MemmeeResource {
     	return memmeeDao.getMemmee(new Long(memmeeId));
     		    	
     }
+    	
     
-    @PUT
-    @Path("/updatememmeewithattachment")
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
-    public Memmee updateMemmeeWithAttachment(@QueryParam("apiKey") String apiKey, final Memmee memmee, final Attachment attachment) 
-    {
-    	
-        int count = 0;
-    	
-    	final User user = userDao.getUserByApiKey(apiKey);
-    	
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-
-    	try{
-    		
-
-    	final Theme theme = memmee.getTheme();
-    		
-    		count = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
-  				  {
-  				    public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
-  				    {
-  				    	
-  				    	int count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-  				    			new Date(), new Date(),memmee.getShareKey(), memmee.getAttachment().getId(), theme.getId());
-
-  				    	memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
-
-  				    	return count;
-  				   
-  				    }
-  				  });
-    			
-    	}catch(DBIException dbException){
-    		LOG.error("DB EXCEPTION",dbException);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	if(count == 0){
-		   	LOG.error("MEMMEE NOT UPDATED");
-	    	throw new WebApplicationException(Status.NOT_MODIFIED);
-	    }
-    	
-    	return memmeeDao.getMemmee(new Long(memmee.getId()));
-    		    	
-    }
-    
-    @PUT
-    @Path("/updatememmee")
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
-    public Memmee updateMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee) 
-    {
-    	
-    	int count = 0;
-    	
-    	final User user = userDao.getUserByApiKey(apiKey);
-    	
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-
-    	try{
-    		
-
-    	final Theme theme = memmee.getTheme();
-    		
-    	count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-    			new Date(), new Date(),memmee.getShareKey(), memmee.getAttachment().getId(), theme.getId());
-    	
-    	}catch(DBIException dbException){
-    		LOG.error("DB EXCEPTION",dbException);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	if(count == 0){
-		   	LOG.error("MEMMEE NOT UPDATED");
-	    	throw new WebApplicationException(Status.NOT_MODIFIED);
-	    }
-    	
-     	return memmeeDao.getMemmee(new Long(memmee.getId()));
-    		    	
-    }
-
 /*
     @GET
     @Path("/insertmemmee2")
@@ -260,9 +174,8 @@ public class MemmeeResource {
     }
   */
     
-    /*
     @GET
-    @Path("/insertmemmeeparams")
+    @Path("/insertmemmee3")
     @Produces({MediaType.APPLICATION_JSON})
     public Memmee add3(@QueryParam("apiKey") String apiKey, @QueryParam("title") final String title, @QueryParam("text") final String text, @QueryParam("filePath") final String filePath, @QueryParam("type") final String type, @QueryParam("themeId") final Long themeId) throws DBIException 
     {
@@ -299,30 +212,6 @@ public class MemmeeResource {
     	return memmeeDao.getMemmee(new Long(memmeeId));
 	    	
     }
-    */
-    
-    
-    @DELETE
-    @Path("/deletememmee")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON})
-    public void delete(@QueryParam("apiKey") String apiKey,@QueryParam("id") final Long id)
-    
-    {
-    	final User user = userDao.getUserByApiKey(apiKey);
-
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	
-    	memmeeDao.delete(id);
-    }
-    	
-    	
-    
-    
     
     /*
     private Handle getWriteHandle(){
