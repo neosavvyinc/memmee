@@ -39,13 +39,52 @@ GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'localhost' WITH GRANT OPTION;
 To create your database use the following create table script:
 
 USE memmee;
-CREATE TABLE user (
-id int(11) NOT NULL AUTO_INCREMENT,
-firstName varchar(1024) DEFAULT NULL,
-lastName varchar(1024) DEFAULT NULL,
-email varchar(4096) DEFAULT NULL,
-PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=10;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(1024) DEFAULT NULL,
+  `lastName` varchar(1024) DEFAULT NULL,
+  `email` varchar(4096) NOT NULL,
+  `apiKey` varchar(1024) DEFAULT NULL,
+  `apiDate` date DEFAULT NULL,
+  `creationDate` date NOT NULL,
+  `password` varchar(4096) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `memmee` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `attachmentId` int(11) DEFAULT NULL,
+  `lastUpdateDate` date NOT NULL,
+  `creationDate` date NOT NULL,
+  `displayDate` date NOT NULL,
+  `text` varchar(4096) DEFAULT NULL,
+  `title` varchar(1024) NOT NULL,
+  `shareKey` varchar(1024) DEFAULT NULL,
+  `themeId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FOREIGN_KEY_USER_ID` (`userId`),
+  CONSTRAINT `memmee_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `attachment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `memmeeId` int(11) NOT NULL,
+  `filePath` varchar(1024) DEFAULT NULL,
+  `type` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FOREIGN_KEY_MEMMEE_ID` (`memmeeId`),
+  CONSTRAINT `attachment_ibfk_1` FOREIGN KEY (`memmeeId`) REFERENCES `memmee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `theme` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `stylePath` varchar(1024) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
 
 I also created a user with name "commons" password "commons" with full rights
 on this database.
