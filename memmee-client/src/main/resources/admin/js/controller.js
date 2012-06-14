@@ -1,4 +1,4 @@
-function UserController($scope, $resource) {
+function UserController($scope, $http) {
 
     $scope.hello = 'hello';
 
@@ -9,18 +9,19 @@ function UserController($scope, $resource) {
         email: ''
     };
 
-    var User = $resource('/memmeeuserrest/user/:userId',
-        null,
-        {'remove': {method:'DELETE', params: {userId: '@id'}, isArray:false},
-         'update': {method:'PUT', params: {userId: '@id'}, isArray:false}
-          } );
-
     $scope.users = {};
 
     var self = $scope;
     self.loadUsers = function() {
-
-        $scope.users = User.query();
+        $http({method: 'GET', url: '/memmeeuserrest/user'}).
+            success(function(data, status, headers, config) {
+                // this callback will be called asynchronously
+                // when the response is available
+                $scope.users = data;
+            }).
+            error(function(data, status, headers, config) {
+                console.log('error while getting users');
+            });
 
     }
 
@@ -29,22 +30,27 @@ function UserController($scope, $resource) {
         if( $scope.user.id == null )
         {
             $scope.user.id = 1;
-            User.save( $scope.user, function(){
-                $scope.loadUsers();
-                $scope.newUser();
-            }, function() {
-                console.log('error');
-            } );
+            $http({method: 'POST', url: '/memmeeuserrest/user', data: $scope.user}).
+                success(function(data, status, headers, config) {
+                    $scope.loadUsers();
+                    $scope.newUser();
+                }).
+                error(function(data, status, headers, config) {
+                    console.log('error while saving a new user');
+                });
         }
         else
         {
-            User.update({userId: $scope.user.id}, $scope.user, function(){
+            $http({method: 'PUT', url: '/memmeeuserrest/user/' + $scope.user.id, data: $scope.user}).
+                success(function(data, status, headers, config) {
+                    $scope.loadUsers();
+                    $scope.newUser();
+                }).
+                error(function(data, status, headers, config) {
+                    console.log('error while updating an existing user');
+                });
 
 
-                $scope.loadUsers();
-            }, function() {
-                console.log('error');
-            } );
         }
     }
 
@@ -57,15 +63,14 @@ function UserController($scope, $resource) {
 
     self.deleteUser = function( )
     {
-        User.delete({userId:$scope.user.id}, function() {
-            $scope.loadUsers();
-            $scope.user = {
-                firstName: '',
-                lastName: '',
-                email: '',
-                pass:''
-            }
-        })
+        $http({method: 'DELETE', url: '/memmeeuserrest/user/' + $scope.user.id, data: $scope.user}).
+            success(function(data, status, headers, config) {
+                $scope.loadUsers();
+                $scope.newUser();
+            }).
+            error(function(data, status, headers, config) {
+                console.log('error while updating an existing user');
+            });
     }
 
     self.newUser = function()
@@ -81,4 +86,4 @@ function UserController($scope, $resource) {
     self.loadUsers();
 }
 
-UserController.$inject = ['$scope', '$resource'];
+UserController.$inject = ['$scope', '$http'];

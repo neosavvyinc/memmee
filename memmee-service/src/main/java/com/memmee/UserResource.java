@@ -48,14 +48,16 @@ public class UserResource {
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public int update(@QueryParam("apiKey") String apiKey,@PathParam("id") Long id, User user)
+    public int update(
+//            @QueryParam("apiKey") String apiKey,
+              @PathParam("id") Long id, User user)
     {
-    	final User userLookup = userDao.getUserByApiKey(apiKey);
-
-    	if(userLookup == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
+//    	final User userLookup = userDao.getUserByApiKey(apiKey);
+//
+//    	if(userLookup == null){
+//    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+//    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+//    	}
     	
         return userDao.update(
                 id,
@@ -92,14 +94,16 @@ public class UserResource {
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON})
-    public void delete(@QueryParam("apiKey") String apiKey,@PathParam("id") Long id)
+    public void delete(
+//            @QueryParam("apiKey") String apiKey,
+            @PathParam("id") Long id)
     {
-    	final User user = userDao.getUserByApiKey(apiKey);
-
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
+//    	final User user = userDao.getUserByApiKey(apiKey);
+//
+//    	if(user == null){
+//    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+//    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+//    	}
     	
     	userDao.delete(id);
     }
