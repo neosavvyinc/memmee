@@ -9,7 +9,7 @@ import com.memmee.theme.dao.ThemeDAO;
 import com.memmee.user.dao.TransactionalUserDAO;
 import com.memmee.user.dao.UserDAO;
 import com.yammer.dropwizard.Service;
-import com.yammer.dropwizard.config.Environment;
+import com.yammer.dropwizard.config.Environment;  
 import com.yammer.dropwizard.db.Database;
 import com.yammer.dropwizard.db.DatabaseFactory;
 
@@ -25,7 +25,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         super("user");
     }
 
-
+ 
     @Override
     protected void initialize(MemmeeConfiguration userConfiguration, Environment environment) throws Exception {
 

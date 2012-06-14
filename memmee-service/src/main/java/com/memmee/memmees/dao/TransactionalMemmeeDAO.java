@@ -88,6 +88,18 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
 	        ,@Bind("type") String type
 	    );
 	    
+	    @SqlUpdate("update attachment set filePath = :filePath, type = :type where id = :id")
+	    int updateAttachment(
+	        @Bind("id") Long id
+	        ,@Bind("filePath") String filePath
+	        ,@Bind("type") String type
+	    );
+	    
+	    @SqlUpdate("delete from attachment where id = :id")
+	    void deleteAttachment(
+	        @Bind("id") Long id
+	    );
+	    
 
 	    void close();
 }
