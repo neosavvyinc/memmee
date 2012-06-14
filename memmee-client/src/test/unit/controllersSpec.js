@@ -11,8 +11,8 @@ describe('myController function', function() {
 
             scope = $rootScope.$new();
             $httpBackend = _$httpBackend_;
-            $httpBackend.expectGET('phones/phones.json').
-                respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
+            $httpBackend.expectGET('/memmeeuserrest/user').
+                respond([{"id":2,"email":"dhamlett@gmail.com","pass":"","firstName":"Dana","lastName":"Hamlett","apiKey":"6865fb30-54d9-498a-afc5-c23787229d68","apiDate":"2012-06-13","creationDate":"2012-06-13"}]);
             userController = $controller(UserController, {$scope: scope});
         }));
 
