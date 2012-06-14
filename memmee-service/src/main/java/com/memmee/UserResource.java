@@ -2,19 +2,23 @@ package com.memmee;
 
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
+import com.yammer.dropwizard.logging.Log;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response.Status;
+
 import java.util.Date;
 import java.util.List;
 
-@Path("/memmeerest")
+@Path("/memmeeuserrest")
 public class UserResource {
 
     private UserDAO userDao;
+    private static final Log LOG = Log.forClass(UserResource.class);
 
     public UserResource(UserDAO dao) {
         super();
@@ -68,8 +72,15 @@ public class UserResource {
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public int update(@PathParam("id") Long id, User user)
+    public int update(@QueryParam("apiKey") String apiKey,@PathParam("id") Long id, User user)
     {
+    	final User userLookup = userDao.getUserByApiKey(apiKey);
+
+    	if(userLookup == null){
+    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+    	}
+    	
         return userDao.update(
                 id,
                 user.getFirstName(),
@@ -105,8 +116,15 @@ public class UserResource {
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON})
-    public void delete(@PathParam("id") Long id)
+    public void delete(@QueryParam("apiKey") String apiKey,@PathParam("id") Long id)
     {
+    	final User user = userDao.getUserByApiKey(apiKey);
+
+    	if(user == null){
+    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+    	}
+    	
     	userDao.delete(id);
     }
 
