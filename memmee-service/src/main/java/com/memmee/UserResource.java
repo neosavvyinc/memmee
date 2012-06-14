@@ -43,31 +43,7 @@ public class UserResource {
         return userDao.loginUser(email, password);
     }
     
-    
-    /*
-    @GET
-    @Path("/sessiontest")
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
-    public String sessionInsert(@Context HttpServletRequest request,@QueryParam("value") String value){
 
-    	  
-        HttpSession session = request.getSession(true);
-        String token = (String) session.getAttribute("token");
-        String returnValue = "";
-        if (token == null) {
-            session.setAttribute("token", value);
-            returnValue = value;
-        }
-        else{
-        	returnValue = token;
-        }
-    	
-        return returnValue;
-    }
-*/
-    
-    
     @PUT
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON})

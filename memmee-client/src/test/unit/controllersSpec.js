@@ -1,66 +1,24 @@
+'use strict';
+
 /* jasmine specs for controllers go here */
-describe('User Admin Controllers', function() {
 
-  beforeEach(function(){
-    this.addMatchers({
-      toEqualData: function(expected) {
-        return angular.equals(this.actual, expected);
-      }
-    });
-  });
+describe('myController function', function() {
+    describe('UserController', function(){
+        var userController;
+        var scope, userController, $httpBackend;
 
+        beforeEach(inject(function($rootScope, $controller, _$httpBackend_) {
 
-  describe('UserController', function(){
-    var scope, $browser, ctrl;
+            scope = $rootScope.$new();
+            $httpBackend = _$httpBackend_;
+            $httpBackend.expectGET('phones/phones.json').
+                respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}]);
+            userController = $controller(UserController, {$scope: scope});
+        }));
 
-    beforeEach(function() {
-      scope = angular.scope();
-      $browser = scope.$service('$browser');
-
-      $browser.xhr.expectGET('/memmeerest/user').respond([{name: 'Nexus S'},
-                                                            {name: 'Motorola DROID'}]);
-      ctrl = scope.$new(PhoneListCtrl);
+        it('should have a hello string with a value of "hello"', function() {
+            expect(scope.hello).toBe('hello');
+        });
     });
 
-
-    it('should create "phones" model with 2 phones fetched from xhr', function() {
-      expect(ctrl.phones).toEqual([]);
-      $browser.xhr.flush();
-
-      expect(ctrl.phones).toEqualData([{name: 'Nexus S'},
-                                       {name: 'Motorola DROID'}]);
-    });
-
-
-    it('should set the default value of orderProp model', function() {
-      expect(ctrl.orderProp).toBe('age');
-    });
-  });
-
-
-  describe('PhoneDetailCtrl', function(){
-    var scope, $browser, ctrl;
-
-    beforeEach(function() {
-      scope = angular.scope();
-      $browser = scope.$service('$browser');
-    });
-
-    beforeEach(function() {
-      scope = angular.scope();
-      $browser = scope.$service('$browser');
-    });
-
-
-    it('should fetch phone detail', function(){
-      scope.params = {phoneId:'xyz'};
-      $browser.xhr.expectGET('phones/xyz.json').respond({name:'phone xyz'});
-      ctrl = scope.$new(PhoneDetailCtrl);
-
-      expect(ctrl.phone).toEqualData({});
-      $browser.xhr.flush();
-
-      expect(ctrl.phone).toEqualData({name:'phone xyz'});
-    });
-  });
 });

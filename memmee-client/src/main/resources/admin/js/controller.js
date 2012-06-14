@@ -1,5 +1,7 @@
 function UserController($scope, $resource) {
 
+    $scope.hello = 'hello';
+
     $scope.user = {
         firstName: '',
         lastName: '',
@@ -7,7 +9,7 @@ function UserController($scope, $resource) {
         email: ''
     };
 
-    var User = $resource('/memmeerest/user/:userId',
+    var User = $resource('/memmeeuserrest/user/:userId',
         null,
         {'remove': {method:'DELETE', params: {userId: '@id'}, isArray:false},
          'update': {method:'PUT', params: {userId: '@id'}, isArray:false}
@@ -78,3 +80,5 @@ function UserController($scope, $resource) {
 
     self.loadUsers();
 }
+
+UserController.$inject = ['$scope', '$resource'];
