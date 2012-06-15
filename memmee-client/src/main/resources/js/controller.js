@@ -1,15 +1,18 @@
 function RegistrationController($scope, $http) {
 
     $scope.user = {
-        firstName: '',
-        lastName: '',
-        pass: '',
         email: ''
     };
 
     $scope.register = function()
     {
-        console.log("This is a registration test");
+        $http({method: 'POST', url: '/memmeeuserrest/user', data: $scope.user}).
+            success(function(data, status, headers, config) {
+                console.log('you were successfully registered');
+            }).
+            error(function(data, status, headers, config) {
+                console.log('error while saving a new user');
+            });
     }
 
 

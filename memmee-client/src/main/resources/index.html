@@ -69,7 +69,11 @@
             <div id="collapsibleRegistration" class="collapse in" style="height: 0px; ">
                 <form class="well" ng-controller="RegistrationController">
                     <label>Email Address is all you need:</label>
-                        <input type="text" class="span3" placeholder="Enter Your Email Address">
+                        <input type="text"
+                               class="span3"
+                               placeholder="Enter Your Email Address"
+                               ng-model="user.email"
+                                >
                         <span class="help-block">It's just that simple.</span>
                     </label>
                     <button ng-click="register()" class="btn btn-primary">Sign Up »</button>

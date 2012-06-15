@@ -29,7 +29,6 @@ function UserController($scope, $http) {
     {
         if( $scope.user.id == null )
         {
-            $scope.user.id = 1;
             $http({method: 'POST', url: '/memmeeuserrest/user', data: $scope.user}).
                 success(function(data, status, headers, config) {
                     $scope.loadUsers();
