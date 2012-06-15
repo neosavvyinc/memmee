@@ -11,8 +11,8 @@ function UserController($scope, $http) {
 
     $scope.users = {};
 
-    var self = $scope;
-    self.loadUsers = function() {
+
+    $scope.loadUsers = function() {
         $http({method: 'GET', url: '/memmeeuserrest/user'}).
             success(function(data, status, headers, config) {
                 // this callback will be called asynchronously
@@ -25,7 +25,7 @@ function UserController($scope, $http) {
 
     }
 
-    self.saveUser = function()
+    $scope.saveUser = function()
     {
         if( $scope.user.id == null )
         {
@@ -54,14 +54,14 @@ function UserController($scope, $http) {
         }
     }
 
-    self.editUser = function( user )
+    $scope.editUser = function( user )
     {
         $scope.user = user;
         console.log("user.id=" + user.id);
         console.log("user=" + user);
     }
 
-    self.deleteUser = function( )
+    $scope.deleteUser = function( )
     {
         $http({method: 'DELETE', url: '/memmeeuserrest/user/' + $scope.user.id, data: $scope.user}).
             success(function(data, status, headers, config) {
@@ -73,7 +73,7 @@ function UserController($scope, $http) {
             });
     }
 
-    self.newUser = function()
+    $scope.newUser = function()
     {
         $scope.user = {
             firstName: '',
@@ -83,7 +83,7 @@ function UserController($scope, $http) {
         }
     }
 
-    self.loadUsers();
+    $scope.loadUsers();
 }
 
 UserController.$inject = ['$scope', '$http'];

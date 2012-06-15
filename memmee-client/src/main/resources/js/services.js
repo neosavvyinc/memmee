@@ -1,1 +1,1 @@
-angular.module('user-app.services', ['ngResource'])
+angular.module('memmee-app.services', ['ngResource'])

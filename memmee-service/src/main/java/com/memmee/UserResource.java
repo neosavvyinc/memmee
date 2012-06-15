@@ -65,8 +65,8 @@ public class UserResource {
                 user.getLastName(),
                 user.getEmail(),
                 user.getPass(),
-                user.getApiKey(), //TODO: LL probably needs to not be passed in from client - hack potential?
-                new Date()//TODO: LL probably needs to be server generated?
+                user.getApiKey(),
+                new Date()
         );
     }
 
@@ -79,13 +79,14 @@ public class UserResource {
     {
     	
     	if(userDao.getUserCount(user.getEmail()) < 1){
-    	userDao.insert(user.getFirstName(),
-                user.getLastName(),
-                user.getEmail(),
-                user.getPass(),
-                user.getApiKey(), //TODO: LL probably needs to not be passed in from client - hack potential?
-                new Date(), //TODO: LL probably needs to be server generated?
-                new Date()); //server generated?
+            userDao.insert(user.getFirstName(),
+                    user.getLastName(),
+                    user.getEmail(),
+                    user.getPass(),
+                    user.getApiKey(),
+                    new Date(),
+                    new Date()
+            );
     	}
     }
 

@@ -1,1 +1,1 @@
-angular.module('user-app', ['user-app.services']).run()
+angular.module('memmee-app', ['memmee-app.services']).run()
