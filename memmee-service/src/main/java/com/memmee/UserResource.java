@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response.Status;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Path("/memmeeuserrest")
 public class UserResource {
@@ -75,9 +76,10 @@ public class UserResource {
     @Path("/user")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public void add(User user)
+    public User add(User user)
     {
-    	
+    	user.setApiKey(UUID.randomUUID().toString());
+
     	if(userDao.getUserCount(user.getEmail()) < 1){
             userDao.insert(user.getFirstName(),
                     user.getLastName(),
@@ -88,6 +90,8 @@ public class UserResource {
                     new Date()
             );
     	}
+
+        return user;
     }
 
     

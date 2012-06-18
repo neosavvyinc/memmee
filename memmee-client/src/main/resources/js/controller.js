@@ -1,3 +1,13 @@
+function SecurityController($scope) {
+    $scope.loggedInUser = null;
+    $scope.visibleLoggedInStyle = { visibility: 'hidden' };
+
+    $scope.saveLoggedInUser = function( $user ) {
+        $scope.loggedInUser = $user;
+        $scope.visibleLoggedInStyle = { visibility: 'visible' };
+    }
+}
+
 function NavigationController($scope) {
 
     $scope.navigationItems = [
@@ -23,7 +33,7 @@ function NavigationController($scope) {
 }
 
 
-function RegistrationController($scope, $http) {
+function RegistrationController($scope, $http ) {
 
     $scope.user = {
         email: ''
@@ -34,6 +44,7 @@ function RegistrationController($scope, $http) {
         $http({method: 'POST', url: '/memmeeuserrest/user', data: $scope.user}).
             success(function(data, status, headers, config) {
                 console.log('you were successfully registered');
+                $scope.saveLoggedInUser(data);
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving a new user');

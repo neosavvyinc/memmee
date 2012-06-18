@@ -31,7 +31,7 @@
     <link rel="apple-touch-icon-precomposed" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
 
-  <body  ng-app="memmee-app">
+  <body  ng-app="memmee-app" ng-controller="SecurityController">
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -47,12 +47,17 @@
               <li ng-repeat="navigationItem in navigationItems" ng-class="navigationItem.selected">
                   <a ng-click="select(navigationItem)" href="./index.html{{navigationItem.navigationLink}}">{{navigationItem.displayName}}</a></li>
               </li>
-
-
-              <!--<li><a href="./index.html#about">About</a></li>-->
-              <!--<li><a href="./index.html#contact">Contact</a></li>-->
             </ul>
           </div><!--/.nav-collapse -->
+
+            <div class="span4 offset4" ng-style="visibleLoggedInStyle">
+                <ul class="nav">
+                    <li>
+                        <a>You are logged in as: {{loggedInUser.email}}</a>
+                    </li>
+                </ul>
+            </div>
+
         </div>
       </div>
     </div>

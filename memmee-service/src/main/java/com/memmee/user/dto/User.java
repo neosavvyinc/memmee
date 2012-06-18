@@ -57,7 +57,7 @@ public class User implements Serializable{
     }
 
 	public String getApiKey() {
-		return UUID.randomUUID().toString();
+		return this.apiKey;
 	}
 
 	public void setApiKey(String apiKey) {   
