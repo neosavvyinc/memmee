@@ -1,4 +1,4 @@
-function SecurityController($scope) {
+function SecurityController($scope, securityService) {
     $scope.loggedInUser = null;
     $scope.visibleLoggedInStyle = { visibility: 'hidden' };
 
@@ -6,15 +6,28 @@ function SecurityController($scope) {
         $scope.loggedInUser = $user;
         $scope.visibleLoggedInStyle = { visibility: 'visible' };
     }
+
+    $scope.logout = function() {
+        $scope.visibleLoggedInStyle = { visibility: 'hidden' };
+        securityService.logoutUser($scope.loggedInUser);
+
+    }
 }
 
-function NavigationController($scope) {
+function NavigationController($scope, securityService) {
 
-    $scope.navigationItems = [
-            { displayName: "Home", navigationLink: "#home", selected: "active" },
-            { displayName: "View", navigationLink: "#view", selected: "" },
-            { displayName: "New", navigationLink: "#new", selected: "" }
+
+    $scope.loggedOutNavigationItems = [
+        { displayName: "Home", navigationLink: "#home", selected: "active" }
+    ];
+
+    $scope.loggedInNavigationItems = [
+            { displayName: "Home", navigationLink: "#home", selected: "active"},
+            { displayName: "View", navigationLink: "#view", selected: ""},
+            { displayName: "New", navigationLink: "#new", selected: ""}
         ];
+
+    $scope.navigationItems = $scope.loggedOutNavigationItems;
 
     $scope.select = function( $selectedNavigationLink ) {
         for ( navIndex in $scope.navigationItems )
@@ -30,10 +43,33 @@ function NavigationController($scope) {
         }
     }
 
+    $scope.$on('handleLogin', function() {
+        $scope.updateNavigation(true);
+    });
+    $scope.$on('handleLogout', function() {
+        $scope.updateNavigation(false);
+    });
+
+
+    $scope.updateNavigation = function( loggedIn ) {
+
+        if( loggedIn )
+        {
+            $scope.navigationItems = $scope.loggedInNavigationItems;
+        }
+        else
+        {
+            $scope.navigationItems = $scope.loggedOutNavigationItems;
+        }
+
+    }
+
+
+
 }
 
 
-function RegistrationController($scope, $http ) {
+function RegistrationController($scope, $http, securityService) {
 
     $scope.user = {
         email: ''
@@ -45,6 +81,7 @@ function RegistrationController($scope, $http ) {
             success(function(data, status, headers, config) {
                 console.log('you were successfully registered');
                 $scope.saveLoggedInUser(data);
+                securityService.loginUser(data);
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving a new user');
@@ -62,3 +99,9 @@ function LoginController($scope, $http) {
     }
 
 }
+
+SecurityController.$inject = ['$scope', 'memmeeSecurityService'];
+
+NavigationController.$inject = ['$scope', 'memmeeSecurityService'];
+
+RegistrationController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
