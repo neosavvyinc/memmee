@@ -8,6 +8,5 @@ angular.module('memmee-app', ['memmee-app.services']).
             otherwise({redirectTo: '/home'});
     }]).
     config(['$locationProvider', function($locationProvider) {
-//        $locationProvider.html5Mode(true).hashPrefix('#');
     }]).
     run()
