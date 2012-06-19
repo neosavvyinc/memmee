@@ -23,13 +23,18 @@
                        ng-model="user.email"
                         >
                 <label>Password:</label>
-                <input type="text"
+                <input type="password"
                        class="span3"
                        placeholder="Password"
                        ng-model="user.password"
                         >
+                <label>Confirm:</label>
+                <input type="password"
+                       class="span3"
+                       placeholder="Confirm"
+                       ng-model="confirmedPass"
+                        >
             </form>
-            <button ng-click="loadUser()" class="btn">Load »</button>
             <button ng-click="update()" class="btn btn-primary">Update »</button>
         </div>
     </div>

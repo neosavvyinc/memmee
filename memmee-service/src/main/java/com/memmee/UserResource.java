@@ -4,12 +4,8 @@ import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
 import com.yammer.dropwizard.logging.Log;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response.Status;
 
 import java.util.Date;
 import java.util.List;
@@ -35,13 +31,12 @@ public class UserResource {
         return userDao.findAll();
     }
         
-    @GET
+    @POST
     @Path("/user/login")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public User loginUser(@QueryParam("email") String email,@QueryParam("password") String password){
-
-        return userDao.loginUser(email, password);
+    public User loginUser(User user){
+        return userDao.loginUser(user.getEmail(), user.getPassword());
     }
     
 
@@ -65,7 +60,7 @@ public class UserResource {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getEmail(),
-                user.getPass(),
+                user.getPassword(),
                 user.getApiKey(),
                 new Date()
         );
@@ -81,14 +76,15 @@ public class UserResource {
     	user.setApiKey(UUID.randomUUID().toString());
 
     	if(userDao.getUserCount(user.getEmail()) < 1){
-            userDao.insert(user.getFirstName(),
+            Long userId = userDao.insert(user.getFirstName(),
                     user.getLastName(),
                     user.getEmail(),
-                    user.getPass(),
+                    user.getPassword(),
                     user.getApiKey(),
                     new Date(),
                     new Date()
             );
+            user = userDao.getUser(userId);
     	}
 
         return user;

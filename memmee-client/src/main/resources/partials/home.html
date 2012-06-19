@@ -32,8 +32,8 @@
         <div id="collapsibleLogin" class="collapse in" style="height: 0px; ">
             <form class="well" ng-controller="LoginController">
                 <label>Login and capture some memmees!</label>
-                <input type="text" class="span3" placeholder="Username / Email Address">
-                <input type="password" class="span3" placeholder="Password">
+                <input type="text" ng-model="user.email" class="span3" placeholder="Username / Email Address">
+                <input type="password" ng-model="user.password" class="span3" placeholder="Password">
                 <br/>
                 <button ng-click="login()" class="btn btn-primary">Login »</button>
             </form>

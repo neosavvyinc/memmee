@@ -2,7 +2,6 @@ package com.memmee.user.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.UUID;
 
 public class User implements Serializable{
 
@@ -12,7 +11,7 @@ public class User implements Serializable{
 
     private String email;
     
-    private String pass;
+    private String password;
 
     private String firstName;
 
@@ -64,12 +63,12 @@ public class User implements Serializable{
 		this.apiKey = apiKey;
 	}
 
-    public String getPass() {
-        return pass;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPass(String pass) {
-        this.pass = pass;
+    public void setPassword(String pass) {
+        this.password = pass;
     }
 
     public Date getApiDate() {

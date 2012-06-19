@@ -110,30 +110,54 @@ function RegistrationController($scope, $http, securityService) {
 
 function LoginController($scope, $http) {
 
+    $scope.user = {
+        email: '',
+        password: ''
+    };
+
     $scope.login = function()
     {
-        console.log("This is a test");
-    }
-
-}
-
-function ProfileController($scope, $http, securityService) {
-
-    $scope.user = securityService.user;
-
-    $scope.loadUser = function () {
-        $scope.user = securityService.user;
-    }
-
-    $scope.register = function()
-    {
-        $http({method: 'PUT', url: '/memmeeuserrest/user', data: $scope.user}).
+        $http({method: 'POST', url: '/memmeeuserrest/user/login', data: $scope.user}).
             success(function(data, status, headers, config) {
                 console.log('you were successfully registered');
+                $scope.saveLoggedInUser(data);
                 securityService.loginUser(data);
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving a new user');
+            });
+    }
+
+}
+
+//function ProfileController($scope) {
+function ProfileController($scope, $http, securityService) {
+
+    $scope.user = securityService.user;
+    $scope.confirmedPass = '';
+
+    $scope.loadUser = function () {
+        $scope.user = securityService.user;
+        console.log('load user works!');
+    }
+
+    $scope.update = function()
+    {
+        if( $scope.confirmedPass != $scope.user.password )
+        {
+            console.log("your password doesn't match your provided password");
+            return;
+        }
+
+        console.log("scope.user.id" + $scope.user.id);
+
+        $http({method: 'PUT', url: '/memmeeuserrest/user/' + $scope.user.id, data: $scope.user}).
+            success(function(data, status, headers, config) {
+                console.log('your user has been updated')
+                securityService.loginUser(data);
+            }).
+            error(function(data, status, headers, config) {
+                console.log('error while saving your user');
             });
     }
 }
@@ -142,7 +166,7 @@ function ContainerController($scope) {
 
 }
 
-ProfileController.$inject = ['$scope', '$http', 'securityService'];
+ProfileController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
 
 SecurityController.$inject = ['$scope', 'memmeeSecurityService', '$location'];
 
