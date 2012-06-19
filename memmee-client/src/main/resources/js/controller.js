@@ -1,4 +1,4 @@
-function SecurityController($scope, securityService) {
+function SecurityController($scope, securityService, $location) {
     $scope.loggedInUser = null;
     $scope.visibleLoggedInStyle = { visibility: 'hidden' };
 
@@ -10,7 +10,7 @@ function SecurityController($scope, securityService) {
     $scope.logout = function() {
         $scope.visibleLoggedInStyle = { visibility: 'hidden' };
         securityService.logoutUser($scope.loggedInUser);
-
+        $location.path('/home');
     }
 }
 
@@ -100,7 +100,11 @@ function LoginController($scope, $http) {
 
 }
 
-SecurityController.$inject = ['$scope', 'memmeeSecurityService'];
+function ContainerController($scope) {
+
+}
+
+SecurityController.$inject = ['$scope', 'memmeeSecurityService', '$location'];
 
 NavigationController.$inject = ['$scope', 'memmeeSecurityService'];
 

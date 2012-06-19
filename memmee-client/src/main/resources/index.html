@@ -50,7 +50,7 @@
             </ul>
           </div><!--/.nav-collapse -->
 
-            <div class="span4 offset4" ng-style="visibleLoggedInStyle">
+            <div class="span6 offset3" ng-style="visibleLoggedInStyle">
                 <ul class="nav">
                     <li>
                         <a>You are logged in as: {{loggedInUser.email}}</a>
@@ -65,58 +65,7 @@
       </div>
     </div>
 
-    <div class="container">
-
-      <div class="hero-unit">
-        <h1>Welcome to Memmee</h1>
-        <p>This is the new future home of Memmee</p>
-        <p><a class="btn btn-primary btn-large">Learn more »</a></p>
-      </div>
-
-      <div class="row">
-        <div class="span6">
-          <h2>Sign Up Now!!!</h2>
-
-            <p><a class="btn" data-toggle="collapse" data-target="#collapsibleRegistration">Sign Up! »</a></p>
-
-            <div id="collapsibleRegistration" class="collapse in" style="height: 0px; ">
-                <form class="well" ng-controller="RegistrationController">
-                    <label>Email Address is all you need:</label>
-                        <input type="text"
-                               class="span3"
-                               placeholder="Enter Your Email Address"
-                               ng-model="user.email"
-                                >
-                        <span class="help-block">It's just that simple.</span>
-                    </label>
-                    <button ng-click="register()" class="btn btn-primary">Sign Up »</button>
-                </form>
-            </div>
-        </div>
-        <div class="span6">
-          <h2>Login</h2>
-
-            <p><a class="btn" data-toggle="collapse" data-target="#collapsibleLogin">Login Here! »</a></p>
-
-            <div id="collapsibleLogin" class="collapse in" style="height: 0px; ">
-                <form class="well" ng-controller="LoginController">
-                    <label>Login and capture some memmees!</label>
-                    <input type="text" class="span3" placeholder="Username / Email Address">
-                    <input type="password" class="span3" placeholder="Password">
-                    <br/>
-                    <button ng-click="login()" class="btn btn-primary">Login »</button>
-                </form>
-            </div>
-
-       </div>
-      </div>
-
-      <hr>
-
-      <footer>
-        <p>© Company 2012</p>
-      </footer>
-
+    <div class="container" ng-view ng-controller="ContainerController">
     </div> <!-- /container -->
 
     <!-- Le javascript
