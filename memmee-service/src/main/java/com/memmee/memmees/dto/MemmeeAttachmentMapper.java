@@ -32,11 +32,13 @@ public class MemmeeAttachmentMapper implements ResultSetMapper<Memmee> {
         attachment.setType(resultSet.getString("type"));
         memmee.setAttachment(attachment);
 
+        /*
         Theme theme = new Theme();
         theme.setId(resultSet.getLong("themeId"));
         theme.setName(resultSet.getString("name"));
         theme.setStylePath(resultSet.getString("stylePath"));
         memmee.setTheme(theme);
+        */
 
         return memmee;
     }

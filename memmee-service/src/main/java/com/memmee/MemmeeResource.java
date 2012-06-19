@@ -1,18 +1,13 @@
 package com.memmee;
 
-import java.sql.SQLException;
+
 import java.util.Date;
 import java.util.List;
-
-import com.memmee.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.attachment.dto.Attachment;
-import com.memmee.memmees.dao.MemmeeDAO;
 import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
-import com.memmee.theme.dto.Theme;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
-import com.yammer.dropwizard.db.Database;
 import com.yammer.dropwizard.logging.Log;
 
 import javax.ws.rs.*;
@@ -76,7 +71,7 @@ public class MemmeeResource {
     @Path("/insertmemmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee, final Attachment attachment, final Theme theme) 
+    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee, final Attachment attachment) 
     {
     	
     	long memmeeId = -1;
@@ -98,20 +93,20 @@ public class MemmeeResource {
   				    {
   				    	
   				    	Long memmeeId = memmeeDao.insert(user.getId(), memmee.getTitle(), memmee.getText(),
-  				    			new Date(), new Date(), new Date(),"", null, theme.getId());
+  				    			new Date(), new Date(), new Date(),"", null, null);
 
   				    	Long attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
 	
-  				    	memmeeDao.update(memmeeId, memmee.getTitle(), memmee.getText(), new Date(), new Date(), null, attachmentId, theme.getId());
+  				    	memmeeDao.update(memmeeId, memmee.getTitle(), memmee.getText(), new Date(), new Date(), null, attachmentId, null);
   				      
   				    	return memmeeId.intValue();
   				   
   				    }
-  				  });
+  				  }); 
     	}
     	else{
     		memmeeId = memmeeDao.insert(user.getId(), memmee.getTitle(), memmee.getText(),
-    		memmee.getLastUpdateDate(), memmee.getCreationDate(), memmee.getDisplayDate(), memmee.getShareKey(), null, theme.getId()).intValue();
+    		memmee.getLastUpdateDate(), memmee.getCreationDate(), memmee.getDisplayDate(), memmee.getShareKey(), null, null).intValue();
     	}
     	
     	}catch(DBIException dbException){
@@ -143,15 +138,13 @@ public class MemmeeResource {
     	try{
     		
 
-    	final Theme theme = memmee.getTheme();
-    		
     		count = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
   				  {
   				    public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
   				    {
   				    	
   				    	int count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-  				    			new Date(), new Date(),memmee.getShareKey(), memmee.getAttachment().getId(), theme.getId());
+  				    			new Date(), new Date(),memmee.getShareKey(), memmee.getAttachment().getId(), null);
 
   				    	memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
 
@@ -193,10 +186,9 @@ public class MemmeeResource {
     	try{
     		
 
-    	final Theme theme = memmee.getTheme();
-    		
+    
     	count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-    			new Date(), new Date(),memmee.getShareKey(), memmee.getAttachment().getId(), theme.getId());
+    			new Date(), new Date(),memmee.getShareKey(), memmee.getAttachment().getId(), null);
     	
     	}catch(DBIException dbException){
     		LOG.error("DB EXCEPTION",dbException);

@@ -28,7 +28,7 @@ public class Memmee implements Serializable{
 
     private String shareKey;
 
-    private Theme theme;
+    //private Theme theme;
 
 
 
@@ -105,6 +105,7 @@ public class Memmee implements Serializable{
         this.shareKey = shareKey;
     }
 
+    /*
     public Theme getTheme() {
         return theme;
     }
@@ -112,5 +113,6 @@ public class Memmee implements Serializable{
     public void setTheme(Theme theme) {
         this.theme = theme;
     }
+    */
 
 }
