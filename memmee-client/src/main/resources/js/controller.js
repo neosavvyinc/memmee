@@ -108,7 +108,7 @@ function RegistrationController($scope, $http, securityService) {
 
 }
 
-function LoginController($scope, $http) {
+function LoginController($scope, $http, securityService) {
 
     $scope.user = {
         email: '',
@@ -130,7 +130,6 @@ function LoginController($scope, $http) {
 
 }
 
-//function ProfileController($scope) {
 function ProfileController($scope, $http, securityService) {
 
     $scope.user = securityService.user;
@@ -162,9 +161,7 @@ function ProfileController($scope, $http, securityService) {
     }
 }
 
-function ContainerController($scope) {
-
-}
+LoginController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
 
 ProfileController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
 
