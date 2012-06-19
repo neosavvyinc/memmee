@@ -52,8 +52,8 @@
 
             <div class="span6 offset3" ng-style="visibleLoggedInStyle">
                 <ul class="nav">
-                    <li>
-                        <a>You are logged in as: {{loggedInUser.email}}</a>
+                    <li ng-class="profileSelected">
+                        <a ng-click="toggleProfile(true)" href="./index.html#profile">You are logged in as: {{loggedInUser.email}}</a>
                     </li>
                     <li>
                         <button ng-click="logout()" class="btn btn-primary">Logout »</button>

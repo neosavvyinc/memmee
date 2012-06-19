@@ -16,7 +16,6 @@ function SecurityController($scope, securityService, $location) {
 
 function NavigationController($scope, securityService) {
 
-
     $scope.loggedOutNavigationItems = [
         { displayName: "Home", navigationLink: "#home", selected: "active" }
     ];
@@ -29,7 +28,11 @@ function NavigationController($scope, securityService) {
 
     $scope.navigationItems = $scope.loggedOutNavigationItems;
 
+    $scope.profileSelected = "";
+
     $scope.select = function( $selectedNavigationLink ) {
+
+        $scope.toggleProfile(false)
         for ( navIndex in $scope.navigationItems )
         {
             if( $scope.navigationItems[navIndex].navigationLink == $selectedNavigationLink.navigationLink )
@@ -40,6 +43,22 @@ function NavigationController($scope, securityService) {
             {
                 $scope.navigationItems[navIndex].selected = "";
             }
+        }
+    }
+
+    $scope.toggleProfile = function( $selected ) {
+
+        if( $selected )
+        {
+            $scope.profileSelected = "active";
+            for ( navIndex in $scope.navigationItems )
+            {
+                $scope.navigationItems[navIndex].selected = "";
+            }
+        }
+        else
+        {
+            $scope.profileSelected = "";
         }
     }
 
@@ -63,8 +82,6 @@ function NavigationController($scope, securityService) {
         }
 
     }
-
-
 
 }
 
@@ -100,9 +117,32 @@ function LoginController($scope, $http) {
 
 }
 
+function ProfileController($scope, $http, securityService) {
+
+    $scope.user = securityService.user;
+
+    $scope.loadUser = function () {
+        $scope.user = securityService.user;
+    }
+
+    $scope.register = function()
+    {
+        $http({method: 'PUT', url: '/memmeeuserrest/user', data: $scope.user}).
+            success(function(data, status, headers, config) {
+                console.log('you were successfully registered');
+                securityService.loginUser(data);
+            }).
+            error(function(data, status, headers, config) {
+                console.log('error while saving a new user');
+            });
+    }
+}
+
 function ContainerController($scope) {
 
 }
+
+ProfileController.$inject = ['$scope', '$http', 'securityService'];
 
 SecurityController.$inject = ['$scope', 'memmeeSecurityService', '$location'];
 
