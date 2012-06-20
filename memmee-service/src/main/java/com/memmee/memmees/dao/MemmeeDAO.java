@@ -12,7 +12,7 @@ import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.memmees.dto.MemmeeAttachmentMapper;
 import com.memmee.memmees.dto.MemmeeMapper;
-
+ 
 public interface MemmeeDAO //extends Transactional<MemmeeDAO>
 {
 	
