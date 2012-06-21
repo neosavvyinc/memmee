@@ -135,11 +135,6 @@ function ProfileController($scope, $http, securityService) {
     $scope.user = securityService.user;
     $scope.confirmedPass = '';
 
-    $scope.loadUser = function () {
-        $scope.user = securityService.user;
-        console.log('load user works!');
-    }
-
     $scope.update = function()
     {
         if( $scope.confirmedPass != $scope.user.password )
@@ -160,6 +155,33 @@ function ProfileController($scope, $http, securityService) {
             });
     }
 }
+
+function NewMemmeeController($scope, $http, securityService) {
+
+    $scope.user = securityService.user;
+    $scope.memmee = {
+        id: '',
+        userId: $scope.user.id,
+        title: '',
+        text: ''
+    };
+    $scope.attachment = {}
+
+
+    $scope.createMemmee = function()
+    {
+        $http({method: 'POST', url: '/memmeerest/insertmemmee/?apiKey=' + $scope.user.apiKey, data: $scope.memmee}).
+            success(function(data, status, headers, config) {
+                console.log('you have saved a memmee');
+            }).
+            error(function(data, status, headers, config) {
+                console.log('error while saving your user');
+                console.log(data);
+            });
+    }
+}
+
+NewMemmeeController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
 
 LoginController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
 

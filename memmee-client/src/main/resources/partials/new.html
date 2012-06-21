@@ -1,1 +1,30 @@
-new
+<div class="row">
+    <div class="span4 offset3">
+        <h2>Memmee something!</h2>
+
+        <div id="profile" ng-controller="NewMemmeeController">
+            <form class="well" >
+                <label>Title:</label>
+                <input type="text"
+                       class="span3"
+                       placeholder="Give your Memmee a title"
+                       ng-model="memmee.title"
+                        >
+                <label>Text:</label>
+                <input type="text"
+                       class="span3"
+                       placeholder="Enter Your Memmee Here"
+                       ng-model="memmee.text"
+                        >
+
+            </form>
+            <button ng-click="createMemmee()" class="btn btn-primary">Update »</button>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<footer>
+    <p>© Memmee.com 2012</p>
+</footer>

@@ -6,16 +6,21 @@ import java.util.Date;
 import com.memmee.attachment.dto.Attachment;
 import com.memmee.theme.dto.Theme;
 
+import javax.validation.constraints.NotNull;
+
 public class Memmee implements Serializable{
 	
     private static final long serialVersionUID = -2311129046798681911L;
 
     private Long id;
 
+    @NotNull
     private Long userId;
 
+    @NotNull
     private String title;
 
+    @NotNull
     private String text;
 
     private Attachment attachment;

@@ -10,6 +10,7 @@ import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
 import com.yammer.dropwizard.logging.Log;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
@@ -71,7 +72,7 @@ public class MemmeeResource {
     @Path("/insertmemmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee, final Attachment attachment) 
+    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee)
     {
     	
     	long memmeeId = -1;
@@ -85,29 +86,37 @@ public class MemmeeResource {
 
     	try{
     		
-    	if(attachment != null){
-    		
-    		memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
-  				  {
-  				    public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
-  				    {
-  				    	
-  				    	Long memmeeId = memmeeDao.insert(user.getId(), memmee.getTitle(), memmee.getText(),
-  				    			new Date(), new Date(), new Date(),"", null, null);
-
-  				    	Long attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
-	
-  				    	memmeeDao.update(memmeeId, memmee.getTitle(), memmee.getText(), new Date(), new Date(), null, attachmentId, null);
-  				      
-  				    	return memmeeId.intValue();
-  				   
-  				    }
-  				  }); 
-    	}
-    	else{
-    		memmeeId = memmeeDao.insert(user.getId(), memmee.getTitle(), memmee.getText(),
-    		memmee.getLastUpdateDate(), memmee.getCreationDate(), memmee.getDisplayDate(), memmee.getShareKey(), null, null).intValue();
-    	}
+//    	if(attachment != null){
+//
+//    		memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
+//  				  {
+//  				    public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
+//  				    {
+//
+//  				    	Long memmeeId = memmeeDao.insert(user.getId(), memmee.getTitle(), memmee.getText(),
+//  				    			new Date(), new Date(), new Date(),"", null, null);
+//
+//  				    	Long attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
+//
+//  				    	memmeeDao.update(memmeeId, memmee.getTitle(), memmee.getText(), new Date(), new Date(), null, attachmentId, null);
+//
+//  				    	return memmeeId.intValue();
+//
+//  				    }
+//  				  });
+//    	}
+//    	else{
+    		memmeeId = memmeeDao.insert(
+                    user.getId()
+                    ,memmee.getTitle()
+                    ,memmee.getText()
+                    ,new Date()
+                    ,new Date()
+                    ,new Date()
+                    ,memmee.getShareKey()
+                    ,null
+                    ,null).intValue();
+//    	}
     	
     	}catch(DBIException dbException){
     		LOG.error("DB EXCEPTION",dbException);
@@ -123,7 +132,7 @@ public class MemmeeResource {
     @Path("/updatememmeewithattachment")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee updateMemmeeWithAttachment(@QueryParam("apiKey") String apiKey, final Memmee memmee, final Attachment attachment) 
+    public Memmee updateMemmeeWithAttachment(@QueryParam("apiKey") String apiKey, final Memmee memmee)
     {
     	
         int count = 0;
@@ -144,9 +153,9 @@ public class MemmeeResource {
   				    {
   				    	
   				    	int count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-  				    			new Date(), new Date(),memmee.getShareKey(), memmee.getAttachment().getId(), null);
+  				    			new Date(), new Date(),memmee.getShareKey(), null, null);
 
-  				    	memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
+  				    	memmeeDao.updateAttachment(memmee.getAttachment().getId(), null, null);
 
   				    	return count;
   				   
@@ -162,8 +171,10 @@ public class MemmeeResource {
 		   	LOG.error("MEMMEE NOT UPDATED");
 	    	throw new WebApplicationException(Status.NOT_MODIFIED);
 	    }
-    	
-    	return memmeeDao.getMemmee(new Long(memmee.getId()));
+
+        Memmee returnValue = memmeeDao.getMemmee(new Long(memmee.getId()));
+
+        return returnValue;
     		    	
     }
     
@@ -188,7 +199,7 @@ public class MemmeeResource {
 
     
     	count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-    			new Date(), new Date(),memmee.getShareKey(), memmee.getAttachment().getId(), null);
+    			new Date(), new Date(),memmee.getShareKey(), null, null);
     	
     	}catch(DBIException dbException){
     		LOG.error("DB EXCEPTION",dbException);
