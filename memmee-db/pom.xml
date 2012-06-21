@@ -51,6 +51,7 @@
                     <username>${db.username}</username>
                     <password>${db.password}</password>
                     <verbose>true</verbose>
+                    <dropFirst>true</dropFirst>
                 </configuration>
                 <executions>
                     <execution>

@@ -11,4 +11,17 @@
         <sqlFile path="src/main/db/changelogs/initial-structure.sql"/>
     </changeSet>
 
+    <changeSet id="sprint2" author="adam">
+        <insert tableName="user">
+            <column name="id" value="-1"/>
+            <column name="firstName" value="test"/>
+            <column name="lastName" value="test"/>
+            <column name="email" value="test@memmee.com"/>
+            <column name="password" value="test"/>
+            <column name="apiKey" value="test"/>
+            <column name="apiDate" valueDate="2012-06-01"/>
+            <column name="creationDate" valueDate="2012-06-01"/>
+        </insert>
+    </changeSet>
+
 </databaseChangeLog>
