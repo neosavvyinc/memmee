@@ -45,8 +45,10 @@ public class MemmeeResource {
 	    	LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
 			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
     	}
-    	
-        return memmeeDao.getMemmeesbyUser(user.getId());
+
+        List<Memmee> memmeesbyUser = memmeeDao.getMemmeesbyUser(user.getId());
+
+        return memmeesbyUser;
         
         
     }

@@ -181,6 +181,36 @@ function NewMemmeeController($scope, $http, securityService) {
     }
 }
 
+function ViewMemmeesController($scope, $http, securityService) {
+
+    $scope.user = securityService.user;
+    $scope.memmees = [
+        {
+            id: '',
+            userId: '',
+            title: 'test1',
+            text: 'test1'
+        },
+        {
+            id: '',
+            userId: '',
+            title: 'test2',
+            text: 'test2'
+        }];
+
+    $http({method: 'GET', url: '/memmeerest/getmemmees/?apiKey=' + $scope.user.apiKey}).
+        success(function(data, status, headers, config) {
+            console.log('your memmees have been loaded')
+            $scope.memmees = data;
+        }).
+        error(function(data, status, headers, config) {
+            console.log('error loading your doggone memmees');
+        });
+
+}
+
+ViewMemmeesController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
+
 NewMemmeeController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
 
 LoginController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
