@@ -4,6 +4,7 @@ package com.memmee;
 import java.util.Date;
 import java.util.List;
 
+import com.memmee.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.attachment.dto.Attachment;
 import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
@@ -21,17 +22,34 @@ import org.skife.jdbi.v2.Transaction;
 import org.skife.jdbi.v2.exceptions.DBIException;
 import org.skife.jdbi.v2.exceptions.TransactionException;
 import org.skife.jdbi.v2.TransactionStatus;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
+
+
+
 
 @Path("/memmeerest")
 public class MemmeeResource {
     private final UserDAO userDao;
     private final TransactionalMemmeeDAO memmeeDao;
+    private final TransactionalAttachmentDAO attachmentDAO;
     private static final Log LOG = Log.forClass(MemmeeResource.class);
 
-    public MemmeeResource(UserDAO userDao, TransactionalMemmeeDAO memmeeDao) {
+    public MemmeeResource(UserDAO userDao, TransactionalMemmeeDAO memmeeDao, TransactionalAttachmentDAO attachmentDao) {
         super();
         this.userDao = userDao;
         this.memmeeDao = memmeeDao;
+        this.attachmentDAO = attachmentDao;
     }
 
 
@@ -316,16 +334,51 @@ public class MemmeeResource {
     }
 
 
-    /*
-    private Handle getWriteHandle(){
-          Handle h = db.open();
-          try{
-              h.getConnection().setAutoCommit(false);
-          }catch(SQLException se){
-              LOG.error(se.getMessage());
-          }
-          return h;
+    @POST
+    @Path("/uploadattachmment")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response uploadFile(
+            @FormDataParam("file") InputStream uploadedInputStream,
+            @FormDataParam("file") FormDataContentDisposition fileDetail) {
+
+        String uploadedFileLocation = "c://memmee/temp/" + fileDetail.getFileName();
+
+        // save it
+        writeToFile(uploadedInputStream, uploadedFileLocation);
+
+        String output = "File uploaded to : " + uploadedFileLocation;
+
+
+        attachmentDAO.insert(null,uploadedFileLocation,"Image");
+
+        return Response.status(200).entity(output).build();
+
     }
-    */
+
+    // save uploaded file to new location
+    private void writeToFile(InputStream uploadedInputStream,
+                             String uploadedFileLocation) {
+
+        try {
+            OutputStream out = new FileOutputStream(new File(
+                    uploadedFileLocation));
+            int read = 0;
+            byte[] bytes = new byte[1024];
+
+            out = new FileOutputStream(new File(uploadedFileLocation));
+            while ((read = uploadedInputStream.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+    }
+
+
+
 
 }
