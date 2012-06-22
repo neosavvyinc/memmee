@@ -338,7 +338,7 @@ public class MemmeeResource {
     @POST
     @Path("/uploadattachment")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public Response uploadFile(
+    public Attachment uploadFile(
             @QueryParam("apiKey") String apiKey,
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail) {
@@ -353,10 +353,11 @@ public class MemmeeResource {
 
         String output = "";
         String uploadedFileLocation = "";
+        final Attachment attachment;
 
         try {
 
-            if(OsUtil.isWindows())     {
+            if(OsUtil.isWindows()){
              uploadedFileLocation = "c://memmee/temp/" + fileDetail.getFileName();
             }else if(OsUtil.isMac()){
              uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
@@ -366,12 +367,14 @@ public class MemmeeResource {
 
             output = "File uploaded to : " + uploadedFileLocation;
 
-            attachmentDAO.insert(null, uploadedFileLocation, "Image");
+            Long attachmentId = attachmentDAO.insert(null, uploadedFileLocation, "Image");
+            attachment = attachmentDAO.getAttachment(attachmentId);
+
         } catch (Exception e) {
             LOG.error("ERROR UPLOADING ATTACHMENT ");
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
-        return Response.status(200).entity(output).build();
+        return attachment;
     }
 
     // save uploaded file to new location
