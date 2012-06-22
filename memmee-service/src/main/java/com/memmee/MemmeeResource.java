@@ -10,6 +10,7 @@ import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
+import com.memmee.util.OsUtil;
 import com.yammer.dropwizard.logging.Log;
 
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import org.skife.jdbi.v2.Transaction;
 import org.skife.jdbi.v2.exceptions.DBIException;
 import org.skife.jdbi.v2.exceptions.TransactionException;
 import org.skife.jdbi.v2.TransactionStatus;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,10 +34,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
-
-
 
 
 @Path("/memmeerest")
@@ -338,21 +339,39 @@ public class MemmeeResource {
     @Path("/uploadattachment")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
+            @QueryParam("apiKey") String apiKey,
             @FormDataParam("file") InputStream uploadedInputStream,
             @FormDataParam("file") FormDataContentDisposition fileDetail) {
 
-        String uploadedFileLocation = "c://memmee/temp/" + fileDetail.getFileName();
 
-        // save it
-        writeToFile(uploadedInputStream, uploadedFileLocation);
+        final User user = userDao.getUserByApiKey(apiKey);
 
-        String output = "File uploaded to : " + uploadedFileLocation;
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
 
+        String output = "";
+        String uploadedFileLocation = "";
 
-        attachmentDAO.insert(null,uploadedFileLocation,"Image");
+        try {
 
+            if(OsUtil.isWindows())     {
+             uploadedFileLocation = "c://memmee/temp/" + fileDetail.getFileName();
+            }else if(OsUtil.isMac()){
+             uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
+            }
+            // save it
+            writeToFile(uploadedInputStream, uploadedFileLocation);
+
+            output = "File uploaded to : " + uploadedFileLocation;
+
+            attachmentDAO.insert(null, uploadedFileLocation, "Image");
+        } catch (Exception e) {
+            LOG.error("ERROR UPLOADING ATTACHMENT ");
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
         return Response.status(200).entity(output).build();
-
     }
 
     // save uploaded file to new location
@@ -377,8 +396,6 @@ public class MemmeeResource {
         }
 
     }
-
-
 
 
 }
