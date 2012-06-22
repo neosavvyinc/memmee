@@ -148,7 +148,7 @@ public class MemmeeResource {
     @Path("/updatememmeewithattachment")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee updateMemmeeWithAttachment(@QueryParam("apiKey") String apiKey, final Memmee memmee) {
+    public Memmee updateMemmeeWithAttachment(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee) {
 
         int count = 0;
 
@@ -195,7 +195,7 @@ public class MemmeeResource {
     @Path("/updatememmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee updateMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee) {
+    public Memmee updateMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee) {
 
         int count = 0;
 
