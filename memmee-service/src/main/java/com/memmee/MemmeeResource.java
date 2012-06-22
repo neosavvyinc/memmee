@@ -346,12 +346,11 @@ public class MemmeeResource {
 
         final User user = userDao.getUserByApiKey(apiKey);
 
-        if (user == null) {
-            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-        }
+//        if (user == null) {
+//            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+//            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+//        }
 
-        String output = "";
         String uploadedFileLocation = "";
         final Attachment attachment;
 
@@ -364,9 +363,6 @@ public class MemmeeResource {
             }
             // save it
             writeToFile(uploadedInputStream, uploadedFileLocation);
-
-            output = "File uploaded to : " + uploadedFileLocation;
-
             Long attachmentId = attachmentDAO.insert(null, uploadedFileLocation, "Image");
             attachment = attachmentDAO.getAttachment(attachmentId);
 

@@ -22,6 +22,16 @@
             <column name="apiDate" valueDate="2012-06-01"/>
             <column name="creationDate" valueDate="2012-06-01"/>
         </insert>
+        <insert tableName="user">
+            <column name="id" value="1"/>
+            <column name="firstName" value="Luke"/>
+            <column name="lastName" value="Lappin"/>
+            <column name="email" value="luke.lappin@gmail.com"/>
+            <column name="password" value="test"/>
+            <column name="apiKey" value="test"/>
+            <column name="apiDate" valueDate="2012-06-01"/>
+            <column name="creationDate" valueDate="2012-06-01"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>
