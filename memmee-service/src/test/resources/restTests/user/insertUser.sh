@@ -4,7 +4,7 @@ curl -vvvvv \
  -HAccept:application/json \
  -HContent-Type:application/json \
  -d @user.json \
- http://localhost:8080/memmeeuserrest/user/
+ http://localhost:8080/memmeeuserrest/user
 
 
 
