@@ -317,7 +317,7 @@ public class MemmeeResource {
 
     @DELETE
     @Path("/deletememmee")
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public void delete(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id)
 
@@ -335,7 +335,7 @@ public class MemmeeResource {
 
 
     @POST
-    @Path("/uploadattachmment")
+    @Path("/uploadattachment")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response uploadFile(
             @FormDataParam("file") InputStream uploadedInputStream,
