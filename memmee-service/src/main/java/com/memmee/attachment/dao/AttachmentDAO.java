@@ -10,9 +10,13 @@ import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 
 public interface AttachmentDAO {
 
+    @SqlQuery("select * from attachment where id = :id")
+    @Mapper(AttachmentMapper.class)
+    Attachment getAttachment(@Bind("id") Long id);
+
     @SqlQuery("select * from attachment where memmeeId = :memmeeId")
     @Mapper(AttachmentMapper.class)
-    Attachment getAttachment(@Bind("memmeeId") Long memmeeId);
+    Attachment getAttachmentByMemmeeId(@Bind("memmeeId") Long memmeeId);
 
     @SqlUpdate("insert into attachment (memmeeId, filePath, type) values (:memmeeId, :filePath, :type)")
     @GetGeneratedKeys
