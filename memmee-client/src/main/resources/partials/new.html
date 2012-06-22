@@ -20,7 +20,44 @@
             </form>
             <button ng-click="createMemmee()" class="btn btn-primary">Update »</button>
         </div>
+        <div id="attachment" >
+            <form class="well" action="memmeerest/uploadattachment" method="post" enctype="multipart/form-data">
+
+                <p>
+                    Select a file : <input type="file" name="file" size="45" />
+                </p>
+
+                <input type="submit" value="Upload It" />
+            </form>
+        </div>
+
+
+        <div id="secondAttachment" ng-controller="AttachmentController">
+            <div class="row">
+                <label for="fileToUpload">Select a File to Upload</label><br />
+                <input type="file" ng-model="fileToUpload" ng-model-instant id="fileToUpload" multiple/>
+            </div>
+            <div id="dropbox" class="dropbox" ng-class="dropClass"><span>{{dropText}}</span></div>
+            <button ng-click="uploadFile()" class="btn btn-primary">Upload</button>
+            <div ng-show="files.length">
+                <div ng-repeat="file in files">
+                    <span>{{file.webkitRelativePath || file.name}}</span>
+                    (<span ng-switch="file.size > 1024*1024">
+                    <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
+                    <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
+                </span>)
+                </div>
+                <div ng-show="progressVisible">
+                    <div class="percent">{{progress}}%</div>
+                    <div class="progress-bar">
+                        <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+
 </div>
 
 <hr>

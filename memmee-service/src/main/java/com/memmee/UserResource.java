@@ -36,7 +36,8 @@ public class UserResource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public User loginUser(User user){
-        return userDao.loginUser(user.getEmail(), user.getPassword());
+        User returnValue = userDao.loginUser(user.getEmail(), user.getPassword());
+        return returnValue;
     }
     
 
