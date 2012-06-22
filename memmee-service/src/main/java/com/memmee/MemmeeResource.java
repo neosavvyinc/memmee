@@ -161,14 +161,14 @@ public class MemmeeResource {
 
         try {
 
-
+           final Attachment attachment = memmee.getAttachment();
             count = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                 public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
 
                     int count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-                            new Date(), new Date(), memmee.getShareKey(), null, null);
+                            new Date(), new Date(), memmee.getShareKey(), attachment.getId(), null);
 
-                    memmeeDao.updateAttachment(memmee.getAttachment().getId(), null, null);
+                    memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
 
                     return count;
 
@@ -364,9 +364,6 @@ public class MemmeeResource {
             }
             // save it
             writeToFile(uploadedInputStream, uploadedFileLocation);
-
-            output = "File uploaded to : " + uploadedFileLocation;
-
             Long attachmentId = attachmentDAO.insert(null, uploadedFileLocation, "Image");
             attachment = attachmentDAO.getAttachment(attachmentId);
 
