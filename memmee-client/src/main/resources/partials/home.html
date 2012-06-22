@@ -8,10 +8,15 @@
     <div class="span6">
         <h2>Sign Up Now!!!</h2>
 
-        <p><a class="btn" data-toggle="collapse" data-target="#collapsibleRegistration">Sign Up! »</a></p>
+        <!--<p><a class="btn" data-toggle="collapse" data-target="#collapsibleRegistration">Sign Up! »</a></p>-->
 
-        <div id="collapsibleRegistration" class="collapse in" style="height: 0px; ">
-            <form class="well" ng-controller="RegistrationController">
+        <div id="collapsibleRegistration" ng-controller="RegistrationController">
+            <div class="alert alert-block">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">Warning!</h4>
+                Best check yo self, you're not...
+            </div>
+            <form class="well">
                 <label>Email Address is all you need:</label>
                 <input type="text"
                        class="span3"
@@ -22,21 +27,36 @@
                 </label>
                 <button ng-click="register()" class="btn btn-primary">Sign Up »</button>
             </form>
+            <div class="alert alert-success">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">Warning!</h4>
+                Best check yo self, you're not...
+            </div>
         </div>
     </div>
     <div class="span6">
         <h2>Login</h2>
 
-        <p><a class="btn" data-toggle="collapse" data-target="#collapsibleLogin">Login Here! »</a></p>
+        <!--<p><a class="btn" >Login Here! »</a></p>-->
 
-        <div id="collapsibleLogin" class="collapse in" style="height: 0px; ">
-            <form class="well" ng-controller="LoginController">
+        <div id="collapsibleLogin" ng-controller="LoginController">
+            <div class="alert alert-block">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">Warning!</h4>
+                Best check yo self, you're not...
+            </div>
+            <form class="well">
                 <label>Login and capture some memmees!</label>
                 <input type="text" ng-model="user.email" class="span3" placeholder="Username / Email Address">
                 <input type="password" ng-model="user.password" class="span3" placeholder="Password">
                 <br/>
                 <button ng-click="login()" class="btn btn-primary">Login »</button>
             </form>
+            <div class="alert alert-success">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">Warning!</h4>
+                Best check yo self, you're not...
+            </div>
         </div>
 
     </div>
