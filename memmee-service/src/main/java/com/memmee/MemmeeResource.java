@@ -3,6 +3,7 @@ package com.memmee;
 
 import java.util.Date;
 import java.util.List;
+
 import com.memmee.attachment.dto.Attachment;
 import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
@@ -24,197 +25,186 @@ import org.skife.jdbi.v2.TransactionStatus;
 @Path("/memmeerest")
 public class MemmeeResource {
     private final UserDAO userDao;
-	private final TransactionalMemmeeDAO memmeeDao;
+    private final TransactionalMemmeeDAO memmeeDao;
     private static final Log LOG = Log.forClass(MemmeeResource.class);
 
-    public MemmeeResource(UserDAO userDao,TransactionalMemmeeDAO memmeeDao) {
-        super();       
+    public MemmeeResource(UserDAO userDao, TransactionalMemmeeDAO memmeeDao) {
+        super();
         this.userDao = userDao;
         this.memmeeDao = memmeeDao;
     }
-    
-    
+
+
     @GET
     @Path("/getmemmees")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Memmee> getMemmees(@QueryParam("apiKey") String apiKey){
-    	
-    	User user = userDao.getUserByApiKey(apiKey);
-    	
-    	if(user == null){
-	    	LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
+    public List<Memmee> getMemmees(@QueryParam("apiKey") String apiKey) {
+
+        User user = userDao.getUserByApiKey(apiKey);
+
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
 
         List<Memmee> memmeesbyUser = memmeeDao.getMemmeesbyUser(user.getId());
 
         return memmeesbyUser;
-        
-        
+
+
     }
-    
+
     @GET
     @Path("/getmemmee")
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee getMemmee(@QueryParam("apiKey") String apiKey, @QueryParam("id") Long id){
+    public Memmee getMemmee(@QueryParam("apiKey") String apiKey, @QueryParam("id") Long id) {
 
-    	User user = userDao.getUserByApiKey(apiKey);
-    	
-    	
-    	if(user == null){
-	    	LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-			throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
+        User user = userDao.getUserByApiKey(apiKey);
+
+
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
         return memmeeDao.getMemmee(id);
-        
-        
+
+
     }
 
     @POST
     @Path("/insertmemmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee)
-    {
-    	
-    	long memmeeId = -1;
-    	
-    	final User user = userDao.getUserByApiKey(apiKey);
-    	
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
+    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee) {
 
-    	try{
-    		
-//    	if(attachment != null){
-//
-//    		memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
-//  				  {
-//  				    public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
-//  				    {
-//
-//  				    	Long memmeeId = memmeeDao.insert(user.getId(), memmee.getTitle(), memmee.getText(),
-//  				    			new Date(), new Date(), new Date(),"", null, null);
-//
-//  				    	Long attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
-//
-//  				    	memmeeDao.update(memmeeId, memmee.getTitle(), memmee.getText(), new Date(), new Date(), null, attachmentId, null);
-//
-//  				    	return memmeeId.intValue();
-//
-//  				    }
-//  				  });
-//    	}
-//    	else{
-    		memmeeId = memmeeDao.insert(
-                    user.getId()
-                    ,memmee.getTitle()
-                    ,memmee.getText()
-                    ,new Date()
-                    ,new Date()
-                    ,new Date()
-                    ,memmee.getShareKey()
-                    ,null
-                    ,null).intValue();
-//    	}
-    	
-    	}catch(DBIException dbException){
-    		LOG.error("DB EXCEPTION",dbException);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	
-    	return memmeeDao.getMemmee(new Long(memmeeId));
-    		    	
+        long memmeeId = -1;
+
+        final User user = userDao.getUserByApiKey(apiKey);
+
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        try {
+            final Attachment attachment = memmee.getAttachment();
+            if (attachment != null) {
+
+                memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
+                    public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
+                        Long memmeeId = memmeeDao.insert(user.getId(), memmee.getTitle(), memmee.getText(),
+                                new Date(), new Date(), new Date(), "", null, null);
+
+                        Long attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
+
+                        memmeeDao.update(memmeeId, memmee.getTitle(), memmee.getText(), new Date(), new Date(), null, attachmentId, null);
+
+                        return memmeeId.intValue();
+                    }
+                });
+            } else {
+                memmeeId = memmeeDao.insert(
+                        user.getId()
+                        , memmee.getTitle()
+                        , memmee.getText()
+                        , new Date()
+                        , new Date()
+                        , new Date()
+                        , memmee.getShareKey()
+                        , null
+                        , null).intValue();
+            }
+
+        } catch (DBIException dbException) {
+            LOG.error("DB EXCEPTION", dbException);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+
+        return memmeeDao.getMemmee(new Long(memmeeId));
+
     }
-    
+
     @PUT
     @Path("/updatememmeewithattachment")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee updateMemmeeWithAttachment(@QueryParam("apiKey") String apiKey, final Memmee memmee)
-    {
-    	
+    public Memmee updateMemmeeWithAttachment(@QueryParam("apiKey") String apiKey, final Memmee memmee) {
+
         int count = 0;
-    	
-    	final User user = userDao.getUserByApiKey(apiKey);
-    	
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
 
-    	try{
-    		
+        final User user = userDao.getUserByApiKey(apiKey);
 
-    		count = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
-  				  {
-  				    public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
-  				    {
-  				    	
-  				    	int count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-  				    			new Date(), new Date(),memmee.getShareKey(), null, null);
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
 
-  				    	memmeeDao.updateAttachment(memmee.getAttachment().getId(), null, null);
+        try {
 
-  				    	return count;
-  				   
-  				    }
-  				  });
-    			
-    	}catch(DBIException dbException){
-    		LOG.error("DB EXCEPTION",dbException);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	if(count == 0){
-		   	LOG.error("MEMMEE NOT UPDATED");
-	    	throw new WebApplicationException(Status.NOT_MODIFIED);
-	    }
+
+            count = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
+                public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
+
+                    int count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
+                            new Date(), new Date(), memmee.getShareKey(), null, null);
+
+                    memmeeDao.updateAttachment(memmee.getAttachment().getId(), null, null);
+
+                    return count;
+
+                }
+            });
+
+        } catch (DBIException dbException) {
+            LOG.error("DB EXCEPTION", dbException);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        if (count == 0) {
+            LOG.error("MEMMEE NOT UPDATED");
+            throw new WebApplicationException(Status.NOT_MODIFIED);
+        }
 
         Memmee returnValue = memmeeDao.getMemmee(new Long(memmee.getId()));
 
         return returnValue;
-    		    	
+
     }
-    
+
     @PUT
     @Path("/updatememmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee updateMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee) 
-    {
-    	
-    	int count = 0;
-    	
-    	final User user = userDao.getUserByApiKey(apiKey);
-    	
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
+    public Memmee updateMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee) {
 
-    	try{
-    		
+        int count = 0;
 
-    
-    	count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-    			new Date(), new Date(),memmee.getShareKey(), null, null);
-    	
-    	}catch(DBIException dbException){
-    		LOG.error("DB EXCEPTION",dbException);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	if(count == 0){
-		   	LOG.error("MEMMEE NOT UPDATED");
-	    	throw new WebApplicationException(Status.NOT_MODIFIED);
-	    }
-    	
-     	return memmeeDao.getMemmee(new Long(memmee.getId()));
-    		    	
+        final User user = userDao.getUserByApiKey(apiKey);
+
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        try {
+
+
+            count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
+                    new Date(), new Date(), memmee.getShareKey(), null, null);
+
+        } catch (DBIException dbException) {
+            LOG.error("DB EXCEPTION", dbException);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        if (count == 0) {
+            LOG.error("MEMMEE NOT UPDATED");
+            throw new WebApplicationException(Status.NOT_MODIFIED);
+        }
+
+        return memmeeDao.getMemmee(new Long(memmee.getId()));
+
     }
 
 /*
@@ -264,7 +254,7 @@ public class MemmeeResource {
 	    	
     }
   */
-    
+
     /*
     @GET
     @Path("/insertmemmeeparams")
@@ -272,73 +262,70 @@ public class MemmeeResource {
     public Memmee add3(@QueryParam("apiKey") String apiKey, @QueryParam("title") final String title, @QueryParam("text") final String text, @QueryParam("filePath") final String filePath, @QueryParam("type") final String type, @QueryParam("themeId") final Long themeId) throws DBIException 
     {
     
-    	final User user = userDao.getUserByApiKey(apiKey);
-    	int memmeeId = 0;
-    	
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	try{
-    		memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
-    				  {
-    				    public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
-    				    {
-    				    	
-    				    	Long memmeeId = memmeeDao.insert(user.getId(), title, text,
-    				    			new Date(), new Date(), new Date(),"", null, themeId);
+        final User user = userDao.getUserByApiKey(apiKey);
+        int memmeeId = 0;
 
-    				    	Long attachmentId = memmeeDao.insertAttachment(memmeeId, filePath, type);
- 
-    				    	memmeeDao.update(memmeeId, title, text, new Date(), new Date(), null, attachmentId, themeId);
-    				      
-    				    	return memmeeId.intValue();
-    				   
-    				    }
-    				  });
-    	}catch(DBIException dbException){
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-   
-    	return memmeeDao.getMemmee(new Long(memmeeId));
-	    	
+        if(user == null){
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        try{
+            memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
+                      {
+                        public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
+                        {
+
+                            Long memmeeId = memmeeDao.insert(user.getId(), title, text,
+                                    new Date(), new Date(), new Date(),"", null, themeId);
+
+                            Long attachmentId = memmeeDao.insertAttachment(memmeeId, filePath, type);
+
+                            memmeeDao.update(memmeeId, title, text, new Date(), new Date(), null, attachmentId, themeId);
+
+                            return memmeeId.intValue();
+
+                        }
+                      });
+        }catch(DBIException dbException){
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        return memmeeDao.getMemmee(new Long(memmeeId));
+
     }
     */
-    
-    
+
+
     @DELETE
     @Path("/deletememmee")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON})
-    public void delete(@QueryParam("apiKey") String apiKey,@QueryParam("id") final Long id)
-    
-    {
-    	final User user = userDao.getUserByApiKey(apiKey);
+    public void delete(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id)
 
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	
-    	memmeeDao.delete(id);
+    {
+        final User user = userDao.getUserByApiKey(apiKey);
+
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+
+        memmeeDao.delete(id);
     }
-    	
-    	
-    
-    
-    
+
+
     /*
     private Handle getWriteHandle(){
-    	  Handle h = db.open();
+          Handle h = db.open();
           try{
-          	h.getConnection().setAutoCommit(false);
+              h.getConnection().setAutoCommit(false);
           }catch(SQLException se){
-          	LOG.error(se.getMessage());
+              LOG.error(se.getMessage());
           }
           return h;
     }
     */
-    
+
 }

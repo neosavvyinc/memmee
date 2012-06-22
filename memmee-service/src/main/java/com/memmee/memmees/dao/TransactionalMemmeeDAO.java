@@ -24,9 +24,8 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     Memmee getMemmeeNoAttachment(@Bind("id") Long id);
 	
 	   @SqlQuery("select m.id, m.userId, m.title, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey," +
-			   " a.id as attachmentId, a.filePath, a.type, t.id as themeId, t.name, t.stylePath from memmee m " +
-			   "INNER JOIN attachment a on m.id = a.memmeeId " +
-			   "INNER JOIN theme t on m.themeId = t.id where m.id = :id"
+			   " a.id as attachmentId, a.filePath, a.type from memmee m " +
+			   "INNER JOIN attachment a on m.id = a.memmeeId where m.id = :id"
 			   )
 	   @Mapper(MemmeeAttachmentMapper.class)
 	   Memmee getMemmee(@Bind("id") Long id);
