@@ -16,22 +16,22 @@ import com.yammer.dropwizard.logging.Log;
  * To change this template use File | Settings | File Templates.
  */
 public class MemmeeAuthenticator implements Authenticator<BasicCredentials, User> {
-      private final UserDAO dao;
-      private static final Log LOG = Log.forClass(MemmeeAuthenticator.class);
+    private final UserDAO dao;
+    private static final Log LOG = Log.forClass(MemmeeAuthenticator.class);
 
-    public MemmeeAuthenticator(UserDAO dao){
-          super();
-          this.dao = dao;
+    public MemmeeAuthenticator(UserDAO dao) {
+        super();
+        this.dao = dao;
     }
 
-        public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
+    public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
 
-            try{
-            return Optional.fromNullable(dao.loginUser(credentials.getUsername(),credentials.getPassword()));
-            }catch (Exception e){
-                LOG.error("AUTHENTICATION EXCEPTION",e);
-                return Optional.absent();
-            }
+        try {
+            return Optional.fromNullable(dao.loginUser(credentials.getUsername(), credentials.getPassword()));
+        } catch (Exception e) {
+            LOG.error("AUTHENTICATION EXCEPTION", e);
+            return Optional.absent();
         }
+    }
 
 }
