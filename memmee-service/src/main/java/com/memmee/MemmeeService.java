@@ -1,5 +1,8 @@
 package com.memmee;
 
+import com.memmee.auth.MemmeeAuthenticator;
+import com.memmee.user.dto.User;
+import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
 import org.skife.jdbi.v2.Handle;
 
 import com.memmee.attachment.dao.TransactionalAttachmentDAO;
@@ -35,6 +38,10 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         final TransactionalMemmeeDAO memmeeDao = db.onDemand(TransactionalMemmeeDAO.class);
         final TransactionalAttachmentDAO attachmentDao = db.onDemand(TransactionalAttachmentDAO.class);
         final ThemeDAO themeDao = db.onDemand(ThemeDAO.class);
+
+
+        environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
+                "MEMMEE AUTHENTICATION"));
         environment.addResource(new UserResource(userDao));
         environment.addResource(new MemmeeResource(userDao,memmeeDao,attachmentDao));
     }
