@@ -6,6 +6,7 @@ import com.memmee.user.dto.User;
 import com.yammer.dropwizard.auth.AuthenticationException;
 import com.yammer.dropwizard.auth.Authenticator;
 import com.yammer.dropwizard.auth.basic.BasicCredentials;
+import com.yammer.dropwizard.logging.Log;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,6 +17,7 @@ import com.yammer.dropwizard.auth.basic.BasicCredentials;
  */
 public class MemmeeAuthenticator implements Authenticator<BasicCredentials, User> {
       private final UserDAO dao;
+      private static final Log LOG = Log.forClass(MemmeeAuthenticator.class);
 
     public MemmeeAuthenticator(UserDAO dao){
           super();
@@ -24,8 +26,12 @@ public class MemmeeAuthenticator implements Authenticator<BasicCredentials, User
 
         public Optional<User> authenticate(BasicCredentials credentials) throws AuthenticationException {
 
+            try{
             return Optional.fromNullable(dao.loginUser(credentials.getUsername(),credentials.getPassword()));
-
+            }catch (Exception e){
+                LOG.error("AUTHENTICATION EXCEPTION",e);
+                return Optional.absent();
+            }
         }
 
 }
