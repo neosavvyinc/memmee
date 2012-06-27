@@ -4,12 +4,14 @@ function SecurityController($scope, securityService, $location) {
 
     $scope.saveLoggedInUser = function( $user ) {
         $scope.loggedInUser = $user;
+        localStorage.setItem( "user", JSON.stringify($user) );
         $scope.visibleLoggedInStyle = { visibility: 'visible' };
     }
 
     $scope.logout = function() {
         $scope.visibleLoggedInStyle = { visibility: 'hidden' };
         securityService.logoutUser($scope.loggedInUser);
+        localStorage.removeItem( "user");
         $location.path('/home');
     }
 }
@@ -127,6 +129,20 @@ function LoginController($scope, $http, securityService) {
                 console.log('error while saving a new user');
             });
     }
+
+    if( localStorage.getItem("user") !== null && localStorage.getItem("user") !== "" )
+    {
+        var obj = localStorage.getItem( "user" );
+        securityService.user = JSON.parse(obj);
+        $scope.saveLoggedInUser(securityService.user);
+        console.log("Loading a user from local storage: " + obj);
+    }
+
+    if( securityService.user !== null )
+    {
+        securityService.loginUser( securityService.user );
+    }
+
 
 }
 
