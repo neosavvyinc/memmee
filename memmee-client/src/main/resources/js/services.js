@@ -1,19 +1,25 @@
 var memmeeServices = angular.module('memmee-app.services', ['ngResource']);
-memmeeServices.factory("memmeeSecurityService", function($rootScope) {
+memmeeServices.factory("memmeeBroadCastService", function($rootScope) {
 
-    var securityService = {};
+    var broadCastService = {};
 
-    securityService.user = null;
+    broadCastService.user = null;
+    broadCastService.attachment = null;
 
-    securityService.loginUser = function ( $user ) {
+    broadCastService.loginUser = function ( $user ) {
         this.user = $user;
         $rootScope.$broadcast('handleLogin');
     }
 
-    securityService.logoutUser = function( $user ) {
+    broadCastService.logoutUser = function( $user ) {
         this.user = null;
         $rootScope.$broadcast('handleLogout');
     }
 
-    return securityService;
+    broadCastService.attachmentSuccess = function( $attachment ) {
+        this.attachment = $attachment;
+        $rootScope.$broadcast('attachmentUploadSuccess');
+    }
+
+    return broadCastService;
 });

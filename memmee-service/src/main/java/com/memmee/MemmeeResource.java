@@ -226,94 +226,6 @@ public class MemmeeResource {
 
     }
 
-/*
-    @GET
-    @Path("/insertmemmee2")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Memmee add2(@QueryParam("apiKey") String apiKey, @QueryParam("title") String title, @QueryParam("text") String text, @QueryParam("filePath") String filePath, @QueryParam("type") String type, @QueryParam("themeId") Long themeId) throws DBIException 
-    {
-    	
-    	final Handle h = this.getWriteHandle();
-        final memmeeDao memmeeDao = h.attach(memmeeDao.class);
-        final TransactionalAttachmentDAO attachmentDao = h.attach(TransactionalAttachmentDAO.class);
-       
-    	User user = userDao.getUserByApiKey(apiKey);
-    	long memmeeId = -1;
-    	
-    	if(user == null){
-    		LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-    		throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	}
-    	
-    	try{
-    
-	    	memmeeId = memmeeDao.insert(user.getId(), title, text,
-	    			new Date(), new Date(), new Date(),"", null, themeId);
-
-	    	Long attachmentId = attachmentDao.insert(memmeeId, filePath, type);
-
-	    	memmeeDao.update(memmeeId, title, text, new Date(), new Date(), null, attachmentId, themeId);
-
-    		
-    	}catch(DBIException dbException){
-    	  	attachmentDao.rollback();
-    		memmeeDao.rollback();
-	    	LOG.error(dbException.getMessage());
-	    	throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-    	
-    	}
-    	finally{
-    		memmeeDao.commit();
-    		attachmentDao.commit();
-    		memmeeDao.close();
-    		attachmentDao.close();
-    	}
-    	
-    	return memmeeDao.getMemmee(memmeeId);
-	    	
-    }
-  */
-
-    /*
-    @GET
-    @Path("/insertmemmeeparams")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Memmee add3(@QueryParam("apiKey") String apiKey, @QueryParam("title") final String title, @QueryParam("text") final String text, @QueryParam("filePath") final String filePath, @QueryParam("type") final String type, @QueryParam("themeId") final Long themeId) throws DBIException 
-    {
-    
-        final User user = userDao.getUserByApiKey(apiKey);
-        int memmeeId = 0;
-
-        if(user == null){
-            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-        }
-
-        try{
-            memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>()
-                      {
-                        public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception
-                        {
-
-                            Long memmeeId = memmeeDao.insert(user.getId(), title, text,
-                                    new Date(), new Date(), new Date(),"", null, themeId);
-
-                            Long attachmentId = memmeeDao.insertAttachment(memmeeId, filePath, type);
-
-                            memmeeDao.update(memmeeId, title, text, new Date(), new Date(), null, attachmentId, themeId);
-
-                            return memmeeId.intValue();
-
-                        }
-                      });
-        }catch(DBIException dbException){
-            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-        }
-
-        return memmeeDao.getMemmee(new Long(memmeeId));
-
-    }
-    */
 
 
     @DELETE
@@ -356,10 +268,10 @@ public class MemmeeResource {
 
         try {
 
-            if(OsUtil.isWindows()){
-             uploadedFileLocation = "c://memmee/temp/" + fileDetail.getFileName();
-            }else if(OsUtil.isMac()){
-             uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
+            if (OsUtil.isWindows()) {
+                uploadedFileLocation = "c://memmee/temp/" + fileDetail.getFileName();
+            } else if (OsUtil.isMac()) {
+                uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
             }
             // save it
             writeToFile(uploadedInputStream, uploadedFileLocation);
