@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.UUID;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -109,12 +110,20 @@ public class MemmeeResource {
             final Attachment attachment = memmee.getAttachment();
             if (attachment != null) {
 
+
                 memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                     public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
                         Long memmeeId = memmeeDao.insert(user.getId(), memmee.getTitle(), memmee.getText(),
                                 new Date(), new Date(), new Date(), "", null, null);
+                        Long attachmentId;
 
-                        Long attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
+                        if(attachment.getMemmeeId() == null)     {
+                             attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
+                        }
+                        else{
+                             memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
+                             attachmentId = attachment.getId();
+                        }
 
                         memmeeDao.update(memmeeId, memmee.getTitle(), memmee.getText(), new Date(), new Date(), null, attachmentId, null);
 
@@ -210,7 +219,7 @@ public class MemmeeResource {
 
 
             count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
-                    new Date(), new Date(), memmee.getShareKey(), null, null);
+                    new Date(), new Date(), memmee.getShareKey(), memmee.getAttachment().getId(), null);
 
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
@@ -226,6 +235,42 @@ public class MemmeeResource {
 
     }
 
+
+
+    @PUT
+    @Path("/sharememmee")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Memmee shareMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee) {
+
+        int count = 0;
+
+        final User user = userDao.getUserByApiKey(apiKey);
+
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        try {
+
+            String shareKey = (UUID.randomUUID().toString());
+            count = memmeeDao.update(memmee.getId(), memmee.getTitle(), memmee.getText(),
+                    new Date(), new Date(),shareKey, memmee.getAttachment().getId(), null);
+
+        } catch (DBIException dbException) {
+            LOG.error("DB EXCEPTION", dbException);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        if (count == 0) {
+            LOG.error("MEMMEE NOT UPDATED");
+            throw new WebApplicationException(Status.NOT_MODIFIED);
+        }
+
+        return memmeeDao.getMemmee(new Long(memmee.getId()));
+
+    }
 /*
     @GET
     @Path("/insertmemmee2")
