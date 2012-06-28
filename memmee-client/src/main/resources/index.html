@@ -24,6 +24,12 @@
       <script src="./js/lib/html5.js"></script>
     <![endif]-->
 
+    <script>
+        if (window.location.href.indexOf('#')<0) {
+            window.location.replace(window.location.href+'#/');
+        }
+    </script>
+
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="http://twitter.github.com/bootstrap/assets/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.com/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">

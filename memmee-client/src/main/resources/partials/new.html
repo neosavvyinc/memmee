@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="span4 offset3">
+    <div class="span6 offset3">
         <h2>Memmee something!</h2>
 
         <div id="profile" ng-controller="NewMemmeeController">
@@ -18,27 +18,19 @@
                         >
 
             </form>
-            <button ng-click="createMemmee()" class="btn btn-primary">Update »</button>
-        </div>
-        <div id="attachment" >
-            <form class="well" action="memmeerest/uploadattachment" method="post" enctype="multipart/form-data">
+            <a ng-click="createMemmee()" class="btn btn-primary">Update »</a>
+            <div style="padding-top: 10px; padding-bottom: 10px"></div>
 
-                <p>
-                    Select a file : <input type="file" name="file" size="45" />
-                </p>
-
-                <input type="submit" value="Upload It" />
-            </form>
         </div>
 
-
-        <div id="secondAttachment" ng-controller="AttachmentController">
-            <div class="row">
+        <div id="secondAttachment" class="well" ng-controller="AttachmentController">
+            <!--<div class="row">-->
                 <label for="fileToUpload">Select a File to Upload</label><br />
                 <input type="file" ng-model="fileToUpload" ng-model-instant id="fileToUpload" multiple/>
-            </div>
+            <!--</div>-->
             <div id="dropbox" class="dropbox" ng-class="dropClass"><span>{{dropText}}</span></div>
-            <button ng-click="uploadFile()" class="btn btn-primary">Upload</button>
+            <div style="padding-top: 10px; padding-bottom: 10px"></div>
+            <a ng-click="uploadFile()" class="btn btn-primary">Upload</a>
             <div ng-show="files.length">
                 <div ng-repeat="file in files">
                     <span>{{file.webkitRelativePath || file.name}}</span>

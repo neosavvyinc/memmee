@@ -40,6 +40,12 @@ public class UserResource {
     @Produces({MediaType.APPLICATION_JSON})
     public User loginUser(@Valid User user) {
         User returnValue = userDao.loginUser(user.getEmail(), user.getPassword());
+
+        if( returnValue == null )
+        {
+            throw new WebApplicationException(Status.UNAUTHORIZED);
+        }
+
         return returnValue;
     }
 

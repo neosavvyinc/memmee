@@ -1,20 +1,4 @@
-function SecurityController($scope, securityService, $location) {
-    $scope.loggedInUser = null;
-    $scope.visibleLoggedInStyle = { visibility: 'hidden' };
-
-    $scope.saveLoggedInUser = function( $user ) {
-        $scope.loggedInUser = $user;
-        $scope.visibleLoggedInStyle = { visibility: 'visible' };
-    }
-
-    $scope.logout = function() {
-        $scope.visibleLoggedInStyle = { visibility: 'hidden' };
-        securityService.logoutUser($scope.loggedInUser);
-        $location.path('/home');
-    }
-}
-
-function NavigationController($scope, securityService) {
+function NavigationController($scope, broadCastService) {
 
     $scope.loggedOutNavigationItems = [
         { displayName: "Home", navigationLink: "#home", selected: "active" }
@@ -82,11 +66,10 @@ function NavigationController($scope, securityService) {
         }
 
     }
-
 }
 
 
-function RegistrationController($scope, $http, securityService) {
+function RegistrationController($scope, $http, broadCastService) {
 
     $scope.user = {
         email: ''
@@ -98,7 +81,7 @@ function RegistrationController($scope, $http, securityService) {
             success(function(data, status, headers, config) {
                 console.log('you were successfully registered');
                 $scope.saveLoggedInUser(data);
-                securityService.loginUser(data);
+                broadCastService.loginUser(data);
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving a new user');
@@ -108,7 +91,7 @@ function RegistrationController($scope, $http, securityService) {
 
 }
 
-function LoginController($scope, $http, securityService) {
+function LoginController($scope, $http, broadCastService) {
 
     $scope.user = {
         email: '',
@@ -121,7 +104,7 @@ function LoginController($scope, $http, securityService) {
             success(function(data, status, headers, config) {
                 console.log('you were successfully registered');
                 $scope.saveLoggedInUser(data);
-                securityService.loginUser(data);
+                broadCastService.loginUser(data);
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving a new user');
@@ -130,9 +113,9 @@ function LoginController($scope, $http, securityService) {
 
 }
 
-function ProfileController($scope, $http, securityService) {
+function ProfileController($scope, $http, broadCastService) {
 
-    $scope.user = securityService.user;
+    $scope.user = broadCastService.user;
     $scope.confirmedPass = '';
 
     $scope.update = function()
@@ -148,7 +131,7 @@ function ProfileController($scope, $http, securityService) {
         $http({method: 'PUT', url: '/memmeeuserrest/user/' + $scope.user.id, data: $scope.user}).
             success(function(data, status, headers, config) {
                 console.log('your user has been updated')
-                securityService.loginUser(data);
+                broadCastService.loginUser(data);
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving your user');
@@ -156,16 +139,20 @@ function ProfileController($scope, $http, securityService) {
     }
 }
 
-function NewMemmeeController($scope, $http, securityService) {
+function NewMemmeeController($scope, $http, broadCastService) {
 
-    $scope.user = securityService.user;
+    $scope.user = broadCastService.user;
     $scope.memmee = {
         id: '',
-        userId: $scope.user.id,
+        userId: $scope.user ? $scope.user.id : null,
         title: '',
         text: ''
     };
-    $scope.attachment = {}
+
+    $scope.$on('attachmentUploadSuccess', function() {
+        $scope.memmee.attachment = broadCastService.attachment;
+        console.log("attachment was uploaded");
+    });
 
 
     $scope.createMemmee = function()
@@ -181,7 +168,7 @@ function NewMemmeeController($scope, $http, securityService) {
     }
 }
 
-function AttachmentController($scope) {
+function AttachmentController($scope, broadCastService) {
     //============== DRAG & DROP =============
     // source for drag&drop: http://www.webappers.com/2011/09/28/drag-drop-file-upload-with-html5-javascript/
     var dropbox = document.getElementById("dropbox")
@@ -270,7 +257,9 @@ function AttachmentController($scope) {
 
     function uploadComplete(evt) {
         /* This event is raised when the server send back a response */
-        alert(evt.target.responseText)
+//        alert(evt.target.responseText)
+
+        broadCastService.attachmentSuccess(JSON.parse(evt.target.responseText));
     }
 
     function uploadFailed(evt) {
@@ -285,9 +274,9 @@ function AttachmentController($scope) {
     }
 }
 
-function ViewMemmeesController($scope, $http, securityService) {
+function ViewMemmeesController($scope, $http, broadCastService) {
 
-    $scope.user = securityService.user;
+    $scope.user = broadCastService.user;
     $scope.memmees = [
         {
             id: '',
@@ -313,18 +302,51 @@ function ViewMemmeesController($scope, $http, securityService) {
 
 }
 
-AttachmentController.$inject = ['$scope'];
+function SecurityController($scope, broadCastService, $location, $timeout) {
+    $scope.loggedInUser = null;
+    $scope.visibleLoggedInStyle = { visibility: 'hidden' };
 
-ViewMemmeesController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
+    $scope.saveLoggedInUser = function( $user ) {
+        $scope.loggedInUser = $user;
+        localStorage.setItem( "user", JSON.stringify($user) );
+        $scope.visibleLoggedInStyle = { visibility: 'visible' };
+    }
 
-NewMemmeeController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
+    $scope.logout = function() {
+        $scope.visibleLoggedInStyle = { visibility: 'hidden' };
+        broadCastService.logoutUser($scope.loggedInUser);
+        localStorage.removeItem( "user");
+        $location.path('/home');
+    }
 
-LoginController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
+    if( localStorage.getItem("user") !== null && localStorage.getItem("user") !== "" )
+    {
+        var obj = localStorage.getItem( "user" );
+        broadCastService.user = JSON.parse(obj);
+        $scope.saveLoggedInUser(broadCastService.user);
+        console.log("Loading a user from local storage: " + obj);
+    }
 
-ProfileController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
+    if( broadCastService.user !== null )
+    {
+        $timeout(function() {
+            broadCastService.loginUser( broadCastService.user );
+        }, 0);
+    }
+}
 
-SecurityController.$inject = ['$scope', 'memmeeSecurityService', '$location'];
+AttachmentController.$inject = ['$scope', 'memmeeBroadCastService'];
 
-NavigationController.$inject = ['$scope', 'memmeeSecurityService'];
+ViewMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
 
-RegistrationController.$inject = ['$scope', '$http', 'memmeeSecurityService'];
+NewMemmeeController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
+
+LoginController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
+
+ProfileController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
+
+SecurityController.$inject = ['$scope', 'memmeeBroadCastService', '$location', '$timeout'];
+
+NavigationController.$inject = ['$scope', 'memmeeBroadCastService'];
+
+RegistrationController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
