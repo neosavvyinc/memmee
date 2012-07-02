@@ -1,4 +1,4 @@
-function NavigationController($scope, broadCastService) {
+function NavigationController($scope, broadCastService, $location) {
 
     $scope.loggedOutNavigationItems = [
         { displayName: "Home", navigationLink: "#home", selected: "active" }
@@ -59,6 +59,19 @@ function NavigationController($scope, broadCastService) {
         if( loggedIn )
         {
             $scope.navigationItems = $scope.loggedInNavigationItems;
+            if( $location.url() == "/view" )
+            {
+                $scope.select($scope.loggedInNavigationItems[1]);
+            }
+            else if ( $location.url() == "/home" )
+            {
+                $scope.select($scope.loggedInNavigationItems[0]);
+            }
+            else if ( $location.url() == "/new" )
+            {
+                $scope.select($scope.loggedInNavigationItems[2]);
+            }
+
         }
         else
         {
@@ -277,19 +290,7 @@ function AttachmentController($scope, broadCastService) {
 function ViewMemmeesController($scope, $http, broadCastService) {
 
     $scope.user = broadCastService.user;
-    $scope.memmees = [
-        {
-            id: '',
-            userId: '',
-            title: 'test1',
-            text: 'test1'
-        },
-        {
-            id: '',
-            userId: '',
-            title: 'test2',
-            text: 'test2'
-        }];
+    $scope.memmees = [];
 
     $http({method: 'GET', url: '/memmeerest/getmemmees/?apiKey=' + $scope.user.apiKey}).
         success(function(data, status, headers, config) {
@@ -347,6 +348,6 @@ ProfileController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
 
 SecurityController.$inject = ['$scope', 'memmeeBroadCastService', '$location', '$timeout'];
 
-NavigationController.$inject = ['$scope', 'memmeeBroadCastService'];
+NavigationController.$inject = ['$scope', 'memmeeBroadCastService', '$location'];
 
 RegistrationController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];

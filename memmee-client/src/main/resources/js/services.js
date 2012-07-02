@@ -9,7 +9,9 @@ memmeeServices.factory("memmeeBroadCastService", function($rootScope, $location)
     broadCastService.loginUser = function ( $user ) {
         this.user = $user;
         $rootScope.$broadcast('handleLogin');
-        $location.url( "/view" );
+
+        if( $location.url() == "/home" )
+            $location.url( "/view" );
     }
 
     broadCastService.logoutUser = function( $user ) {
