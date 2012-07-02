@@ -331,7 +331,7 @@ function SecurityController($scope, broadCastService, $location, $timeout) {
     {
         $timeout(function() {
             broadCastService.loginUser( broadCastService.user );
-        }, 0);
+        }, 100);
     }
 }
 
