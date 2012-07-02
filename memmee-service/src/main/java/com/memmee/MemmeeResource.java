@@ -396,18 +396,23 @@ public class MemmeeResource {
 //            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
 //        }
 
+        String baseFileDirectory = "";
         String uploadedFileLocation = "";
         final Attachment attachment;
 
         try {
 
-            if(OsUtil.isWindows()){
-             uploadedFileLocation = "c://memmee/temp/" + fileDetail.getFileName();
-            }else if(OsUtil.isMac()){
-             uploadedFileLocation = "/tmp/" + fileDetail.getFileName();
+
+
+            if (OsUtil.isWindows()) {
+                baseFileDirectory = "c://memmee/temp/";
+            } else if (OsUtil.isMac()) {
+                baseFileDirectory = "/memmee/";
             }
+            uploadedFileLocation = fileDetail.getFileName();
+
             // save it
-            writeToFile(uploadedInputStream, uploadedFileLocation);
+            writeToFile(uploadedInputStream, baseFileDirectory + uploadedFileLocation);
             Long attachmentId = attachmentDAO.insert(null, uploadedFileLocation, "Image");
             attachment = attachmentDAO.getAttachment(attachmentId);
 

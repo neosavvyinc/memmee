@@ -7,6 +7,8 @@
             <div class="well" ng-repeat="memmee in memmees">
                 <label>{{memmee.title}}</label>
                 <label>{{memmee.text}}</label>
+
+                <img ng-src="./memmee/{{memmee.attachment.filePath}}"/>
             </div>
 
         </div>

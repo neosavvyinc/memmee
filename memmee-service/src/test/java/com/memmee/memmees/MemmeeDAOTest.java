@@ -99,6 +99,14 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
 
     }
 
+    public void testGetMemmeesByUser() throws Exception {
+        final Handle handle = database.open();
+        final MemmeeDAO dao = database.open(MemmeeDAO.class);
+
+        Long id = dao.insert(new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+
+    }
+
 
     @Test
     public void testUpdate() throws Exception {
