@@ -13,7 +13,7 @@
 
     <changeSet id="sprint2" author="adam">
         <insert tableName="user">
-            <column name="id" value="-1"/>
+            <column name="id" value="-100"/>
             <column name="firstName" value="test"/>
             <column name="lastName" value="test"/>
             <column name="email" value="test@memmee.com"/>

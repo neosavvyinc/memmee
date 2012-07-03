@@ -5,6 +5,7 @@ memmeeServices.factory("memmeeBroadCastService", function($rootScope, $location)
 
     broadCastService.user = null;
     broadCastService.attachment = null;
+    broadCastService.apiKey = $location.search().apiKey;
 
     broadCastService.loginUser = function ( $user ) {
         this.user = $user;

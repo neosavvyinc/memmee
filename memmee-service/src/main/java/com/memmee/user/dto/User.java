@@ -1,5 +1,6 @@
 package com.memmee.user.dto;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,6 +10,7 @@ public class User implements Serializable{
 
 	private Long id;
 
+    @NotNull
     private String email;
     
     private String password;
