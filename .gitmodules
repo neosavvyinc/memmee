@@ -1,0 +1,3 @@
+[submodule "mandrill-client"]
+	path = mandrill-client
+	url = https://github.com/cribbstechnologies/Java-Mandrill-Wrapper.git

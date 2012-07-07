@@ -33,11 +33,6 @@ public class Memmee implements Serializable{
 
     private String shareKey;
 
-    //private Theme theme;
-
-
-
-
     public Long getId() {
         return id;
     }

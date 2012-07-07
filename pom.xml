@@ -48,5 +48,6 @@
         <module>memmee-service</module>
         <module>memmee-client</module>
         <module>memmee-db</module>
+        <module>mandrill-client</module>
     </modules>
 </project>
