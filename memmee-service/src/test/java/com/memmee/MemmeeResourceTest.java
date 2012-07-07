@@ -44,6 +44,7 @@ public class MemmeeResourceTest extends ResourceTest {
     @Test
     public void simpleResourceTest() throws Exception {
 
+
     }
 }
 

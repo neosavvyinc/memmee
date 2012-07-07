@@ -11,7 +11,7 @@ import org.junit.Test;
  */
 public class MemmeeMailSenderTest {
 
-    private MemmeeMailSender mailSender = new MemmeeMailSender();
+    private MemmeeMailSender mailSender = new MemmeeMailSenderImpl();
 
     @Test
     public void testSendConfirmationEmail()

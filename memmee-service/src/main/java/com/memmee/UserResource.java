@@ -1,14 +1,10 @@
 package com.memmee;
 
-import com.cribbstechnologies.clients.mandrill.request.MandrillMessagesRequest;
-import com.cribbstechnologies.clients.mandrill.request.MandrillRESTRequest;
-import com.cribbstechnologies.clients.mandrill.util.MandrillConfiguration;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
+import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.logging.Log;
-import org.apache.http.client.HttpClient;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.skife.jdbi.v2.exceptions.DBIException;
 
 import javax.ws.rs.*;
@@ -24,11 +20,12 @@ public class UserResource {
     private UserDAO userDao;
     private static final Log LOG = Log.forClass(UserResource.class);
 
-    private final MemmeeMailSender memmeeMailSender = new MemmeeMailSender();
+    private MemmeeMailSender memmeeMailSender;
 
-    public UserResource(UserDAO dao) {
+    public UserResource(UserDAO dao, MemmeeMailSender mailSender ) {
         super();
         this.userDao = dao;
+        this.memmeeMailSender = mailSender;
     }
 
     @GET

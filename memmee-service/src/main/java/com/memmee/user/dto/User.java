@@ -1,6 +1,8 @@
 package com.memmee.user.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,7 +14,8 @@ public class User implements Serializable{
 
     @NotNull
     private String email;
-    
+
+    @Size(min = 8, max = 20, message = "Your password must be between 8 and 20 characters")
     private String password;
 
     private String firstName;

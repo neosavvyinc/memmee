@@ -2,6 +2,7 @@ package com.memmee;
 
 import com.memmee.auth.MemmeeAuthenticator;
 import com.memmee.user.dto.User;
+import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
 import org.skife.jdbi.v2.Handle;
 
@@ -37,12 +38,11 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         final UserDAO userDao = db.onDemand(UserDAO.class);
         final TransactionalMemmeeDAO memmeeDao = db.onDemand(TransactionalMemmeeDAO.class);
         final TransactionalAttachmentDAO attachmentDao = db.onDemand(TransactionalAttachmentDAO.class);
-        final ThemeDAO themeDao = db.onDemand(ThemeDAO.class);
-
 
         environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
                 "MEMMEE AUTHENTICATION"));
-        environment.addResource(new UserResource(userDao));
+        environment.addResource(new UserResource(userDao, new MemmeeMailSenderImpl()));
         environment.addResource(new MemmeeResource(userDao,memmeeDao,attachmentDao));
+
     }
 }
