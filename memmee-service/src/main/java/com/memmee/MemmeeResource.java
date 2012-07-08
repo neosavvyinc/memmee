@@ -316,6 +316,8 @@ public class MemmeeResource {
                 baseFileDirectory = "c://memmee/temp/";
             } else if (OsUtil.isMac()) {
                 baseFileDirectory = "/memmee/";
+            } else if (OsUtil.isUnix()) {
+                baseFileDirectory = "/memmee/";
             }
             uploadedFileLocation = fileDetail.getFileName();
 
