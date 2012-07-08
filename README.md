@@ -4,99 +4,51 @@ Memmee.com Setup Instructions
 Setup
 -----
 
-To setup Dropwizard and build you will need to make sure you have Maven 3.X
+To setup the project and build you will need to make sure you have Maven 3.X
 installed. After you have followed the instructions for setting up Maven then
 you should be able to open a terminal and execute the following:
 
-./recompileAndRun.sh
+    ./compile.sh
 
-This should fetch all the Java dependencies and start the server running on
-port 8080. I also use MAMP to provide some hooks to Apache and MySQL in one
+This will make sure to pull down the submodules of Memmee.com and also pull down
+all dependencies. Then it will run the tests and you can then start the server.
+
+    ./run.sh
+
+Will fire up the server for you on port 8080.
+
+We also use MAMP to provide some hooks to Apache and MySQL in one
 nice clean package. You are welcome to use Apache and MySQL installed on their
 own but they require the following settings:
 
-ProxyPass settings should be added to the advanced tab of MAMP for your server
+    ProxyPass settings should be added to the advanced tab of MAMP or Apache for your server
 
-ProxyPass /backend http://127.0.0.1:8080/backend
-ProxyPassReverse /backend http://127.0.0.1:8080/backend
+    ProxyPass /memmeeuserrest http://127.0.0.1:8080/memmeeuserrest
+    ProxyPassReverse /memmeeuserrest http://127.0.0.1:8080/memmeeuserrest
 
-I also set my server up to be called local.commons-user.com and hopefully I
+    ProxyPass /memmeerest http://127.0.0.1:8080/memmeerest
+    ProxyPassReverse /memmeerest http://127.0.0.1:8080/memmeerest
+
+    Alias /memmee /memmee/
+
+I also set my server up to be called local.memmee.com and hopefully I
 don't have any hard coded references to that NameVirtualHost, however if I do
 please point them out.
 
 To create your user use the following commands:
 
-CREATE memmee
-CREATE memmeetest
+    CREATE memmee
+    CREATE memmeetest
 
-CREATE USER 'memmee'@'%' IDENTIFIED BY 'memmee';
-CREATE USER 'memmee'@'localhost' IDENTIFIED BY 'memmee';
-GRANT ALL PRIVILEGES ON memmee.* TO 'memmee'@'%' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON memmee.* TO 'memmee'@'localhost' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'%' WITH GRANT OPTION;
-GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'localhost' WITH GRANT OPTION;
+    CREATE USER 'memmee'@'%' IDENTIFIED BY 'memmee';
+    CREATE USER 'memmee'@'localhost' IDENTIFIED BY 'memmee';
+    GRANT ALL PRIVILEGES ON memmee.* TO 'memmee'@'%' WITH GRANT OPTION;
+    GRANT ALL PRIVILEGES ON memmee.* TO 'memmee'@'localhost' WITH GRANT OPTION;
+    GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'%' WITH GRANT OPTION;
+    GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'localhost' WITH GRANT OPTION;
 
-To create your database use the following create table script:
+To initialize the database you just have to go into the memmee-db directory and run:
 
-USE memmee;
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(1024) DEFAULT NULL,
-  `lastName` varchar(1024) DEFAULT NULL,
-  `email` varchar(4096) NOT NULL,
-  `apiKey` varchar(1024) DEFAULT NULL,
-  `apiDate` date DEFAULT NULL,
-  `creationDate` date NOT NULL,
-  `password` varchar(4096) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `memmee` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
-  `attachmentId` int(11) DEFAULT NULL,
-  `lastUpdateDate` date NOT NULL,
-  `creationDate` date NOT NULL,
-  `displayDate` date NOT NULL,
-  `text` varchar(4096) DEFAULT NULL,
-  `title` varchar(1024) NOT NULL,
-  `shareKey` varchar(1024) DEFAULT NULL,
-  `themeId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FOREIGN_KEY_USER_ID` (`userId`),
-  CONSTRAINT `memmee_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-
-CREATE TABLE `attachment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `memmeeId` int(11) NOT NULL,
-  `filePath` varchar(1024) DEFAULT NULL,
-  `type` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FOREIGN_KEY_MEMMEE_ID` (`memmeeId`),
-  CONSTRAINT `attachment_ibfk_1` FOREIGN KEY (`memmeeId`) REFERENCES `memmee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-CREATE TABLE `theme` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `stylePath` varchar(1024) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
-
-I also created a user with name "commons" password "commons" with full rights
-on this database.
-
-You should see that when you execute the run.sh script that your sever starts
-and when you browse to the following two URLs you are greeted with a simple UI.
-
-Backbone: http://local.commons-user.com/backbone/
-Angular: http://local.commons-user.com/angular/
-
-Please give my blog post a read and comment if you have any questions or other
-things to say.
+    mvn liquibase:update
 
 
