@@ -6,11 +6,11 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable{
+public class User implements Serializable {
 
-	private static final long serialVersionUID = 7080674511686049053L;
+    private static final long serialVersionUID = 7080674511686049053L;
 
-	private Long id;
+    private Long id;
 
     @NotNull
     private String email;
@@ -21,11 +21,11 @@ public class User implements Serializable{
     private String firstName;
 
     private String lastName;
-    
+
     private String apiKey;
-    
+
     private Date apiDate;
-    
+
     private Date creationDate;
 
     public Long getId() {
@@ -60,13 +60,13 @@ public class User implements Serializable{
         this.lastName = lastName;
     }
 
-	public String getApiKey() {
-		return this.apiKey;
-	}
+    public String getApiKey() {
+        return this.apiKey;
+    }
 
-	public void setApiKey(String apiKey) {   
-		this.apiKey = apiKey;
-	}
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
 
     public String getPassword() {
         return password;
@@ -77,18 +77,18 @@ public class User implements Serializable{
     }
 
     public Date getApiDate() {
-		return apiDate;
-	}
+        return apiDate;
+    }
 
-	public void setApiDate(Date apiDate) {
-		this.apiDate = apiDate;
-	}
+    public void setApiDate(Date apiDate) {
+        this.apiDate = apiDate;
+    }
 
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 }

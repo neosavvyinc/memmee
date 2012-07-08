@@ -19,13 +19,11 @@ import com.yammer.dropwizard.db.DatabaseFactory;
 
 public class MemmeeService extends Service<MemmeeConfiguration> {
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         new MemmeeService().run(args);
     }
 
-    private MemmeeService()
-    {
+    private MemmeeService() {
         super("user");
     }
 
@@ -42,7 +40,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
                 "MEMMEE AUTHENTICATION"));
         environment.addResource(new UserResource(userDao, new MemmeeMailSenderImpl()));
-        environment.addResource(new MemmeeResource(userDao,memmeeDao,attachmentDao));
+        environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao));
 
     }
 }

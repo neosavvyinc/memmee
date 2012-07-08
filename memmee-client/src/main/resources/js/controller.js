@@ -173,7 +173,6 @@ function NewMemmeeController($scope, $http, broadCastService) {
     $scope.memmee = {
         id: '',
         userId: $scope.user ? $scope.user.id : null,
-        title: '',
         text: ''
     };
 

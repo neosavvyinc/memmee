@@ -8,17 +8,14 @@ import com.memmee.theme.dto.Theme;
 
 import javax.validation.constraints.NotNull;
 
-public class Memmee implements Serializable{
-	
+public class Memmee implements Serializable {
+
     private static final long serialVersionUID = -2311129046798681911L;
 
     private Long id;
 
     @NotNull
     private Long userId;
-
-    @NotNull
-    private String title;
 
     @NotNull
     private String text;
@@ -55,14 +52,6 @@ public class Memmee implements Serializable{
 
     public void setAttachment(Attachment attachment) {
         this.attachment = attachment;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getText() {

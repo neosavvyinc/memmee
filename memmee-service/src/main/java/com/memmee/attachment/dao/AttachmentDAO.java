@@ -21,23 +21,23 @@ public interface AttachmentDAO {
     @SqlUpdate("insert into attachment (memmeeId, filePath, type) values (:memmeeId, :filePath, :type)")
     @GetGeneratedKeys
     Long insert(
-         @Bind("memmeeId") Long memmeeId
-        ,@Bind("filePath") String filePath
-        ,@Bind("type") String type
+            @Bind("memmeeId") Long memmeeId
+            , @Bind("filePath") String filePath
+            , @Bind("type") String type
     );
-    
+
     @SqlUpdate("update attachment set filePath = :filePath, type = :type where id = :id")
     int update(
-        @Bind("id") Long id
-        ,@Bind("filePath") String filePath
-        ,@Bind("type") String type
+            @Bind("id") Long id
+            , @Bind("filePath") String filePath
+            , @Bind("type") String type
     );
 
     @SqlUpdate("delete from attachment where id = :id")
     void delete(
-        @Bind("id") Long id
+            @Bind("id") Long id
     );
-    
+
     void close();
 
 }

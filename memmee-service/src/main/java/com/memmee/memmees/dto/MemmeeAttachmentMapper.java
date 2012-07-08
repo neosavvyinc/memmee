@@ -17,7 +17,6 @@ public class MemmeeAttachmentMapper implements ResultSetMapper<Memmee> {
 
         Memmee memmee = new Memmee();
         memmee.setId(resultSet.getLong("id"));
-        memmee.setTitle(resultSet.getString("title"));
         memmee.setText(resultSet.getString("text"));
         memmee.setUserId(resultSet.getLong("userId"));
         memmee.setCreationDate(resultSet.getDate("creationDate"));
@@ -25,7 +24,7 @@ public class MemmeeAttachmentMapper implements ResultSetMapper<Memmee> {
         memmee.setDisplayDate(resultSet.getDate("creationDate"));
         memmee.setShareKey(resultSet.getString("shareKey"));
 
-        Attachment attachment  = new Attachment();
+        Attachment attachment = new Attachment();
         attachment.setId(resultSet.getLong("attachmentId"));
         attachment.setFilePath(resultSet.getString("filePath"));
         attachment.setMemmeeId(resultSet.getLong("id"));

@@ -3,7 +3,6 @@ package com.memmee;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
-import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.logging.Log;
 import org.skife.jdbi.v2.exceptions.DBIException;
 
@@ -22,7 +21,7 @@ public class UserResource {
 
     private MemmeeMailSender memmeeMailSender;
 
-    public UserResource(UserDAO dao, MemmeeMailSender mailSender ) {
+    public UserResource(UserDAO dao, MemmeeMailSender mailSender) {
         super();
         this.userDao = dao;
         this.memmeeMailSender = mailSender;
@@ -41,7 +40,7 @@ public class UserResource {
     @Path("/user/login")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public User loginUserByApiKey(@QueryParam("apiKey") String apiKey ) {
+    public User loginUserByApiKey(@QueryParam("apiKey") String apiKey) {
         final User userLookup = userDao.getUserByApiKey(apiKey);
         return userLookup;
     }
@@ -51,11 +50,10 @@ public class UserResource {
     @Path("/user/login")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public User loginUser(@Valid User user) {
+    public User loginUser(User user) {
         User returnValue = userDao.loginUser(user.getEmail(), user.getPassword());
 
-        if( returnValue == null )
-        {
+        if (returnValue == null) {
             throw new WebApplicationException(Status.UNAUTHORIZED);
         }
 
@@ -147,5 +145,4 @@ public class UserResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
     }
-
 }

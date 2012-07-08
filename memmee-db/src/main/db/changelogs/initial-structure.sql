@@ -13,7 +13,6 @@ CREATE TABLE memmee
  creationDate date NOT NULL,
  displayDate date NOT NULL,
  text varchar(4096) DEFAULT NULL,
- title varchar(1024) NOT NULL,
  shareKey varchar(1024) DEFAULT NULL,
  themeId int(11) DEFAULT NULL,
  PRIMARY KEY (id));

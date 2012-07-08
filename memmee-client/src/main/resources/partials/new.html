@@ -4,18 +4,15 @@
 
         <div id="profile" ng-controller="NewMemmeeController">
             <form class="well" >
-                <label>Title:</label>
-                <input type="text"
-                       class="span3"
-                       placeholder="Give your Memmee a title"
-                       ng-model="memmee.title"
-                        >
-                <label>Text:</label>
-                <input type="text"
-                       class="span3"
-                       placeholder="Enter Your Memmee Here"
-                       ng-model="memmee.text"
-                        >
+
+                <textarea
+                        class="input-xlarge"
+                        id="textarea"
+                        rows="3"
+                        placeholder="Enter Your Memmee Here"
+                        ng-model="memmee.text">
+
+                </textarea>
 
             </form>
             <a ng-click="createMemmee()" class="btn btn-primary">Update »</a>
@@ -24,10 +21,9 @@
         </div>
 
         <div id="secondAttachment" class="well" ng-controller="AttachmentController">
-            <!--<div class="row">-->
-                <label for="fileToUpload">Select a File to Upload</label><br />
-                <input type="file" ng-model="fileToUpload" ng-model-instant id="fileToUpload" multiple/>
-            <!--</div>-->
+            <label for="fileToUpload">Select a File to Upload</label><br />
+            <input type="file" ng-model="fileToUpload" ng-model-instant id="fileToUpload" multiple/>
+
             <div id="dropbox" class="dropbox" ng-class="dropClass"><span>{{dropText}}</span></div>
             <div style="padding-top: 10px; padding-bottom: 10px"></div>
             <a ng-click="uploadFile()" class="btn btn-primary">Upload</a>

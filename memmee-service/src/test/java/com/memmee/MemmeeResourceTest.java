@@ -28,7 +28,6 @@ public class MemmeeResourceTest extends ResourceTest {
         memmee.setId(-100L);
         memmee.setShareKey("testShareKey");
         memmee.setText("Memmee text");
-        memmee.setTitle("Memmee title");
         memmee.setUserId(-100L);
     }
 

@@ -16,7 +16,6 @@ public class MemmeeMapper implements ResultSetMapper<Memmee> {
 
         Memmee memmee = new Memmee();
         memmee.setId(resultSet.getLong("id"));
-        memmee.setTitle(resultSet.getString("title"));
         memmee.setText(resultSet.getString("text"));
         memmee.setUserId(resultSet.getLong("userId"));
         memmee.setCreationDate(resultSet.getDate("creationDate"));

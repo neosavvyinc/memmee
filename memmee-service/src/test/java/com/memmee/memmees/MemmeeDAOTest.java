@@ -40,7 +40,6 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
             		  " `creationDate` date NOT NULL,\n" +
             		  " `displayDate` date NOT NULL,\n" +
             		  " `text` varchar(4096) DEFAULT NULL,\n" +
-            		  " `title` varchar(1024) NOT NULL,\n" +
             		  " `shareKey` varchar(1024) DEFAULT NULL,\n" +
             		  " `themeId` int(11) DEFAULT NULL,\n" +
             		  " PRIMARY KEY (`id`)\n" +
@@ -68,7 +67,7 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            dao.insert(new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+            dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
             final String result = handle.createQuery("SELECT COUNT(*) FROM memmee").map(StringMapper.FIRST).first();
 
             assertThat(Integer.parseInt(result), equalTo(1));
@@ -87,7 +86,7 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
         try{
         	
         	
-        	Long id = dao.insert(new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+        	Long id = dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
         	
             final Memmee memmee = dao.getMemmeeNoAttachment(id);
             assertThat(memmee.getId(), equalTo(id));
@@ -103,7 +102,7 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
         final Handle handle = database.open();
         final MemmeeDAO dao = database.open(MemmeeDAO.class);
 
-        Long id = dao.insert(new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+        Long id = dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
 
     }
 
@@ -114,8 +113,8 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-        	dao.insert(new Long(1), "title", "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
-            final int result = dao.update(new Long(1), "title2", "text2", new Date(), new Date(), "shareKey2", new Long(2), new Long(2));
+        	dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+            final int result = dao.update(new Long(1), "text2", new Date(), new Date(), "shareKey2", new Long(2), new Long(2));
 
             assertThat(result, equalTo(1));
         } finally {

@@ -3,38 +3,38 @@ package com.memmee.theme.dto;
 import java.io.Serializable;
 
 
-public class Theme implements Serializable{
-	
-	private static final long serialVersionUID = 1706390233616761884L;
+public class Theme implements Serializable {
 
-	private Long id;
-	
-	private String name;
-	
-	private String stylePath;
+    private static final long serialVersionUID = 1706390233616761884L;
 
-	public Long getId() {
-		return id;
-	}
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String name;
 
-	public String getName() {
-		return name;
-	}
+    private String stylePath;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getStylePath() {
-		return stylePath;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setStylePath(String stylePath) {
-		this.stylePath = stylePath;
-	}   
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getStylePath() {
+        return stylePath;
+    }
+
+    public void setStylePath(String stylePath) {
+        this.stylePath = stylePath;
+    }
 
 }
