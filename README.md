@@ -51,4 +51,15 @@ To initialize the database you just have to go into the memmee-db directory and 
 
     mvn liquibase:update
 
+Useful Stuff
+------------
+
+I have created a few useful scripts in the root of the file system for the project
+
+- compile.sh: This script will help you initilize and build your project the first time.
+- debug.sh: This will start the server in debug mode listening for remote debug connections on port 4000
+- deployWebResource.sh: This script is used after a build on the build environment to copy the resources to the correct location for apache
+- initSubmodules.sh: This script will setup the external non maven deployed dependencies that are available on github as other projects
+- recompileAndRun.sh: This script can be used to recompile the code and then start a server that is listening on port 4000 for debug connections
+- serverRun.sh: This script is used to start the server on QA/Dev instances and does not listen for debug connections
 
