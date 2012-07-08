@@ -63,3 +63,21 @@ I have created a few useful scripts in the root of the file system for the proje
 - recompileAndRun.sh: This script can be used to recompile the code and then start a server that is listening on port 4000 for debug connections
 - serverRun.sh: This script is used to start the server on QA/Dev instances and does not listen for debug connections
 
+
+Systems Admin Stuff for Deployment
+----------------------------------
+A few deployment related things have occurred when deploying the code to SE Linux Enabled CentOS environments. So I assume they will also
+be relevant to things like RHEL environments.
+
+Firstly we use /memmee to store all the images that are uploaded. These are served outside of /var/www which is the location
+used by Apache to serve static content. This causes a SE Linux problem and must be circumvented by allowing HTTPD processes
+to serve files outside of /var/www. This is done with the following commands:
+
+    semanage fcontext -a -t httpd_sys_content_t "/memmee(/.*)?"
+    restorecon -R -v /memmeee
+
+Secondly we also have to make sure that our ProxyPass will work and SE Linux gets in the way here as well. To do this we just
+have to allow HTTPD to establish network connections with the following two commands:
+
+    /usr/sbin/setsebool httpd_can_network_connect 1
+    /usr/sbin/setsebool -P httpd_can_network_connect 1
