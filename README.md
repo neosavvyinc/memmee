@@ -81,3 +81,11 @@ have to allow HTTPD to establish network connections with the following two comm
 
     /usr/sbin/setsebool httpd_can_network_connect 1
     /usr/sbin/setsebool -P httpd_can_network_connect 1
+
+Branch and Tag related Stuff
+----------------------------
+Right now I am tagging every time we do a deployment to our development environment. Then we can build from a tag.  I am doing
+this by creating an annotated tag named after every sprint.
+
+    git tag -a sprint-1 -m 'tagging for sprint 1 release'
+    git push --tags
