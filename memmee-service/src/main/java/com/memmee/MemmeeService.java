@@ -23,7 +23,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         new MemmeeService().run(args);
     }
 
-    private MemmeeService() {
+    public MemmeeService() {
         super("user");
     }
 
