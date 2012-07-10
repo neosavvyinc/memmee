@@ -151,6 +151,12 @@ public class MemmeeResource {
 
     }
 
+    /**
+     *
+     * Potentially this method can be removed as I think the method above satisifies
+     * the needs that were intended below
+     *
+     */
     @PUT
     @Path("/updatememmeewithattachment")
     @Consumes({MediaType.APPLICATION_JSON})
