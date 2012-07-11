@@ -7,11 +7,6 @@ function NewMemmeeController($scope, $http, broadCastService) {
         text: ''
     };
 
-    $scope.$on('attachmentUploadSuccess', function() {
-        $scope.memmee.attachment = broadCastService.attachment;
-        console.log("attachment was uploaded");
-    });
-
 
     $scope.createMemmee = function()
     {

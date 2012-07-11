@@ -12,7 +12,7 @@ memmeeServices.factory("memmeeBroadCastService", function($rootScope, $location)
         $rootScope.$broadcast('handleLogin');
 
         if( $location.url() == "/home" )
-            $location.url( "/view" );
+            $location.url( "/loggedin" );
     }
 
     broadCastService.logoutUser = function( $user ) {
