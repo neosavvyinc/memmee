@@ -3,14 +3,9 @@
 
         <a ng-click="toggleCreateMode()" class="btn btn-primary"> Toggle Create Mode </a>
 
-        <div ng-show="createMode">
-            In create mode
-        </div>
+        <div ng-include src="bodyContentPartial"></div>
 
-        <div ng-hide="createMode">
-            In view mode
-        </div>
-
+        <div ng-include src="'partials/archiveList.html'"></div>
 
     </div>
 </div>
