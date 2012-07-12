@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="span4 offset3">
+        <h2>Complete Your Profile</h2>
+
+        <div id="profile" ng-controller="ProfileController">
+            <form class="well" >
+                <label>Firstname:</label>
+                <input type="text"
+                       class="span3"
+                       placeholder="First Name"
+                       ng-model="user.firstName"
+                        >
+                <label>Lastname:</label>
+                <input type="text"
+                       class="span3"
+                       placeholder="Last Name"
+                       ng-model="user.lastName"
+                        >
+                <label>Email:</label>
+                <input type="text"
+                       class="span3"
+                       placeholder="Email Address"
+                       ng-model="user.email"
+                        >
+                <label>Password:</label>
+                <input type="password"
+                       class="span3"
+                       placeholder="Password"
+                       ng-model="user.password"
+                        >
+                <label>Confirm:</label>
+                <input type="password"
+                       class="span3"
+                       placeholder="Confirm"
+                       ng-model="confirmedPass"
+                        >
+            </form>
+            <button ng-click="update()" class="btn btn-primary">Update »</button>
+        </div>
+    </div>
+</div>
+
+<div ng-include src="'partials/footer.html'">
+</div>
