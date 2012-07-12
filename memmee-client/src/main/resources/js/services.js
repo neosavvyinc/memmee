@@ -25,5 +25,22 @@ memmeeServices.factory("memmeeBroadCastService", function($rootScope, $location)
         $rootScope.$broadcast('attachmentUploadSuccess');
     }
 
+
+    var createMode = false;
+
+    broadCastService.isCreateMode = function() {
+        return createMode;
+    }
+
+    broadCastService.createModeStarted = function() {
+        createMode = true;
+        $rootScope.$broadcast('createModeStarted');
+    }
+
+    broadCastService.createModeCancelled = function() {
+        createMode = false;
+        $rootScope.$broadcast('createModeCancelled');
+    }
+
     return broadCastService;
 });
