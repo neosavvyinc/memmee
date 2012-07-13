@@ -1,22 +1,20 @@
 function LoggedInController($scope, $http, broadCastService) {
 
-    $scope.createMode = false;
-    /*'partials/archiveList.html'*/
     $scope.bodyContentPartial = "partials/createMode.html";
 
+    $scope.$on('createModeStarted', function() {
 
-    $scope.toggleCreateMode = function() {
-        $scope.createMode = !($scope.createMode);
+        $scope.bodyContentPartial = "partials/createMode.html";
+        console.log("starting create mode...");
 
-        if( $scope.createMode )
-        {
-            $scope.bodyContentPartial = "partials/createMode.html";
-        }
-        else
-        {
-            $scope.bodyContentPartial = "partials/viewMode.html";
-        }
-    }
+    });
+
+    $scope.$on('createModeCancelled', function() {
+
+        $scope.bodyContentPartial = "partials/viewMode.html";
+        console.log("leaving create mode");
+
+    });
 
 }
 

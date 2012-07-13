@@ -1,7 +1,23 @@
-<div class="navbar-inner">
-    <div class="container">
+<div class="navbar">
+    <div class="navbar-inner" ng-controller="NavigationController">
+        <div class="container">
 
-        <a class="brand" href="./#home">Memmee</a>
+            <a class="brand" href="./#home">Memmee</a>
 
+            <ul class="nav pull-right">
+                <li id="fat-menu" class="dropdown">
+                    <a href="#fat-menu" class="dropdown-toggle" data-toggle="dropdown"data-target="#fat-menu">{{loggedInUser.firstName}} {{loggedInUser.lastName}}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="nav pull-right">
+                <a ng-click="toggleCreateMode()" class="btn btn-primary"><i class="icon-pencil icon-white"></i> Toggle Create Mode </a>
+            </div>
+
+        </div>
     </div>
 </div>
