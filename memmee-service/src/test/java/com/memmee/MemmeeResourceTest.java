@@ -7,6 +7,7 @@ import com.memmee.memmees.dao.MemmeeDAO;
 import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.user.dao.UserDAO;
+import com.memmee.user.dto.User;
 import com.yammer.dropwizard.testing.ResourceTest;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -17,8 +18,11 @@ import org.skife.jdbi.v2.Handle;
 import java.util.Date;
 import java.util.List;
 
+import static org.mockito.Matchers.notNull;
+import static org.mockito.Mockito.ignoreStubs;
 import static org.mockito.Mockito.mock;
 import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,6 +47,8 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     private static TransactionalMemmeeDAO txMemmeeDAO;
     private static TransactionalAttachmentDAO txAttachmentDAO;
 
+    private static Long userId;
+
     @Override
     protected void setUpResources() throws Exception {
         super.setUpResources();
@@ -52,20 +58,44 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         txMemmeeDAO = database.open(TransactionalMemmeeDAO.class);
         txAttachmentDAO = database.open(TransactionalAttachmentDAO.class);
 
-        userDAO.insert("Trevor", "Ewen", "me@trevorewen.com", "password", "apiKey", new Date(), new Date());
+        userId = userDAO.insert("memmee_resource_test", "user", "memmee_resource_test", "password", "apiKey", new Date(), new Date());
 
         addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO));
     }
 
     @Test
     public void testGetMemmees() {
-        List<Memmee> memmees = client().resource("/getmemmees?apiKey=apiKey").get(List.class);
+        Long memmeeId = insertTestData();
+
+        List<Memmee> memmees = client().resource("/memmeerest/getmemmees?apiKey=apiKey").get(List.class);
         assertNotNull(memmees);
+        assertThat(memmees.size(), is(equalTo(1)));
+        assertThat(memmees.get(0).getUserId(), is(equalTo(userId)));
+        assertThat(memmees.get(0).getText(), is("This is a memmee"));
+        assertThat(memmees.get(0).getLastUpdateDate(), is(notNull()));
+        assertThat(memmees.get(0).getCreationDate(), is(notNull()));
+        assertThat(memmees.get(0).getDisplayDate(), is(notNull()));
+        assertThat(memmees.get(0).getShareKey(), is(equalTo("shareKey")));
+        assertThat(memmees.get(0).getAttachment(), is(notNull()));
     }
 
     @Test
-    public void simpleResourceTest() throws Exception {
-        assertTrue(true);
+    public void testGetMemmee() {
+        Long memmeeId = insertTestData();
+
+        Memmee memmee = client().resource("/memmeerest/getmemmee?apiKey=apiKey&id=" + memmeeId).get(Memmee.class);
+        assertThat(memmee.getUserId(), is(equalTo(userId)));
+        assertThat(memmee.getText(), is("This is a memmee"));
+        assertThat(memmee.getLastUpdateDate(), is(notNull()));
+        assertThat(memmee.getCreationDate(), is(notNull()));
+        assertThat(memmee.getDisplayDate(), is(notNull()));
+        assertThat(memmee.getShareKey(), is(equalTo("shareKey")));
+        assertThat(memmee.getAttachment(), is(notNull()));
+    }
+
+    protected Long insertTestData() {
+        Long attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "image/jpeg");
+        return txMemmeeDAO.insert(userId, "This is a memmee", new Date(), new Date(), new Date(), "shareKey", attachmentId, Long.parseLong("1"));
     }
 
     @AfterClass

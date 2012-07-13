@@ -27,7 +27,6 @@ public class MemmeeAttachmentMapper implements ResultSetMapper<Memmee> {
         Attachment attachment = new Attachment();
         attachment.setId(resultSet.getLong("attachmentId"));
         attachment.setFilePath(resultSet.getString("filePath"));
-        attachment.setMemmeeId(resultSet.getLong("id"));
         attachment.setType(resultSet.getString("type"));
         memmee.setAttachment(attachment);
 

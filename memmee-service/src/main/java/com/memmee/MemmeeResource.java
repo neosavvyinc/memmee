@@ -70,8 +70,6 @@ public class MemmeeResource {
         List<Memmee> memmeesbyUser = memmeeDao.getMemmeesbyUser(user.getId());
 
         return memmeesbyUser;
-
-
     }
 
     @GET
@@ -117,12 +115,13 @@ public class MemmeeResource {
                                 new Date(), new Date(), new Date(), "", null, null);
                         Long attachmentId;
 
-                        if (attachment.getMemmeeId() == null) {
-                            attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
-                        } else {
-                            memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
-                            attachmentId = attachment.getId();
-                        }
+                        //@TODO, will fix this issue
+//                        if (attachment.getMemmeeId() == null) {
+//                            attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
+//                        } else {
+                        memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
+                        attachmentId = attachment.getId();
+                        //}
 
                         memmeeDao.update(memmeeId, memmee.getText(), new Date(), new Date(), null, attachmentId, null);
 
@@ -152,10 +151,8 @@ public class MemmeeResource {
     }
 
     /**
-     *
      * Potentially this method can be removed as I think the method above satisifies
      * the needs that were intended below
-     *
      */
     @PUT
     @Path("/updatememmeewithattachment")
@@ -329,7 +326,7 @@ public class MemmeeResource {
 
             // save it
             writeToFile(uploadedInputStream, baseFileDirectory + uploadedFileLocation);
-            Long attachmentId = attachmentDAO.insert(null, uploadedFileLocation, "Image");
+            Long attachmentId = attachmentDAO.insert(uploadedFileLocation, "Image");
             attachment = attachmentDAO.getAttachment(attachmentId);
 
         } catch (Exception e) {

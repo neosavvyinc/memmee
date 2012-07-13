@@ -15,7 +15,6 @@ public class AttachmentMapper implements ResultSetMapper<Attachment> {
 
         attachment.setId(resultSet.getLong("id"));
         attachment.setFilePath(resultSet.getString("filePath"));
-        attachment.setMemmeeId(resultSet.getLong("memmeeId"));
         attachment.setType(resultSet.getString("type"));
 
         return attachment;

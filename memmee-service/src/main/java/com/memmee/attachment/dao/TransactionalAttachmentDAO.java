@@ -17,15 +17,10 @@ public interface TransactionalAttachmentDAO extends Transactional<TransactionalA
     @Mapper(AttachmentMapper.class)
     Attachment getAttachment(@Bind("id") Long id);
 
-    @SqlQuery("select * from attachment where memmeeId = :memmeeId")
-    @Mapper(AttachmentMapper.class)
-    Attachment getAttachmentByMemmeeId(@Bind("memmeeId") Long memmeeId);
-
-    @SqlUpdate("insert into attachment (memmeeId, filePath, type) values (:memmeeId, :filePath, :type)")
+    @SqlUpdate("insert into attachment (filePath, type) values (:filePath, :type)")
     @GetGeneratedKeys
     long insert(
-            @Bind("memmeeId") Long memmeeId
-            , @Bind("filePath") String filePath
+            @Bind("filePath") String filePath
             , @Bind("type") String type
     );
 
