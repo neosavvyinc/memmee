@@ -10,6 +10,7 @@ import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
+import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
 import com.yammer.dropwizard.logging.Log;
 
@@ -86,10 +87,10 @@ public class MemmeeResource {
         }
 
         if (id == null) {
-            List<Memmee> memmees = memmeeDao.getMemmeesbyUser(user.getId());
+            List<Memmee> list = memmeeDao.getMemmeesbyUser(user.getId());
 
-            if(memmees != null && memmees.size() > 0)
-                return memmees.get(0);
+            if(!ListUtil.nullOrEmpty(list))
+                return list.get(0);
             return new Memmee(user.getId(), Memmee.NO_MEMMEES_TEXT);
         }
         return memmeeDao.getMemmee(id);

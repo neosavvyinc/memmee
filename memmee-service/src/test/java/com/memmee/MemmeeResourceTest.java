@@ -1,25 +1,17 @@
 package com.memmee;
 
 import base.ResourceIntegrationTest;
-import com.memmee.attachment.dao.AttachmentDAO;
 import com.memmee.attachment.dao.TransactionalAttachmentDAO;
-import com.memmee.memmees.dao.MemmeeDAO;
 import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.user.dao.UserDAO;
-import com.memmee.user.dto.User;
 import com.memmee.util.DateUtil;
-import com.yammer.dropwizard.testing.ResourceTest;
-import org.apache.http.impl.cookie.DateUtils;
 import org.junit.*;
-import org.skife.jdbi.v2.Handle;
 
 import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Matchers.notNull;
-import static org.mockito.Mockito.ignoreStubs;
-import static org.mockito.Mockito.mock;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
