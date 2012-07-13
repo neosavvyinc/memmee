@@ -9,8 +9,7 @@ function LoginController($scope, $http, broadCastService) {
     {
         $http({method: 'POST', url: '/memmeeuserrest/user/login', data: $scope.user}).
             success(function(data, status, headers, config) {
-                console.log('you were successfully registered');
-                $scope.saveLoggedInUser(data);
+                console.log('you were successfully logged into memmee.com');
                 broadCastService.loginUser(data);
             }).
             error(function(data, status, headers, config) {

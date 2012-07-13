@@ -2,10 +2,12 @@ function NavigationController($scope, broadCastService) {
 
     $scope.loggedInUser = "";
 
+    $scope.visibleLoggedInStyle = { visibility: 'hidden' };
+
     $scope.$on('handleLogin', function() {
 
         console.log("NavigationController:handleLogin()");
-
+        $scope.visibleLoggedInStyle = {};
         $scope.loggedInUser = broadCastService.user;
 
     });
@@ -24,6 +26,13 @@ function NavigationController($scope, broadCastService) {
             console.log("Turning on create mode....");
             broadCastService.createModeStarted();
         }
+    }
+
+    $scope.signOut = function()
+    {
+        broadCastService.logoutUser();
+        $scope.loggedInUser = "";
+        $scope.visibleLoggedInStyle = { visibility: 'hidden' };
     }
 
 }
