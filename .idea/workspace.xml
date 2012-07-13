@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8682d3af-6482-4d9a-94a1-51fda6b54496" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/js/create_mode_controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-client/src/main/resources/index.html" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-client/src/main/resources/js/view_memmees_controller.js" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/js/view_memmees_controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-client/src/main/resources/js/view_mode_controller.js" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/js/view_mode_controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-client/src/main/resources/partials/viewMode.html" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/partials/viewMode.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-client/src/main/resources/js/navigation_controller.js" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/js/navigation_controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-client/src/main/resources/partials/createMode.html" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/partials/createMode.html" />
     </list>
     <ignored path="hbo-dropwizard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -98,7 +98,7 @@
           <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="84" column="43" selection-start="3668" selection-end="3668" vertical-scroll-proportion="0.6232687">
+                <state line="86" column="19" selection-start="3737" selection-end="3737" vertical-scroll-proportion="0.6260388">
                   <folding />
                 </state>
               </provider>
@@ -1562,7 +1562,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="43" selection-start="3668" selection-end="3668" vertical-scroll-proportion="0.6232687">
+        <state line="86" column="19" selection-start="3737" selection-end="3737" vertical-scroll-proportion="0.6260388">
           <folding />
         </state>
       </provider>

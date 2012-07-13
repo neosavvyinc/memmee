@@ -5,9 +5,14 @@ function NavigationController($scope, broadCastService) {
     $scope.visibleLoggedInStyle = { visibility: 'hidden' };
     $scope.createModeStyles = "btn btn-primary";
 
+    var resetCreationButton = function() {
+        $scope.createModeStyles = "btn btn-primary";
+    }
+
     var resetStyles = function() {
         $scope.visibleLoggedInStyle = {};
-        $scope.createModeStyles = "btn btn-primary";
+
+        resetCreationButton();
     }
 
     $scope.$on('handleLogin', function() {
@@ -18,6 +23,11 @@ function NavigationController($scope, broadCastService) {
 
     });
 
+    $scope.$on('createModeCancelled', function() {
+
+        resetCreationButton();
+
+    })
 
     $scope.toggleCreateMode = function()
     {
