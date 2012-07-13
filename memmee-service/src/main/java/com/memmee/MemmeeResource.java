@@ -72,6 +72,7 @@ public class MemmeeResource {
         return memmeesbyUser;
     }
 
+
     @GET
     @Path("/getmemmee")
     @Produces({MediaType.APPLICATION_JSON})
@@ -79,14 +80,12 @@ public class MemmeeResource {
 
         User user = userDao.getUserByApiKey(apiKey);
 
-
         if (user == null) {
             LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
-        return memmeeDao.getMemmee(id);
 
-
+        return id != null ? memmeeDao.getMemmee(id) : memmeeDao.getMemmeesbyUser(user.getId()).get(0);
     }
 
     @POST
