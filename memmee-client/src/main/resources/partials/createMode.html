@@ -5,7 +5,7 @@
         <textarea ng-model="memmee.text" class="input-xlarge span10" id="textarea" rows="10"></textarea>
 
         <a class="btn btn-primary" ng-click="cancel()">Cancel</a>
-        <a class="btn btn-primary" ng-disabled="isUnchanged(memmee)">Done</a>
+        <a class="btn btn-primary" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Done</a>
     </form>
 
 
