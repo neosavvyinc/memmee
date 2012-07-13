@@ -9,6 +9,7 @@ memmeeServices.factory("memmeeBroadCastService", function($rootScope, $location)
 
     broadCastService.loginUser = function ( $user ) {
         this.user = $user;
+        localStorage.setItem( "user", JSON.stringify($user) );
         $rootScope.$broadcast('handleLogin');
 
         if( $location.url() == "/home" )
@@ -17,6 +18,8 @@ memmeeServices.factory("memmeeBroadCastService", function($rootScope, $location)
 
     broadCastService.logoutUser = function( $user ) {
         this.user = null;
+        localStorage.removeItem( "user");
+        $location.path('/home');
         $rootScope.$broadcast('handleLogout');
     }
 
