@@ -85,7 +85,14 @@ public class MemmeeResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
 
-        return id != null ? memmeeDao.getMemmee(id) : memmeeDao.getMemmeesbyUser(user.getId()).get(0);
+        if (id == null) {
+            List<Memmee> memmees = memmeeDao.getMemmeesbyUser(user.getId());
+
+            if(memmees != null && memmees.size() > 0)
+                return memmees.get(0);
+            return new Memmee(user.getId(), Memmee.NO_MEMMEES_TEXT);
+        }
+        return memmeeDao.getMemmee(id);
     }
 
     @POST

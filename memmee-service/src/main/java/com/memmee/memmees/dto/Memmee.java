@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 
 public class Memmee implements Serializable {
 
+    public static String NO_MEMMEES_TEXT = "You have no memmees.";
+
     private static final long serialVersionUID = -2311129046798681911L;
 
     private Long id;
@@ -29,6 +31,13 @@ public class Memmee implements Serializable {
     private Date displayDate;
 
     private String shareKey;
+
+    public Memmee() {}
+
+    public Memmee(Long userId, String text) {
+        this.text = text;
+        this.userId = userId;
+    }
 
     public Long getId() {
         return id;
