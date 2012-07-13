@@ -33,7 +33,8 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey" +
             ", a.id as attachmentId, a.filePath, a.type from memmee m " +
-            " JOIN attachment a on m.attachmentId = a.id where m.userId = :userId"
+            " JOIN attachment a on m.attachmentId = a.id where m.userId = :userId" +
+            " ORDER BY m.displayDate DESC"
     )
     @Mapper(MemmeeAttachmentMapper.class)
     List<Memmee> getMemmeesbyUser(@Bind("userId") Long userId);

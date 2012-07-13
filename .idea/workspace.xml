@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8682d3af-6482-4d9a-94a1-51fda6b54496" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-client/src/main/resources/js/logged_in_controller.js" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/js/logged_in_controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-client/src/main/resources/partials/viewMode.html" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/partials/viewMode.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/memmee-client/src/main/resources/js/view_mode_controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/util/DateUtil.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/MemmeeResource.java" afterPath="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/MemmeeResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/memmees/dao/TransactionalMemmeeDAO.java" afterPath="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/memmees/dao/TransactionalMemmeeDAO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/MemmeeResourceTest.java" afterPath="$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/MemmeeResourceTest.java" />
     </list>
     <ignored path="hbo-dropwizard.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,62 +67,92 @@
     <favorites_list name="hbo-dropwizard" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="logged_in_controller.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/logged_in_controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="50" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="createMode.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/createMode.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="viewMode.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/viewMode.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="57" selection-start="947" selection-end="947" vertical-scroll-proportion="0.44850498">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="nav.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/nav.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="12" selection-start="190" selection-end="736" vertical-scroll-proportion="-3.75">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/poc/partials/view.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="16" selection-start="224" selection-end="326" vertical-scroll-proportion="-4.375">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login_controller.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/login_controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.500473">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="view_memmees_controller.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/view_memmees_controller.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="2" column="4" selection-start="71" selection-end="126" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="controllersSpec.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/memmee-client/src/test/unit/controllersSpec.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MemmeeResourceTest.java" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/MemmeeResourceTest.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="104" column="23" selection-start="3926" selection-end="3926" vertical-scroll-proportion="0.54913294">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DateUtil.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/util/DateUtil.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="29" column="24" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0">
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="OsUtil.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/util/OsUtil.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="8" column="13" selection-start="131" selection-end="131" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="view_mode_controller.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/view_mode_controller.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="2" column="24" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="MemmeeResource.java" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/MemmeeResource.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="87" column="0" selection-start="2623" selection-end="2623" vertical-scroll-proportion="0.33236995">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TransactionalMemmeeDAO.java" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/memmees/dao/TransactionalMemmeeDAO.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="32" column="43" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -135,9 +169,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/commons-user-service/src/main/java/com/neosavvy/UserDAO.java" />
-        <option value="$PROJECT_DIR$/commons-user-service/src/main/java/com/neosavvy/UserResource.java" />
-        <option value="$PROJECT_DIR$/commons-user-client/src/main/resources/angular/js/controller1.0.js" />
         <option value="$PROJECT_DIR$/memmee-service/src/test/java/base/MemmeeServiceTest.java" />
         <option value="$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/MemmeeServiceTest.java" />
         <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/MemmeeService.java" />
@@ -145,12 +176,15 @@
         <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/attachment/dto/Attachment.java" />
         <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/memmees/dto/MemmeeAttachmentMapper.java" />
         <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/attachment/dto/AttachmentMapper.java" />
-        <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/MemmeeResource.java" />
         <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/attachment/dao/TransactionalAttachmentDAO.java" />
         <option value="$PROJECT_DIR$/memmee-service/src/test/java/base/ResourceIntegrationTest.java" />
-        <option value="$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/MemmeeResourceTest.java" />
         <option value="$PROJECT_DIR$/memmee-client/src/main/resources/js/logged_in_controller.js" />
         <option value="$PROJECT_DIR$/memmee-client/src/main/resources/partials/viewMode.html" />
+        <option value="$PROJECT_DIR$/memmee-client/src/main/resources/js/view_mode_controller.js" />
+        <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/MemmeeResource.java" />
+        <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/memmees/dao/TransactionalMemmeeDAO.java" />
+        <option value="$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/util/DateUtil.java" />
+        <option value="$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/MemmeeResourceTest.java" />
       </list>
     </option>
   </component>
@@ -563,45 +597,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dto" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commons-user" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="memmee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="memmee-service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="memmee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
+              <option name="myItemId" value="util" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -704,6 +700,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commons-user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="memmee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="memmee-client" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1341,8 +1367,9 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3963964" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3873874" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1353,11 +1380,10 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22341955" sideWeight="0.21771772" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.109508544" sideWeight="0.60198456" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26005748" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24066092" sideWeight="0.6126126" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1485,74 +1511,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/attachment/dao/TransactionalAttachmentDAO.java">
+    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/viewMode.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="26" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/MemmeeResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="0" selection-start="2180" selection-end="2180" vertical-scroll-proportion="0.03599374">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/memmees/AbstractMemmeeDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="22" selection-start="390" selection-end="390" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/attachment/AttachmentDAOTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="52" selection-start="682" selection-end="682" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-service/src/test/java/base/ResourceIntegrationTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="46" selection-start="1069" selection-end="1069" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/MemmeeResourceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="98" selection-start="2951" selection-end="2951" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-client/1.12/jersey-client-1.12.jar!/com/sun/jersey/api/client/GenericType.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="163" selection-end="163" vertical-scroll-proportion="0.09771987">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sun/jersey/jersey-client/1.12/jersey-client-1.12.jar!/com/sun/jersey/api/client/WebResource.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="56" selection-start="2209" selection-end="2209" vertical-scroll-proportion="-9.24">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/loggedin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="18" column="57" selection-start="947" selection-end="947" vertical-scroll-proportion="-11.25">
           <folding />
         </state>
       </provider>
@@ -1564,38 +1525,105 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/logged_in_controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="50" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/poc/partials/view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="16" selection-start="224" selection-end="326" vertical-scroll-proportion="-4.375">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/createMode.html">
+    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/services.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/nav.html">
+    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/security_controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="12" selection-start="190" selection-end="736" vertical-scroll-proportion="-3.75">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/partials/viewMode.html">
+    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/registration_controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="57" selection-start="947" selection-end="947" vertical-scroll-proportion="0.44850498">
+        <state line="0" column="31" selection-start="31" selection-end="64" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/view_mode_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="24" selection-start="128" selection-end="128" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-client/src/test/unit/controllersSpec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar!/java/util/Date.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="11" selection-start="681" selection-end="681" vertical-scroll-proportion="-3.544702">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-client/src/main/resources/js/view_memmees_controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="4" selection-start="71" selection-end="126" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/user/dto/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="16" selection-start="676" selection-end="676" vertical-scroll-proportion="0.33278146">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/util/OsUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="131" selection-end="131" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/memmees/dao/TransactionalMemmeeDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="43" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar!/org/apache/http/impl/cookie/DateUtils.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="19" selection-start="209" selection-end="209" vertical-scroll-proportion="0.12953368">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/util/DateUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="24" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-service/src/main/java/com/memmee/MemmeeResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="0" selection-start="2623" selection-end="2623" vertical-scroll-proportion="0.33236995">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/memmee-service/src/test/java/com/memmee/MemmeeResourceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="23" selection-start="3926" selection-end="3926" vertical-scroll-proportion="0.54913294">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
