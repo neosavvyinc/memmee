@@ -5,7 +5,7 @@ function ViewMemmeesController($scope, $http, broadCastService) {
 
     $http({method: 'GET', url: '/memmeerest/getmemmees/?apiKey=' + $scope.user.apiKey}).
         success(function(data, status, headers, config) {
-            console.log('your memmees have been loaded')
+            console.log('your memmees have been loaded');
             $scope.memmees = data;
         }).
         error(function(data, status, headers, config) {
