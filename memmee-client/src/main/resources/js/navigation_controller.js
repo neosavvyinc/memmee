@@ -1,5 +1,16 @@
 function NavigationController($scope, broadCastService) {
 
+    $scope.loggedInUser = "";
+
+    $scope.$on('handleLogin', function() {
+
+        console.log("NavigationController:handleLogin()");
+
+        $scope.loggedInUser = broadCastService.user;
+
+    });
+
+
     $scope.toggleCreateMode = function()
     {
         console.log("About to toggle create mode")
