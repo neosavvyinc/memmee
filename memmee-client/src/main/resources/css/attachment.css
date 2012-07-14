@@ -17,8 +17,8 @@ table { border-collapse: collapse; }
     border-image: initial;
 }
 .dropbox {
-    width: 15em;
-    height: 3em;
+    width: 24px;
+    height: 24px;
     border: 2px solid #DDD;
     border-radius: 8px;
     background-color: #FEFFEC;

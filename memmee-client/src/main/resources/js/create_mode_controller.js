@@ -1,15 +1,21 @@
-function CreateMemmeesController($scope, $http, broadCastService) {
+function CreateMemmeesController($scope, $http, broadCastService, $location) {
 
     $scope.master= {
         id: '',
         userId: broadCastService.user ? broadCastService.user.id : null,
-        text: ''
+        text: '',
+        creationDate: Date.today(),
+        lastUpdateDate: Date.today(),
+        displayDate: Date.today()
     };
 
     $scope.memmee = {
         id: '',
         userId: broadCastService.user ? broadCastService.user.id : null,
-        text: ''
+        text: '',
+        creationDate: Date.today(),
+        lastUpdateDate: Date.today(),
+        displayDate: Date.today()
     };
 
     $scope.$on('attachmentUploadSuccess', function() {
@@ -34,11 +40,17 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         broadCastService.createModeCancelled();
     }
 
+    $scope.getDisplayDate = function( )
+    {
+        return $scope.memmee.displayDate.toDateString();
+    }
+
     $scope.createMemmee = function()
     {
         $http({method: 'POST', url: '/memmeerest/insertmemmee/?apiKey=' + broadCastService.user.apiKey, data: $scope.memmee}).
             success(function(data, status, headers, config) {
                 console.log('you have saved a memmee');
+                broadCastService.createModeCancelled();
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving your user');
@@ -47,7 +59,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     }
 }
 
-CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
+CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location'];
 
 
 function AttachmentController($scope, broadCastService) {
