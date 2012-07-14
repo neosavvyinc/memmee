@@ -1,4 +1,4 @@
-function NavigationController($scope, broadCastService) {
+function NavigationController($scope, broadCastService, $location) {
 
     $scope.loggedInUser = "";
 
@@ -31,6 +31,12 @@ function NavigationController($scope, broadCastService) {
 
     $scope.toggleCreateMode = function()
     {
+        if( $location.path() != "/loggedin" )
+        {
+            $location.path("/loggedin");
+            return;
+        }
+
         console.log("About to toggle create mode")
         if( broadCastService.isCreateMode() )
         {
@@ -55,4 +61,4 @@ function NavigationController($scope, broadCastService) {
 
 }
 
-NavigationController.$inject = ['$scope', 'memmeeBroadCastService'];
+NavigationController.$inject = ['$scope', 'memmeeBroadCastService', '$location'];

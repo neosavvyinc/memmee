@@ -1,36 +1,56 @@
 <div class="well span10" ng-controller="CreateMemmeesController">
 
+    <div class="row span10" style="margin: 0px; padding-bottom: 10px">
+        <a class="btn btn-large">Get Inspiration</a>
+    </div>
+
     <form name="memmeeCreationForm">
 
         <textarea ng-model="memmee.text" class="input-xlarge span10" id="textarea" rows="10"></textarea>
 
-        <a class="btn btn-primary" ng-click="cancel()">Cancel</a>
-        <a class="btn btn-primary" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Done</a>
+        <div class="row span10" style="margin: 0px; padding-bottom: 10px" ng-controller="AttachmentController">
+            <div class="span1" style="margin: 0px; width: 100px;">
+                <div style="float: left;">
+                    <div id="dropbox" class="dropbox" ng-class="dropClass"><i class="icon-camera"></i></div>
+                </div>
+                <div style="float: right;">
+                    <a ng-click="uploadFile()" class="btn btn-primary">Upload</a>
+                </div>
+            </div>
+            <div ng-show="files.length" class="span3">
+                <div ng-repeat="file in files">
+                    <span>{{file.webkitRelativePath || file.name}}</span>
+                    (<span ng-switch="file.size > 1024*1024">
+                            <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
+                            <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
+                        </span>)
+                </div>
+                <div ng-show="progressVisible">
+                    <div class="percent">{{progress}}%</div>
+                    <div class="progress-bar">
+                        <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group" style="float: right;">
+                <a class="btn btn-primary" >T1</a>
+                <a class="btn btn-primary" >T2</a>
+                <a class="btn btn-primary" >T3</a>
+                <a class="btn btn-primary" >T4</a>
+            </div>
+        </div>
+
+        <div class="row span10" style="margin: 0px;" >
+            <div style="margin: 0px; float: left;">
+                This Memmee will be dated: {{getDisplayDate()}}
+            </div>
+            <div style="margin: 0px; float: right;">
+                <a class="btn btn-primary" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Done</a>
+                <a class="btn btn-primary" ng-click="cancel()">Cancel</a>
+            </div>
+        </div>
 
     </form>
 
-    <div id="secondAttachment" class="well" ng-controller="AttachmentController">
-        <label for="fileToUpload">Select a File to Upload</label><br />
-        <input type="file" ng-model="fileToUpload" ng-model-instant id="fileToUpload" multiple/>
-
-        <div id="dropbox" class="dropbox" ng-class="dropClass"><span>{{dropText}}</span></div>
-        <div style="padding-top: 10px; padding-bottom: 10px"></div>
-        <a ng-click="uploadFile()" class="btn btn-primary">Upload</a>
-        <div ng-show="files.length">
-            <div ng-repeat="file in files">
-                <span>{{file.webkitRelativePath || file.name}}</span>
-                (<span ng-switch="file.size > 1024*1024">
-                    <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
-                    <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
-                </span>)
-            </div>
-            <div ng-show="progressVisible">
-                <div class="percent">{{progress}}%</div>
-                <div class="progress-bar">
-                    <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </div>

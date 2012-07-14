@@ -119,7 +119,7 @@ public class MemmeeResource {
                 memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                     public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
                         Long memmeeId = memmeeDao.insert(user.getId(), memmee.getText(),
-                                new Date(), new Date(), new Date(), "", null, null);
+                                new Date(), memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null);
                         Long attachmentId;
 
                         //@TODO, will fix this issue
@@ -130,7 +130,7 @@ public class MemmeeResource {
                         attachmentId = attachment.getId();
                         //}
 
-                        memmeeDao.update(memmeeId, memmee.getText(), new Date(), new Date(), null, attachmentId, null);
+                        memmeeDao.update(memmeeId, memmee.getText(), new Date(), memmee.getDisplayDate(), null, attachmentId, null);
 
                         return memmeeId.intValue();
                     }
