@@ -1,4 +1,4 @@
-function SecurityController($scope, broadCastService, $timeout) {
+function SecurityController($scope, broadCastService, $timeout, $location) {
 
     if( localStorage.getItem("user") !== null && localStorage.getItem("user") !== "" )
     {
@@ -14,6 +14,10 @@ function SecurityController($scope, broadCastService, $timeout) {
             broadCastService.loginUser( broadCastService.user );
         }, 100);
     }
+    else
+    {
+        $location.path('/home');
+    }
 }
 
-SecurityController.$inject = ['$scope', 'memmeeBroadCastService', '$timeout'];
+SecurityController.$inject = ['$scope', 'memmeeBroadCastService', '$timeout', '$location'];
