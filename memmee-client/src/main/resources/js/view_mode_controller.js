@@ -32,6 +32,15 @@ function ViewModeController($scope, $http, broadCastService) {
     {
         return $scope.memmee.displayDate.toDateString();
     }
+
+    $scope.showImage = function( )
+    {
+        if( $scope.memmee && $scope.memmee.attachment && $scope.memmee.attachment.filePath )
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
