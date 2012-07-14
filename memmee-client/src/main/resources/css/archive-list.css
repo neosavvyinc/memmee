@@ -1,3 +1,8 @@
 li.archive-list {
     height: 250px;
 }
+
+div.archive-list {
+    width: 350px;
+    height: 263px;
+}

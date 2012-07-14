@@ -11,6 +11,15 @@ function ArchiveListController($scope, $http, broadCastService) {
               console.log('error loading memmees');
         });
 
+    //UI
+    $scope.innerScrollerWidth = function() {
+        return (memmees.length * 500).toString() + "px";
+    }
+
+    $scope.imageStyle = function(memmee) {
+        return {'background-image': 'url(/memmee/' + memmee.attachment.filePath + ')'};
+    }
+
 }
 
 ArchiveListController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
