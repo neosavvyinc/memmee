@@ -1,1 +1,13 @@
-this is where the archive list content goes
+<div class="span10 scrollable-x nowrap" ng-controller="ArchiveListController">
+    <div class="hidden-x" style="width: 7000px;">
+        <ul class="horizontal">
+            <li class="span4 archive-list" ng-repeat="memmee in memmees">
+                <div class="clear span3">Stub Date</div>
+                <div class="clear span3">
+                    {{memmee.text}}
+                    <img ng-src="/memmee/{{memmee.attachment.filePath}}"/>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

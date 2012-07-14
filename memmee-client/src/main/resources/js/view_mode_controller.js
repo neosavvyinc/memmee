@@ -1,8 +1,7 @@
 function ViewModeController($scope, $http, broadCastService) {
 
     $scope.user = broadCastService.user;
-    $scope.memmee = null
-
+    $scope.memmee = null;
 
     //Action Handlers
     $scope.getDefaultMemmee = function () {
