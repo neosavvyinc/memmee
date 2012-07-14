@@ -4,6 +4,7 @@ import com.memmee.auth.MemmeeAuthenticator;
 import com.memmee.user.dto.User;
 import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
+import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
 import org.skife.jdbi.v2.Handle;
 
 import com.memmee.attachment.dao.TransactionalAttachmentDAO;
@@ -31,6 +32,9 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
     @Override
     protected void initialize(MemmeeConfiguration userConfiguration, Environment environment) throws Exception {
 
+        //Monitors Database Exceptions From the DAOS
+        addBundle(new DBIExceptionsBundle());
+
         final DatabaseFactory factory = new DatabaseFactory(environment);
         final Database db = factory.build(userConfiguration.getDatabase(), "mysql");
         final UserDAO userDao = db.onDemand(UserDAO.class);
@@ -41,6 +45,5 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
                 "MEMMEE AUTHENTICATION"));
         environment.addResource(new UserResource(userDao, new MemmeeMailSenderImpl()));
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao));
-
     }
 }

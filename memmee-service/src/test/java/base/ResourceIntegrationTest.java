@@ -1,6 +1,7 @@
 package base;
 
 import com.memmee.MemmeeResource;
+import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.config.LoggingFactory;
 import com.yammer.dropwizard.db.Database;
@@ -37,10 +38,12 @@ public class ResourceIntegrationTest extends ResourceTest {
     protected final DatabaseFactory factory = new DatabaseFactory(environment);
     protected static Database database;
     protected static Handle handle;
+    protected static DBIExceptionsBundle dbiExceptionsBundle = new DBIExceptionsBundle();
 
 
     @Override
     protected void setUpResources() throws Exception {
+        dbiExceptionsBundle.initialize(environment);
         database = factory.build(mysqlConfig, "mysql");
         handle = database.open();
 

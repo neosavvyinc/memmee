@@ -282,7 +282,6 @@ public class MemmeeResource {
 
     @DELETE
     @Path("/deletememmee")
-    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public void delete(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id)
 

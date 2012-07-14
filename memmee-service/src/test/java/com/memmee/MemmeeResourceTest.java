@@ -2,10 +2,12 @@ package com.memmee;
 
 import base.ResourceIntegrationTest;
 import com.memmee.attachment.dao.TransactionalAttachmentDAO;
+import com.memmee.builder.MemmeeURLBuilder;
 import com.memmee.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.memmees.dto.Memmee;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.util.DateUtil;
+import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
 import org.junit.*;
 
 import java.util.Date;
@@ -77,7 +79,11 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     public void testGetMemmee() {
         memmeeId = insertTestData();
 
-        Memmee memmee = client().resource("/memmeerest/getmemmee?apiKey=apiKey&id=" + memmeeId).get(Memmee.class);
+        Memmee memmee = client().resource(new MemmeeURLBuilder().
+                setMethodURL("getmemmee").
+                setApiKeyParam("apiKey").
+                setIdParam(memmeeId).
+                build()).get(Memmee.class);
         assertThat(memmee.getUserId(), is(equalTo(userId)));
         assertThat(memmee.getText(), is("This is a memmee"));
         assertThat(memmee.getLastUpdateDate(), is(not(nullValue())));
@@ -92,7 +98,10 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         memmeeId = insertTestData();
         txMemmeeDAO.insert(userId, "This is a later memmee", new Date(), new Date(), new Date(), "shareKey", attachmentId, Long.parseLong("1"));
 
-        Memmee memmee = client().resource("/memmeerest/getmemmee?apiKey=apiKey").get(Memmee.class);
+        Memmee memmee = client().resource(new MemmeeURLBuilder().
+                setMethodURL("getmemmee").
+                setApiKeyParam("apiKey").
+                build()).get(Memmee.class);
         assertThat(memmee.getUserId(), is(equalTo(userId)));
         assertThat(memmee.getText(), is("This is a later memmee"));
         assertThat(memmee.getLastUpdateDate(), is(not(nullValue())));
@@ -102,6 +111,26 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         assertThat(memmee.getAttachment(), is(not(nullValue())));
     }
 
+    @Test
+    public void testDelete() {
+        memmeeId = insertTestData();
+
+        client().resource(new MemmeeURLBuilder().setMethodURL("deletememmee").setApiKeyParam("apiKey").setIdParam(memmeeId).build()).delete();
+
+        Memmee myMemmee = txMemmeeDAO.getMemmee(memmeeId);
+        assertThat(myMemmee, is(nullValue()));
+    }
+
+    @Test
+    public void testDeleteInvalidId() {
+        memmeeId = insertTestData();
+
+        client().resource(new MemmeeURLBuilder().setMethodURL("deletememmee").setApiKeyParam("apiKey").setIdParam(memmeeId + 75).build()).delete();
+
+        Memmee myMemmee = txMemmeeDAO.getMemmee(memmeeId);
+        assertThat(myMemmee, is(not(nullValue())));
+    }
+
     protected Long insertTestData() {
         attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "image/jpeg");
         Date date = DateUtil.getDate(2011, 6, 12);
@@ -109,7 +138,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     }
 
     @AfterClass
-    public static void tearDownClass() throws Exception{
+    public static void tearDownClass() throws Exception {
         userDAO.close();
         txMemmeeDAO.close();
         txAttachmentDAO.close();
