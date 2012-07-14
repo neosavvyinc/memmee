@@ -6,7 +6,31 @@
 
         <a class="btn btn-primary" ng-click="cancel()">Cancel</a>
         <a class="btn btn-primary" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Done</a>
+
     </form>
 
+    <div id="secondAttachment" class="well" ng-controller="AttachmentController">
+        <label for="fileToUpload">Select a File to Upload</label><br />
+        <input type="file" ng-model="fileToUpload" ng-model-instant id="fileToUpload" multiple/>
+
+        <div id="dropbox" class="dropbox" ng-class="dropClass"><span>{{dropText}}</span></div>
+        <div style="padding-top: 10px; padding-bottom: 10px"></div>
+        <a ng-click="uploadFile()" class="btn btn-primary">Upload</a>
+        <div ng-show="files.length">
+            <div ng-repeat="file in files">
+                <span>{{file.webkitRelativePath || file.name}}</span>
+                (<span ng-switch="file.size > 1024*1024">
+                    <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
+                    <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
+                </span>)
+            </div>
+            <div ng-show="progressVisible">
+                <div class="percent">{{progress}}%</div>
+                <div class="progress-bar">
+                    <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
