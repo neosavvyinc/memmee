@@ -1,0 +1,37 @@
+/* Reusable Classes */
+div.scrollable-x {
+    overflow-x: scroll;
+}
+
+div.scrollable-y {
+    overflow-y: scroll;
+}
+
+div.hidden-x {
+    overflow-x: hidden;
+}
+
+div.hidden-y {
+    overflow-y: hidden;
+}
+
+div.nowrap {
+    white-space: nowrap;
+}
+
+ul.horizontal {
+    margin: 0;
+    padding: 0;
+}
+
+ul.horizontal li, ul.horizontal div {
+    display: inline-block;
+}
+
+.clear {
+    clear: both;
+}
+
+.fullwidth {
+    width: 100%;
+}
