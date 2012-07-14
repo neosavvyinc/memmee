@@ -27,6 +27,11 @@ function ViewModeController($scope, $http, broadCastService) {
     };
 
     $scope.getDefaultMemmee();
+
+    $scope.getDisplayDate = function( )
+    {
+        return $scope.memmee.displayDate.toDateString();
+    }
 }
 
 ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];

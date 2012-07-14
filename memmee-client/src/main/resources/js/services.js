@@ -45,5 +45,16 @@ memmeeServices.factory("memmeeBroadCastService", function($rootScope, $location)
         $rootScope.$broadcast('createModeCancelled');
     }
 
+    /**
+     * Modal Popup Notifications:
+     */
+    broadCastService.showProfileUpdatedSuccess = function() {
+        $rootScope.$broadcast('showProfileUpdatedSuccess');
+    }
+
+    broadCastService.showProfileUpdatedError = function() {
+        $rootScope.$broadcast('showProfileUpdatedError');
+    }
+
     return broadCastService;
 });

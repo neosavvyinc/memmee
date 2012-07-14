@@ -17,10 +17,11 @@ function ProfileController($scope, $http, broadCastService) {
             success(function(data, status, headers, config) {
                 console.log('your user has been updated')
                 broadCastService.loginUser(data);
-                $scope.saveLoggedInUser(data);
+                broadCastService.showProfileUpdatedSuccess();
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving your user');
+                broadCastService.showProfileUpdatedError();
             });
     }
 
