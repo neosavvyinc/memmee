@@ -2,6 +2,7 @@ CREATE TABLE attachment
 (id int(11) NOT NULL AUTO_INCREMENT,
  memmeeId int(11),
  filePath varchar(1024) DEFAULT NULL,
+ thumbFilePath varchar(1024) DEFAULT NULL,
  type varchar(20) DEFAULT NULL,
  PRIMARY KEY (id));
 

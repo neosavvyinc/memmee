@@ -17,7 +17,7 @@ function ArchiveListController($scope, $http, broadCastService) {
     }
 
     $scope.imageStyle = function(memmee) {
-        return {'background-image': 'url(/memmee/' + memmee.attachment.filePath + ')'};
+        return {'background-image': 'url(' + memmee.attachment.thumbFilePath + ')'};
     }
 
 }

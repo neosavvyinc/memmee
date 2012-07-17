@@ -18,18 +18,20 @@ public interface AttachmentDAO {
     @Mapper(AttachmentMapper.class)
     Attachment getAttachmentByMemmeeId(@Bind("memmeeId") Long memmeeId);
 
-    @SqlUpdate("insert into attachment (memmeeId, filePath, type) values (:memmeeId, :filePath, :type)")
+    @SqlUpdate("insert into attachment (memmeeId, filePath, thumbFilePath, type) values (:memmeeId, :filePath, :thumbFilePath, :type)")
     @GetGeneratedKeys
     Long insert(
             @Bind("memmeeId") Long memmeeId
             , @Bind("filePath") String filePath
+            , @Bind("thumbFilePath") String thumbFilePath
             , @Bind("type") String type
     );
 
-    @SqlUpdate("update attachment set filePath = :filePath, type = :type where id = :id")
+    @SqlUpdate("update attachment set filePath = :filePath, thumbFilePath = :thumbFilePath, type = :type where id = :id")
     int update(
             @Bind("id") Long id
             , @Bind("filePath") String filePath
+            , @Bind("thumbFilePath") String thumbFilePath
             , @Bind("type") String type
     );
 

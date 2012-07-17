@@ -132,7 +132,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     }
 
     protected Long insertTestData() {
-        attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "image/jpeg");
+        attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "this_is_a_thumb_file_path.path", "image/jpeg");
         Date date = DateUtil.getDate(2011, 6, 12);
         return txMemmeeDAO.insert(userId, "This is a memmee", date, date, date, "shareKey", attachmentId, Long.parseLong("1"));
     }

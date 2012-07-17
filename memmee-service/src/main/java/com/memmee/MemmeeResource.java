@@ -19,6 +19,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status;
 
+import org.im4java.core.ConvertCmd;
+import org.im4java.core.IM4JavaException;
+import org.im4java.core.IMOperation;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.Transaction;
 import org.skife.jdbi.v2.exceptions.DBIException;
@@ -309,10 +312,10 @@ public class MemmeeResource {
 
         final User user = userDao.getUserByApiKey(apiKey);
 
-//        if (user == null) {
-//            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
-//            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-//        }
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
 
         String baseFileDirectory = "";
         String uploadedFileLocation = "";
@@ -322,17 +325,21 @@ public class MemmeeResource {
 
 
             if (OsUtil.isWindows()) {
-                baseFileDirectory = "c://memmee/temp/";
+                baseFileDirectory = "c://memmee/temp/" + user.getId() + "/";
             } else if (OsUtil.isMac()) {
-                baseFileDirectory = "/memmee/";
+                baseFileDirectory = "/memmee/" + user.getId() + "/";
             } else if (OsUtil.isUnix()) {
-                baseFileDirectory = "/memmee/";
+                baseFileDirectory = "/memmee/" + user.getId() + "/";
             }
-            uploadedFileLocation = fileDetail.getFileName();
+            ensureParentDirectory(baseFileDirectory);
+
+            uploadedFileLocation = fileDetail.getFileName().toLowerCase();
 
             // save it
-            writeToFile(uploadedInputStream, baseFileDirectory + uploadedFileLocation);
-            Long attachmentId = attachmentDAO.insert(uploadedFileLocation, "Image");
+            String uploadedFileLocationToWrite = baseFileDirectory + uploadedFileLocation;
+            writeToFile(uploadedInputStream, uploadedFileLocationToWrite);
+            String uploadedThumbFileLocation = writeThumbnailImage(uploadedFileLocationToWrite);
+            Long attachmentId = attachmentDAO.insert(uploadedFileLocationToWrite, uploadedThumbFileLocation, "Image");
             attachment = attachmentDAO.getAttachment(attachmentId);
 
         } catch (Exception e) {
@@ -342,13 +349,29 @@ public class MemmeeResource {
         return attachment;
     }
 
+    private void ensureParentDirectory(String parentDirectory)
+    {
+        File parentDir;
+        if (parentDirectory != null) {
+            parentDir = new File(parentDirectory);
+            if (!parentDir.exists()) {
+                parentDir.mkdirs();
+            }
+        }
+        else
+        {
+            throw new WebApplicationException(Status.PRECONDITION_FAILED);
+        }
+
+
+    }
+
     // save uploaded file to new location
     private void writeToFile(InputStream uploadedInputStream,
                              String uploadedFileLocation) {
 
         try {
-            OutputStream out = new FileOutputStream(new File(
-                    uploadedFileLocation));
+            OutputStream out;
             int read = 0;
             byte[] bytes = new byte[1024];
 
@@ -363,6 +386,47 @@ public class MemmeeResource {
             e.printStackTrace();
         }
 
+    }
+
+    private String writeThumbnailImage(String fileName) {
+        String imPath="/opt/local/bin:/usr/bin:/usr/local/bin";
+        ConvertCmd
+                cmd = new ConvertCmd();
+        cmd.setSearchPath(imPath);
+
+        // create the operation, add images and operators/options
+        IMOperation op = new IMOperation();
+        String sourceImage = fileName;
+        String destinationImage;
+        if( sourceImage.toLowerCase().indexOf(".jpg") > -1 )
+        {
+            destinationImage = sourceImage.replaceFirst(".jpg", "-thumb.jpg");
+        }
+        else if( sourceImage.toLowerCase().indexOf(".png") > -1 )
+        {
+            destinationImage = sourceImage.replaceFirst(".png", "-thumb.png");
+        }
+        else
+        {
+            throw new WebApplicationException(Status.UNSUPPORTED_MEDIA_TYPE);
+        }
+
+
+        op.addImage(sourceImage);
+        op.resize(200,300);
+        op.addImage(destinationImage);
+
+        try {
+            cmd.run(op);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IM4JavaException e) {
+            e.printStackTrace();
+        }
+
+        return destinationImage;
     }
 
 

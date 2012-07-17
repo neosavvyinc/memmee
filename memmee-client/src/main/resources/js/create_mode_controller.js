@@ -130,7 +130,7 @@ function AttachmentController($scope, broadCastService) {
         xhr.addEventListener("load", uploadComplete, false)
         xhr.addEventListener("error", uploadFailed, false)
         xhr.addEventListener("abort", uploadCanceled, false)
-        xhr.open("POST", "/memmeerest/uploadattachment")
+        xhr.open("POST", "/memmeerest/uploadattachment/?apiKey=" + broadCastService.user.apiKey)
         $scope.progressVisible = true
         xhr.send(fd)
     }

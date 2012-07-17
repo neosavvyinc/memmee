@@ -32,13 +32,14 @@ public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
             handle.createCall("DROP TABLE IF EXISTS attachment").invoke();
 
             handle.createCall(
-            		"CREATE TABLE `attachment` (\n" +
-            				  " `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-            				  " `memmeeId` int(11) NOT NULL,\n" + 
-            				  " `filePath` varchar(1024) DEFAULT NULL,\n" + 
-            				  " `type` varchar(20) DEFAULT NULL,\n" +
-            				  " PRIMARY KEY (`id`)\n" +
-            				  ") ENGINE=InnoDB DEFAULT CHARSET=latin1").invoke();
+                "CREATE TABLE `attachment` (\n" +
+                " `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                " `memmeeId` int(11) NOT NULL,\n" +
+                " `filePath` varchar(1024) DEFAULT NULL,\n" +
+                " `thumbFilePath` varchar(1024) DEFAULT NULL,\n" +
+                " `type` varchar(20) DEFAULT NULL,\n" +
+                " PRIMARY KEY (`id`)\n" +
+                ") ENGINE=InnoDB DEFAULT CHARSET=latin1").invoke();
             		
          
         } catch (Exception e)
@@ -65,7 +66,7 @@ public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
     	
     	try {
 	      
-	        dao.insert(new Long(1), "filePath", "Image");
+	        dao.insert(new Long(1), "filePath", "thumbFilePath", "Image");
 	        final String result = handle.createQuery("SELECT COUNT(*) FROM attachment").map(StringMapper.FIRST).first();
 	
 	        assertThat(Integer.parseInt(result), equalTo(1));
@@ -87,7 +88,7 @@ public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
         
     try{
 
-    	Long id = dao.insert(new Long(1), "filePath", "Image");
+    	Long id = dao.insert(new Long(1), "filePath", "thumbFilePath", "Image");
         final Attachment attachment = dao.getAttachment(new Long(1));
        
 
@@ -107,8 +108,8 @@ public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
         
         try{
         	
-         Long id  = dao.insert(new Long(1), "filePath", "Image");
-         final int result = dao.update(id, "filePath2", "Image2");
+         Long id  = dao.insert(new Long(1), "filePath", "thumbFilePath", "Image");
+         final int result = dao.update(id, "filePath2", "thumbFilePath2", "Image2");
 
          assertThat(result,equalTo(1));
         }finally{

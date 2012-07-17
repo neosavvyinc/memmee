@@ -14,6 +14,8 @@ public class Attachment implements Serializable {
 
     private String filePath;
 
+    private String thumbFilePath;
+
     private String type;
 
 
@@ -41,5 +43,11 @@ public class Attachment implements Serializable {
         this.filePath = filePath;
     }
 
+    public String getThumbFilePath() {
+        return thumbFilePath;
+    }
 
+    public void setThumbFilePath(String thumbFilePath) {
+        this.thumbFilePath = thumbFilePath;
+    }
 }
