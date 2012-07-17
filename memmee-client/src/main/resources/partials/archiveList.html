@@ -1,5 +1,5 @@
 <div class="span10 scrollable-x hidden-y nowrap" ng-controller="ArchiveListController">
-    <div class="hidden-x hidden-y" ng-style="innerScrollerWidth()">
+    <div class="hidden-x hidden-y" ng-style="innerScrollerWidth(memmees);">
         <ul class="horizontal">
             <li class="span4 archive-list" ng-repeat="memmee in memmees">
                 <div class="clear span3">{{memmee.displayDate}}</div>
