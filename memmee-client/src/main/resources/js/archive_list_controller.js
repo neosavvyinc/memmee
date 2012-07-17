@@ -13,7 +13,7 @@ function ArchiveListController($scope, $http, broadCastService) {
 
     //UI
     $scope.innerScrollerWidth = function() {
-        return (memmees.length * 500).toString() + "px";
+        return {'width': (memmees.length * 5000).toString() + "px"};
     }
 
     $scope.imageStyle = function(memmee) {
