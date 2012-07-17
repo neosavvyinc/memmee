@@ -14,12 +14,16 @@ function ArchiveListController($scope, $http, broadCastService) {
     //UI
     $scope.innerScrollerWidth = function(memmees) {
         return {'width': (memmees.length * 450).toString() + "px"};
-    }
+    };
 
     $scope.imageStyle = function(memmee) {
         return {'background-image': 'url(' + memmee.attachment.thumbFilePath + ')'};
     }
 
+    //Action Handlers
+    $scope.onMemmeeSelect = function(memmee) {
+        broadCastService.memmeeSelectedArchiveListController(memmee);
+    };
 }
 
 ArchiveListController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];

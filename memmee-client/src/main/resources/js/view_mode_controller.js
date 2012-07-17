@@ -25,12 +25,19 @@ function ViewModeController($scope, $http, broadCastService) {
             });
     };
 
-    $scope.getDefaultMemmee();
+    //Broadcast Handlers
+    $scope.$on('memmeeSelectedArchiveListController', function(event, memmee) {
+        $scope.memmee = memmee;
+    });
 
+    //UI
     $scope.getDisplayDate = function( )
     {
         return $scope.memmee.displayDate.toDateString();
     }
+
+    //Initializaton
+    $scope.getDefaultMemmee();
 
     $scope.showImage = function( )
     {
