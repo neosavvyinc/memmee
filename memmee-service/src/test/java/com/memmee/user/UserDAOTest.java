@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.Date;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
@@ -63,7 +64,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            dao.insert("Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+            insertTestData(dao);
             final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
 
             assertThat(Integer.parseInt(result), equalTo(1));
@@ -81,7 +82,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            Long id = dao.insert("Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+            Long id = insertTestData(dao);
             final User user = dao.getUser(id);
             assertThat(user.getId(), equalTo(id));
 
@@ -138,6 +139,19 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
             e.printStackTrace();
             fail("shouldn't have thrown an exception but did");
         }
+    }
+
+    @Test
+    public void testGetUserCount() throws Exception {
+        final Handle handle = database.open();
+        final UserDAO dao = database.open(UserDAO.class);
+        insertTestData(dao);
+
+        assertThat(dao.getUserCount("aparrish@neosavvy.com"), is(equalTo(1)));
+    }
+
+    protected Long insertTestData(UserDAO dao) {
+        return dao.insert("Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
     }
 }
 

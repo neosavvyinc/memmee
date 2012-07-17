@@ -43,6 +43,8 @@ import com.sun.jersey.multipart.FormDataParam;
 
 @Path("/memmeerest")
 public class MemmeeResource {
+    public static final String BASE_URL = "memmeerest";
+
     private final UserDAO userDao;
     private final TransactionalMemmeeDAO memmeeDao;
     private final TransactionalAttachmentDAO attachmentDAO;

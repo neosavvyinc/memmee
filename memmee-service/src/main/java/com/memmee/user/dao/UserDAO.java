@@ -33,7 +33,7 @@ public interface UserDAO {
 
     @SqlQuery("select * from user where email = :email")
     @Mapper(UserMapper.class)
-    User userFirstLogin(
+    User getUserByEmail (
             @Bind("email") String email);
 
 
@@ -67,7 +67,7 @@ public interface UserDAO {
             @Bind("id") Long id
     );
 
-    @SqlUpdate("select count(*) from user where email = :email")
+    @SqlQuery("select count(*) from user where email = :email")
     int getUserCount(
             @Bind("email") String email
     );

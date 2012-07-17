@@ -1,16 +1,21 @@
 package com.memmee;
 
+import base.ResourceIntegrationTest;
+import com.memmee.builder.MemmeeURLBuilder;
+import com.memmee.error.UserResourceException;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
+import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.testing.ResourceTest;
 import org.junit.Test;
 
 import java.util.Date;
+import java.util.List;
 
-import static org.mockito.Matchers.anyLong;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.notNull;
+import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,40 +23,66 @@ import static org.mockito.Mockito.when;
  * Date: 7/6/12
  * Time: 11:22 PM
  */
-public class UserResourceTest extends ResourceTest {
+public class UserResourceTest extends ResourceIntegrationTest {
 
-    private static User user = new User();
-    {
-        user.setEmail("aparrish@neosavvy.com");
-        user.setPassword("test");
-        user.setApiDate(new Date());
-        user.setCreationDate(new Date());
-        user.setFirstName("Adam");
-        user.setLastName("Parrish");
-        user.setApiKey("testKey");
-        user.setId(1L);
-    }
-    private UserDAO userDAO = mock(UserDAO.class);
-    private MemmeeMailSender mailSender = mock(MemmeeMailSender.class);
+    private static UserDAO userDAO;
+    private static MemmeeMailSender memmeeMailSender;
 
     @Override
     protected void setUpResources() throws Exception {
-        when(userDAO.getUser(anyLong())).thenReturn(user);
-        addResource(new UserResource(userDAO, mailSender));
+        super.setUpResources();
+
+        //setup Daos
+        userDAO = database.open(UserDAO.class);
+        memmeeMailSender = new MemmeeMailSenderImpl();
+
+        //add resources
+        addResource(new UserResource(userDAO, memmeeMailSender));
     }
 
     @Test
-    public void testValidUser()
-    {
-        User testUser = new User();
-        testUser.setEmail("aparrish@neosavvy.com");
-        testUser.setPassword("12345678");
+    public void testLoginUserByApiKey() {
+        insertTestData();
+
+        User user = client().resource(new MemmeeURLBuilder().
+                setBaseURL(UserResource.BASE_URL).
+                setMethodURL("user/login").
+                setApiKeyParam("apiKey500").
+                build()).get(User.class);
+
+        assertThat(user, is(not(nullValue())));
+        assertThat(user.getFirstName(), is(equalTo("Adam")));
+        assertThat(user.getLastName(), is(equalTo("West")));
+    }
+
+    @Test
+    public void testAdd() {
+        User user = new User("Ed", "ONeil", "newemail@newemail.com", "myPas64400");
+        client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
+        List<User> users = userDAO.findAll();
+
+        assertThat(users.size(), is(equalTo(1)));
+        assertThat(users.get(0).getEmail(), is(equalTo("newemail@newemail.com")));
+    }
+
+    @Test
+    public void testAddNonUniqueEmail() {
+        insertTestData();
+
+        UserResourceException caseException = null;
+
+        User user = new User("Different Name", "Different Last Name", "trevorewen@gmail.com", "pw555666");
+
         try {
-            User returnobject = client().resource("/memmeeuserrest/user").post(User.class, testUser);
-        } catch ( Exception e )
-        {
-            e.toString();
+            client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
+        } catch (UserResourceException e) {
+            caseException = e;
         }
 
+        assertThat(caseException, is(not(nullValue())));
+    }
+
+    protected Long insertTestData() {
+        return userDAO.insert("Adam", "West", "trevorewen@gmail.com", "abc123", "apiKey500", new Date(), new Date());
     }
 }

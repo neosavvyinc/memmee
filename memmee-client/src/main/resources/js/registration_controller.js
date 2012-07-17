@@ -13,7 +13,7 @@ function RegistrationController($scope, $http, broadCastService) {
                 broadCastService.loginUser(data);
             }).
             error(function(data, status, headers, config) {
-                console.log('error while saving a new user');
+                broadCastService.errorSavingUserRegistrationController(data);
             });
     }
 

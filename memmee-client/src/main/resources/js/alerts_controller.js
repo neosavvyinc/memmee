@@ -25,6 +25,11 @@ function AlertsController($scope, $http, broadCastService, $location) {
         $scope.toggleAlert(Errors.get('PROFILE_UPDATE_HEADER'), Errors.get('PROFILE_UPDATE_MESSAGE'));
     });
 
+    /* RegistrationController */
+    $scope.$on(RegistrationControllerEvents.get('ERROR_SAVING'), function(event, message) {
+       $scope.toggleAlert(Errors.get('REGISTRATION_HEADER'), message);
+    });
+
     //Initialization
     $scope.header = null;
     $scope.message = null;

@@ -1,5 +1,6 @@
 package com.memmee.builder;
 
+import com.memmee.MemmeeResource;
 import com.memmee.util.ListUtil;
 import com.memmee.util.StringUtil;
 import org.skife.jdbi.v2.util.BooleanMapper;
@@ -15,7 +16,7 @@ import java.util.List;
  */
 public class MemmeeURLBuilder {
 
-    private String baseURL = "memmeerest";
+    private String baseURL = MemmeeResource.BASE_URL;
     private String methodURL;
     private List<String> appendURLS;
     private String apiKeyParam;

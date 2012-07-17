@@ -24,3 +24,16 @@ var ProfileControllerEvents = (function () {
         }
     }
 })();
+
+var RegistrationControllerEvents = (function () {
+    var controllerName = "RegistrationController";
+    var private = {
+        'ERROR_SAVING':'errorSaving' + controllerName
+    };
+
+    return {
+        get:function (name) {
+            return private[name];
+        }
+    }
+})();

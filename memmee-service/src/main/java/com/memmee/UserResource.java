@@ -1,9 +1,11 @@
 package com.memmee;
 
+import com.memmee.error.UserResourceException;
 import com.memmee.user.dao.UserDAO;
 import com.memmee.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
 import com.yammer.dropwizard.logging.Log;
+import org.apache.commons.validator.EmailValidator;
 import org.skife.jdbi.v2.exceptions.DBIException;
 
 import javax.ws.rs.*;
@@ -15,6 +17,8 @@ import javax.validation.Valid;
 
 @Path("/memmeeuserrest")
 public class UserResource {
+
+    public static final String BASE_URL = "memmeeuserrest";
 
     private UserDAO userDao;
     private static final Log LOG = Log.forClass(UserResource.class);
@@ -99,12 +103,16 @@ public class UserResource {
     @Path("/user")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public User add(@Valid User user) {
+    public User add(@Valid User user) throws UserResourceException {
         user.setApiKey(UUID.randomUUID().toString());
         memmeeMailSender.sendConfirmationEmail(user);
 
         try {
-            if (userDao.getUserCount(user.getEmail()) < 1) {
+            if (!EmailValidator.getInstance().isValid(user.getEmail()))
+                throw new UserResourceException(UserResourceException.INVALID_EMAIL);
+            else if (userDao.getUserCount(user.getEmail()) >= 1) {
+                throw new UserResourceException(UserResourceException.IN_USE_EMAIL);
+            } else {
                 Long userId = userDao.insert(user.getFirstName(),
                         user.getLastName(),
                         user.getEmail(),
@@ -115,6 +123,8 @@ public class UserResource {
                 );
                 user = userDao.getUser(userId);
             }
+
+
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
@@ -122,7 +132,6 @@ public class UserResource {
 
         return user;
     }
-
 
     @DELETE
     @Path("/user/{id}")

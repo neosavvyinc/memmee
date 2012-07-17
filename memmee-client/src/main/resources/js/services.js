@@ -82,5 +82,12 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(ProfileControllerEvents.get('UPDATE_FAILURE'));
     }
 
+    /**
+     * RegistrationController
+     */
+    broadCastService.errorSavingUserRegistrationController = function(message) {
+        $rootScope.$broadcast(RegistrationControllerEvents.get('ERROR_SAVING'), message)
+    }
+
     return broadCastService;
 });

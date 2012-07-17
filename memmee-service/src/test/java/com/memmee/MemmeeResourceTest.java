@@ -55,6 +55,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
 
         userId = userDAO.insert("memmee_resource_test", "user", "memmee_resource_test", "password", "apiKey", new Date(), new Date());
 
+        //add resources
         addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO));
     }
 
