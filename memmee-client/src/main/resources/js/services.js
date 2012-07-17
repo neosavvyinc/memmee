@@ -64,5 +64,23 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast('memmeeSelectedArchiveListController', memmee);
     };
 
+    /**
+     * LoginController
+     */
+    broadCastService.invalidLoginLoginController = function() {
+      $rootScope.$broadcast(LoginControllerEvents.get('INVALID_LOGIN'));
+    };
+
+    /**
+     * ProfileController
+     */
+    broadCastService.showProfileUpdatedSuccess = function () {
+        $rootScope.$broadcast(ProfileControllerEvents.get('UPDATE_SUCCESS'));
+    }
+
+    broadCastService.showProfileUpdatedError = function () {
+        $rootScope.$broadcast(ProfileControllerEvents.get('UPDATE_FAILURE'));
+    }
+
     return broadCastService;
 });
