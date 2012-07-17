@@ -39,6 +39,14 @@ function ViewModeController($scope, $http, broadCastService) {
     //Initializaton
     $scope.getDefaultMemmee();
 
+    $scope.showImage = function( )
+    {
+        if( $scope.memmee && $scope.memmee.attachment && $scope.memmee.attachment.filePath )
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];

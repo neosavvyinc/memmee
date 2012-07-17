@@ -85,6 +85,7 @@ public class ResourceIntegrationTest extends ResourceTest {
                             "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
                             "  `memmeeId` int(11) DEFAULT NULL,\n" +
                             "  `filePath` varchar(1024) DEFAULT NULL,\n" +
+                            "  `thumbFilePath` varchar(1024) DEFAULT NULL,\n" +
                             "  `type` varchar(20) DEFAULT NULL,\n" +
                             "  PRIMARY KEY (`id`)\n" +
                             ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3"

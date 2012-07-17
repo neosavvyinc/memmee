@@ -109,20 +109,16 @@ function AttachmentController($scope, broadCastService) {
     }, false)
     //============== DRAG & DROP =============
 
-    $scope.fileToUpload = {}
-    $scope.$watch('fileToUpload', function(){
-        //this seems to be a fake array, because for (i in files) will traverse on the "length" attribute as well,
-        //and it doesn't have a forEach method
-        // scope.files = document.getElementById('fileToUpload').files
-        //...so we need to copy the files to a new array
-        $scope.files = []
-        var files = document.getElementById('fileToUpload').files
-        console.log('files:', files)
-        for (var i = 0; i < files.length; i++) {
-            $scope.files.push(files[i])
-        }
-        $scope.progressVisible = false
-    })
+//    $scope.fileToUpload = {}
+//    $scope.$watch('fileToUpload', function(){
+//        $scope.files = []
+//        var files = document.getElementById('fileToUpload').files
+//        console.log('files:', files)
+//        for (var i = 0; i < files.length; i++) {
+//            $scope.files.push(files[i])
+//        }
+//        $scope.progressVisible = false
+//    })
 
     $scope.uploadFile = function() {
         var fd = new FormData()
@@ -134,7 +130,7 @@ function AttachmentController($scope, broadCastService) {
         xhr.addEventListener("load", uploadComplete, false)
         xhr.addEventListener("error", uploadFailed, false)
         xhr.addEventListener("abort", uploadCanceled, false)
-        xhr.open("POST", "/memmeerest/uploadattachment")
+        xhr.open("POST", "/memmeerest/uploadattachment/?apiKey=" + broadCastService.user.apiKey)
         $scope.progressVisible = true
         xhr.send(fd)
     }
@@ -150,9 +146,6 @@ function AttachmentController($scope, broadCastService) {
     }
 
     function uploadComplete(evt) {
-        /* This event is raised when the server send back a response */
-//        alert(evt.target.responseText)
-
         broadCastService.attachmentSuccess(JSON.parse(evt.target.responseText));
     }
 

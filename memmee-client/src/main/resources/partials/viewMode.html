@@ -17,8 +17,8 @@
         </div>
     </div>
     <div class="well span7 offset1" style="margin-top: 12px; margin-bottom: 50px;">
-        <div>
-            <img ng-src="/memmee/{{memmee.attachment.filePath}}"/>
+        <div ng-show="showImage()">
+            <img ng-src="{{memmee.attachment.filePath}}"/>
         </div>
         <div id="text-view">
             <label>{{memmee.text}}</label>

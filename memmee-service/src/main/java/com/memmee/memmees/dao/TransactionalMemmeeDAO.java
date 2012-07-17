@@ -24,7 +24,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     Memmee getMemmeeNoAttachment(@Bind("id") Long id);
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey," +
-            " a.id as attachmentId, a.filePath, a.type from memmee m " +
+            " a.id as attachmentId, a.filePath, a.thumbFilePath, a.type from memmee m " +
             "LEFT OUTER JOIN attachment a on m.id = a.memmeeId where m.id = :id"
     )
     @Mapper(MemmeeAttachmentMapper.class)
@@ -32,7 +32,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
 
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey" +
-            ", a.id as attachmentId, a.filePath, a.type from memmee m " +
+            ", a.id as attachmentId, a.filePath, a.thumbFilePath, a.type from memmee m " +
             " LEFT OUTER JOIN attachment a on m.attachmentId = a.id where m.userId = :userId" +
             " ORDER BY m.displayDate DESC"
     )

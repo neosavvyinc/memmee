@@ -17,17 +17,19 @@ public interface TransactionalAttachmentDAO extends Transactional<TransactionalA
     @Mapper(AttachmentMapper.class)
     Attachment getAttachment(@Bind("id") Long id);
 
-    @SqlUpdate("insert into attachment (filePath, type) values (:filePath, :type)")
+    @SqlUpdate("insert into attachment (filePath, thumbFilePath, type) values (:filePath, :thumbFilePath, :type)")
     @GetGeneratedKeys
     long insert(
             @Bind("filePath") String filePath
+            , @Bind("thumbFilePath") String thumbFilePath
             , @Bind("type") String type
     );
 
-    @SqlUpdate("update attachment set filePath = :filePath, type = :type where id = :id")
+    @SqlUpdate("update attachment set filePath = :filePath, thumbFilePath = :thumbFilePath, type = :type where id = :id")
     int update(
             @Bind("id") Long id
             , @Bind("filePath") String filePath
+            , @Bind("thumbFilePath") String thumbFilePath
             , @Bind("type") String type
     );
 

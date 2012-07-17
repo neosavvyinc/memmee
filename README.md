@@ -89,3 +89,19 @@ this by creating an annotated tag named after every sprint.
 
     git tag -a sprint-1 -m 'tagging for sprint 1 release'
     git push --tags
+
+ImageMagick installation for MacOSX
+-----------------------------------
+
+I needed ImageMagick for the resizing hooks when uploading images. I used the following commands to install it:
+
+    brew update
+    brew install ImageMagick
+    sudo chmod 777 /usr/local/include/
+    sudo chmod 777 /usr/local/lib/
+    brew link little-cms
+    brew link jasper
+    brew link jpeg
+    brew link libtiff
+
+
