@@ -2,7 +2,7 @@ package com.memmee.domain.attachment;
 
 import com.memmee.domain.attachment.dao.AttachmentDAO;
 import com.memmee.domain.attachment.dto.Attachment;
-import com.memmee.domain.memmees.AbstractMemmeeDAOTest;
+import base.AbstractMemmeeDAOTest;
 import com.yammer.dropwizard.db.Database;
 import org.skife.jdbi.v2.Handle;
 

@@ -1,6 +1,6 @@
 package com.memmee.domain.user;
 
-import com.memmee.domain.memmees.AbstractMemmeeDAOTest;
+import base.AbstractMemmeeDAOTest;
 import com.memmee.domain.user.dao.UserDAO;
 import com.memmee.domain.user.dto.User;
 import org.junit.After;

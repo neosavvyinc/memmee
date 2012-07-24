@@ -1,5 +1,6 @@
 package com.memmee.domain.memmees;
 
+import base.AbstractMemmeeDAOTest;
 import com.memmee.domain.memmees.dao.MemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 

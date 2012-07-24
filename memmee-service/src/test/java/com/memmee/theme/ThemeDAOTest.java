@@ -2,7 +2,7 @@ package com.memmee.theme;
 
 import com.memmee.theme.dao.ThemeDAO;
 import com.memmee.theme.dto.Theme;
-import com.memmee.domain.memmees.AbstractMemmeeDAOTest;
+import base.AbstractMemmeeDAOTest;
 import com.yammer.dropwizard.db.Database;
 import org.skife.jdbi.v2.Handle;
 
