@@ -1,10 +1,9 @@
-package com.memmee.memmees.dto;
+package com.memmee.domain.memmees.dto;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import com.memmee.attachment.dto.Attachment;
-import com.memmee.theme.dto.Theme;
+import com.memmee.domain.attachment.dto.Attachment;
 
 import javax.validation.constraints.NotNull;
 

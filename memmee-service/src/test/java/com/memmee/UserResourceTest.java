@@ -3,11 +3,10 @@ package com.memmee;
 import base.ResourceIntegrationTest;
 import com.memmee.builder.MemmeeURLBuilder;
 import com.memmee.error.UserResourceException;
-import com.memmee.user.dao.UserDAO;
-import com.memmee.user.dto.User;
+import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
 import com.memmee.util.MemmeeMailSenderImpl;
-import com.yammer.dropwizard.testing.ResourceTest;
 import org.junit.Test;
 
 import java.util.Date;

@@ -1,18 +1,14 @@
 package com.memmee;
 
 import com.memmee.auth.MemmeeAuthenticator;
-import com.memmee.user.dto.User;
+import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
 import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
-import org.skife.jdbi.v2.Handle;
 
-import com.memmee.attachment.dao.TransactionalAttachmentDAO;
-import com.memmee.memmees.dao.MemmeeDAO;
-import com.memmee.memmees.dao.TransactionalMemmeeDAO;
-import com.memmee.theme.dao.ThemeDAO;
-import com.memmee.user.dao.TransactionalUserDAO;
-import com.memmee.user.dao.UserDAO;
+import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
+import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
+import com.memmee.domain.user.dao.UserDAO;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.Database;

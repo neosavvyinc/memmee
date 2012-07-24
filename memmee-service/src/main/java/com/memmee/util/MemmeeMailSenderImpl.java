@@ -8,7 +8,7 @@ import com.cribbstechnologies.clients.mandrill.model.response.message.SendMessag
 import com.cribbstechnologies.clients.mandrill.request.MandrillMessagesRequest;
 import com.cribbstechnologies.clients.mandrill.request.MandrillRESTRequest;
 import com.cribbstechnologies.clients.mandrill.util.MandrillConfiguration;
-import com.memmee.user.dto.User;
+import com.memmee.domain.user.dto.User;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.codehaus.jackson.map.ObjectMapper;

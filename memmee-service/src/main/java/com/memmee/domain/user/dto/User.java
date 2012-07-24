@@ -1,6 +1,5 @@
-package com.memmee.user.dto;
+package com.memmee.domain.user.dto;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;

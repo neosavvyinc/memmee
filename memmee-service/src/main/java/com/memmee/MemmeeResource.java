@@ -4,12 +4,12 @@ package com.memmee;
 import java.util.Date;
 import java.util.List;
 
-import com.memmee.attachment.dao.TransactionalAttachmentDAO;
-import com.memmee.attachment.dto.Attachment;
-import com.memmee.memmees.dao.TransactionalMemmeeDAO;
-import com.memmee.memmees.dto.Memmee;
-import com.memmee.user.dao.UserDAO;
-import com.memmee.user.dto.User;
+import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
+import com.memmee.domain.attachment.dto.Attachment;
+import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
+import com.memmee.domain.memmees.dto.Memmee;
+import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dto.User;
 import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
 import com.yammer.dropwizard.logging.Log;
@@ -22,10 +22,8 @@ import javax.ws.rs.core.Response.Status;
 import org.im4java.core.ConvertCmd;
 import org.im4java.core.IM4JavaException;
 import org.im4java.core.IMOperation;
-import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.Transaction;
 import org.skife.jdbi.v2.exceptions.DBIException;
-import org.skife.jdbi.v2.exceptions.TransactionException;
 import org.skife.jdbi.v2.TransactionStatus;
 
 import java.io.File;
@@ -37,8 +35,6 @@ import java.util.UUID;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;

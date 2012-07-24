@@ -1,13 +1,12 @@
 package com.memmee;
 
 import base.ResourceIntegrationTest;
-import com.memmee.attachment.dao.TransactionalAttachmentDAO;
+import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.builder.MemmeeURLBuilder;
-import com.memmee.memmees.dao.TransactionalMemmeeDAO;
-import com.memmee.memmees.dto.Memmee;
-import com.memmee.user.dao.UserDAO;
+import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
+import com.memmee.domain.memmees.dto.Memmee;
+import com.memmee.domain.user.dao.UserDAO;
 import com.memmee.util.DateUtil;
-import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
 import org.junit.*;
 
 import java.util.Date;

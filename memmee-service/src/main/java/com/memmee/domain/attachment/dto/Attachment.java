@@ -1,4 +1,4 @@
-package com.memmee.attachment.dto;
+package com.memmee.domain.attachment.dto;
 
 import java.io.Serializable;
 

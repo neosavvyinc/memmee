@@ -1,4 +1,4 @@
-package com.memmee.attachment.dto;
+package com.memmee.domain.attachment.dto;
 
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;

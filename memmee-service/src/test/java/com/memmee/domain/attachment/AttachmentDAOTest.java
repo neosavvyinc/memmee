@@ -1,14 +1,12 @@
-package com.memmee.attachment;
+package com.memmee.domain.attachment;
 
-import com.memmee.attachment.dao.AttachmentDAO;
-import com.memmee.attachment.dto.Attachment;
-import com.memmee.memmees.AbstractMemmeeDAOTest;
-import com.memmee.memmees.dao.MemmeeDAO;
+import com.memmee.domain.attachment.dao.AttachmentDAO;
+import com.memmee.domain.attachment.dto.Attachment;
+import com.memmee.domain.memmees.AbstractMemmeeDAOTest;
 import com.yammer.dropwizard.db.Database;
 import org.skife.jdbi.v2.Handle;
 
 import java.sql.SQLException;
-import java.util.Date;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,9 +1,7 @@
-package com.memmee.memmees.dto;
+package com.memmee.domain.memmees.dto;
 
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
-
-import com.memmee.attachment.dto.Attachment;
 
 
 import java.sql.ResultSet;

@@ -1,11 +1,7 @@
-package com.memmee.memmees;
+package com.memmee.domain.memmees;
 
-import com.memmee.attachment.dao.AttachmentDAO;
-import com.memmee.memmees.AbstractMemmeeDAOTest;
-import com.memmee.memmees.dao.MemmeeDAO;
-import com.memmee.memmees.dto.Memmee;
-import com.memmee.theme.dao.ThemeDAO;
-import com.memmee.user.dao.UserDAO;
+import com.memmee.domain.memmees.dao.MemmeeDAO;
+import com.memmee.domain.memmees.dto.Memmee;
 
 import org.junit.After;
 import org.junit.Before;

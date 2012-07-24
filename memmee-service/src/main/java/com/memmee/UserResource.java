@@ -1,8 +1,8 @@
 package com.memmee;
 
 import com.memmee.error.UserResourceException;
-import com.memmee.user.dao.UserDAO;
-import com.memmee.user.dto.User;
+import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
 import com.yammer.dropwizard.logging.Log;
 import org.apache.commons.validator.EmailValidator;

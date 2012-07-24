@@ -1,8 +1,8 @@
-package com.memmee.user;
+package com.memmee.domain.user;
 
-import com.memmee.memmees.AbstractMemmeeDAOTest;
-import com.memmee.user.dao.UserDAO;
-import com.memmee.user.dto.User;
+import com.memmee.domain.memmees.AbstractMemmeeDAOTest;
+import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dto.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

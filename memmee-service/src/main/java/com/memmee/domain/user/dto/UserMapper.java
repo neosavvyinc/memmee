@@ -1,4 +1,4 @@
-package com.memmee.user.dto;
+package com.memmee.domain.user.dto;
 
 
 import org.skife.jdbi.v2.StatementContext;

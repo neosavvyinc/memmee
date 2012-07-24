@@ -1,6 +1,6 @@
 package com.memmee.util;
 
-import com.memmee.user.dto.User;
+import com.memmee.domain.user.dto.User;
 import org.junit.Test;
 
 /**

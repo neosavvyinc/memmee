@@ -1,4 +1,4 @@
-package com.memmee.memmees;
+package com.memmee.domain.memmees;
 
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.config.LoggingFactory;
