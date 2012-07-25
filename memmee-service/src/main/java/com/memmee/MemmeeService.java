@@ -43,5 +43,6 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
                 "MEMMEE AUTHENTICATION"));
         environment.addResource(new UserResource(userDao, new MemmeeMailSenderImpl()));
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao));
+        environment.addResource(new InspirationResource(userDao, inspirationDao));
     }
 }

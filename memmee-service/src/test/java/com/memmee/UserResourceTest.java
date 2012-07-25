@@ -12,16 +12,9 @@ import org.junit.Test;
 import java.util.Date;
 import java.util.List;
 
-import static org.mockito.Matchers.notNull;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: waparrish
- * Date: 7/6/12
- * Time: 11:22 PM
- */
 public class UserResourceTest extends ResourceIntegrationTest {
 
     private static UserDAO userDAO;
