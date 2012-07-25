@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.domain.attachment.dto.Attachment;
+import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.user.dao.UserDAO;
@@ -47,13 +48,15 @@ public class MemmeeResource {
     private final UserDAO userDao;
     private final TransactionalMemmeeDAO memmeeDao;
     private final TransactionalAttachmentDAO attachmentDAO;
+    private final TransactionalInspirationDAO inspirationDAO;
     private static final Log LOG = Log.forClass(MemmeeResource.class);
 
-    public MemmeeResource(UserDAO userDao, TransactionalMemmeeDAO memmeeDao, TransactionalAttachmentDAO attachmentDao) {
+    public MemmeeResource(UserDAO userDao, TransactionalMemmeeDAO memmeeDao, TransactionalAttachmentDAO attachmentDao, TransactionalInspirationDAO inspirationDao) {
         super();
         this.userDao = userDao;
         this.memmeeDao = memmeeDao;
         this.attachmentDAO = attachmentDao;
+        this.inspirationDAO = inspirationDao;
     }
 
 
@@ -90,7 +93,7 @@ public class MemmeeResource {
         if (id == null) {
             List<Memmee> list = memmeeDao.getMemmeesbyUser(user.getId());
 
-            if(!ListUtil.nullOrEmpty(list))
+            if (!ListUtil.nullOrEmpty(list))
                 return list.get(0);
             return new Memmee(user.getId(), Memmee.NO_MEMMEES_TEXT);
         }
@@ -120,7 +123,7 @@ public class MemmeeResource {
                 memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                     public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
                         Long memmeeId = memmeeDao.insert(user.getId(), memmee.getText(),
-                                new Date(), memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null);
+                                new Date(), memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null, null);
                         Long attachmentId;
 
                         //@TODO, will fix this issue
@@ -144,6 +147,7 @@ public class MemmeeResource {
                         , new Date()
                         , new Date()
                         , memmee.getShareKey()
+                        , null
                         , null
                         , null).intValue();
             }
@@ -347,17 +351,14 @@ public class MemmeeResource {
         return attachment;
     }
 
-    private void ensureParentDirectory(String parentDirectory)
-    {
+    private void ensureParentDirectory(String parentDirectory) {
         File parentDir;
         if (parentDirectory != null) {
             parentDir = new File(parentDirectory);
             if (!parentDir.exists()) {
                 parentDir.mkdirs();
             }
-        }
-        else
-        {
+        } else {
             throw new WebApplicationException(Status.PRECONDITION_FAILED);
         }
 
@@ -387,7 +388,7 @@ public class MemmeeResource {
     }
 
     private String writeThumbnailImage(String fileName) {
-        String imPath="/opt/local/bin:/usr/bin:/usr/local/bin";
+        String imPath = "/opt/local/bin:/usr/bin:/usr/local/bin";
         ConvertCmd
                 cmd = new ConvertCmd();
         cmd.setSearchPath(imPath);
@@ -396,22 +397,17 @@ public class MemmeeResource {
         IMOperation op = new IMOperation();
         String sourceImage = fileName;
         String destinationImage;
-        if( sourceImage.toLowerCase().indexOf(".jpg") > -1 )
-        {
+        if (sourceImage.toLowerCase().indexOf(".jpg") > -1) {
             destinationImage = sourceImage.replaceFirst(".jpg", "-thumb.jpg");
-        }
-        else if( sourceImage.toLowerCase().indexOf(".png") > -1 )
-        {
+        } else if (sourceImage.toLowerCase().indexOf(".png") > -1) {
             destinationImage = sourceImage.replaceFirst(".png", "-thumb.png");
-        }
-        else
-        {
+        } else {
             throw new WebApplicationException(Status.UNSUPPORTED_MEDIA_TYPE);
         }
 
 
         op.addImage(sourceImage);
-        op.resize(200,300);
+        op.resize(200, 300);
         op.addImage(destinationImage);
 
         try {

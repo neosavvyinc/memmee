@@ -1,53 +1,24 @@
 package base;
 
-import com.memmee.MemmeeResource;
-import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
-import com.yammer.dropwizard.config.Environment;
-import com.yammer.dropwizard.config.LoggingFactory;
-import com.yammer.dropwizard.db.Database;
-import com.yammer.dropwizard.db.DatabaseConfiguration;
-import com.yammer.dropwizard.db.DatabaseFactory;
-import com.yammer.dropwizard.testing.ResourceTest;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.skife.jdbi.v2.Handle;
-
-import static org.mockito.Mockito.mock;
 
 /**
  * Created with IntelliJ IDEA.
  * User: trevorewen
- * Date: 7/9/12
- * Time: 10:18 PM
+ * Date: 7/24/12
+ * Time: 9:50 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ResourceIntegrationTest extends ResourceTest {
+public class BaseMemmeeDAOTest extends AbstractMemmeeDAOTest {
 
-    protected final DatabaseConfiguration mysqlConfig = new DatabaseConfiguration();
-
-    {
-        LoggingFactory.bootstrap();
-        mysqlConfig.setUrl("jdbc:mysql://localhost:3306/memmeetest");
-        mysqlConfig.setUser("memmeetest");      //PLEASE CREATE THIS USER - DO NOT SWITCH BACK TO commons
-        mysqlConfig.setPassword("memmeetest");
-        mysqlConfig.setDriverClass("com.mysql.jdbc.Driver");
-    }
-
-    protected final Environment environment = mock(Environment.class);
-    protected final DatabaseFactory factory = new DatabaseFactory(environment);
-    protected static Database database;
-    protected static Handle handle;
-    protected static DBIExceptionsBundle dbiExceptionsBundle = new DBIExceptionsBundle();
-
-
-    @Override
-    protected void setUpResources() throws Exception {
-        dbiExceptionsBundle.initialize(environment);
-        database = factory.build(mysqlConfig, "mysql");
-        handle = database.open();
-
+    @Before
+    public void setUp() throws Exception {
+        this.database = factory.build(mysqlConfig, "mysql");
+        final Handle handle = database.open();
         try {
+
             handle.createCall("DROP TABLE IF EXISTS user").invoke();
             handle.createCall("DROP TABLE IF EXISTS memmee").invoke();
             handle.createCall("DROP TABLE IF EXISTS attachment").invoke();
@@ -113,15 +84,15 @@ public class ResourceIntegrationTest extends ResourceTest {
 
         } catch (Exception e) {
             System.err.println(e);
+
+        } finally {
+            handle.close();
         }
     }
 
-    @AfterClass
-    public static void tearDownClass() throws Exception {
-        handle.close();
-        handle = null;
+    @After
+    public void tearDown() throws Exception {
         database.stop();
-        database = null;
+        this.database = null;
     }
-
 }

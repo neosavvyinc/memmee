@@ -3,6 +3,7 @@ package com.memmee;
 import base.ResourceIntegrationTest;
 import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.builder.MemmeeURLBuilder;
+import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.user.dao.UserDAO;
@@ -32,10 +33,12 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     private static UserDAO userDAO;
     private static TransactionalMemmeeDAO txMemmeeDAO;
     private static TransactionalAttachmentDAO txAttachmentDAO;
+    private static TransactionalInspirationDAO txInspirationDAO;
 
     private static Long userId;
     private static Long memmeeId;
     private static Long attachmentId;
+    private static Long inspirationId;
 
     @Override
     protected void setUpResources() throws Exception {
@@ -45,11 +48,12 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         userDAO = database.open(UserDAO.class);
         txMemmeeDAO = database.open(TransactionalMemmeeDAO.class);
         txAttachmentDAO = database.open(TransactionalAttachmentDAO.class);
+        txInspirationDAO = database.open(TransactionalInspirationDAO.class);
 
         userId = userDAO.insert("memmee_resource_test", "user", "memmee_resource_test", "password", "apiKey", new Date(), new Date());
 
         //add resources
-        addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO));
+        addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO));
     }
 
     @Test
@@ -90,7 +94,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     @Test
     public void testGetMemmeeDefault() {
         memmeeId = insertTestData();
-        txMemmeeDAO.insert(userId, "This is a later memmee", new Date(), new Date(), new Date(), "shareKey", attachmentId, Long.parseLong("1"));
+        txMemmeeDAO.insert(userId, "This is a later memmee", new Date(), new Date(), new Date(), "shareKey", attachmentId, Long.parseLong("1"), inspirationId);
 
         Memmee memmee = client().resource(new MemmeeURLBuilder().
                 setMethodURL("getmemmee").
@@ -127,8 +131,9 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
 
     protected Long insertTestData() {
         attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "this_is_a_thumb_file_path.path", "image/jpeg");
+        inspirationId = txInspirationDAO.insert("this is the inspiration text", new Date(), new Date());
         Date date = DateUtil.getDate(2011, 6, 12);
-        return txMemmeeDAO.insert(userId, "This is a memmee", date, date, date, "shareKey", attachmentId, Long.parseLong("1"));
+        return txMemmeeDAO.insert(userId, "This is a memmee", date, date, date, "shareKey", attachmentId, Long.parseLong("1"), inspirationId);
     }
 
     @AfterClass

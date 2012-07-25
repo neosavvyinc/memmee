@@ -14,17 +14,19 @@ CREATE TABLE inspiration (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE memmee
-(id int(11) NOT NULL AUTO_INCREMENT,
- userId int(11) NOT NULL,
- attachmentId int(11) DEFAULT NULL,
- lastUpdateDate datetime NOT NULL,
- creationDate datetime NOT NULL,
- displayDate datetime NOT NULL,
- text varchar(4096) DEFAULT NULL,
- shareKey varchar(1024) DEFAULT NULL,
- themeId int(11) DEFAULT NULL,
- PRIMARY KEY (id));
+CREATE TABLE memmee (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  userId int(11) NOT NULL,
+  attachmentId int(11) DEFAULT NULL,
+  inspirationId int(11) DEFAULT NULL,
+  lastUpdateDate datetime NOT NULL,
+  creationDate datetime NOT NULL,
+  displayDate datetime NOT NULL,
+  text varchar(4096) DEFAULT NULL,
+  shareKey varchar(1024) DEFAULT NULL,
+  themeId int(11) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
 
 CREATE TABLE user
 (id int(11) NOT NULL AUTO_INCREMENT,

@@ -3,6 +3,7 @@ package com.memmee.domain.memmees.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.memmee.domain.memmees.dto.MemmeeAttachmentInspirationMapper;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
@@ -21,26 +22,34 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
 
     @SqlQuery("select * from memmee where id = :id")
     @Mapper(MemmeeMapper.class)
-    Memmee getMemmeeNoAttachment(@Bind("id") Long id);
+    Memmee getMemmeeMin(@Bind("id") Long id);
 
-    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey," +
-            " a.id as attachmentId, a.filePath, a.thumbFilePath, a.type from memmee m " +
-            "LEFT OUTER JOIN attachment a on m.id = a.memmeeId where m.id = :id"
+    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
+            "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
+            "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate, " +
+            "i.lastUpdateDate as inspirationLastUpdateDate from memmee m " +
+            "LEFT OUTER JOIN attachment a on m.attachmentId = attachmentId " +
+            "LEFT OUTER JOIN inspiration i on m.inspirationId = inspirationId " +
+            "where m.id = :id"
     )
-    @Mapper(MemmeeAttachmentMapper.class)
+    @Mapper(MemmeeAttachmentInspirationMapper.class)
     Memmee getMemmee(@Bind("id") Long id);
 
 
-    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey" +
-            ", a.id as attachmentId, a.filePath, a.thumbFilePath, a.type from memmee m " +
-            " LEFT OUTER JOIN attachment a on m.attachmentId = a.id where m.userId = :userId" +
-            " ORDER BY m.displayDate DESC"
+    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
+            "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
+            "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate, " +
+            "i.lastUpdateDate as inspirationLastUpdateDate from memmee m " +
+            "LEFT OUTER JOIN attachment a on m.attachmentId = attachmentId " +
+            "LEFT OUTER JOIN inspiration i on m.inspirationId = inspirationId " +
+            "where m.userId = :userId " +
+            "ORDER BY m.displayDate DESC"
     )
-    @Mapper(MemmeeAttachmentMapper.class)
+    @Mapper(MemmeeAttachmentInspirationMapper.class)
     List<Memmee> getMemmeesbyUser(@Bind("userId") Long userId);
 
-    @SqlUpdate("insert into memmee (userId, text, lastUpdateDate, creationDate, displayDate, shareKey, attachmentId, themeId)" +
-            " values (:userId, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey, :attachmentId, :themeId)")
+    @SqlUpdate("insert into memmee (userId, text, lastUpdateDate, creationDate, displayDate, shareKey, attachmentId, themeId, inspirationId)" +
+            " values (:userId, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey, :attachmentId, :themeId, :inspirationId)")
     @GetGeneratedKeys
     Long insert(
             @Bind("userId") Long userId
@@ -51,6 +60,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
             , @Bind("shareKey") String shareKey
             , @Bind("attachmentId") Long attachmentId
             , @Bind("themeId") Long themeId
+            , @Bind("inspirationId") Long inspirationId
     );
 
     @SqlUpdate("update memmee set text = :text, lastUpdateDate = :lastUpdateDate, displayDate = :displayDate, shareKey = :shareKey, " +

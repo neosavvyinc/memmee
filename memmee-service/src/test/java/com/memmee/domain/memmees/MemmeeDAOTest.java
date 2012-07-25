@@ -1,7 +1,9 @@
 package com.memmee.domain.memmees;
 
 import base.AbstractMemmeeDAOTest;
+import base.BaseMemmeeDAOTest;
 import com.memmee.domain.memmees.dao.MemmeeDAO;
+import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 
 import org.junit.After;
@@ -11,49 +13,85 @@ import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.util.StringMapper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
-public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
+public class MemmeeDAOTest extends BaseMemmeeDAOTest {
 
-
-    @Before
-    public void setUp() throws Exception {
-        this.database = factory.build(mysqlConfig, "mysql");
+    @Test
+    public void testGetMemmeeMin() throws Exception {
         final Handle handle = database.open();
+        final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
+
+        List<Long> ids = insertMemmees(dao, 1);
+
         try {
 
-            handle.createCall("DROP TABLE IF EXISTS memmee").invoke();
-            
-            
-            handle.createCall("CREATE TABLE `memmee` (\n" +
-            		  " `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-            		  " `userId` int(11) NOT NULL,\n" + 
-            		  " `attachmentId` int(11) DEFAULT NULL,\n" +
-            		  " `lastUpdateDate` date NOT NULL,\n" + 
-            		  " `creationDate` date NOT NULL,\n" +
-            		  " `displayDate` date NOT NULL,\n" +
-            		  " `text` varchar(4096) DEFAULT NULL,\n" +
-            		  " `shareKey` varchar(1024) DEFAULT NULL,\n" +
-            		  " `themeId` int(11) DEFAULT NULL,\n" +
-            		  " PRIMARY KEY (`id`)\n" +
-            		  " ) ENGINE=InnoDB DEFAULT CHARSET=latin1").invoke();
+            for (Long id : ids) {
+                Memmee memmee = dao.getMemmeeMin(id);
 
-        } catch (Exception e) {
-            System.err.println(e);
+                assertThat(memmee, is(not(nullValue())));
+                assertThat(memmee.getId(), is(equalTo(id)));
+            }
 
         } finally {
+            dao.close();
             handle.close();
         }
     }
 
-    @After
-    public void tearDown() throws Exception {
-        database.stop();
-        this.database = null;
+    @Test
+    public void testGetMemmee() throws Exception {
+        final Handle handle = database.open();
+        final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
+
+        List<Long> ids = insertMemmees(dao, 1);
+
+        try {
+
+            for (Long id : ids) {
+                Memmee memmee = dao.getMemmee(id);
+
+                assertThat(memmee, is(not(nullValue())));
+                assertThat(memmee.getId(), is(equalTo(id)));
+                assertThat(memmee.getAttachment(), is(not(nullValue())));
+                assertThat(memmee.getInspiration(), is(not(nullValue())));
+            }
+
+        } finally {
+            dao.close();
+            handle.close();
+        }
+    }
+
+    @Test
+    public void testGetMemmeesByUser() throws Exception {
+        final Handle handle = database.open();
+        final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
+
+        insertMemmees(dao, 7);
+
+        try {
+
+            List<Memmee> memmees = dao.getMemmeesbyUser((long) 7);
+
+            assertThat(memmees, is(not(nullValue())));
+            assertThat(memmees.size(), is(equalTo(3)));
+
+            for (Memmee memmee : memmees) {
+                assertThat(memmee.getAttachment(), is(not(nullValue())));
+                assertThat(memmee.getInspiration(), is(not(nullValue())));
+            }
+
+        } finally {
+            dao.close();
+            handle.close();
+        }
     }
 
     @Test
@@ -76,41 +114,12 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
     }
 
     @Test
-    public void testRead() throws Exception {
-        final Handle handle = database.open();
-        final MemmeeDAO dao = database.open(MemmeeDAO.class);
-        
-        try{
-        	
-        	
-        	Long id = dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
-        	
-            final Memmee memmee = dao.getMemmeeNoAttachment(id);
-            assertThat(memmee.getId(), equalTo(id));
-
-        } finally {
-            dao.close();
-            handle.close();
-        }
-
-    }
-
-    public void testGetMemmeesByUser() throws Exception {
-        final Handle handle = database.open();
-        final MemmeeDAO dao = database.open(MemmeeDAO.class);
-
-        Long id = dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
-
-    }
-
-
-    @Test
     public void testUpdate() throws Exception {
         final MemmeeDAO dao = database.open(MemmeeDAO.class);
 
         try {
 
-        	dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+            dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
             final int result = dao.update(new Long(1), "text2", new Date(), new Date(), "shareKey2", new Long(2), new Long(2));
 
             assertThat(result, equalTo(1));
@@ -140,6 +149,20 @@ public class MemmeeDAOTest extends AbstractMemmeeDAOTest {
 
     }
 
+    protected List<Long> insertMemmees(TransactionalMemmeeDAO dao, int userId) {
+        List<Long> returnIds = new ArrayList<Long>();
+
+        for (Integer i = 0; i < 3; i++)
+            returnIds.add(dao.insert((long) userId,
+                    String.format("Text %s", i),
+                    new Date(),
+                    new Date(),
+                    new Date(),
+                    String.format("Share Key %s", i),
+                    (long) i, (long) i, (long) i));
+
+        return returnIds;
+    }
 
     @Test
     public void pingWorks() throws Exception {
