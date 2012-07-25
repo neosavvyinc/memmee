@@ -6,6 +6,14 @@ CREATE TABLE attachment
  type varchar(20) DEFAULT NULL,
  PRIMARY KEY (id));
 
+CREATE TABLE inspiration (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  text varchar(1000) NOT NULL,
+  creationDate datetime NOT NULL,
+  lastUpdateDate datetime NOT NULL,
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE memmee
 (id int(11) NOT NULL AUTO_INCREMENT,
  userId int(11) NOT NULL,

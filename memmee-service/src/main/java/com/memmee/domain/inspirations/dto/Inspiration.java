@@ -4,13 +4,6 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: trevorewen
- * Date: 7/24/12
- * Time: 6:42 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Inspiration implements Serializable {
 
     private Long id;

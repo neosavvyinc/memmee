@@ -16,12 +16,6 @@ import static org.mockito.Matchers.notNull;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
-/**
- * Created with IntelliJ IDEA.
- * User: waparrish
- * Date: 7/6/12
- * Time: 9:12 PM
- */
 public class MemmeeResourceTest extends ResourceIntegrationTest {
 
     private static Memmee memmee = new Memmee();

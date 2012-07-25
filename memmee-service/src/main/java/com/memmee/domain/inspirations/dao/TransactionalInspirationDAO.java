@@ -1,15 +1,36 @@
 package com.memmee.domain.inspirations.dao;
 
+import com.memmee.domain.inspirations.dto.Inspiration;
+import com.memmee.domain.inspirations.dto.InspirationMapper;
+import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
+import org.skife.jdbi.v2.sqlobject.SqlQuery;
+import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
 import org.skife.jdbi.v2.sqlobject.mixins.CloseMe;
 import org.skife.jdbi.v2.sqlobject.mixins.GetHandle;
 import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
-/**
- * Created with IntelliJ IDEA.
- * User: trevorewen
- * Date: 7/24/12
- * Time: 6:45 PM
- * To change this template use File | Settings | File Templates.
- */
-public class TransactionalInspirationDAO extends Transactional<TransactionalInspirationDAO>, GetHandle, CloseMe {
+import java.util.Date;
+
+public interface TransactionalInspirationDAO extends Transactional<TransactionalInspirationDAO>, GetHandle, CloseMe {
+
+    @SqlQuery("select * from inspiration where id = :id")
+    @Mapper(InspirationMapper.class)
+    Inspiration getInspiration(@Bind("id") Long id);
+
+    @SqlQuery("select * from inspiration order by rand() limit 1")
+    @Mapper(InspirationMapper.class)
+    Inspiration getRandomInspiration();
+
+    @SqlUpdate("insert into inspiration (text, creationDate, lastUpdateDate) " +
+        "values (:text, :creationDate, :lastUpdateDate)")
+    @GetGeneratedKeys
+    Long insert(
+            @Bind("text") String text,
+            @Bind("creationDate") Date creationDate,
+            @Bind("lastUpdateDate") Date lastUpdateDate
+    );
+
+    void close();
 }
