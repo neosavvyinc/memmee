@@ -57,6 +57,11 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
                 console.log(data);
             });
     }
+
+    $scope.setTheme = function( number )
+    {
+        broadCastService.setTheme( number );
+    }
 }
 
 CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location'];
