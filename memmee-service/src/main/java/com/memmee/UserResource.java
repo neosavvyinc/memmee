@@ -135,8 +135,7 @@ public class UserResource {
 
     @POST
     @Path("/user/forgotpassword")
-    @Consumes({MediaType.APPLICATION_JSON})
-    public void forgotPassword(String email) {
+    public void forgotPassword(@QueryParam("email") String email) {
         User user = userDao.getUserByEmail(email);
 
         if (user == null)

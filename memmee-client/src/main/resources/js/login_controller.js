@@ -22,11 +22,12 @@ function LoginController($scope, $http, broadCastService) {
     $scope.forgotPassword = function () {
         if ($scope.user['email'] != "") {
             $scope.forgotPasswordReminder = "";
-            $http({method:'POST', url:'/memmeeuserrest/user/forgotpassword', data:$scope.user['email']}).
+            $http({method:'POST', url:'/memmeeuserrest/user/forgotpassword?email=' + $scope.user['email']}).
                 success(function (data, status, headers, config) {
                     $scope.forgotPasswordReminder = "A new password was sent to your email";
                     $scope.forgotPasswordSuccessStyle = {'color': '#0000FF'};
-                }).error(function (data, status, headers, config) {
+                }).
+                error(function (data, status, headers, config) {
                     $scope.forgotPasswordReminder = "There was an error sending the new password to your email.";
                 });
         } else {
