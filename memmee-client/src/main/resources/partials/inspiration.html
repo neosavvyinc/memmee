@@ -1,3 +1,10 @@
 <div ng-controller="InspirationController">
+    <!-- Hidden Inspiration State -->
+    <a class="btn btn-large" ng-click="toggleViewState()" ng-show="hiddenInspiration()">Get Inspiration</a>
 
+    <!-- View Inspiration State -->
+    <div class="well row span9 offset0" ng-show="viewInspiration()">
+        <button class="close" style="margin-top: -8px;" ng-click="toggleViewState()">&times;</button>
+        <p>{{inspiration.text}}</p>
+    </div>
 </div>

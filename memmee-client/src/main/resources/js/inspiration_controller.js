@@ -1,6 +1,6 @@
 function InspirationController($scope, $http, broadCastService) {
     //Constants
-    $scope.ViewStates = (function () {
+    var ViewStates = (function () {
         var private = {
             'VIEW_INSPIRATION_STATE':'viewInspirationState',
             'HIDDEN_INSPIRATION_STATE':'hiddenInspirationState'
@@ -18,6 +18,15 @@ function InspirationController($scope, $http, broadCastService) {
     $scope.user = broadCastService.user;
     $scope.inspiration = null;
 
+    //State Handers
+    $scope.hiddenInspiration = function() {
+        return $scope.viewState == ViewStates.get('HIDDEN_INSPIRATION_STATE');
+    };
+
+    $scope.viewInspiration = function() {
+        return $scope.viewState == ViewStates.get('VIEW_INSPIRATION_STATE');
+    };
+
     //Action Handlers
     $scope.getRandomInspiration = function () {
        $http({method: 'GET', url: '/memmeeinspirationrest/getrandominspiration?apiKey=' + $scope.user.apiKey}).
@@ -27,7 +36,19 @@ function InspirationController($scope, $http, broadCastService) {
            }).error(function (data, status, headers, config) {
                console.log('error loading your doggone inspiration');
            });
-    }
+    };
+
+    $scope.toggleViewState = function() {
+        if ($scope.viewInspiration()) {
+            $scope.viewState = ViewStates.get('HIDDEN_INSPIRATION_STATE');
+            $scope.getRandomInspiration();
+        } else {
+            $scope.viewState = ViewStates.get('VIEW_INSPIRATION_STATE');
+        }
+    };
+
+    //Initialization
+    $scope.getRandomInspiration();
 }
 
 InspirationController.$inject = ['$scope', '$http', 'memmeeBroadCastService']
