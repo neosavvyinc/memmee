@@ -1,6 +1,6 @@
 function LoggedInController($scope, $http, broadCastService) {
 
-    $scope.bodyContentPartial = "partials/viewMode.html";
+    $scope.bodyContentPartial = "partials/createMode.html";
 
     $scope.$on('createModeStarted', function() {
 
