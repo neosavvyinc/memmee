@@ -29,6 +29,9 @@ own but they require the following settings:
     ProxyPass /memmeerest http://127.0.0.1:8080/memmeerest
     ProxyPassReverse /memmeerest http://127.0.0.1:8080/memmeerest
 
+    ProxyPass /memmeeinspirationrest http://127.0.0.1:8080/memmeeinspirationrest
+    ProxyPassReverse /memmeeinspirationrest http://127.0.0.1:8080/memmeeinspirationrest
+
     Alias /memmee /memmee/
 
 I also set my server up to be called local.memmee.com and hopefully I
