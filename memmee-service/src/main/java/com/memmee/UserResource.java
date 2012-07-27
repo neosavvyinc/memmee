@@ -133,6 +133,19 @@ public class UserResource {
         return user;
     }
 
+    @POST
+    @Path("/user/forgotpassword")
+    @Produces({MediaType.APPLICATION_JSON})
+    public void forgotPassword(@QueryParam("email") String email) throws UserResourceException {
+        User user = userDao.getUserByEmail(email);
+
+        if (user == null)
+            throw new UserResourceException("There is no user that exists with that email");
+
+        memmeeMailSender.sendForgotPasswordEmail(user);
+    }
+
+
     @DELETE
     @Path("/user/{id}")
     @Consumes({MediaType.APPLICATION_JSON})

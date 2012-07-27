@@ -10,4 +10,6 @@ import com.memmee.domain.user.dto.User;
  */
 public interface MemmeeMailSender {
     public void sendConfirmationEmail(User user);
+
+    public void sendForgotPasswordEmail(User user);
 }

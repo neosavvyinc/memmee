@@ -74,6 +74,36 @@ public class UserResourceTest extends ResourceIntegrationTest {
         assertThat(caseException, is(not(nullValue())));
     }
 
+    @Test
+    public void testForgotPassword() {
+        insertTestData();
+
+        client().resource(new MemmeeURLBuilder().
+                setBaseURL(UserResource.BASE_URL).
+                setMethodURL("user/forgotpassword").
+                setParam("email", "trevorewen@gmail.com").
+                build()).post();
+    }
+
+    @Test
+    public void testForgotPasswordInvalidEmail() {
+        insertTestData();
+
+        UserResourceException caseException = null;
+
+        try {
+            client().resource(new MemmeeURLBuilder().
+                    setBaseURL(UserResource.BASE_URL).
+                    setMethodURL("user/forgotpassword").
+                    setParam("email", "mike@rocklobster.com").
+                    build()).post();
+        } catch (UserResourceException e) {
+            caseException = e;
+        }
+
+        assertThat(caseException, is(not(nullValue())));
+    }
+
     protected Long insertTestData() {
         return userDAO.insert("Adam", "West", "trevorewen@gmail.com", "abc123", "apiKey500", new Date(), new Date());
     }
