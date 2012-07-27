@@ -63,16 +63,7 @@ CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService', 
 
 
 function AttachmentController($scope, broadCastService) {
-
-    $scope.openFiles = function()
-    {
-        console.log("STUFF");
-    }
-
-    //============== DRAG & DROP =============
-    // source for drag&drop: http://www.webappers.com/2011/09/28/drag-drop-file-upload-with-html5-javascript/
     var dropbox = document.getElementById("dropbox")
-
     function onDropboxChange(evt) {
         var input = document.getElementById("uploadInput")
         console.log("input contents change");
@@ -102,77 +93,6 @@ function AttachmentController($scope, broadCastService) {
 
     }
     dropbox.addEventListener("change", onDropboxChange, false)
-
-
-
-    $scope.dropText = 'Drop files here...'
-
-    // init event handlers
-    function dragEnterLeave(evt) {
-        evt.stopPropagation()
-        evt.preventDefault()
-        $scope.$apply(function(){
-            $scope.dropText = 'Drop files here...'
-            $scope.dropClass = ''
-        })
-    }
-    dropbox.addEventListener("dragenter", dragEnterLeave, false)
-    dropbox.addEventListener("dragleave", dragEnterLeave, false)
-    dropbox.addEventListener("dragover", function(evt) {
-        evt.stopPropagation()
-        evt.preventDefault()
-        var clazz = 'not-available'
-        var ok = evt.dataTransfer && evt.dataTransfer.types && evt.dataTransfer.types.indexOf('Files') >= 0
-        $scope.$apply(function(){
-            $scope.dropText = ok ? 'Drop files here...' : 'Only files are allowed!'
-            $scope.dropClass = ok ? 'over' : 'not-available'
-        })
-    }, false)
-    dropbox.addEventListener("drop", function(evt) {
-        console.log('drop evt:', JSON.parse(JSON.stringify(evt.dataTransfer)))
-        evt.stopPropagation()
-        evt.preventDefault()
-        $scope.$apply(function(){
-            $scope.dropText = 'Drop files here...'
-            $scope.dropClass = ''
-        })
-        var files = evt.dataTransfer.files
-        if (files.length > 0) {
-            $scope.$apply(function(){
-                $scope.files = []
-                for (var i = 0; i < files.length; i++) {
-                    $scope.files.push(files[i])
-                }
-            })
-        }
-    }, false)
-    //============== DRAG & DROP =============
-
-//    $scope.fileToUpload = {}
-//    $scope.$watch('fileToUpload', function(){
-//        $scope.files = []
-//        var files = document.getElementById('fileToUpload').files
-//        console.log('files:', files)
-//        for (var i = 0; i < files.length; i++) {
-//            $scope.files.push(files[i])
-//        }
-//        $scope.progressVisible = false
-//    })
-
-    $scope.uploadFile = function() {
-        var fd = new FormData()
-        for (var i in $scope.files) {
-            fd.append("file", $scope.files[i])
-        }
-        var xhr = new XMLHttpRequest()
-        xhr.upload.addEventListener("progress", uploadProgress, false)
-        xhr.addEventListener("load", uploadComplete, false)
-        xhr.addEventListener("error", uploadFailed, false)
-        xhr.addEventListener("abort", uploadCanceled, false)
-        xhr.open("POST", "/memmeerest/uploadattachment/?apiKey=" + broadCastService.user.apiKey)
-        $scope.progressVisible = true
-        xhr.send(fd)
-    }
 
     function uploadProgress(evt) {
         $scope.$apply(function(){
