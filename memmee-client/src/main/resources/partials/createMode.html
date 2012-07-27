@@ -9,12 +9,13 @@
         <textarea ng-model="memmee.text" class="input-xlarge span10" id="textarea" rows="10"></textarea>
 
         <div class="row span10" style="margin: 0px; padding-bottom: 10px" ng-controller="AttachmentController">
-            <div class="span1" style="margin: 0px; width: 100px;">
+            <div class="span2" style="margin: 0px; ">
                 <div style="float: left;">
-                    <div id="dropbox" class="dropbox" ng-class="dropClass"><i class="icon-camera"></i></div>
-                </div>
-                <div style="float: right;">
-                    <a ng-click="uploadFile()" class="btn btn-primary">Upload</a>
+                    <div id="dropbox" ng-class="dropbox">
+                        <div file-button>
+                            <button class='btn btn-success btn-large'><i class="icon-camera"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div ng-show="files.length" class="span3">

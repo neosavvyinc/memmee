@@ -63,9 +63,48 @@ CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService', 
 
 
 function AttachmentController($scope, broadCastService) {
+
+    $scope.openFiles = function()
+    {
+        console.log("STUFF");
+    }
+
     //============== DRAG & DROP =============
     // source for drag&drop: http://www.webappers.com/2011/09/28/drag-drop-file-upload-with-html5-javascript/
     var dropbox = document.getElementById("dropbox")
+
+    function onDropboxChange(evt) {
+        var input = document.getElementById("uploadInput")
+        console.log("input contents change");
+
+        var files = input.files;
+        if (files.length > 0) {
+            $scope.$apply(function(){
+                $scope.files = []
+                for (var i = 0; i < files.length; i++) {
+                    $scope.files.push(files[i])
+                }
+            })
+        }
+
+        var fd = new FormData()
+        for (var i in $scope.files) {
+            fd.append("file", $scope.files[i])
+        }
+        var xhr = new XMLHttpRequest()
+        xhr.upload.addEventListener("progress", uploadProgress, false)
+        xhr.addEventListener("load", uploadComplete, false)
+        xhr.addEventListener("error", uploadFailed, false)
+        xhr.addEventListener("abort", uploadCanceled, false)
+        xhr.open("POST", "/memmeerest/uploadattachment/?apiKey=" + broadCastService.user.apiKey)
+        $scope.progressVisible = true
+        xhr.send(fd)
+
+    }
+    dropbox.addEventListener("change", onDropboxChange, false)
+
+
+
     $scope.dropText = 'Drop files here...'
 
     // init event handlers
