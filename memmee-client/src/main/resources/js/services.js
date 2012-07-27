@@ -89,5 +89,24 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(RegistrationControllerEvents.get('ERROR_SAVING'), message)
     }
 
+    broadCastService.setTheme = function( number )
+    {
+        switch ( number )
+        {
+            case 0:
+                $rootScope.$broadcast('changeToDefaultTheme');
+                break;
+            case 1:
+                $rootScope.$broadcast('changeToTheme1');
+                break;
+            case 2:
+                $rootScope.$broadcast('changeToTheme2');
+                break;
+            case 3:
+                $rootScope.$broadcast('changeToTheme3');
+                break;
+        }
+    }
+
     return broadCastService;
 });
