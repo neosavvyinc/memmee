@@ -135,8 +135,8 @@ public class UserResource {
 
     @POST
     @Path("/user/forgotpassword")
-    @Produces({MediaType.APPLICATION_JSON})
-    public void forgotPassword(@QueryParam("email") String email) throws UserResourceException {
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void forgotPassword(String email) {
         User user = userDao.getUserByEmail(email);
 
         if (user == null)
@@ -144,7 +144,6 @@ public class UserResource {
 
         memmeeMailSender.sendForgotPasswordEmail(user);
     }
-
 
     @DELETE
     @Path("/user/{id}")

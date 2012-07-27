@@ -1,20 +1,37 @@
 function LoginController($scope, $http, broadCastService) {
 
     $scope.user = {
-        email: '',
-        password: ''
+        email:'',
+        password:''
     };
+    $scope.forgotPasswordReminder = ""
+    $scope.forgotPasswordSuccessStyle = {};
 
-    $scope.login = function()
-    {
-        $http({method: 'POST', url: '/memmeeuserrest/user/login', data: $scope.user}).
-            success(function(data, status, headers, config) {
+    //Action Handlers
+    $scope.login = function () {
+        $http({method:'POST', url:'/memmeeuserrest/user/login', data:$scope.user}).
+            success(function (data, status, headers, config) {
                 console.log('you were successfully logged into memmee.com');
                 broadCastService.loginUser(data);
             }).
-            error(function(data, status, headers, config) {
+            error(function (data, status, headers, config) {
                 broadCastService.invalidLoginLoginController();
             });
+    }
+
+    $scope.forgotPassword = function () {
+        if ($scope.user['email'] != "") {
+            $scope.forgotPasswordReminder = "";
+            $http({method:'POST', url:'/memmeeuserrest/user/forgotpassword', data:$scope.user['email']}).
+                success(function (data, status, headers, config) {
+                    $scope.forgotPasswordReminder = "A new password was sent to your email";
+                    $scope.forgotPasswordSuccessStyle = {'color': '#0000FF'};
+                }).error(function (data, status, headers, config) {
+                    $scope.forgotPasswordReminder = "There was an error sending the new password to your email.";
+                });
+        } else {
+           $scope.forgotPasswordReminder = "Please enter your email address below";
+        }
     }
 
 }

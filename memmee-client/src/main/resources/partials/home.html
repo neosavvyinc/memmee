@@ -1,6 +1,8 @@
 <div class="hero-unit">
     <h1>Welcome to Memmee</h1>
+
     <p>This is the new future home of Memmee</p>
+
     <p><a class="btn btn-primary btn-large">Learn more »</a></p>
 </div>
 
@@ -31,10 +33,14 @@
 
             <form class="well">
                 <label>Login and capture some memmees!</label>
+
+                <p class="error" style="margin: auto auto 0 3px;" ng-style="forgotPasswordSuccessStyle"
+                   ng-show="forgotPasswordReminder != ''">{{forgotPasswordReminder}}</p>
                 <input type="text" ng-model="user.email" class="span3" placeholder="Username / Email Address">
                 <input type="password" ng-model="user.password" class="span3" placeholder="Password">
                 <br/>
                 <button ng-click="login()" class="btn btn-primary">Login »</button>
+                <button ng-click="forgotPassword()" class="btn btn-danger">Forgot Password »</button>
             </form>
 
         </div>

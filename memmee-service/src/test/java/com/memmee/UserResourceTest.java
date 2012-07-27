@@ -81,8 +81,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
         client().resource(new MemmeeURLBuilder().
                 setBaseURL(UserResource.BASE_URL).
                 setMethodURL("user/forgotpassword").
-                setParam("email", "trevorewen@gmail.com").
-                build()).post();
+                build()).post("trevorewen@gmail.com");
     }
 
     @Test
@@ -95,8 +94,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
             client().resource(new MemmeeURLBuilder().
                     setBaseURL(UserResource.BASE_URL).
                     setMethodURL("user/forgotpassword").
-                    setParam("email", "mike@rocklobster.com").
-                    build()).post();
+                    build()).post("mike@rocklobster.com");
         } catch (UserResourceException e) {
             caseException = e;
         }
