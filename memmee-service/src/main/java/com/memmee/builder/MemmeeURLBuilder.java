@@ -5,7 +5,10 @@ import com.memmee.util.ListUtil;
 import com.memmee.util.StringUtil;
 import org.skife.jdbi.v2.util.BooleanMapper;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,6 +24,7 @@ public class MemmeeURLBuilder {
     private List<String> appendURLS;
     private String apiKeyParam;
     private String idParam;
+    private Map<String, String> params;
 
     public MemmeeURLBuilder setBaseURL(String baseURL) {
         this.baseURL = baseURL;
@@ -47,6 +51,13 @@ public class MemmeeURLBuilder {
         return this;
     }
 
+    public MemmeeURLBuilder setParam(String key, String value) {
+        if (params == null)
+            params = new HashMap<String, String>();
+        params.put(key, value);
+        return this;
+    }
+
     public String build() {
         if (baseURL == null || methodURL == null)
             throw new RuntimeException("You must specify a baseURL and methodURL or each call");
@@ -67,6 +78,15 @@ public class MemmeeURLBuilder {
         if (!StringUtil.nullOrEmpty(idParam)) {
             url += appendParam(firstParam, "id", idParam);
             firstParam = false;
+        }
+
+        if (params != null && params.size() != 0) {
+            Iterator i = params.entrySet().iterator();
+            while(i.hasNext()) {
+                Map.Entry<String, String> pair = (Map.Entry<String, String>) i.next();
+                url += appendParam(firstParam, pair.getKey(), pair.getValue());
+                firstParam = false;
+            }
         }
 
         return url;
