@@ -1,3 +1,47 @@
+var AlertsControllerEvents = (function() {
+    var controllerName = "AlertsController";
+    var private = {
+        'YES_SELECTED': 'yesSelected' + controllerName,
+        'NO_SELECTED': 'noSelected' + controllerName
+    };
+
+    return {
+        get: function(name) {
+            return private[name];
+        }
+    }
+
+})();
+
+var ArchiveListControllerEvents = (function() {
+    var controllerName = "ArchiveListController";
+    var private = {
+        'MEMMEE_SELECTED': 'memmeeSelected' + controllerName
+    };
+
+    return {
+        get: function(name) {
+            return private[name];
+        }
+    }
+
+})();
+
+var CreateModeControllerEvents = (function() {
+    var controllerName = "CreateModeController";
+    var private = {
+        'CONFIRM_DISCARD': 'confirmDiscard' + controllerName,
+        'DISCARD_CONFIRMED': 'discardConfirmed' + controllerName
+    };
+
+    return {
+        get: function(name) {
+            return private[name];
+        }
+    }
+
+})();
+
 var LoginControllerEvents = (function () {
     var controllerName = "LoginController";
     var private = {

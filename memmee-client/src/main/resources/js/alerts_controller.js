@@ -5,11 +5,47 @@ function AlertsController($scope, $http, broadCastService, $location) {
         $scope.header = header;
         $scope.message = message;
         $('#modalAlert').modal('toggle');
-    }
+    };
+
+    $scope.toggleYesNoAlert = function (header, message, yesText, noText) {
+        $scope.header = header;
+        $scope.message = message;
+        $scope.yesText = yesText;
+        $scope.noText = noText;
+        $('#modalYesNoAlert').modal('toggle');
+    };
+
+    $scope.yesClick = function () {
+        broadCastService.yesSelectedAlertsController($scope.promptingEvent);
+    };
+
+    $scope.noClick = function () {
+        broadCastService.noSelectedAlertsController($scope.promptingEvent);
+    };
+
+    $scope.yesText = "Ok";
+    $scope.noText = "Cancel";
+
+    $scope.promptingEvent = null;
 
     /**
      * Broadcast Handlers
      */
+
+    /* Self */
+    $scope.$on(AlertsControllerEvents.get('YES_SELECTED'), function () {
+        $('#modalYesNoAlert').modal('toggle');
+    });
+
+    $scope.$on(AlertsControllerEvents.get('NO_SELECTED'), function () {
+        $('#modalYesNoAlert').modal('toggle');
+    });
+
+    /* Create Mode Controller */
+    $scope.$on(CreateModeControllerEvents.get('CONFIRM_DISCARD'), function (event, memmee) {
+        $scope.promptingEvent = CreateModeControllerEvents.get('CONFIRM_DISCARD');
+        $scope.toggleYesNoAlert(Notifications.get('DISCARD_MEMMEE_HEADER'), Notifications.get('DISCARD_MEMMEE_MESSAGE'), "Discard", "Cancel");
+    });
 
     /* LoginController */
     $scope.$on(LoginControllerEvents.get('INVALID_LOGIN'), function () {
@@ -26,8 +62,8 @@ function AlertsController($scope, $http, broadCastService, $location) {
     });
 
     /* RegistrationController */
-    $scope.$on(RegistrationControllerEvents.get('ERROR_SAVING'), function(event, message) {
-       $scope.toggleAlert(Errors.get('REGISTRATION_HEADER'), message);
+    $scope.$on(RegistrationControllerEvents.get('ERROR_SAVING'), function (event, message) {
+        $scope.toggleAlert(Errors.get('REGISTRATION_HEADER'), message);
     });
 
     //Initialization

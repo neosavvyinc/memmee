@@ -57,12 +57,29 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
     }
 
     /**
+     * AlertsController
+     */
+    broadCastService.yesSelectedAlertsController = function(promptingEvent) {
+        $rootScope.$broadcast(AlertsControllerEvents.get('YES_SELECTED'), promptingEvent);
+    };
+
+    broadCastService.noSelectedAlertsController = function(promptingEvent) {
+        $rootScope.$broadcast(AlertsControllerEvents.get('NO_SELECTED'), promptingEvent);
+    };
+
+    /**
      * ArchiveListController
      */
-
     broadCastService.memmeeSelectedArchiveListController = function(memmee) {
-        $rootScope.$broadcast('memmeeSelectedArchiveListController', memmee);
+        $rootScope.$broadcast(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), memmee);
     };
+
+    /**
+     * CreateModeController
+     */
+    broadCastService.confirmDiscardCreateModeController = function() {
+        $rootScope.$broadcast(CreateModeControllerEvents.get('CONFIRM_DISCARD'));
+    }
 
     /**
      * LoginController
@@ -86,9 +103,10 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
      * RegistrationController
      */
     broadCastService.errorSavingUserRegistrationController = function(message) {
-        $rootScope.$broadcast(RegistrationControllerEvents.get('ERROR_SAVING'), message)
+        $rootScope.$broadcast(RegistrationControllerEvents.get('ERROR_SAVING'), message);
     }
 
+    //Initialization
     broadCastService.setTheme = function( number )
     {
         switch ( number )

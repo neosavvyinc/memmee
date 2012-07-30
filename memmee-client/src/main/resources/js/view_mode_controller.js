@@ -26,7 +26,7 @@ function ViewModeController($scope, $http, broadCastService) {
     };
 
     //Broadcast Handlers
-    $scope.$on('memmeeSelectedArchiveListController', function(event, memmee) {
+    $scope.$on(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), function(event, memmee) {
         $scope.memmee = memmee;
     });
 

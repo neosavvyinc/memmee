@@ -28,13 +28,9 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
         $scope.memmee = angular.copy($scope.master);
     };
 
-    $scope.isUnchanged = function (memmee) {
-        return angular.equals(memmee, $scope.master);
-    };
-
     $scope.cancel = function () {
         broadCastService.createModeCancelled();
-    }
+    };
 
     $scope.createMemmee = function () {
         $http({method:'POST', url:'/memmeerest/insertmemmee/?apiKey=' + broadCastService.user.apiKey, data:$scope.memmee}).
@@ -46,9 +42,16 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
                 console.log('error while saving your user');
                 console.log(data);
             });
-    }
+    };
 
-    $scope.dateChanged = function(e) {
+    $scope.selectMemmee = function (event, memmee) {
+        $scope.master = memmee;
+
+        //Makes a shallow copy of the object for editing.
+        $scope.memmee = jQuery.extend({}, memmee);
+    };
+
+    $scope.dateChanged = function (e) {
         $scope.memmee.displayDate = e.date;
         $(e.currentTarget).datepicker("hide");
 
@@ -67,15 +70,42 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
         return $scope.memmee.displayDate.toDateString();
     }
 
+    $scope.isUnchanged = function (memmee) {
+        return angular.equals(memmee, $scope.master);
+    };
+
     //Setters
     $scope.setTheme = function (number) {
         broadCastService.setTheme(number);
     }
 
-    //Add Listeners
+    //Broadcast and Event Handlers
     $scope.$on('attachmentUploadSuccess', function () {
         $scope.memmee.attachment = broadCastService.attachment;
         console.log("attachment was uploaded");
+    });
+
+    $scope.$on(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), function (event, memmee) {
+        if (memmee.id != $scope.memmee.id) {
+            if ($scope.isUnchanged($scope.memmee)) {
+                $scope.selectMemmee(event, memmee);
+            } else {
+                $scope.maybeSelectMemmee = memmee;
+                broadCastService.confirmDiscardCreateModeController();
+            }
+        }
+    });
+
+    $scope.$on(AlertsControllerEvents.get('YES_SELECTED'), function (event, promptingEvent) {
+        if (promptingEvent == CreateModeControllerEvents.get('CONFIRM_DISCARD')) {
+            $scope.selectMemmee(event, $scope.maybeSelectMemmee);
+        }
+    });
+
+    $scope.$on(AlertsControllerEvents.get('NO_SELECTED'), function (event, promptingEvent) {
+        if (promptingEvent == CreateModeControllerEvents.get('CONFIRM_DISCARD')) {
+            $scope.maybeSelectMemmee = null;
+        }
     });
 
     //UI Initialization
