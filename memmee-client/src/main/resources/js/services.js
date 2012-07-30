@@ -59,33 +59,33 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
     /**
      * AlertsController
      */
-    broadCastService.yesSelectedAlertsController = function(promptingEvent) {
+    broadCastService.yesSelectedAlertsController = function (promptingEvent) {
         $rootScope.$broadcast(AlertsControllerEvents.get('YES_SELECTED'), promptingEvent);
     };
 
-    broadCastService.noSelectedAlertsController = function(promptingEvent) {
+    broadCastService.noSelectedAlertsController = function (promptingEvent) {
         $rootScope.$broadcast(AlertsControllerEvents.get('NO_SELECTED'), promptingEvent);
     };
 
     /**
      * ArchiveListController
      */
-    broadCastService.memmeeSelectedArchiveListController = function(memmee) {
+    broadCastService.memmeeSelectedArchiveListController = function (memmee) {
         $rootScope.$broadcast(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), memmee);
     };
 
     /**
      * CreateModeController
      */
-    broadCastService.confirmDiscardCreateModeController = function() {
+    broadCastService.confirmDiscardCreateModeController = function () {
         $rootScope.$broadcast(CreateModeControllerEvents.get('CONFIRM_DISCARD'));
     }
 
     /**
      * LoginController
      */
-    broadCastService.invalidLoginLoginController = function() {
-      $rootScope.$broadcast(LoginControllerEvents.get('INVALID_LOGIN'));
+    broadCastService.invalidLoginLoginController = function () {
+        $rootScope.$broadcast(LoginControllerEvents.get('INVALID_LOGIN'));
     };
 
     /**
@@ -102,15 +102,22 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
     /**
      * RegistrationController
      */
-    broadCastService.errorSavingUserRegistrationController = function(message) {
+    broadCastService.errorSavingUserRegistrationController = function (message) {
         $rootScope.$broadcast(RegistrationControllerEvents.get('ERROR_SAVING'), message);
     }
 
-    //Initialization
-    broadCastService.setTheme = function( number )
-    {
-        switch ( number )
-        {
+    /**
+     * ViewModeController
+     */
+    broadCastService.confirmDeleteViewModeController = function () {
+        $rootScope.$broadcast(ViewModeControllerEvents.get('CONFIRM_DELETE'));
+    }
+
+    /**
+     * Initialization
+     */
+    broadCastService.setTheme = function (number) {
+        switch (number) {
             case 0:
                 $rootScope.$broadcast('changeToDefaultTheme');
                 break;

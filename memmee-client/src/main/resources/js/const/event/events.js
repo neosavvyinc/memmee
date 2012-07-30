@@ -81,3 +81,18 @@ var RegistrationControllerEvents = (function () {
         }
     }
 })();
+
+var ViewModeControllerEvents = (function() {
+    var controllerName = "ViewModeController";
+    var private = {
+        'CONFIRM_DELETE': 'confirmDelete' + controllerName,
+        'DELETE_CONFIRMED': 'deleteConfirmed' + controllerName
+    };
+
+    return {
+        get: function(name) {
+            return private[name];
+        }
+    }
+
+})();

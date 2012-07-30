@@ -42,7 +42,7 @@ function AlertsController($scope, $http, broadCastService, $location) {
     });
 
     /* Create Mode Controller */
-    $scope.$on(CreateModeControllerEvents.get('CONFIRM_DISCARD'), function (event, memmee) {
+    $scope.$on(CreateModeControllerEvents.get('CONFIRM_DISCARD'), function () {
         $scope.promptingEvent = CreateModeControllerEvents.get('CONFIRM_DISCARD');
         $scope.toggleYesNoAlert(Notifications.get('DISCARD_MEMMEE_HEADER'), Notifications.get('DISCARD_MEMMEE_MESSAGE'), "Discard", "Cancel");
     });
@@ -64,6 +64,12 @@ function AlertsController($scope, $http, broadCastService, $location) {
     /* RegistrationController */
     $scope.$on(RegistrationControllerEvents.get('ERROR_SAVING'), function (event, message) {
         $scope.toggleAlert(Errors.get('REGISTRATION_HEADER'), message);
+    });
+
+    /* ViewModeController */
+    $scope.$on(ViewModeControllerEvents.get('CONFIRM_DELETE'), function() {
+        $scope.promptingEvent = ViewModeControllerEvents.get('CONFIRM_DELETE');
+        $scope.toggleYesNoAlert(Notifications.get('DELETE_MEMMEE_HEADER'), Notifications.get('DELETE_MEMMEE_MESSAGE'), "Delete", "Cancel");
     });
 
     //Initialization
