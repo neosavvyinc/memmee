@@ -1,66 +1,87 @@
 function CreateMemmeesController($scope, $http, broadCastService, $location) {
 
-    $scope.master= {
-        id: '',
-        userId: broadCastService.user ? broadCastService.user.id : null,
-        text: '',
-        creationDate: Date.today(),
-        lastUpdateDate: Date.today(),
-        displayDate: Date.today()
+    //Properties
+    $scope.master = {
+        id:'',
+        userId:broadCastService.user ? broadCastService.user.id : null,
+        text:'',
+        creationDate:Date.today(),
+        lastUpdateDate:Date.today(),
+        displayDate:Date.today()
     };
 
     $scope.memmee = {
-        id: '',
-        userId: broadCastService.user ? broadCastService.user.id : null,
-        text: '',
-        creationDate: Date.today(),
-        lastUpdateDate: Date.today(),
-        displayDate: Date.today()
+        id:'',
+        userId:broadCastService.user ? broadCastService.user.id : null,
+        text:'',
+        creationDate:Date.today(),
+        lastUpdateDate:Date.today(),
+        displayDate:Date.today()
     };
 
-    $scope.$on('attachmentUploadSuccess', function() {
-        $scope.memmee.attachment = broadCastService.attachment;
-        console.log("attachment was uploaded");
-    });
-
-    $scope.update = function(memmee) {
-        $scope.master= angular.copy(memmee);
+    //Action Handlers
+    $scope.update = function (memmee) {
+        $scope.master = angular.copy(memmee);
     };
 
-    $scope.reset = function() {
+    $scope.reset = function () {
         $scope.memmee = angular.copy($scope.master);
     };
 
-    $scope.isUnchanged = function(memmee) {
+    $scope.isUnchanged = function (memmee) {
         return angular.equals(memmee, $scope.master);
     };
 
-    $scope.cancel = function()
-    {
+    $scope.cancel = function () {
         broadCastService.createModeCancelled();
     }
 
-    $scope.getDisplayDate = function( )
-    {
-        return $scope.memmee.displayDate.toDateString();
-    }
-
-    $scope.createMemmee = function()
-    {
-        $http({method: 'POST', url: '/memmeerest/insertmemmee/?apiKey=' + broadCastService.user.apiKey, data: $scope.memmee}).
-            success(function(data, status, headers, config) {
+    $scope.createMemmee = function () {
+        $http({method:'POST', url:'/memmeerest/insertmemmee/?apiKey=' + broadCastService.user.apiKey, data:$scope.memmee}).
+            success(function (data, status, headers, config) {
                 console.log('you have saved a memmee');
                 broadCastService.createModeCancelled();
             }).
-            error(function(data, status, headers, config) {
+            error(function (data, status, headers, config) {
                 console.log('error while saving your user');
                 console.log(data);
             });
     }
 
-    $scope.setTheme = function( number )
-    {
-        broadCastService.setTheme( number );
+    $scope.dateChanged = function(e) {
+        $scope.memmee.displayDate = e.date;
+        $(e.currentTarget).datepicker("hide");
+
+        //Forces View Refresh
+        $scope.$apply();
+    };
+
+    //Getters
+    $scope.getTodaysDate = function () {
+        var myDate = $scope.memmee.displayDate;
+
+        return myDate.getMonth() + 1 + "-" + myDate.getDate() + "-" + myDate.getFullYear();
+    }
+
+    $scope.getDisplayDate = function () {
+        return $scope.memmee.displayDate.toDateString();
+    }
+
+    //Setters
+    $scope.setTheme = function (number) {
+        broadCastService.setTheme(number);
+    }
+
+    //Add Listeners
+    $scope.$on('attachmentUploadSuccess', function () {
+        $scope.memmee.attachment = broadCastService.attachment;
+        console.log("attachment was uploaded");
+    });
+
+    //UI Initialization
+    $scope.initializeDatePicker = function (clazz) {
+        $(clazz).data("date", $scope.getTodaysDate());
+        $(clazz).datepicker({format:'mm-dd-yyyy'}).on('changeDate', $scope.dateChanged);
     }
 }
 
@@ -69,13 +90,14 @@ CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService', 
 
 function AttachmentController($scope, broadCastService) {
     var dropbox = document.getElementById("dropbox")
+
     function onDropboxChange(evt) {
         var input = document.getElementById("uploadInput")
         console.log("input contents change");
 
         var files = input.files;
         if (files.length > 0) {
-            $scope.$apply(function(){
+            $scope.$apply(function () {
                 $scope.files = []
                 for (var i = 0; i < files.length; i++) {
                     $scope.files.push(files[i])
@@ -97,10 +119,11 @@ function AttachmentController($scope, broadCastService) {
         xhr.send(fd)
 
     }
+
     dropbox.addEventListener("change", onDropboxChange, false)
 
     function uploadProgress(evt) {
-        $scope.$apply(function(){
+        $scope.$apply(function () {
             if (evt.lengthComputable) {
                 $scope.progress = Math.round(evt.loaded * 100 / evt.total)
             } else {
@@ -118,7 +141,7 @@ function AttachmentController($scope, broadCastService) {
     }
 
     function uploadCanceled(evt) {
-        $scope.$apply(function(){
+        $scope.$apply(function () {
             $scope.progressVisible = false
         })
         alert("The upload has been canceled by the user or the browser dropped the connection.")

@@ -33,16 +33,16 @@
                 </div>
             </div>
             <div class="btn-group" style="float: right;">
-                <a class="btn btn-primary" ng-click="setTheme(0)" >T1</a>
+                <a class="btn btn-primary" ng-click="setTheme(0)">T1</a>
                 <a class="btn btn-primary" ng-click="setTheme(1)">T2</a>
                 <a class="btn btn-primary" ng-click="setTheme(2)">T3</a>
                 <a class="btn btn-primary" ng-click="setTheme(3)">T4</a>
             </div>
         </div>
 
-        <div class="row span10" style="margin: 0px;" >
+        <div class="row span10" style="margin: 0px;">
             <div style="margin: 0px; float: left;">
-                This Memmee will be dated: {{getDisplayDate()}}
+                This Memmee will be dated: <a class="datepicker" data-date-format="mm-dd-yyyy" ng-init="initializeDatePicker('.datepicker')">{{getDisplayDate()}}</a>
             </div>
             <div style="margin: 0px; float: right;">
                 <a class="btn btn-primary" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Done</a>
