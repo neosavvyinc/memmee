@@ -11,6 +11,11 @@ function ArchiveListController($scope, $http, broadCastService) {
               console.log('error loading memmees');
         });
 
+    //Action Handlers
+    $scope.onMemmeeSelect = function(memmee) {
+        broadCastService.memmeeSelectedArchiveListController(memmee);
+    };
+
     //UI
     $scope.innerScrollerWidth = function(memmees) {
         if( memmees !== null )
@@ -24,11 +29,14 @@ function ArchiveListController($scope, $http, broadCastService) {
 
     $scope.imageStyle = function(memmee) {
         return {'background-image': 'url(' + memmee.attachment.thumbFilePath + ')'};
-    }
+    };
 
-    //Action Handlers
-    $scope.onMemmeeSelect = function(memmee) {
-        broadCastService.memmeeSelectedArchiveListController(memmee);
+    $scope.getDisplayDate = function(memmee) {
+        if (memmee.displayDate != null) {
+            var myDate = new Date.parse(memmee.displayDate);
+            return MemmeeDateUtil.shortMonth(myDate.getMonth()) + " " + myDate.getDate().toString();
+        }
+        return null;
     };
 }
 

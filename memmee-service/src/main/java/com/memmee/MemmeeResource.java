@@ -145,7 +145,7 @@ public class MemmeeResource {
                         , memmee.getText()
                         , new Date()
                         , new Date()
-                        , new Date()
+                        , memmee.getDisplayDate()
                         , memmee.getShareKey()
                         , null
                         , null
