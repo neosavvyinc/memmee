@@ -36,6 +36,11 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
         $http({method:'POST', url:'/memmeerest/insertmemmee/?apiKey=' + broadCastService.user.apiKey, data:$scope.memmee}).
             success(function (data, status, headers, config) {
                 console.log('you have saved a memmee');
+
+                //Broadcasts Create Event
+                broadCastService.memmeeCreatedCreateModeController();
+
+                //Legacy Event, references will be removed
                 broadCastService.createModeCancelled();
             }).
             error(function (data, status, headers, config) {

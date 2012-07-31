@@ -31,7 +31,8 @@ var CreateModeControllerEvents = (function() {
     var controllerName = "CreateModeController";
     var private = {
         'CONFIRM_DISCARD': 'confirmDiscard' + controllerName,
-        'DISCARD_CONFIRMED': 'discardConfirmed' + controllerName
+        'DISCARD_CONFIRMED': 'discardConfirmed' + controllerName,
+        'MEMMEE_CREATED': 'memmeeCreated' + controllerName
     };
 
     return {
@@ -86,7 +87,8 @@ var ViewModeControllerEvents = (function() {
     var controllerName = "ViewModeController";
     var private = {
         'CONFIRM_DELETE': 'confirmDelete' + controllerName,
-        'DELETE_CONFIRMED': 'deleteConfirmed' + controllerName
+        'DELETE_CONFIRMED': 'deleteConfirmed' + controllerName,
+        'MEMMEE_DELETED': 'memmeeDeleted' + controllerName
     };
 
     return {

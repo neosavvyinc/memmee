@@ -81,6 +81,10 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(CreateModeControllerEvents.get('CONFIRM_DISCARD'));
     }
 
+    broadCastService.memmeeCreatedCreateModeController = function() {
+        $rootScope.$broadcast(CreateModeControllerEvents.get('MEMMEE_CREATED'));
+    }
+
     /**
      * LoginController
      */
@@ -111,6 +115,10 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
      */
     broadCastService.confirmDeleteViewModeController = function () {
         $rootScope.$broadcast(ViewModeControllerEvents.get('CONFIRM_DELETE'));
+    }
+
+    broadCastService.memmeeDeletedViewModeController = function() {
+        $rootScope.$broadcast(ViewModeControllerEvents.get('MEMMEE_DELETED'));
     }
 
     /**
