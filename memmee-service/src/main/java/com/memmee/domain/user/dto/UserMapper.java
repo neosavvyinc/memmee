@@ -16,7 +16,6 @@ public class UserMapper implements ResultSetMapper<User> {
         user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));
         user.setFirstName(resultSet.getString("firstName"));
-        user.setLastName(resultSet.getString("lastName"));
         user.setId(resultSet.getLong("id"));
         user.setApiKey(resultSet.getString("apiKey"));
         user.setApiDate(resultSet.getDate("apiDate"));

@@ -83,7 +83,6 @@ public class UserResource {
             userDao.update(
                     id,
                     user.getFirstName(),
-                    user.getLastName(),
                     user.getEmail(),
                     user.getPassword(),
                     user.getApiKey(),
@@ -114,7 +113,6 @@ public class UserResource {
                 throw new UserResourceException(UserResourceException.IN_USE_EMAIL);
             } else {
                 Long userId = userDao.insert(user.getFirstName(),
-                        user.getLastName(),
                         user.getEmail(),
                         user.getPassword(),
                         user.getApiKey(),

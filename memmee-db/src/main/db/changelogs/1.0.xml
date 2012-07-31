@@ -26,7 +26,6 @@
         <insert tableName="user">
             <column name="id" value="1"/>
             <column name="firstName" value="Luke"/>
-            <column name="lastName" value="Lappin"/>
             <column name="email" value="luke.lappin@gmail.com"/>
             <column name="password" value="test"/>
             <column name="apiKey" value="lukesKey"/>
@@ -36,7 +35,6 @@
         <insert tableName="user">
             <column name="id" value="2"/>
             <column name="firstName" value="Adam"/>
-            <column name="lastName" value="Parrish"/>
             <column name="email" value="aparrish@neosavvy.com"/>
             <column name="password" value="test"/>
             <column name="apiKey" value="adamsKey"/>

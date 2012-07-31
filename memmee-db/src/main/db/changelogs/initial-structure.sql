@@ -31,7 +31,6 @@ CREATE TABLE memmee (
 CREATE TABLE user
 (id int(11) NOT NULL AUTO_INCREMENT,
  firstName varchar(1024) DEFAULT NULL,
- lastName varchar(1024) DEFAULT NULL,
  email varchar(4096) NOT NULL,
  password varchar(4096) DEFAULT NULL,
  apiKey varchar(1024) DEFAULT NULL,

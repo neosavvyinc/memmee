@@ -37,12 +37,11 @@ public interface UserDAO {
             @Bind("email") String email);
 
 
-    @SqlUpdate("insert into user (firstName, lastName, email, password, apiKey, apiDate, creationDate)" +
-            " values (:firstName, :lastName, :email, :password, :apiKey, :apiDate, :creationDate)")
+    @SqlUpdate("insert into user (firstName, email, password, apiKey, apiDate, creationDate)" +
+            " values (:firstName, :email, :password, :apiKey, :apiDate, :creationDate)")
     @GetGeneratedKeys
     Long insert(
             @Bind("firstName") String firstName
-            , @Bind("lastName") String lastName
             , @Bind("email") String email
             , @Bind("password") String password
             , @Bind("apiKey") String apiKey
@@ -50,12 +49,11 @@ public interface UserDAO {
             , @Bind("creationDate") Date creationDate
     );
 
-    @SqlUpdate("update user set firstName = :firstName, lastName = :lastName, email = :email, password = :password, " +
+    @SqlUpdate("update user set firstName = :firstName, email = :email, password = :password, " +
             "apiKey = :apiKey, apiDate = :apiDate where id = :id")
     int update(
             @Bind("id") Long id
             , @Bind("firstName") String firstName
-            , @Bind("lastName") String lastName
             , @Bind("email") String email
             , @Bind("password") String password
             , @Bind("apiKey") String apiKey

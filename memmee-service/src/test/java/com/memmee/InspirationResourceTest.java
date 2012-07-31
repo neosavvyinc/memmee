@@ -58,7 +58,7 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
     }
 
     protected Long insertTestUser() {
-        return userDAO.insert("Adam", "West", "trevorewen@gmail.com", "abc123", "apiKey500", new Date(), new Date());
+        return userDAO.insert("Adam", "trevorewen@gmail.com", "abc123", "apiKey500", new Date(), new Date());
     }
 
 }

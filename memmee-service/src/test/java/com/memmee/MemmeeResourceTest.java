@@ -53,7 +53,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         txAttachmentDAO = database.open(TransactionalAttachmentDAO.class);
         txInspirationDAO = database.open(TransactionalInspirationDAO.class);
 
-        userId = userDAO.insert("memmee_resource_test", "user", "memmee_resource_test", "password", "apiKey", new Date(), new Date());
+        userId = userDAO.insert("memmee_resource_test", "user", "password", "apiKey", new Date(), new Date());
 
         //add resources
         addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO));
