@@ -90,8 +90,8 @@ var ViewModeControllerEvents = (function() {
     var private = {
         'CONFIRM_DELETE': 'confirmDelete' + controllerName,
         'DELETE_CONFIRMED': 'deleteConfirmed' + controllerName,
-        'MEMMEE_DELETED': 'memmeeDeleted' + controllerName,
-        'SHOW_SHARE_LINK': 'showShareLink' + controllerName
+        'SHOW_SHARE_LINK': 'showShareLink' + controllerName,
+        'MEMMEE_DELETED': 'memmeeDeleted' + controllerName
     };
 
     return {
