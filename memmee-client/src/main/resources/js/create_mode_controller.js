@@ -37,6 +37,8 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
             success(function (data, status, headers, config) {
                 console.log('you have saved a memmee');
 
+                broadCastService.selectedMemmee = data;
+
                 //Broadcasts Create Event
                 broadCastService.memmeeCreatedCreateModeController();
 
