@@ -23,6 +23,7 @@ public class MemmeeURLBuilder {
     private String methodURL;
     private List<String> appendURLS;
     private String apiKeyParam;
+    private String shareKeyParam;
     private String idParam;
     private Map<String, String> params;
 
@@ -48,6 +49,11 @@ public class MemmeeURLBuilder {
 
     public MemmeeURLBuilder setIdParam(Long idParam) {
         this.idParam = Long.toString(idParam);
+        return this;
+    }
+
+    public MemmeeURLBuilder setShareKeyParam(String shareKeyParam) {
+        this.shareKeyParam = shareKeyParam;
         return this;
     }
 
@@ -77,6 +83,11 @@ public class MemmeeURLBuilder {
 
         if (!StringUtil.nullOrEmpty(idParam)) {
             url += appendParam(firstParam, "id", idParam);
+            firstParam = false;
+        }
+
+        if(!StringUtil.nullOrEmpty(shareKeyParam)) {
+            url += appendParam(firstParam, "shareKey", shareKeyParam);
             firstParam = false;
         }
 

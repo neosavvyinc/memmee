@@ -267,8 +267,14 @@ public class MemmeeResource {
         try {
 
             String shareKey = (UUID.randomUUID().toString());
-            count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                    new Date(), new Date(), shareKey, memmee.getAttachment().getId(), null);
+            count = memmeeDao.update(
+                    memmee.getId()
+                    ,memmee.getText()
+                    ,new Date()                     //Last Update Date is updated to server supplied
+                    ,memmee.getDisplayDate()        //Updating Display Date to user supplied value
+                    ,shareKey
+                    ,memmee.getAttachment().getId()
+                    ,null);
 
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
@@ -281,6 +287,28 @@ public class MemmeeResource {
         }
 
         return memmeeDao.getMemmee(new Long(memmee.getId()));
+
+    }
+
+    @GET
+    @Path("/open")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public Memmee openShare(@QueryParam("shareKey") String shareKey ) {
+
+        try {
+
+            Memmee memmee = memmeeDao.getMemmee( shareKey );
+            if( memmee == null )
+            {
+                throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+            }
+            return memmee;
+
+        } catch (DBIException dbException) {
+            LOG.error("DB EXCEPTION", dbException);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
 
     }
 

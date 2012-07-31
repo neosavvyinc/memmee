@@ -46,4 +46,29 @@ public class Inspiration implements Serializable {
     public void setLastUpdateDate(Date lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Inspiration)) return false;
+
+        Inspiration that = (Inspiration) o;
+
+        if (creationDate != null ? !creationDate.equals(that.creationDate) : that.creationDate != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (lastUpdateDate != null ? !lastUpdateDate.equals(that.lastUpdateDate) : that.lastUpdateDate != null)
+            return false;
+        if (text != null ? !text.equals(that.text) : that.text != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+        result = 31 * result + (lastUpdateDate != null ? lastUpdateDate.hashCode() : 0);
+        return result;
+    }
 }

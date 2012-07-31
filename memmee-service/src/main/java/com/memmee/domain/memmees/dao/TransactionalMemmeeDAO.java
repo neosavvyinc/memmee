@@ -35,6 +35,17 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     @Mapper(MemmeeAttachmentInspirationMapper.class)
     Memmee getMemmee(@Bind("id") Long id);
 
+    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
+            "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
+            "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate, " +
+            "i.lastUpdateDate as inspirationLastUpdateDate from memmee m " +
+            "LEFT OUTER JOIN attachment a on m.attachmentId = attachmentId " +
+            "LEFT OUTER JOIN inspiration i on m.inspirationId = inspirationId " +
+            "where m.shareKey = :shareKey"
+    )
+    @Mapper(MemmeeAttachmentInspirationMapper.class)
+    Memmee getMemmee(@Bind("shareKey") String shareKey);
+
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +

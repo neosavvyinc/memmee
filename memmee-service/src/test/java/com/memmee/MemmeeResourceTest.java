@@ -13,6 +13,7 @@ import org.junit.*;
 import java.util.Date;
 import java.util.List;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.notNull;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
@@ -127,6 +128,36 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
 
         Memmee myMemmee = txMemmeeDAO.getMemmee(memmeeId);
         assertThat(myMemmee, is(not(nullValue())));
+    }
+
+    @Test
+    public void testShareMemmee() {
+        memmeeId = insertTestData();
+
+        Memmee testMemmee = txMemmeeDAO.getMemmee(memmeeId);
+
+        Memmee valueFromServer = client().resource(
+                new MemmeeURLBuilder()
+                        .setMethodURL("sharememmee")
+                        .setApiKeyParam("apiKey")
+                        .setIdParam(memmeeId + 75)
+                        .build())
+                .put(Memmee.class, testMemmee);
+
+        assertThat(valueFromServer.getId(), is(equalTo(testMemmee.getId())));
+        assertThat(valueFromServer.getShareKey(), is(notNullValue()));
+
+
+        Memmee sharedMemmeeFromShareKey = client().resource(
+                new MemmeeURLBuilder()
+                        .setMethodURL("open")
+                        .setShareKeyParam(valueFromServer.getShareKey())
+                        .build())
+                .get(Memmee.class);
+
+        boolean equals = sharedMemmeeFromShareKey.equals(valueFromServer);
+        assertThat(equals, is(true));
+
     }
 
     protected Long insertTestData() {

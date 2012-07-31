@@ -113,14 +113,40 @@ public class Memmee implements Serializable {
         this.inspiration = inspiration;
     }
 
-/*
-    public Theme getTheme() {
-        return theme;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Memmee)) return false;
+
+        Memmee memmee = (Memmee) o;
+
+        if (attachment != null ? !attachment.equals(memmee.attachment) : memmee.attachment != null) return false;
+        if (creationDate != null ? !creationDate.equals(memmee.creationDate) : memmee.creationDate != null)
+            return false;
+        if (displayDate != null ? !displayDate.equals(memmee.displayDate) : memmee.displayDate != null) return false;
+        if (id != null ? !id.equals(memmee.id) : memmee.id != null) return false;
+        if (inspiration != null ? !inspiration.equals(memmee.inspiration) : memmee.inspiration != null) return false;
+        if (lastUpdateDate != null ? !lastUpdateDate.equals(memmee.lastUpdateDate) : memmee.lastUpdateDate != null)
+            return false;
+        if (shareKey != null ? !shareKey.equals(memmee.shareKey) : memmee.shareKey != null) return false;
+        if (text != null ? !text.equals(memmee.text) : memmee.text != null) return false;
+        if (userId != null ? !userId.equals(memmee.userId) : memmee.userId != null) return false;
+
+        return true;
     }
 
-    public void setTheme(Theme theme) {
-        this.theme = theme;
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (attachment != null ? attachment.hashCode() : 0);
+        result = 31 * result + (inspiration != null ? inspiration.hashCode() : 0);
+        result = 31 * result + (creationDate != null ? creationDate.hashCode() : 0);
+        result = 31 * result + (lastUpdateDate != null ? lastUpdateDate.hashCode() : 0);
+        result = 31 * result + (displayDate != null ? displayDate.hashCode() : 0);
+        result = 31 * result + (shareKey != null ? shareKey.hashCode() : 0);
+        return result;
     }
-    */
 
 }
