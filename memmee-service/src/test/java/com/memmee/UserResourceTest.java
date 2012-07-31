@@ -44,12 +44,11 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
         assertThat(user, is(not(nullValue())));
         assertThat(user.getFirstName(), is(equalTo("Adam")));
-        assertThat(user.getLastName(), is(equalTo("West")));
     }
 
     @Test
     public void testAdd() {
-        User user = new User("Ed", "ONeil", "newemail@newemail.com", "myPas64400");
+        User user = new User("Ed", "newemail@newemail.com", "myPas64400");
         client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
         List<User> users = userDAO.findAll();
 
@@ -63,7 +62,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
         UserResourceException caseException = null;
 
-        User user = new User("Different Name", "Different Last Name", "trevorewen@gmail.com", "pw555666");
+        User user = new User("Different Name", "trevorewen@gmail.com", "pw555666");
 
         try {
             client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
@@ -105,6 +104,6 @@ public class UserResourceTest extends ResourceIntegrationTest {
     }
 
     protected Long insertTestData() {
-        return userDAO.insert("Adam", "West", "trevorewen@gmail.com", "abc123", "apiKey500", new Date(), new Date());
+        return userDAO.insert("Adam", "trevorewen@gmail.com", "abc123", "apiKey500", new Date(), new Date());
     }
 }

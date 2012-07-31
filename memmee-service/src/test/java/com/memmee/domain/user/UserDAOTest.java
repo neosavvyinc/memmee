@@ -32,7 +32,6 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
                     "CREATE TABLE `user` (\n" +
                             "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
                             "  `firstName` varchar(1024) DEFAULT NULL,\n" +
-                            "  `lastName` varchar(1024) DEFAULT NULL,\n" +
                             "  `email` varchar(4096) NOT NULL,\n" +
                             "  `password` varchar(4096) NOT NULL,\n" +
                             "  `apiKey` varchar(1024) DEFAULT NULL,\n" +
@@ -100,8 +99,8 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            Long id = dao.insert("Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
-            final int result = dao.update(id, "Luke", "Lappin", "lukelappin@gmail.com", "password", "apiKey", new Date());
+            Long id = dao.insert("Adam", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+            final int result = dao.update(id, "Luke", "lukelappin@gmail.com", "password", "apiKey", new Date());
 
             assertThat(result, equalTo(1));
         } finally {
@@ -151,7 +150,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
     }
 
     protected Long insertTestData(UserDAO dao) {
-        return dao.insert("Adam", "Parrish", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
+        return dao.insert("Adam", "aparrish@neosavvy.com", "password", "apiKey", new Date(), new Date());
     }
 }
 
