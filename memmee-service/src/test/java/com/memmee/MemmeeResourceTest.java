@@ -187,6 +187,20 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     }
 
     @Test
+    public void testInsertWithInvalidApiKey() {
+        RuntimeException caseException = null;
+        Memmee memmee = new Memmee();
+
+        try {
+            client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKeyMISS").build()).post(Memmee.class, memmee);
+        } catch (RuntimeException e) {
+            caseException = e;
+        }
+
+        assertThat(caseException, is(not(nullValue())));
+    }
+
+    @Test
     public void testShareMemmee() {
         memmeeId = insertTestData();
 
@@ -214,20 +228,6 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         boolean equals = sharedMemmeeFromShareKey.equals(valueFromServer);
         assertThat(equals, is(true));
 
-    }
-
-    @Test
-    public void testInsertWithInvalidApiKey() {
-        RuntimeException caseException = null;
-        Memmee memmee = new Memmee();
-
-        try {
-            client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKeyMISS").build()).post(Memmee.class, memmee);
-        } catch (RuntimeException e) {
-            caseException = e;
-        }
-
-        assertThat(caseException, is(not(nullValue())));
     }
 
     protected Long insertTestData() {
