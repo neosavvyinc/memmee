@@ -3,8 +3,12 @@
     <a class="btn btn-large" ng-click="toggleViewState()" ng-show="hiddenInspiration()">Get Inspiration</a>
 
     <!-- View Inspiration State -->
-    <div class="well row span9 offset0" ng-show="viewInspiration()">
-        <button class="close" style="margin-top: -8px;" ng-click="toggleViewState()">&times;</button>
-        <p>{{inspiration.text}}</p>
+    <div style="height: 64px;">
+        <button class="btn btn-large left fullHeight" ng-click="getRandomInspiration(inspiration.id)"> < </button>
+        <div class="well row span8" style="margin-left: 20px;" ng-show="viewInspiration()">
+            <button class="close" style="margin-top: -8px;" ng-click="toggleViewState()">&times;</button>
+            <p>{{inspiration.text}}</p>
+        </div>
+        <button class="btn btn-large right fullHeight" style="margin-right: 8px;" ng-click="getRandomInspiration(inspiration.id)"> > </button>
     </div>
 </div>

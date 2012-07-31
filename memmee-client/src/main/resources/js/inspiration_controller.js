@@ -28,8 +28,14 @@ function InspirationController($scope, $http, broadCastService) {
     };
 
     //Action Handlers
-    $scope.getRandomInspiration = function () {
-       $http({method: 'GET', url: '/memmeeinspirationrest/getrandominspiration?apiKey=' + $scope.user.apiKey}).
+    $scope.getRandomInspiration = function (excludeId) {
+        var appendedParams = "";
+
+        if (excludeId != undefined && excludeId != null) {
+             appendedParams = "&excludeId=" + excludeId.toString();
+        }
+
+       $http({method: 'GET', url: '/memmeeinspirationrest/getrandominspiration?apiKey=' + $scope.user.apiKey + appendedParams}).
            success(function (data, status, headers, config) {
                console.log('The random inspiration has been loaded');
                $scope.inspiration = data;
