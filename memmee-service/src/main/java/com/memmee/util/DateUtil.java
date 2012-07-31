@@ -20,7 +20,15 @@ public class DateUtil {
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
-        return calendar.getTime();
+        return org.apache.commons.lang3.time.DateUtils.truncate(calendar.getTime(), Calendar.DAY_OF_MONTH);
+    }
+
+    public static Date hourPrecision(Date date) {
+        return org.apache.commons.lang3.time.DateUtils.truncate(date, Calendar.HOUR);
+    }
+
+    public static String toSqlDate(Date date) {
+        return new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
     }
 
     public static Date safeParse(String date) {
