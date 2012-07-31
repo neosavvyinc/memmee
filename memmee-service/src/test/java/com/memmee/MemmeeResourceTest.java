@@ -132,8 +132,9 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         assertThat(myMemmee, is(not(nullValue())));
     }
 
-    @Ignore
+
     @Test
+    @Ignore
     public void testInsertMemmeeNoAttachment() {
         insertTestData();
 
@@ -142,7 +143,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         Memmee memmee = new Memmee();
         memmee.setText("This is the text of my memory");
         memmee.setDisplayDate(DateUtil.getDate(2009, 2, 17));
-        memmee.setInspiration(inspiration);
+        memmee.setInspiration(null);
         memmee.setShareKey("myShareKey");
         memmee.setUserId(userId - 4);
 
@@ -157,6 +158,30 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         assertThat(myMemmee.getAttachment(), is(nullValue()));
         assertThat(myMemmee.getShareKey(), is(equalTo("myShareKey")));
     }
+
+    @Test
+    @Ignore
+    public void testInsertMemmeeWithNoAttachmentOrInspiration() {
+        insertTestData();
+
+        Memmee memmee = new Memmee();
+        memmee.setText("This is the text of my memory");
+        memmee.setDisplayDate(DateUtil.getDate(2009, 2, 17));
+        memmee.setInspiration(null);
+        memmee.setShareKey("myShareKey");
+        memmee.setUserId(userId - 4);
+
+        Memmee myMemmee = client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee);
+
+        assertThat(myMemmee.getUserId(), is(equalTo(userId)));
+        assertThat(myMemmee.getText(), is(equalTo("This is the text of my memory")));
+        assertThat(myMemmee.getDisplayDate(), is(equalTo(DateUtil.getDate(2009, 2, 17))));
+        assertThat(DateUtil.hourPrecision(myMemmee.getCreationDate()), is(equalTo(DateUtil.hourPrecision(new Date()))));
+        assertThat(DateUtil.hourPrecision(myMemmee.getLastUpdateDate()), is(equalTo(DateUtil.hourPrecision(new Date()))));
+        assertThat(myMemmee.getAttachment(), is(nullValue()));
+        assertThat(myMemmee.getShareKey(), is(equalTo("myShareKey")));
+    }
+
 
     @Ignore
     @Test
