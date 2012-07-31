@@ -1,4 +1,4 @@
-function SecurityController($scope, broadCastService, $timeout, $location) {
+function SecurityController($scope, broadCastService, $timeout, $location, $routeParams) {
 
     $scope.defaultTheme = "../css/bootstrap.css";
     $scope.theme1 = "../css/bootstrap1.css";
@@ -38,10 +38,14 @@ function SecurityController($scope, broadCastService, $timeout, $location) {
             broadCastService.loginUser( broadCastService.user );
         }, 100);
     }
+    else if( $location.path() == '/share' )
+    {
+        console.log("Loading a memmee from a share key");
+    }
     else
     {
         $location.path('/home');
     }
 }
 
-SecurityController.$inject = ['$scope', 'memmeeBroadCastService', '$timeout', '$location'];
+SecurityController.$inject = ['$scope', 'memmeeBroadCastService', '$timeout', '$location', '$routeParams'];

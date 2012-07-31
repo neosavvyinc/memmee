@@ -292,7 +292,6 @@ public class MemmeeResource {
 
     @GET
     @Path("/open")
-    @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public Memmee openShare(@QueryParam("shareKey") String shareKey ) {
 
