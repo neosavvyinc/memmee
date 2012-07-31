@@ -32,7 +32,9 @@ var CreateModeControllerEvents = (function() {
     var private = {
         'CONFIRM_DISCARD': 'confirmDiscard' + controllerName,
         'DISCARD_CONFIRMED': 'discardConfirmed' + controllerName,
-        'MEMMEE_CREATED': 'memmeeCreated' + controllerName
+        'MEMMEE_CREATED': 'memmeeCreated' + controllerName,
+        'CREATE_MODE_CANCELLED': 'createModeCancelled' + controllerName,
+        'CREATE_MODE_STARTED': 'createModeStarted' + controllerName
     };
 
     return {

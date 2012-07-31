@@ -9,7 +9,7 @@ function LoggedInController($scope, $http, broadCastService) {
 
     });
 
-    $scope.$on('createModeCancelled', function() {
+    $scope.$on(CreateModeControllerEvents.get('CREATE_MODE_CANCELLED'), function() {
 
         $scope.bodyContentPartial = "partials/viewMode.html";
         console.log("leaving create mode");

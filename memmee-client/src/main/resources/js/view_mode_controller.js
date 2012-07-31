@@ -10,13 +10,17 @@ function ViewModeController($scope, $http, broadCastService) {
 
     //Service Calls
     $scope.getDefaultMemmee = function () {
-        $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
-            success(function (data, status, headers, config) {
-                console.log('your memmee has been loaded');
-                $scope.memmee = data;
-            }).error(function (data, status, headers, config) {
-                console.log('error loading your doggone memmee');
-            });
+        if (broadCastService.selectedMemmee == null) {
+            $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
+                success(function (data, status, headers, config) {
+                    console.log('your memmee has been loaded');
+                    $scope.memmee = broadCastService.selectedMemmee = data;
+                }).error(function (data, status, headers, config) {
+                    console.log('error loading your doggone memmee');
+                });
+        } else {
+            $scope.memmee = broadCastService.selectedMemmee;
+        }
     };
 
     $scope.deleteMemmee = function (memmee) {

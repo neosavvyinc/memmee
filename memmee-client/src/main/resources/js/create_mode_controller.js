@@ -29,7 +29,7 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
     };
 
     $scope.cancel = function () {
-        broadCastService.createModeCancelled();
+        broadCastService.createModeCancelledCreateModeController();
     };
 
     $scope.createMemmee = function () {
@@ -41,7 +41,7 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
                 broadCastService.memmeeCreatedCreateModeController();
 
                 //Legacy Event, references will be removed
-                broadCastService.createModeCancelled();
+                broadCastService.createModeCancelledCreateModeController();
             }).
             error(function (data, status, headers, config) {
                 console.log('error while saving your user');
@@ -50,10 +50,8 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
     };
 
     $scope.selectMemmee = function (event, memmee) {
-        $scope.master = memmee;
-
-        //Makes a shallow copy of the object for editing.
-        $scope.memmee = jQuery.extend({}, memmee);
+        broadCastService.selectedMemmee = memmee;
+        broadCastService.createModeCancelledCreateModeController();
     };
 
     $scope.dateChanged = function (e) {
