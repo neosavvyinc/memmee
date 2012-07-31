@@ -6,6 +6,7 @@ import com.memmee.domain.memmees.dao.MemmeeDAO;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 
+import com.memmee.util.DateUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -98,11 +99,11 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
     public void testSave() throws Exception {
 
         final Handle handle = database.open();
-        final MemmeeDAO dao = database.open(MemmeeDAO.class);
+        final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
 
         try {
 
-            dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+            dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1), new Long(1));
             final String result = handle.createQuery("SELECT COUNT(*) FROM memmee").map(StringMapper.FIRST).first();
 
             assertThat(Integer.parseInt(result), equalTo(1));
@@ -115,11 +116,11 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
 
     @Test
     public void testUpdate() throws Exception {
-        final MemmeeDAO dao = database.open(MemmeeDAO.class);
+        final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
 
         try {
 
-            dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1));
+            dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1), new Long(1));
             final int result = dao.update(new Long(1), "text2", new Date(), new Date(), "shareKey2", new Long(2), new Long(2));
 
             assertThat(result, equalTo(1));

@@ -23,7 +23,7 @@ function NavigationController($scope, broadCastService, $location) {
 
     });
 
-    $scope.$on('createModeCancelled', function() {
+    $scope.$on(CreateModeControllerEvents.get('CREATE_MODE_CANCELLED'), function() {
 
         resetCreationButton();
 
@@ -42,7 +42,7 @@ function NavigationController($scope, broadCastService, $location) {
         {
             console.log("Turning off create mode....");
             $scope.createModeStyles = "btn btn-primary";
-            broadCastService.createModeCancelled();
+            broadCastService.createModeCancelledCreateModeController();
         }
         else
         {

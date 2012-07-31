@@ -6,6 +6,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
     broadCastService.user = null;
     broadCastService.attachment = null;
     broadCastService.apiKey = $location.search().apiKey;
+    broadCastService.selectedMemmee = null;
 
     broadCastService.loginUser = function ($user) {
         this.user = $user;
@@ -35,15 +36,6 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         return createMode;
     }
 
-    broadCastService.createModeStarted = function () {
-        createMode = true;
-        $rootScope.$broadcast('createModeStarted');
-    }
-
-    broadCastService.createModeCancelled = function () {
-        createMode = false;
-        $rootScope.$broadcast('createModeCancelled');
-    }
 
     /**
      * Modal Popup Notifications:
@@ -81,6 +73,20 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(CreateModeControllerEvents.get('CONFIRM_DISCARD'));
     }
 
+    broadCastService.memmeeCreatedCreateModeController = function() {
+        $rootScope.$broadcast(CreateModeControllerEvents.get('MEMMEE_CREATED'));
+    }
+
+    broadCastService.createModeCancelledCreateModeController = function () {
+        createMode = false;
+        $rootScope.$broadcast(CreateModeControllerEvents.get('CREATE_MODE_CANCELLED'));
+    }
+
+    broadCastService.createModeStarted = function () {
+        createMode = true;
+        $rootScope.$broadcast('createModeStarted');
+    }
+
     /**
      * LoginController
      */
@@ -111,6 +117,10 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
      */
     broadCastService.confirmDeleteViewModeController = function () {
         $rootScope.$broadcast(ViewModeControllerEvents.get('CONFIRM_DELETE'));
+    }
+
+    broadCastService.memmeeDeletedViewModeController = function() {
+        $rootScope.$broadcast(ViewModeControllerEvents.get('MEMMEE_DELETED'));
     }
 
     broadCastService.showShareLinkViewModeController = function( memmee ) {

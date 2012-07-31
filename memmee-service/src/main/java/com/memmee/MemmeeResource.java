@@ -11,6 +11,7 @@ import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.user.dao.UserDAO;
 import com.memmee.domain.user.dto.User;
+import com.memmee.util.DateUtil;
 import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
 import com.yammer.dropwizard.logging.Log;
@@ -119,20 +120,16 @@ public class MemmeeResource {
             final Attachment attachment = memmee.getAttachment();
             if (attachment != null) {
 
-
                 memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                     public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
                         Long memmeeId = memmeeDao.insert(user.getId(), memmee.getText(),
                                 new Date(), memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null, null);
+
                         Long attachmentId;
 
-                        //@TODO, will fix this issue
-//                        if (attachment.getMemmeeId() == null) {
-//                            attachmentId = memmeeDao.insertAttachment(memmeeId, attachment.getFilePath(), attachment.getType());
-//                        } else {
                         memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
+
                         attachmentId = attachment.getId();
-                        //}
 
                         memmeeDao.update(memmeeId, memmee.getText(), new Date(), memmee.getDisplayDate(), null, attachmentId, null);
 
@@ -149,7 +146,7 @@ public class MemmeeResource {
                         , memmee.getShareKey()
                         , null
                         , null
-                        , null).intValue();
+                        , memmee.getInspiration().getId()).intValue();
             }
 
         } catch (DBIException dbException) {

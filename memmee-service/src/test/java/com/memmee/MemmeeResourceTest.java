@@ -3,7 +3,9 @@ package com.memmee;
 import base.ResourceIntegrationTest;
 import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.builder.MemmeeURLBuilder;
+import com.memmee.domain.attachment.dto.Attachment;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
+import com.memmee.domain.inspirations.dto.Inspiration;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.user.dao.UserDAO;
@@ -130,6 +132,60 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         assertThat(myMemmee, is(not(nullValue())));
     }
 
+    @Ignore
+    @Test
+    public void testInsertMemmeeNoAttachment() {
+        insertTestData();
+
+        Inspiration inspiration = txInspirationDAO.getInspiration(inspirationId);
+
+        Memmee memmee = new Memmee();
+        memmee.setText("This is the text of my memory");
+        memmee.setDisplayDate(DateUtil.getDate(2009, 2, 17));
+        memmee.setInspiration(inspiration);
+        memmee.setShareKey("myShareKey");
+        memmee.setUserId(userId - 4);
+
+        Memmee myMemmee = client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee);
+
+        assertThat(myMemmee.getUserId(), is(equalTo(userId)));
+        assertThat(myMemmee.getText(), is(equalTo("This is the text of my memory")));
+        assertThat(myMemmee.getDisplayDate(), is(equalTo(DateUtil.getDate(2009, 2, 17))));
+        assertThat(myMemmee.getInspiration(), is(equalTo(inspiration)));
+        assertThat(DateUtil.hourPrecision(myMemmee.getCreationDate()), is(equalTo(DateUtil.hourPrecision(new Date()))));
+        assertThat(DateUtil.hourPrecision(myMemmee.getLastUpdateDate()), is(equalTo(DateUtil.hourPrecision(new Date()))));
+        assertThat(myMemmee.getAttachment(), is(nullValue()));
+        assertThat(myMemmee.getShareKey(), is(equalTo("myShareKey")));
+    }
+
+    @Ignore
+    @Test
+    public void testInsertMemmeeWithAttachment() {
+        insertTestData();
+
+        Attachment attachment = txAttachmentDAO.getAttachment(attachmentId);
+        Inspiration inspiration = txInspirationDAO.getInspiration(inspirationId);
+
+        Memmee memmee = new Memmee();
+        memmee.setText("Text for another memory");
+        memmee.setDisplayDate(DateUtil.getDate(2006, 8, 2));
+        memmee.setInspiration(inspiration);
+        memmee.setShareKey("myShareKey78");
+        memmee.setAttachment(attachment);
+        memmee.setUserId(userId - 4);
+
+        Memmee myMemmee = client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee);
+
+        assertThat(myMemmee.getUserId(), is(equalTo(userId)));
+        assertThat(myMemmee.getText(), is(equalTo("This is the text of my memory")));
+        assertThat(myMemmee.getDisplayDate(), is(equalTo(DateUtil.getDate(2006, 8, 2))));
+        assertThat(myMemmee.getInspiration(), is(equalTo(inspiration)));
+        assertThat(DateUtil.hourPrecision(myMemmee.getCreationDate()), is(equalTo(DateUtil.hourPrecision(new Date()))));
+        assertThat(DateUtil.hourPrecision(myMemmee.getLastUpdateDate()), is(equalTo(DateUtil.hourPrecision(new Date()))));
+        assertThat(myMemmee.getShareKey(), is(equalTo("myShareKey78")));
+        assertThat(myMemmee.getAttachment(), is(equalTo(attachment)));
+    }
+
     @Test
     public void testShareMemmee() {
         memmeeId = insertTestData();
@@ -158,6 +214,20 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         boolean equals = sharedMemmeeFromShareKey.equals(valueFromServer);
         assertThat(equals, is(true));
 
+    }
+
+    @Test
+    public void testInsertWithInvalidApiKey() {
+        RuntimeException caseException = null;
+        Memmee memmee = new Memmee();
+
+        try {
+            client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKeyMISS").build()).post(Memmee.class, memmee);
+        } catch (RuntimeException e) {
+            caseException = e;
+        }
+
+        assertThat(caseException, is(not(nullValue())));
     }
 
     protected Long insertTestData() {

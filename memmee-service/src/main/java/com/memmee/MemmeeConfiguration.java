@@ -17,4 +17,5 @@ public class MemmeeConfiguration extends Configuration {
     public DatabaseConfiguration getDatabase() {
         return database;
     }
+
 }

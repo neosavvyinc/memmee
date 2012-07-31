@@ -15,6 +15,8 @@ import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.Database;
 import com.yammer.dropwizard.db.DatabaseFactory;
 
+import java.util.TimeZone;
+
 public class MemmeeService extends Service<MemmeeConfiguration> {
 
     public static void main(String[] args) throws Exception {
@@ -31,6 +33,9 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
 
         //Monitors Database Exceptions From the DAOS
         addBundle(new DBIExceptionsBundle());
+
+        //Set Timezone
+        userConfiguration.getLoggingConfiguration().getConsoleConfiguration().setTimeZone(TimeZone.getDefault());
 
         final DatabaseFactory factory = new DatabaseFactory(environment);
         final Database db = factory.build(userConfiguration.getDatabase(), "mysql");

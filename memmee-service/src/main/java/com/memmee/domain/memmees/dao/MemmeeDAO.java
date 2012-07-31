@@ -36,8 +36,8 @@ public interface MemmeeDAO //extends Transactional<MemmeeDAO>
     @Mapper(MemmeeAttachmentMapper.class)
     List<Memmee> getMemmeesbyUser(@Bind("userId") Long userId);
 
-    @SqlUpdate("insert into memmee (userId, text, lastUpdateDate, creationDate, displayDate, shareKey, attachmentId, themeId)" +
-            " values (:userId, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey, :attachmentId, :themeId)")
+    @SqlUpdate("insert into memmee (userId, text, lastUpdateDate, creationDate, displayDate, shareKey, attachmentId, themeId, inspirationId)" +
+            " values (:userId, :text, :lastUpdateDate, :creationDate, :displayDate, :shareKey, :attachmentId, :themeId, :inspirationId)")
     @GetGeneratedKeys
     Long insert(
             @Bind("userId") Long userId
@@ -48,6 +48,7 @@ public interface MemmeeDAO //extends Transactional<MemmeeDAO>
             , @Bind("shareKey") String shareKey
             , @Bind("attachmentId") Long attachmentId
             , @Bind("themeId") Long themeId
+            , @Bind("inspirationId") Long inspirationId
     );
 
     @SqlUpdate("update memmee set text = :text, lastUpdateDate = :lastUpdateDate, displayDate = :displayDate, shareKey = :shareKey, " +
