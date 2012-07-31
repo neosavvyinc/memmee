@@ -7,6 +7,7 @@ import java.util.List;
 import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.domain.attachment.dto.Attachment;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
+import com.memmee.domain.inspirations.dto.Inspiration;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.user.dao.UserDAO;
@@ -118,6 +119,7 @@ public class MemmeeResource {
 
         try {
             final Attachment attachment = memmee.getAttachment();
+            final Long inspirationId = memmee.getInspiration() != null ? memmee.getInspiration().getId() : null;
             if (attachment != null) {
 
                 memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
@@ -146,7 +148,7 @@ public class MemmeeResource {
                         , memmee.getShareKey()
                         , null
                         , null
-                        , memmee.getInspiration().getId()).intValue();
+                        , inspirationId).intValue();
             }
 
         } catch (DBIException dbException) {
