@@ -67,7 +67,12 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
     }
 
     $scope.getDisplayDate = function () {
-        return $scope.memmee.displayDate.toDateString();
+        if( $scope.memmee && $scope.memmee.displayDate && $scope.memmee.displayDate instanceof Date)
+        {
+            return $scope.memmee.displayDate.toDateString();
+        }
+        console.log("$scope.memmee.displayDate was not a Date object");
+        return "";
     }
 
     $scope.isUnchanged = function (memmee) {

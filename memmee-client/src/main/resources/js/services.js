@@ -113,6 +113,10 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(ViewModeControllerEvents.get('CONFIRM_DELETE'));
     }
 
+    broadCastService.showShareLinkViewModeController = function( memmee ) {
+        $rootScope.$broadcast(ViewModeControllerEvents.get('SHOW_SHARE_LINK'), [memmee])
+    }
+
     /**
      * Initialization
      */

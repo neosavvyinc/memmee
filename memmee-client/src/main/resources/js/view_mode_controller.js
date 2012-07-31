@@ -8,6 +8,18 @@ function ViewModeController($scope, $http, broadCastService) {
         broadCastService.confirmDeleteViewModeController();
     };
 
+    $scope.generateAndShowPublicLink = function() {
+        $http({method: 'PUT', url: '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey, data: $scope.memmee}).
+            success(function(data, status, headers, config) {
+                console.log('you have generated a share link');
+                $scope.memmee = data;
+                broadCastService.showShareLinkViewModeController( $scope.memmee );
+            }).
+            error(function(data, status, headers, config) {
+                console.log('there was an error generating your share link');
+            });
+    }
+
     //Service Calls
     $scope.getDefaultMemmee = function () {
         $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).

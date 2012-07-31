@@ -72,6 +72,11 @@ function AlertsController($scope, $http, broadCastService, $location) {
         $scope.toggleYesNoAlert(Notifications.get('DELETE_MEMMEE_HEADER'), Notifications.get('DELETE_MEMMEE_MESSAGE'), "Delete", "Cancel");
     });
 
+    $scope.$on(ViewModeControllerEvents.get('SHOW_SHARE_LINK'), function( event, message) {
+        console.log("Memmee with id: " + message[0].id + " sharekey: " + message[0].shareKey);
+        $scope.toggleAlert("You generated this link, send it to some friends", "http://local.memmee.com/memmeerest/?shareKey=" + message[0].shareKey);
+    });
+
     //Initialization
     $scope.header = null;
     $scope.message = null;

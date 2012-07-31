@@ -86,7 +86,9 @@ var ViewModeControllerEvents = (function() {
     var controllerName = "ViewModeController";
     var private = {
         'CONFIRM_DELETE': 'confirmDelete' + controllerName,
-        'DELETE_CONFIRMED': 'deleteConfirmed' + controllerName
+        'DELETE_CONFIRMED': 'deleteConfirmed' + controllerName,
+        'SHOW_SHARE_LINK': 'showShareLink' + controllerName
+
     };
 
     return {
