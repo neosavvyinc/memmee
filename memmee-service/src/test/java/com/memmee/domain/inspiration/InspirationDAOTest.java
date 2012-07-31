@@ -87,6 +87,31 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
     }
 
     @Test
+    public void testGetRandomInspirationWithExcludeId() throws Exception {
+        final Handle handle = database.open();
+        final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);
+
+        List<Long> ids = insertTestInspirations(dao);
+
+        try {
+            Set<Inspiration> uniqueItemSet = new HashSet<Inspiration>();
+            Long excludedId = ids.get(0);
+
+            for (int i = 0; i < 30; i++)
+                uniqueItemSet.add(dao.getRandomInspiration(excludedId));
+
+            assertThat(uniqueItemSet.size(), is(greaterThan(1)));
+
+            for (Inspiration inspiration : uniqueItemSet)
+                assertThat(inspiration.getId(), is(not(equalTo(excludedId))));
+
+        } finally {
+            dao.close();
+            handle.close();
+        }
+    }
+
+    @Test
     public void testInsert() throws Exception {
         final Handle handle = database.open();
         final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);

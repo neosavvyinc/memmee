@@ -63,6 +63,18 @@
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
+        <insert tableName="inspiration">
+            <column name="id" value="4"/>
+            <column name="text" value="I'm thinking of breakfast, remember any good ones?"/>
+            <column name="creationDate" value="2012-07-29"/>
+            <column name="lastUpdateDate" value="2012-07-29"/>
+        </insert>
+        <insert tableName="inspiration">
+            <column name="id" value="5"/>
+            <column name="text" value="Mmmm, reeses blizzard!"/>
+            <column name="creationDate" value="2012-07-29"/>
+            <column name="lastUpdateDate" value="2012-07-29"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

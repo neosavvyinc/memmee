@@ -24,8 +24,10 @@ public class InspirationResource extends BaseResource {
     @GET
     @Path("/getrandominspiration")
     @Produces({MediaType.APPLICATION_JSON})
-    public Inspiration getRandomInspiration(@QueryParam("apiKey") String apiKey) {
+    public Inspiration getRandomInspiration(@QueryParam("apiKey") String apiKey, @QueryParam("excludeId") Long excludeId) {
         validateAccess(apiKey);
+        if (excludeId != null)
+            return inspirationDAO.getRandomInspiration(excludeId);
         return inspirationDAO.getRandomInspiration();
     }
 }

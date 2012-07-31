@@ -35,3 +35,15 @@ ul.horizontal li, ul.horizontal div {
 .fullwidth {
     width: 100%;
 }
+
+.fullHeight {
+    height: 100%;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}

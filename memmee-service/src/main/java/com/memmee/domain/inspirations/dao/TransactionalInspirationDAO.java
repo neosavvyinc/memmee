@@ -23,6 +23,10 @@ public interface TransactionalInspirationDAO extends Transactional<Transactional
     @Mapper(InspirationMapper.class)
     Inspiration getRandomInspiration();
 
+    @SqlQuery("select * from inspiration where id <> :excludeId order by rand() limit 1")
+    @Mapper(InspirationMapper.class)
+    Inspiration getRandomInspiration(@Bind("excludeId") Long excludeId);
+
     @SqlUpdate("insert into inspiration (text, creationDate, lastUpdateDate) " +
         "values (:text, :creationDate, :lastUpdateDate)")
     @GetGeneratedKeys
