@@ -19,6 +19,10 @@ div.nowrap {
     white-space: nowrap;
 }
 
+div.inline-block {
+    display: inline-block;
+}
+
 ul.horizontal {
     margin: 0;
     padding: 0;
