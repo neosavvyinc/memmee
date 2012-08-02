@@ -48,7 +48,7 @@ function ArchiveListController($scope, $http, broadCastService) {
     $scope.getDisplayDate = function (memmee) {
         if (memmee.displayDate != null) {
             var myDate = new Date.parse(memmee.displayDate);
-            return MemmeeDateUtil.shortMonth(myDate.getMonth()) + " " + myDate.getDate().toString();
+            return MemmeeDateUtil.longMonth(myDate.getMonth()) + " " + myDate.getDate().toString() + ", " + myDate.getFullYear().toString();
         }
         return null;
     };
