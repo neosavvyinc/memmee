@@ -51,14 +51,13 @@ function ArchiveListController($scope, $http, broadCastService) {
 
     $scope.getDisplayDate = function (memmee) {
         if (memmee.displayDate != null) {
-            var myDate = new Date.parse(memmee.displayDate);
-            return MemmeeDateUtil.longMonth(myDate.getMonth()) + " " + myDate.getDate().toString() + ", " + myDate.getFullYear().toString();
+            return MemmeeDateUtil.standardDate(new Date.parse(memmee.displayDate));
         }
         return null;
     };
 
-    $scope.addScrollListener = function(clazz) {
-        $(clazz).scroll(function(e) {
+    $scope.addScrollListener = function (clazz) {
+        $(clazz).scroll(function (e) {
             $scope.amountScrolledRight = $(e.currentTarget).scrollLeft();
         });
     };

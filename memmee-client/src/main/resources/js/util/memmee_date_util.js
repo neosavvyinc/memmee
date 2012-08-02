@@ -30,7 +30,7 @@ var MemmeeDateUtil = (function () {
         '11':'December'
     };
 
-    return {
+    var method = {
         shortMonth:function (number) {
             if (number != null) {
                 return shortMonth[number.toString()];
@@ -40,6 +40,31 @@ var MemmeeDateUtil = (function () {
         longMonth:function (number) {
             if (number != null) {
                 return longMonth[number.toString()];
+            }
+            return null;
+        },
+        isToday:function (date) {
+            if (date != null) {
+                var today = Date.today()
+                return date.getDate() == today.getDate() && date.getMonth() == today.getMonth() && date.getYear() == today.getYear();
+            }
+            return false;
+        }
+    };
+
+    return {
+        shortMonth:method['shortMonth'],
+        longMonth:method['longMonth'],
+        isToday:method['isToday'],
+        standardDate:function (date) {
+            if (date != null) {
+                if (method['isToday'](date)) {
+                    return "Today";
+                } else {
+                    return method['longMonth'](date.getMonth()) +
+                        " " + date.getDate().toString() +
+                        ", " + date.getFullYear().toString();
+                }
             }
             return null;
         }
