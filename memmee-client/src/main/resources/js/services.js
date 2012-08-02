@@ -73,7 +73,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(CreateModeControllerEvents.get('CONFIRM_DISCARD'));
     }
 
-    broadCastService.memmeeCreatedCreateModeController = function() {
+    broadCastService.memmeeCreatedCreateModeController = function () {
         $rootScope.$broadcast(CreateModeControllerEvents.get('MEMMEE_CREATED'));
     }
 
@@ -82,9 +82,9 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(CreateModeControllerEvents.get('CREATE_MODE_CANCELLED'));
     }
 
-    broadCastService.createModeStarted = function () {
+    broadCastService.createModeStartedCreateModeController = function () {
         createMode = true;
-        $rootScope.$broadcast('createModeStarted');
+        $rootScope.$broadcast(CreateModeControllerEvents.get('CREATE_MODE_STARTED'));
     }
 
     /**
@@ -119,11 +119,12 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(ViewModeControllerEvents.get('CONFIRM_DELETE'));
     }
 
-    broadCastService.memmeeDeletedViewModeController = function() {
+    broadCastService.memmeeDeletedViewModeController = function () {
+        broadCastService.selectedMemmee = null;
         $rootScope.$broadcast(ViewModeControllerEvents.get('MEMMEE_DELETED'));
     }
 
-    broadCastService.showShareLinkViewModeController = function( memmee ) {
+    broadCastService.showShareLinkViewModeController = function (memmee) {
         $rootScope.$broadcast(ViewModeControllerEvents.get('SHOW_SHARE_LINK'), [memmee])
     }
 

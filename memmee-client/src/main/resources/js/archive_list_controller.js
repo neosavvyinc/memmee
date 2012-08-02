@@ -10,6 +10,10 @@ function ArchiveListController($scope, $http, broadCastService) {
         broadCastService.memmeeSelectedArchiveListController(memmee);
     };
 
+    $scope.onCreateMemmee = function () {
+        broadCastService.createModeStartedCreateModeController();
+    };
+
     //Broadcast Handlers
     $scope.$on(CreateModeControllerEvents.get('MEMMEE_CREATED'), function () {
         $scope.getMemmees();

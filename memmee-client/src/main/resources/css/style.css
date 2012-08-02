@@ -51,3 +51,7 @@ ul.horizontal li, ul.horizontal div {
 .right {
     float: right;
 }
+
+.center-text {
+    text-align: center;
+}

@@ -1,3 +1,14 @@
+/* Global */
 .error {
     color: #FF0000;
+}
+
+/* ArchiveListController */
+.you-have-no-memmees {
+    font-size: 16px;
+    color: #60B7C8;
+}
+
+.create-a-memmee {
+    font-size: 11px;
 }

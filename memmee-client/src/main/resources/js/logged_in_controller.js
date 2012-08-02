@@ -2,7 +2,7 @@ function LoggedInController($scope, $http, broadCastService) {
 
     $scope.bodyContentPartial = "partials/viewMode.html";
 
-    $scope.$on('createModeStarted', function() {
+    $scope.$on(CreateModeControllerEvents.get('CREATE_MODE_STARTED'), function() {
 
         $scope.bodyContentPartial = "partials/createMode.html";
         console.log("starting create mode...");
