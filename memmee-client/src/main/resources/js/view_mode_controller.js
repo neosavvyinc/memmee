@@ -8,15 +8,14 @@ function ViewModeController($scope, $http, broadCastService) {
         broadCastService.confirmDeleteViewModeController();
     };
 
-
-    $scope.generateAndShowPublicLink = function() {
-        $http({method: 'PUT', url: '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey, data: $scope.memmee}).
-            success(function(data, status, headers, config) {
+    $scope.generateAndShowPublicLink = function () {
+        $http({method:'PUT', url:'/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey, data:$scope.memmee}).
+            success(function (data, status, headers, config) {
                 console.log('you have generated a share link');
                 $scope.memmee = data;
-                broadCastService.showShareLinkViewModeController( $scope.memmee );
+                broadCastService.showShareLinkViewModeController($scope.memmee);
             }).
-            error(function(data, status, headers, config) {
+            error(function (data, status, headers, config) {
                 console.log('there was an error generating your share link');
             });
     }
@@ -40,6 +39,7 @@ function ViewModeController($scope, $http, broadCastService) {
         $http({method:'DELETE', url:'/memmeerest/deletememmee?apiKey=' + $scope.user.apiKey + "&id=" + memmee.id}).
             success(function (data, status, headers, config) {
                 console.log('your memmee has been deleted');
+                $scope.memmee = null;
 
                 //Broadcasts event
                 broadCastService.memmeeDeletedViewModeController();

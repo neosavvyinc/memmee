@@ -48,7 +48,7 @@ function NavigationController($scope, broadCastService, $location) {
         {
             console.log("Turning on create mode....");
             $scope.createModeStyles = "btn btn-primary disabled";
-            broadCastService.createModeStarted();
+            broadCastService.createModeStartedCreateModeController();
         }
     }
 
