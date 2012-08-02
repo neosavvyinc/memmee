@@ -7,12 +7,10 @@ import java.util.List;
 import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.domain.attachment.dto.Attachment;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
-import com.memmee.domain.inspirations.dto.Inspiration;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.user.dao.UserDAO;
 import com.memmee.domain.user.dto.User;
-import com.memmee.util.DateUtil;
 import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
 import com.yammer.dropwizard.logging.Log;
@@ -370,8 +368,22 @@ public class MemmeeResource {
             Long attachmentId = attachmentDAO.insert(uploadedFileLocationToWrite, uploadedThumbFileLocation, "Image");
             attachment = attachmentDAO.getAttachment(attachmentId);
 
-        } catch (Exception e) {
+        }
+        catch (WebApplicationException e) {
+            if( e.getResponse().getStatus() == Status.UNSUPPORTED_MEDIA_TYPE.getStatusCode() )
+            {
+                LOG.error("The user attempted to upload a file that isn't supported ");
+            }
+            else
+            {
+                LOG.error("Unhandled exception occurred: " +  e.getResponse().getStatus() );
+            }
             LOG.error("ERROR UPLOADING ATTACHMENT ");
+
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+        catch (Exception e) {
+            LOG.error("ERROR UPLOADING ATTACHMENT FOR UNKNOWN REASON");
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
         return attachment;
@@ -423,12 +435,19 @@ public class MemmeeResource {
         IMOperation op = new IMOperation();
         String sourceImage = fileName;
         String destinationImage;
-        if (sourceImage.toLowerCase().indexOf(".jpg") > -1) {
+        if (sourceImage.toLowerCase().indexOf(".jpg") > -1 ) {
             destinationImage = sourceImage.replaceFirst(".jpg", "-thumb.jpg");
-        } else if (sourceImage.toLowerCase().indexOf(".png") > -1) {
+        }
+        else if (sourceImage.toLowerCase().indexOf(".jpeg") > -1) {
+            destinationImage = sourceImage.replaceFirst(".png", "-thumb.jpeg");
+        }
+        else if (sourceImage.toLowerCase().indexOf(".png") > -1) {
             destinationImage = sourceImage.replaceFirst(".png", "-thumb.png");
-        } else {
-            throw new WebApplicationException(Status.UNSUPPORTED_MEDIA_TYPE);
+        }
+        else {
+            WebApplicationException unsupportedMediaException = new WebApplicationException(Status.UNSUPPORTED_MEDIA_TYPE);
+            LOG.error("Attempting to save a file named " + sourceImage.toLowerCase());
+            throw unsupportedMediaException;
         }
 
 
