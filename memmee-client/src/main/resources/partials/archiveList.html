@@ -3,7 +3,7 @@
         <button class="btn btn-large left" ng-mousedown="leftScroll('div.archive-list-scroller-inner')" ng-mouseup="scrolling = false"> <</button>
     </div>
 
-    <div class="archive-list-scroller span8 scrollable-x hidden-y nowrap">
+    <div class="archive-list-scroller span8 scrollable-x hidden-y nowrap" ng-init="addScrollListener('div.archive-list-scroller')">
         <div class="archive-list-scroller-inner hidden-x hidden-y" ng-style="innerScrollerWidth(memmees);">
             <ul class="horizontal">
                 <li class="span4 archive-list" ng-repeat="memmee in memmees" ng-click="onMemmeeSelect(memmee);">

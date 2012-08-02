@@ -53,6 +53,12 @@ function ArchiveListController($scope, $http, broadCastService) {
         return null;
     };
 
+    $scope.addScrollListener = function(clazz) {
+        $(clazz).scroll(function(e) {
+            $scope.amountScrolledRight = $(e.currentTarget).scrollLeft();
+        });
+    };
+
     $scope.leftScroll = function (clazz) {
         var scrollable = $scope.amountScrolledRight >= 300;
         $scope.animateScroll($(clazz), "+=300px", scrollable, true)
