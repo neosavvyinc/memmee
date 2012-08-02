@@ -32,20 +32,14 @@ public class UserResource {
     }
 
     @GET
-    @Path("/user")
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<User> fetch() {
-
-        return userDao.findAll();
-    }
-
-    @GET
     @Path("/user/login")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public User loginUserByApiKey(@QueryParam("apiKey") String apiKey) {
         final User userLookup = userDao.getUserByApiKey(apiKey);
+
+        userLookup.setPassword(null);
+
         return userLookup;
     }
 
@@ -56,6 +50,8 @@ public class UserResource {
     @Produces({MediaType.APPLICATION_JSON})
     public User loginUser(User user) {
         User returnValue = userDao.loginUser(user.getEmail(), user.getPassword());
+
+        returnValue.setPassword(null);
 
         if (returnValue == null) {
             throw new WebApplicationException(Status.UNAUTHORIZED);
@@ -94,6 +90,9 @@ public class UserResource {
         }
 
         userLookup = userDao.getUserByApiKey(user.getApiKey());
+
+        userLookup.setPassword(null);
+
         return userLookup;
     }
 
@@ -127,6 +126,8 @@ public class UserResource {
             LOG.error("DB EXCEPTION", dbException);
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
+
+        user.setPassword(null);
 
         return user;
     }

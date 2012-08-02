@@ -1,4 +1,4 @@
-function CreateMemmeesController($scope, $http, broadCastService, $location) {
+function CreateMemmeesController($scope, $http, broadCastService ) {
 
     //Properties
     $scope.master = {
@@ -125,4 +125,4 @@ function CreateMemmeesController($scope, $http, broadCastService, $location) {
     }
 }
 
-CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location'];
+CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];

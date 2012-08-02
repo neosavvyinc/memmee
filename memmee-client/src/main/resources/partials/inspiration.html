@@ -4,11 +4,11 @@
 
     <!-- View Inspiration State -->
     <div style="height: 64px;">
-        <button class="btn btn-large left fullHeight" ng-click="getRandomInspiration(inspiration.id)"> < </button>
+        <button class="btn btn-large left fullHeight" ng-click="getRandomInspiration(inspiration.id)"> <i class="icon-circle-arrow-left"></i> </button>
         <div class="well row span8" style="margin-left: 20px;" ng-show="viewInspiration()">
             <button class="close" style="margin-top: -8px;" ng-click="toggleViewState()">&times;</button>
             <p>{{inspiration.text}}</p>
         </div>
-        <button class="btn btn-large right fullHeight" style="margin-right: 8px;" ng-click="getRandomInspiration(inspiration.id)"> > </button>
+        <button class="btn btn-large right fullHeight" style="margin-right: 8px;" ng-click="getRandomInspiration(inspiration.id)"> <i class="icon-circle-arrow-right"></i> </button>
     </div>
 </div>
