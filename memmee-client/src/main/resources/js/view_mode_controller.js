@@ -22,7 +22,7 @@ function ViewModeController($scope, $http, broadCastService) {
 
     //Service Calls
     $scope.getDefaultMemmee = function () {
-        if (broadCastService.selectedMemmee == null) {
+//        if (broadCastService.selectedMemmee == null || broadCastService.selectedMemmee.id == null) {
             $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
                 success(function (data, status, headers, config) {
                     console.log('your memmee has been loaded');
@@ -30,9 +30,9 @@ function ViewModeController($scope, $http, broadCastService) {
                 }).error(function (data, status, headers, config) {
                     console.log('error loading your doggone memmee');
                 });
-        } else {
-            $scope.memmee = broadCastService.selectedMemmee;
-        }
+//        } else {
+//            $scope.memmee = broadCastService.selectedMemmee;
+//        }
     };
 
     $scope.deleteMemmee = function (memmee) {
@@ -43,9 +43,6 @@ function ViewModeController($scope, $http, broadCastService) {
 
                 //Broadcasts event
                 broadCastService.memmeeDeletedViewModeController();
-
-                //Re-initializes view
-                $scope.getDefaultMemmee();
             }).
             error(function (data, status, headers, config) {
                 console.log('error deleting your doggone memmee');
@@ -56,6 +53,14 @@ function ViewModeController($scope, $http, broadCastService) {
     $scope.$on(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), function (event, memmee) {
         $scope.memmee = memmee;
     });
+
+    $scope.$on(ViewModeControllerEvents.get('MEMMEE_DELETED'), function(event) {
+        console.log("Deleting the local memmee on ViewController!");
+        //this is a bug
+        $scope.memmee = broadCastService.selectedMemmee = { attachment: { filePath: "/img/1x1.gif"}};
+        $scope.getDefaultMemmee();
+    });
+
 
     $scope.$on(AlertsControllerEvents.get('YES_SELECTED'), function (event, promptingEvent) {
         if (promptingEvent == ViewModeControllerEvents.get('CONFIRM_DELETE')) {
