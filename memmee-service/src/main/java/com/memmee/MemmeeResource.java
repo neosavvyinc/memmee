@@ -313,7 +313,6 @@ public class MemmeeResource {
     @Path("/deletememmee")
     @Produces({MediaType.APPLICATION_JSON})
     public void delete(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id)
-
     {
         final User user = userDao.getUserByApiKey(apiKey);
 
@@ -322,8 +321,20 @@ public class MemmeeResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
 
+        memmeeDao.inTransaction(new Transaction<Long, TransactionalMemmeeDAO>() {
+            public Long inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
+                Memmee memmee = memmeeDao.getMemmee(id);
+                if( memmee != null && memmee.getAttachment() != null )
+                {
+                    memmeeDao.deleteAttachment( memmee.getAttachment().getId() );
+                }
+                memmeeDao.delete(id);
 
-        memmeeDao.delete(id);
+                return id;
+            }
+        });
+
+        LOG.info("Memmee with id: " + id + " was successfully deleted");
     }
 
 
@@ -399,14 +410,11 @@ public class MemmeeResource {
         } else {
             throw new WebApplicationException(Status.PRECONDITION_FAILED);
         }
-
-
     }
 
     // save uploaded file to new location
     private void writeToFile(InputStream uploadedInputStream,
                              String uploadedFileLocation) {
-
         try {
             OutputStream out;
             int read = 0;
@@ -419,10 +427,8 @@ public class MemmeeResource {
             out.flush();
             out.close();
         } catch (IOException e) {
-
             e.printStackTrace();
         }
-
     }
 
     private String writeThumbnailImage(String fileName) {
