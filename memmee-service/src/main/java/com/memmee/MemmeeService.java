@@ -1,6 +1,7 @@
 package com.memmee;
 
 import com.memmee.auth.MemmeeAuthenticator;
+import com.memmee.auth.PasswordGeneratorImpl;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSenderImpl;
@@ -46,7 +47,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
 
         environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
                 "MEMMEE AUTHENTICATION"));
-        environment.addResource(new UserResource(userDao, new MemmeeMailSenderImpl()));
+        environment.addResource(new UserResource(userDao, new PasswordGeneratorImpl(), new MemmeeMailSenderImpl()));
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao));
         environment.addResource(new InspirationResource(userDao, inspirationDao));
     }

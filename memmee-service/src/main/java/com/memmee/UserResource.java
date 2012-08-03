@@ -1,5 +1,6 @@
 package com.memmee;
 
+import com.memmee.auth.PasswordGenerator;
 import com.memmee.error.UserResourceException;
 import com.memmee.domain.user.dao.UserDAO;
 import com.memmee.domain.user.dto.User;
@@ -22,12 +23,13 @@ public class UserResource {
 
     private UserDAO userDao;
     private static final Log LOG = Log.forClass(UserResource.class);
-
+    private PasswordGenerator passwordGenerator;
     private MemmeeMailSender memmeeMailSender;
 
-    public UserResource(UserDAO dao, MemmeeMailSender mailSender) {
+    public UserResource(UserDAO dao, PasswordGenerator passwordGenerator, MemmeeMailSender mailSender) {
         super();
         this.userDao = dao;
+        this.passwordGenerator = passwordGenerator;
         this.memmeeMailSender = mailSender;
     }
 
@@ -49,7 +51,7 @@ public class UserResource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public User loginUser(User user) {
-        User returnValue = userDao.loginUser(user.getEmail(), user.getPassword());
+        User returnValue = userDao.loginUser(user.getEmail(), passwordGenerator.encrypt(user.getPassword()));
 
         returnValue.setPassword(null);
 
@@ -80,7 +82,7 @@ public class UserResource {
                     id,
                     user.getFirstName(),
                     user.getEmail(),
-                    user.getPassword(),
+                    passwordGenerator.encrypt(user.getPassword()),
                     user.getApiKey(),
                     new Date()
             );
@@ -113,7 +115,7 @@ public class UserResource {
             } else {
                 Long userId = userDao.insert(user.getFirstName(),
                         user.getEmail(),
-                        user.getPassword(),
+                        passwordGenerator.encrypt(user.getPassword()),
                         user.getApiKey(),
                         new Date(),
                         new Date()
