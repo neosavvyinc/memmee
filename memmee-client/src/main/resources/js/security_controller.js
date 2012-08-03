@@ -1,11 +1,15 @@
 function SecurityController($scope, broadCastService, $timeout, $location, $routeParams) {
 
-    $scope.defaultTheme = "../css/bootstrap.css";
-    $scope.theme1 = "../css/bootstrap1.css";
-    $scope.theme2 = "../css/bootstrap2.css";
-    $scope.theme3 = "../css/bootstrap3.css";
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.defaultTheme = "../css/bootstrap.css";
+            $scope.theme1 = "../css/bootstrap1.css";
+            $scope.theme2 = "../css/bootstrap2.css";
+            $scope.theme3 = "../css/bootstrap3.css";
 
-    $scope.cssThemeUrl = $scope.defaultTheme;
+            $scope.cssThemeUrl = $scope.defaultTheme;
+        });
 
     $scope.$on('changeToTheme1', function () {
         $scope.cssThemeUrl = $scope.theme1;

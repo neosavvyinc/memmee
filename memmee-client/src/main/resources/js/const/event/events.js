@@ -48,7 +48,9 @@ var CreateModeControllerEvents = (function() {
 var LoginControllerEvents = (function () {
     var controllerName = "LoginController";
     var private = {
-        'INVALID_LOGIN':'invalidLogin' + controllerName
+        'INVALID_LOGIN':'invalidLogin' + controllerName,
+        'LOGIN': 'login' + controllerName,
+        'LOGOUT': 'logout' + controllerName
     };
 
     return {

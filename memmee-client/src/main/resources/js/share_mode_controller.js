@@ -1,9 +1,13 @@
 function ShareModeController($scope, $http, broadCastService, $location, $routeParams) {
 
-    $scope.user = broadCastService.user;
-    $scope.memmee = null;
-    $scope.shareKey = null;
-    $scope.errorMode = false;
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.user = broadCastService.user;
+            $scope.memmee = null;
+            $scope.shareKey = null;
+            $scope.errorMode = false;
+        });
 
     //Action Handlers
 

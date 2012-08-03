@@ -1,7 +1,11 @@
 function ViewModeController($scope, $http, broadCastService) {
 
-    $scope.user = broadCastService.user;
-    $scope.memmee = null;
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.user = broadCastService.user;
+            $scope.memmee = null;
+        });
 
     //Action Handlers
     $scope.onDeleteMemmee = function () {
@@ -23,13 +27,13 @@ function ViewModeController($scope, $http, broadCastService) {
     //Service Calls
     $scope.getDefaultMemmee = function () {
 //        if (broadCastService.selectedMemmee == null || broadCastService.selectedMemmee.id == null) {
-            $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
-                success(function (data, status, headers, config) {
-                    console.log('your memmee has been loaded');
-                    $scope.memmee = broadCastService.selectedMemmee = data;
-                }).error(function (data, status, headers, config) {
-                    console.log('error loading your doggone memmee');
-                });
+        $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
+            success(function (data, status, headers, config) {
+                console.log('your memmee has been loaded');
+                $scope.memmee = broadCastService.selectedMemmee = data;
+            }).error(function (data, status, headers, config) {
+                console.log('error loading your doggone memmee');
+            });
 //        } else {
 //            $scope.memmee = broadCastService.selectedMemmee;
 //        }
@@ -54,13 +58,12 @@ function ViewModeController($scope, $http, broadCastService) {
         $scope.memmee = memmee;
     });
 
-    $scope.$on(ViewModeControllerEvents.get('MEMMEE_DELETED'), function(event) {
+    $scope.$on(ViewModeControllerEvents.get('MEMMEE_DELETED'), function (event) {
         console.log("Deleting the local memmee on ViewController!");
         //this is a bug
-        $scope.memmee = broadCastService.selectedMemmee = { attachment: { filePath: "/img/1x1.gif"}};
+        $scope.memmee = broadCastService.selectedMemmee = { attachment:{ filePath:"/img/1x1.gif"}};
         $scope.getDefaultMemmee();
     });
-
 
     $scope.$on(AlertsControllerEvents.get('YES_SELECTED'), function (event, promptingEvent) {
         if (promptingEvent == ViewModeControllerEvents.get('CONFIRM_DELETE')) {

@@ -1,7 +1,11 @@
 function ProfileController($scope, $http, broadCastService) {
 
-    $scope.user = broadCastService.user;
-    $scope.confirmedPass = '';
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.user = broadCastService.user;
+            $scope.confirmedPass = '';
+        });
 
     $scope.update = function()
     {

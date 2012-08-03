@@ -1,8 +1,12 @@
 function RegistrationController($scope, $http, broadCastService) {
 
-    $scope.user = {
-        email: ''
-    };
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.user = {
+                email: ''
+            };
+        });
 
     $scope.register = function()
     {

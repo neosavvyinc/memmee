@@ -1,11 +1,15 @@
 function LoginController($scope, $http, broadCastService) {
 
-    $scope.user = {
-        email:'',
-        password:''
-    };
-    $scope.forgotPasswordReminder = ""
-    $scope.forgotPasswordSuccessStyle = {};
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.user = {
+                email:'',
+                password:''
+            };
+            $scope.forgotPasswordReminder = "";
+            $scope.forgotPasswordSuccessStyle = {};
+        });
 
     //Action Handlers
     $scope.login = function () {

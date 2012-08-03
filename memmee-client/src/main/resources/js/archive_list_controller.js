@@ -1,9 +1,13 @@
 function ArchiveListController($scope, $http, broadCastService) {
-    $scope.user = broadCastService.user;
-    $scope.memmees = null;
-    $scope.scrollableLeft = false;
-    $scope.scrollableRight = true;
-    $scope.amountScrolledRight = 0;
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.user = broadCastService.user;
+            $scope.memmees = null;
+            $scope.scrollableLeft = false;
+            $scope.scrollableRight = true;
+            $scope.amountScrolledRight = 0;
+        });
 
     //Action Handlers
     $scope.onMemmeeSelect = function (memmee) {

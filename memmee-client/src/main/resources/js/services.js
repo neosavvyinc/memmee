@@ -11,7 +11,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
     broadCastService.loginUser = function ($user) {
         this.user = $user;
         localStorage.setItem("user", JSON.stringify($user));
-        $rootScope.$broadcast('handleLogin');
+        $rootScope.$broadcast(LoginControllerEvents.get('LOGIN'));
 
         if ($location.url() == "/home")
             $location.url("/loggedin");
@@ -21,7 +21,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         this.user = null;
         localStorage.removeItem("user");
         $location.path('/home');
-        $rootScope.$broadcast('handleLogout');
+        $rootScope.$broadcast(LoginControllerEvents.get('LOGOUT'));
     }
 
     broadCastService.attachmentSuccess = function ($attachment) {

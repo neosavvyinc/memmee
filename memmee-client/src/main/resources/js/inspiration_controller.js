@@ -13,10 +13,13 @@ function InspirationController($scope, $http, broadCastService) {
         }
     })();
 
-    //Properties
-    $scope.viewState = ViewStates.get('VIEW_INSPIRATION_STATE');
-    $scope.user = broadCastService.user;
-    $scope.inspiration = null;
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.viewState = ViewStates.get('VIEW_INSPIRATION_STATE');
+            $scope.user = broadCastService.user;
+            $scope.inspiration = null;
+        });
 
     //State Handers
     $scope.hiddenInspiration = function() {

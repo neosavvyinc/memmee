@@ -1,9 +1,13 @@
 function NavigationController($scope, broadCastService, $location) {
 
-    $scope.loggedInUser = "";
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.loggedInUser = "";
 
-    $scope.visibleLoggedInStyle = { visibility: 'hidden' };
-    $scope.createModeStyles = "btn btn-primary";
+            $scope.visibleLoggedInStyle = { visibility: 'hidden' };
+            $scope.createModeStyles = "btn btn-primary";
+        });
 
     var resetCreationButton = function() {
         $scope.createModeStyles = "btn btn-primary";
@@ -15,7 +19,7 @@ function NavigationController($scope, broadCastService, $location) {
         resetCreationButton();
     }
 
-    $scope.$on('handleLogin', function() {
+    $scope.$on(LoginControllerEvents.get('LOGIN'), function() {
 
         console.log("NavigationController:handleLogin()");
         resetStyles();

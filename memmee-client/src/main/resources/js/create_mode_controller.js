@@ -1,23 +1,26 @@
-function CreateMemmeesController($scope, $http, broadCastService ) {
+function CreateMemmeesController($scope, $http, broadCastService) {
 
-    //Properties
-    $scope.master = {
-        id:'',
-        userId:broadCastService.user ? broadCastService.user.id : null,
-        text:'',
-        creationDate:Date.today(),
-        lastUpdateDate:Date.today(),
-        displayDate:Date.today()
-    };
+    //Super/Inherited Methods
+    DefaultController($scope,
+        /* load/tearDown */ function () {
+            $scope.master = {
+                id:'',
+                userId:broadCastService.user ? broadCastService.user.id : null,
+                text:'',
+                creationDate:Date.today(),
+                lastUpdateDate:Date.today(),
+                displayDate:Date.today()
+            };
 
-    $scope.memmee = {
-        id:'',
-        userId:broadCastService.user ? broadCastService.user.id : null,
-        text:'',
-        creationDate:Date.today(),
-        lastUpdateDate:Date.today(),
-        displayDate:Date.today()
-    };
+            $scope.memmee = {
+                id:'',
+                userId:broadCastService.user ? broadCastService.user.id : null,
+                text:'',
+                creationDate:Date.today(),
+                lastUpdateDate:Date.today(),
+                displayDate:Date.today()
+            };
+        });
 
     //Action Handlers
     $scope.update = function (memmee) {
@@ -72,8 +75,7 @@ function CreateMemmeesController($scope, $http, broadCastService ) {
     }
 
     $scope.getDisplayDate = function () {
-        if( $scope.memmee && $scope.memmee.displayDate && $scope.memmee.displayDate instanceof Date)
-        {
+        if ($scope.memmee && $scope.memmee.displayDate && $scope.memmee.displayDate instanceof Date) {
             return $scope.memmee.displayDate.toDateString();
         }
         console.log("$scope.memmee.displayDate was not a Date object");
@@ -122,7 +124,7 @@ function CreateMemmeesController($scope, $http, broadCastService ) {
     $scope.initializeDatePicker = function (clazz) {
         $(clazz).data("date", $scope.getTodaysDate());
         $(clazz).datepicker({format:'mm-dd-yyyy'}).on('changeDate', $scope.dateChanged);
-    }
+    };
 }
 
 CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
