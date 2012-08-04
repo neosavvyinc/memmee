@@ -1,9 +1,9 @@
 package com.memmee.domain.password.dao;
 
+import com.memmee.domain.password.dto.Password;
 import com.memmee.domain.password.dto.PasswordMapper;
-import com.memmee.domain.user.dto.User;
-import com.memmee.domain.user.dto.UserMapper;
 import org.skife.jdbi.v2.sqlobject.Bind;
+import org.skife.jdbi.v2.sqlobject.GetGeneratedKeys;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
@@ -15,12 +15,13 @@ public interface TransactionalPasswordDAO extends Transactional<TransactionalPas
 
     @SqlQuery("select * from password where id = :id")
     @Mapper(PasswordMapper.class)
-    PasswordMapper getPassword(@Bind("id") Long id);
+    Password getPassword(@Bind("id") Long id);
 
     @SqlUpdate("insert into password (value, temp) values (:value, :temp)")
+    @GetGeneratedKeys
     Long insert(@Bind("value") String value, @Bind("temp") int temp);
 
     @SqlUpdate("update password set value = :value, temp = :temp where id = :id")
-    Long update(@Bind("id") Long id, @Bind("value") String value, @Bind("temp") int temp);
+    int update(@Bind("id") Long id, @Bind("value") String value, @Bind("temp") int temp);
 
 }

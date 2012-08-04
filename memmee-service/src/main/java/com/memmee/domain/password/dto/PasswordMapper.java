@@ -15,7 +15,7 @@ public class PasswordMapper implements ResultSetMapper<Password> {
 
         password.setId(resultSet.getLong("id"));
         password.setValue(resultSet.getString("value"));
-        password.setTemp(resultSet.getBoolean("temp"));
+        password.setTemp(resultSet.getInt("temp") != 0);
 
         return password;
     }
