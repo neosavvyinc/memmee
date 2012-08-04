@@ -1,6 +1,7 @@
 package com.memmee.domain.user.dto;
 
 
+import com.memmee.domain.password.dto.Password;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
 
@@ -14,12 +15,17 @@ public class UserMapper implements ResultSetMapper<User> {
         User user = new User();
 
         user.setEmail(resultSet.getString("email"));
-        user.setPassword(resultSet.getString("password"));
         user.setFirstName(resultSet.getString("firstName"));
         user.setId(resultSet.getLong("id"));
         user.setApiKey(resultSet.getString("apiKey"));
         user.setApiDate(resultSet.getDate("apiDate"));
         user.setCreationDate(resultSet.getDate("creationDate"));
+
+        Password password = new Password();
+        password.setId(resultSet.getLong("passwordId"));
+        password.setValue(resultSet.getString("passwordValue"));
+        password.setTemp(resultSet.getInt("passwordTemp") != 0);
+        user.setPassword(password);
 
         return user;
     }

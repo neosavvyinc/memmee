@@ -8,7 +8,8 @@ import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
-import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.password.dao.TransactionalPasswordDAO;
+import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.util.DateUtil;
 import org.junit.*;
 
@@ -33,12 +34,14 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         memmee.setUserId(-100L);
     }
 
-    private static UserDAO userDAO;
+    private static TransactionalUserDAO userDAO;
+    private static TransactionalPasswordDAO passwordDAO;
     private static TransactionalMemmeeDAO txMemmeeDAO;
     private static TransactionalAttachmentDAO txAttachmentDAO;
     private static TransactionalInspirationDAO txInspirationDAO;
 
     private static Long userId;
+    private static Long passwordId;
     private static Long memmeeId;
     private static Long attachmentId;
     private static Long inspirationId;
@@ -48,12 +51,14 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         super.setUpResources();
 
         //setup Daos
-        userDAO = database.open(UserDAO.class);
+        userDAO = database.open(TransactionalUserDAO.class);
+        passwordDAO = database.open(TransactionalPasswordDAO.class);
         txMemmeeDAO = database.open(TransactionalMemmeeDAO.class);
         txAttachmentDAO = database.open(TransactionalAttachmentDAO.class);
         txInspirationDAO = database.open(TransactionalInspirationDAO.class);
 
-        userId = userDAO.insert("memmee_resource_test", "user", "password", "apiKey", new Date(), new Date());
+        passwordId = passwordDAO.insert("password", 0);
+        userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date());
 
         //add resources
         addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO));

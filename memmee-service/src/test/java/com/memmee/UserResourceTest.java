@@ -4,8 +4,10 @@ import base.ResourceIntegrationTest;
 import com.memmee.auth.PasswordGenerator;
 import com.memmee.auth.PasswordGeneratorImpl;
 import com.memmee.builder.MemmeeURLBuilder;
+import com.memmee.domain.password.dao.TransactionalPasswordDAO;
+import com.memmee.domain.password.dto.Password;
 import com.memmee.error.UserResourceException;
-import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
 import com.memmee.util.MemmeeMailSenderImpl;
@@ -19,7 +21,8 @@ import static org.hamcrest.Matchers.*;
 
 public class UserResourceTest extends ResourceIntegrationTest {
 
-    private static UserDAO userDAO;
+    private static TransactionalUserDAO userDAO;
+    private static TransactionalPasswordDAO passwordDAO;
     private static MemmeeMailSender memmeeMailSender;
     private static PasswordGenerator passwordGenerator;
 
@@ -28,12 +31,13 @@ public class UserResourceTest extends ResourceIntegrationTest {
         super.setUpResources();
 
         //setup Daos
-        userDAO = database.open(UserDAO.class);
+        userDAO = database.open(TransactionalUserDAO.class);
+        passwordDAO = database.open(TransactionalPasswordDAO.class);
         memmeeMailSender = new MemmeeMailSenderImpl();
         passwordGenerator = new PasswordGeneratorImpl();
 
         //add resources
-        addResource(new UserResource(userDAO, passwordGenerator, memmeeMailSender));
+        addResource(new UserResource(userDAO, passwordDAO, passwordGenerator, memmeeMailSender));
     }
 
     @Test
@@ -57,10 +61,11 @@ public class UserResourceTest extends ResourceIntegrationTest {
         User user = client().resource(new MemmeeURLBuilder().
                 setBaseURL(UserResource.BASE_URL).
                 setMethodURL("user/login").
-                build()).post(User.class, new User("Adam", "trevorewen@gmail.com", "abc123"));
+                build()).post(User.class, new User("Adam", "trevorewen@gmail.com", new Password("abc123")));
 
         assertThat(user, is(not(nullValue())));
-        assertThat(user.getPassword(), is(nullValue()));
+        assertThat(user.getPassword(), is(not(nullValue())));
+        assertThat(user.getPassword().getValue(), is(nullValue()));
     }
 
     @Test
@@ -73,7 +78,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
             User user = client().resource(new MemmeeURLBuilder().
                     setBaseURL(UserResource.BASE_URL).
                     setMethodURL("user/login").
-                    build()).post(User.class, new User("Adam", "trevorewen@gmail.com", "abc124"));
+                    build()).post(User.class, new User("Adam", "trevorewen@gmail.com", new Password("abc124")));
         } catch (RuntimeException e) {
             caseException = e;
         }
@@ -83,14 +88,16 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
     @Test
     public void testAdd() {
-        User user = new User("Ed", "newemail@newemail.com", "myPas64400");
+        User user = new User("Ed", "newemail@newemail.com", new Password("myPas64400"));
         client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
         List<User> users = userDAO.findAll();
 
         assertThat(users.size(), is(equalTo(1)));
         assertThat(users.get(0).getEmail(), is(equalTo("newemail@newemail.com")));
-        assertThat(users.get(0).getPassword(), is(equalTo(passwordGenerator.encrypt("myPas64400"))));
-        assertThat(users.get(0).getPassword(), is(not(equalTo("myPas64400"))));
+
+        assertThat(users.get(0).getPassword(), is(not(nullValue())));
+        assertThat(users.get(0).getPassword().getValue(), is(equalTo(passwordGenerator.encrypt("myPas64400"))));
+        assertThat(users.get(0).getPassword().getValue(), is(not(equalTo("myPas64400"))));
     }
 
     @Test
@@ -99,7 +106,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
         UserResourceException caseException = null;
 
-        User user = new User("Different Name", "trevorewen@gmail.com", "pw555666");
+        User user = new User("Different Name", "trevorewen@gmail.com", new Password("pw555666"));
 
         try {
             client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
@@ -141,6 +148,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
     }
 
     protected Long insertTestData() {
-        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordGenerator.encrypt("abc123"), "apiKey500", new Date(), new Date());
+        Long passwordId = passwordDAO.insert(passwordGenerator.encrypt("abc123"), 0);
+        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date());
     }
 }

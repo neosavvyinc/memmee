@@ -27,7 +27,7 @@
             <column name="id" value="1"/>
             <column name="firstName" value="Luke"/>
             <column name="email" value="luke.lappin@gmail.com"/>
-            <column name="password" value="qUqP5cyxm6YcTAhz05Hph5gvu9M="/>
+            <column name="passwordId" value="1"/>
             <column name="apiKey" value="lukesKey"/>
             <column name="apiDate" valueDate="2012-06-01"/>
             <column name="creationDate" valueDate="2012-06-01"/>
@@ -36,10 +36,23 @@
             <column name="id" value="2"/>
             <column name="firstName" value="Adam"/>
             <column name="email" value="aparrish@neosavvy.com"/>
-            <column name="password" value="qUqP5cyxm6YcTAhz05Hph5gvu9M="/>
+            <column name="passwordId" value="2"/>
             <column name="apiKey" value="adamsKey"/>
             <column name="apiDate" valueDate="2012-06-01"/>
             <column name="creationDate" valueDate="2012-06-01"/>
+        </insert>
+
+        <!-- password -->
+        <insert tableName="password">
+            <column name="id" value="1"/>
+            <column name="value" value="qUqP5cyxm6YcTAhz05Hph5gvu9M="/>
+            <column name="temp" value="0"/>
+        </insert>
+
+        <insert tableName="password">
+            <column name="id" value="2"/>
+            <column name="value" value="qUqP5cyxm6YcTAhz05Hph5gvu9M="/>
+            <column name="temp" value="0"/>
         </insert>
 
         <!-- inspiration -->

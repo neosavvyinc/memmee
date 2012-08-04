@@ -1,21 +1,14 @@
 package com.memmee.base;
 
-import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dao.TransactionalUserDAO;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 
-/**
- * Created with IntelliJ IDEA.
- * User: trevorewen
- * Date: 7/24/12
- * Time: 10:22 PM
- * To change this template use File | Settings | File Templates.
- */
 public class BaseResource {
-    protected final UserDAO userDAO;
+    protected final TransactionalUserDAO userDAO;
 
-    public BaseResource(UserDAO userDao) {
+    public BaseResource(TransactionalUserDAO userDao) {
         super();
         this.userDAO = userDao;
     }

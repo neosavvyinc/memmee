@@ -1,5 +1,7 @@
 package com.memmee.domain.user.dto;
 
+import com.memmee.domain.password.dto.Password;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -14,11 +16,10 @@ public class User implements Serializable {
     @NotNull
     private String email;
 
-    @Size(min = 8, max = 20, message = "Your password must be between 8 and 20 characters")
-    private String password;
+    @NotNull
+    private Password password;
 
     private String firstName;
-
 
     private String apiKey;
 
@@ -28,12 +29,18 @@ public class User implements Serializable {
 
     public User() { super(); }
 
-    public User(String firstName, String email, String password) {
+    public User(String firstName, String email, Password password) {
         super();
 
         this.firstName = firstName;
         this.email = email;
         this.password = password;
+    }
+
+    public void hidePassword() {
+        if (this.password != null) {
+            this.password.setValue(null);
+        }
     }
 
     public Long getId() {
@@ -68,12 +75,12 @@ public class User implements Serializable {
         this.apiKey = apiKey;
     }
 
-    public String getPassword() {
+    public Password getPassword() {
         return password;
     }
 
-    public void setPassword(String pass) {
-        this.password = pass;
+    public void setPassword(Password password) {
+        this.password = password;
     }
 
     public Date getApiDate() {

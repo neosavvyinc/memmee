@@ -1,10 +1,13 @@
 package com.memmee;
 
 import base.ResourceIntegrationTest;
+import com.memmee.auth.PasswordGenerator;
+import com.memmee.auth.PasswordGeneratorImpl;
 import com.memmee.builder.MemmeeURLBuilder;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
-import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.password.dao.TransactionalPasswordDAO;
+import com.memmee.domain.user.dao.TransactionalUserDAO;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,8 +18,10 @@ import java.util.List;
 
 public class InspirationResourceTest extends ResourceIntegrationTest {
 
-    private static UserDAO userDAO;
+    private static TransactionalUserDAO userDAO;
+    private static TransactionalPasswordDAO passwordDAO;
     private static TransactionalInspirationDAO inspirationDAO;
+    private static PasswordGenerator passwordGenerator;
 
     @Override
     protected void setUpResources() throws Exception {
@@ -24,7 +29,9 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
 
         //setup Daos
         inspirationDAO = database.open(TransactionalInspirationDAO.class);
-        userDAO = database.open(UserDAO.class);
+        passwordDAO = database.open(TransactionalPasswordDAO.class);
+        userDAO = database.open(TransactionalUserDAO.class);
+        passwordGenerator = new PasswordGeneratorImpl();
 
         //add resources
         addResource(new InspirationResource(userDAO, inspirationDAO));
@@ -58,7 +65,8 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
     }
 
     protected Long insertTestUser() {
-        return userDAO.insert("Adam", "trevorewen@gmail.com", "abc123", "apiKey500", new Date(), new Date());
+        Long passwordId = passwordDAO.insert(passwordGenerator.encrypt("abc123"), 0);
+        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date());
     }
 
 }

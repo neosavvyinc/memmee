@@ -4,7 +4,7 @@ package com.memmee;
 import com.memmee.base.BaseResource;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
-import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dao.TransactionalUserDAO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,7 +16,7 @@ public class InspirationResource extends BaseResource {
 
     private TransactionalInspirationDAO inspirationDAO;
 
-    public InspirationResource(UserDAO userDao, TransactionalInspirationDAO inspirationDAO) {
+    public InspirationResource(TransactionalUserDAO userDao, TransactionalInspirationDAO inspirationDAO) {
         super(userDao);
         this.inspirationDAO = inspirationDAO;
     }

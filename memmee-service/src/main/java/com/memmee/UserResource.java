@@ -1,8 +1,9 @@
 package com.memmee;
 
 import com.memmee.auth.PasswordGenerator;
+import com.memmee.domain.password.dao.TransactionalPasswordDAO;
 import com.memmee.error.UserResourceException;
-import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
 import com.yammer.dropwizard.logging.Log;
@@ -21,14 +22,16 @@ public class UserResource {
 
     public static final String BASE_URL = "memmeeuserrest";
 
-    private UserDAO userDao;
+    private TransactionalUserDAO userDao;
+    private TransactionalPasswordDAO passwordDao;
     private static final Log LOG = Log.forClass(UserResource.class);
     private PasswordGenerator passwordGenerator;
     private MemmeeMailSender memmeeMailSender;
 
-    public UserResource(UserDAO dao, PasswordGenerator passwordGenerator, MemmeeMailSender mailSender) {
+    public UserResource(TransactionalUserDAO dao, TransactionalPasswordDAO passwordDao, PasswordGenerator passwordGenerator, MemmeeMailSender mailSender) {
         super();
         this.userDao = dao;
+        this.passwordDao = passwordDao;
         this.passwordGenerator = passwordGenerator;
         this.memmeeMailSender = mailSender;
     }
@@ -40,7 +43,7 @@ public class UserResource {
     public User loginUserByApiKey(@QueryParam("apiKey") String apiKey) {
         final User userLookup = userDao.getUserByApiKey(apiKey);
 
-        userLookup.setPassword(null);
+        userLookup.hidePassword();
 
         return userLookup;
     }
@@ -51,13 +54,13 @@ public class UserResource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public User loginUser(User user) {
-        User returnValue = userDao.loginUser(user.getEmail(), passwordGenerator.encrypt(user.getPassword()));
+        User returnValue = userDao.getUserByEmail(user.getEmail());
 
-        returnValue.setPassword(null);
-
-        if (returnValue == null) {
+        if (returnValue == null || invalidPassword(user, returnValue)) {
             throw new WebApplicationException(Status.UNAUTHORIZED);
         }
+
+        returnValue.hidePassword();
 
         return returnValue;
     }
@@ -78,11 +81,15 @@ public class UserResource {
         }
 
         try {
+            passwordDao.update(
+                    user.getPassword().getId(),
+                    passwordGenerator.encrypt(user.getPassword().getValue()),
+                    user.getPassword().isTemp() ? 1 : 0);
             userDao.update(
                     id,
                     user.getFirstName(),
                     user.getEmail(),
-                    passwordGenerator.encrypt(user.getPassword()),
+                    user.getPassword().getId(),
                     user.getApiKey(),
                     new Date()
             );
@@ -93,7 +100,7 @@ public class UserResource {
 
         userLookup = userDao.getUserByApiKey(user.getApiKey());
 
-        userLookup.setPassword(null);
+        userLookup.hidePassword();
 
         return userLookup;
     }
@@ -113,9 +120,12 @@ public class UserResource {
             else if (userDao.getUserCount(user.getEmail()) >= 1) {
                 throw new UserResourceException(UserResourceException.IN_USE_EMAIL);
             } else {
+                Long passwordId = passwordDao.insert(
+                        passwordGenerator.encrypt(user.getPassword().getValue()),
+                        user.getPassword().isTemp() ? 1 : 0);
                 Long userId = userDao.insert(user.getFirstName(),
                         user.getEmail(),
-                        passwordGenerator.encrypt(user.getPassword()),
+                        passwordId,
                         user.getApiKey(),
                         new Date(),
                         new Date()
@@ -129,7 +139,7 @@ public class UserResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
 
-        user.setPassword(null);
+        user.hidePassword();
 
         return user;
     }
@@ -165,5 +175,9 @@ public class UserResource {
             LOG.error("DB EXCEPTION", dbException);
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    protected boolean invalidPassword(User given, User stored) {
+        return !passwordGenerator.encrypt(given.getPassword().getValue()).equals(stored.getPassword().getValue());
     }
 }

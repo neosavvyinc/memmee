@@ -3,6 +3,8 @@ package com.memmee;
 import com.memmee.auth.MemmeeAuthenticator;
 import com.memmee.auth.PasswordGeneratorImpl;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
+import com.memmee.domain.password.dao.TransactionalPasswordDAO;
+import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
@@ -10,7 +12,6 @@ import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
 
 import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
-import com.memmee.domain.user.dao.UserDAO;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.Database;
@@ -40,14 +41,15 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
 
         final DatabaseFactory factory = new DatabaseFactory(environment);
         final Database db = factory.build(userConfiguration.getDatabase(), "mysql");
-        final UserDAO userDao = db.onDemand(UserDAO.class);
+        final TransactionalUserDAO userDao = db.onDemand(TransactionalUserDAO.class);
+        final TransactionalPasswordDAO passwordDAO = db.onDemand(TransactionalPasswordDAO.class);
         final TransactionalMemmeeDAO memmeeDao = db.onDemand(TransactionalMemmeeDAO.class);
         final TransactionalAttachmentDAO attachmentDao = db.onDemand(TransactionalAttachmentDAO.class);
         final TransactionalInspirationDAO inspirationDao = db.onDemand(TransactionalInspirationDAO.class);
 
         environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
                 "MEMMEE AUTHENTICATION"));
-        environment.addResource(new UserResource(userDao, new PasswordGeneratorImpl(), new MemmeeMailSenderImpl()));
+        environment.addResource(new UserResource(userDao, passwordDAO, new PasswordGeneratorImpl(), new MemmeeMailSenderImpl()));
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao));
         environment.addResource(new InspirationResource(userDao, inspirationDao));
     }

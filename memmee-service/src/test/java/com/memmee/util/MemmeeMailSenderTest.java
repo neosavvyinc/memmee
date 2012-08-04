@@ -3,12 +3,9 @@ package com.memmee.util;
 import com.memmee.domain.user.dto.User;
 import org.junit.Test;
 
-/**
- * Created with IntelliJ IDEA.
- * User: waparrish
- * Date: 7/6/12
- * Time: 6:58 PM
- */
+import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
+
 public class MemmeeMailSenderTest {
 
     private MemmeeMailSender mailSender = new MemmeeMailSenderImpl();
@@ -20,6 +17,8 @@ public class MemmeeMailSenderTest {
         user.setEmail("aparrish@neosavvy.com");
 
         mailSender.sendConfirmationEmail(user);
+
+        assertTrue(true);
     }
 
 }

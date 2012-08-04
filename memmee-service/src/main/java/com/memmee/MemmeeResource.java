@@ -9,7 +9,7 @@ import com.memmee.domain.attachment.dto.Attachment;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
-import com.memmee.domain.user.dao.UserDAO;
+import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
@@ -45,13 +45,13 @@ import com.sun.jersey.multipart.FormDataParam;
 public class MemmeeResource {
     public static final String BASE_URL = "memmeerest";
 
-    private final UserDAO userDao;
+    private final TransactionalUserDAO userDao;
     private final TransactionalMemmeeDAO memmeeDao;
     private final TransactionalAttachmentDAO attachmentDAO;
     private final TransactionalInspirationDAO inspirationDAO;
     private static final Log LOG = Log.forClass(MemmeeResource.class);
 
-    public MemmeeResource(UserDAO userDao, TransactionalMemmeeDAO memmeeDao, TransactionalAttachmentDAO attachmentDao, TransactionalInspirationDAO inspirationDao) {
+    public MemmeeResource(TransactionalUserDAO userDao, TransactionalMemmeeDAO memmeeDao, TransactionalAttachmentDAO attachmentDao, TransactionalInspirationDAO inspirationDao) {
         super();
         this.userDao = userDao;
         this.memmeeDao = memmeeDao;
