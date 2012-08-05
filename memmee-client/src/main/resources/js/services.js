@@ -10,6 +10,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
 
     broadCastService.loginUser = function ($user) {
         this.user = $user;
+        $user.password = "";
         localStorage.setItem("user", JSON.stringify($user));
         $rootScope.$broadcast(LoginControllerEvents.get('LOGIN'));
 
