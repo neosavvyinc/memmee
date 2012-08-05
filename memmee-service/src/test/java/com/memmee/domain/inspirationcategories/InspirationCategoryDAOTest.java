@@ -14,21 +14,21 @@ import static org.hamcrest.Matchers.*;
 
 public class InspirationCategoryDAOTest extends AbstractMemmeeDAOTest {
 
+    public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS inspirationcategory";
+    public static final String TABLE_DEFINITION = "CREATE TABLE `inspirationcategory` (\n" +
+            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+            "  `name` varchar(200) NOT NULL,\n" +
+            "  PRIMARY KEY (`id`)\n" +
+            ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
+
     @Before
     public void setUp() throws Exception {
         this.database = factory.build(mysqlConfig, "mysql");
         final Handle handle = database.open();
         try {
 
-            handle.createCall("DROP TABLE IF EXISTS inspirationcategory").invoke();
-
-            handle.createCall(
-                    "CREATE TABLE `inspirationcategory` (\n" +
-                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                            "  `name` varchar(200) NOT NULL,\n" +
-                            "  PRIMARY KEY (`id`)\n" +
-                            ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1"
-            ).invoke();
+            handle.createCall(DROP_TABLE_STATEMENT).invoke();
+            handle.createCall(TABLE_DEFINITION).invoke();
 
         } catch (Exception e) {
             System.err.println(e);

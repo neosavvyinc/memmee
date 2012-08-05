@@ -14,6 +14,12 @@ CREATE TABLE inspiration (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE inspirationcategory (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(200) NOT NULL,
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE memmee (
   id int(11) NOT NULL AUTO_INCREMENT,
   userId int(11) NOT NULL,
