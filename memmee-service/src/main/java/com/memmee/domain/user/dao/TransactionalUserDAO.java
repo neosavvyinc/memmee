@@ -18,27 +18,27 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
 
     @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
-            "LEFT OUTER JOIN password p on u.passwordId = passwordId")
+            "LEFT OUTER JOIN password p on u.passwordId = p.id")
     @Mapper(UserMapper.class)
     List<User> findAll();
 
     @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
-            "LEFT OUTER JOIN password p on u.passwordId = passwordId " +
+            "LEFT OUTER JOIN password p on u.passwordId = p.id " +
             "where u.id = :id")
     @Mapper(UserMapper.class)
     User getUser(@Bind("id") Long id);
 
     @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
-            "LEFT OUTER JOIN password p on u.passwordId = passwordId " +
+            "LEFT OUTER JOIN password p on u.passwordId = p.id " +
             "where u.apiKey = :apiKey")
     @Mapper(UserMapper.class)
     User getUserByApiKey(@Bind("apiKey") String apiKey);
 
     @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
-            "LEFT OUTER JOIN password p on u.passwordId = passwordId " +
+            "LEFT OUTER JOIN password p on u.passwordId = p.id " +
             "where u.email = :email")
     @Mapper(UserMapper.class)
     User getUserByEmail(
@@ -46,7 +46,7 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
 
     @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
-            "LEFT OUTER JOIN password p on u.passwordId = passwordId " +
+            "LEFT OUTER JOIN password p on u.passwordId = p.id " +
             "where u.email = :email AND p.value = :password")
     @Mapper(UserMapper.class)
     User loginUser(
