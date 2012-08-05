@@ -31,6 +31,7 @@ function ViewModeController($scope, $http, broadCastService) {
             success(function (data, status, headers, config) {
                 console.log('your memmee has been loaded');
                 $scope.memmee = broadCastService.selectedMemmee = data;
+                $scope.hideAttachmentDiv();
             }).error(function (data, status, headers, config) {
                 console.log('error loading your doggone memmee');
             });
@@ -84,6 +85,24 @@ function ViewModeController($scope, $http, broadCastService) {
             return true;
         }
         return false;
+    }
+
+    $scope.attachmentVisible = true;
+
+    $scope.hideAttachmentDiv = function() {
+
+        console.log("ViewModeController.hideAttachmentDiv()");
+
+        if ( "You have no memmees." == $scope.memmee.text )
+        {
+            console.log("ViewModeController.hideAttachmentDiv() -- no memmees left");
+            $scope.attachmentVisible = false;
+        }
+        else
+        {
+            console.log("ViewModeController.hideAttachmentDiv() -- still a memmee left");
+            $scope.attachmentVisible = true;
+        }
     }
 }
 

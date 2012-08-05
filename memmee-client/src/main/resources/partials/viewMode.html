@@ -8,17 +8,17 @@
                     <a href="#share-menu" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-target="#share-menu">Share<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="" ng-click="generateAndShowPublicLink()">Create Public Link</a></li>
-                        <li><a href="">Email</a></li>
-                        <li><a href="">Facebook</a></li>
-                        <li><a href="">Twitter</a></li>
+                        <!--<li><a href="">Email</a></li> For now we are not going to provide this -->
+                        <!--<li><a href="">Facebook</a></li> For now we are not going to provide this -->
+                        <!--<li><a href="">Twitter</a></li> For now we are not going to provide this -->
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
     <div class="well span7 offset1" style="margin-top: 12px; margin-bottom: 50px;">
-        <div >
-            <img ng-src="{{memmee.attachment.filePath}}"/>
+        <div id="attachment-view" ng-show="attachmentVisible" >
+            <img ng-src="{{memmee.attachment.filePath}}" ng-show="attachmentVisible" />
         </div>
         <div id="text-view">
             <label>{{memmee.text}}</label>
