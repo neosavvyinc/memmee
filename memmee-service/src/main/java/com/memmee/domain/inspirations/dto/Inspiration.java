@@ -1,5 +1,7 @@
 package com.memmee.domain.inspirations.dto;
 
+import com.memmee.domain.inspirationcategories.domain.InspirationCategory;
+
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,6 +12,10 @@ public class Inspiration implements Serializable {
 
     @NotNull
     private String text;
+
+    private InspirationCategory inspirationCategory;
+
+    private Long inspirationCategoryIndex;
 
     private Date creationDate;
 
@@ -29,6 +35,22 @@ public class Inspiration implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public InspirationCategory getInspirationCategory() {
+        return inspirationCategory;
+    }
+
+    public void setInspirationCategory(InspirationCategory inspirationCategory) {
+        this.inspirationCategory = inspirationCategory;
+    }
+
+    public Long getInspirationCategoryIndex() {
+        return inspirationCategoryIndex;
+    }
+
+    public void setInspirationCategoryIndex(Long inspirationCategoryIndex) {
+        this.inspirationCategoryIndex = inspirationCategoryIndex;
     }
 
     public Date getCreationDate() {

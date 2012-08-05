@@ -4,6 +4,7 @@ import base.ResourceIntegrationTest;
 import com.memmee.auth.PasswordGenerator;
 import com.memmee.auth.PasswordGeneratorImpl;
 import com.memmee.builder.MemmeeURLBuilder;
+import com.memmee.domain.inspirationcategories.dao.TransactionalInspirationCategoryDAO;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
@@ -21,6 +22,7 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
     private static TransactionalUserDAO userDAO;
     private static TransactionalPasswordDAO passwordDAO;
     private static TransactionalInspirationDAO inspirationDAO;
+    private static TransactionalInspirationCategoryDAO inspirationCategoryDAO;
     private static PasswordGenerator passwordGenerator;
 
     @Override
@@ -29,6 +31,7 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
 
         //setup Daos
         inspirationDAO = database.open(TransactionalInspirationDAO.class);
+        inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
         passwordDAO = database.open(TransactionalPasswordDAO.class);
         userDAO = database.open(TransactionalUserDAO.class);
         passwordGenerator = new PasswordGeneratorImpl();
@@ -52,14 +55,17 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
 
     protected void insertTestData() {
         insertTestUser();
-        insertTestInspirations(inspirationDAO);
+        insertTestInspirations(inspirationDAO, inspirationCategoryDAO);
     }
 
-    protected List<Long> insertTestInspirations(TransactionalInspirationDAO dao) {
+    protected List<Long> insertTestInspirations(TransactionalInspirationDAO dao, TransactionalInspirationCategoryDAO inspirationCategoryDAO) {
         List<Long> inspirationIds = new ArrayList<Long>();
 
-        for (int i = 0; i < 3; i++)
-            inspirationIds.add(dao.insert(String.format("Inspiration %s", i), new Date(), new Date()));
+        for (int k = 0; k < 3; k++) {
+            Long categoryId = inspirationCategoryDAO.insert(String.format("Inspiration Category %s", k));
+            for (int i = 0; i < 3; i++)
+                inspirationIds.add(dao.insert(String.format("Inspiration %s", i), categoryId, Long.parseLong(Integer.toString(i)), new Date(), new Date()));
+        }
 
         return inspirationIds;
     }

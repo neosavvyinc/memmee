@@ -1,6 +1,7 @@
 package com.memmee.domain.inspiration;
 
 import base.AbstractMemmeeDAOTest;
+import com.memmee.domain.inspirationcategories.dao.TransactionalInspirationCategoryDAO;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
 import org.junit.*;
@@ -20,14 +21,24 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
         try {
 
             handle.createCall("DROP TABLE IF EXISTS inspiration").invoke();
+            handle.createCall("DROP TABLE IF EXISTS inspirationcategory").invoke();
 
             handle.createCall(
                     "CREATE TABLE `inspiration` (\n" +
-                            "`id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                            "`text` varchar(1000) NOT NULL,\n" +
-                            "`creationDate` datetime NOT NULL,\n" +
-                            "`lastUpdateDate` datetime NOT NULL,\n" +
-                            "PRIMARY KEY (`id`)\n" +
+                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                            "  `inspirationCategoryId` int(11) NOT NULL,\n" +
+                            "  `text` varchar(1000) NOT NULL,\n" +
+                            "  `inspirationCategoryIndex` int(11) DEFAULT NULL,\n" +
+                            "  `creationDate` datetime DEFAULT NULL,\n" +
+                            "  `lastUpdateDate` datetime DEFAULT NULL,\n" +
+                            "  PRIMARY KEY (`id`)\n" +
+                            ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6"
+            ).invoke();
+            handle.createCall(
+                    "CREATE TABLE `inspirationcategory` (\n" +
+                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                            "  `name` varchar(200) NOT NULL,\n" +
+                            "  PRIMARY KEY (`id`)\n" +
                             ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1"
             ).invoke();
 
@@ -49,8 +60,9 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
     public void testGetInspiration() throws Exception {
         final Handle handle = database.open();
         final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);
+        final TransactionalInspirationCategoryDAO inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
 
-        List<Long> ids = insertTestInspirations(dao);
+        List<Long> ids = insertTestInspirations(dao, inspirationCategoryDAO);
 
         try {
             for (Long id : ids) {
@@ -69,8 +81,9 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
     public void testGetRandomInspiration() throws Exception {
         final Handle handle = database.open();
         final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);
+        final TransactionalInspirationCategoryDAO inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
 
-        insertTestInspirations(dao);
+        insertTestInspirations(dao, inspirationCategoryDAO);
 
         try {
             Set<Inspiration> uniqueItemSet = new HashSet<Inspiration>();
@@ -90,8 +103,9 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
     public void testGetRandomInspirationWithExcludeId() throws Exception {
         final Handle handle = database.open();
         final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);
+        final TransactionalInspirationCategoryDAO inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
 
-        List<Long> ids = insertTestInspirations(dao);
+        List<Long> ids = insertTestInspirations(dao, inspirationCategoryDAO);
 
         try {
             Set<Inspiration> uniqueItemSet = new HashSet<Inspiration>();
@@ -115,15 +129,22 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
     public void testInsert() throws Exception {
         final Handle handle = database.open();
         final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);
+        final TransactionalInspirationCategoryDAO inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
 
         try {
-            Long id = dao.insert("This is my text", new Date(), new Date());
+            Long categoryId = insertTestCategory(inspirationCategoryDAO);
+            Long id = dao.insert("This is my text", categoryId, Long.parseLong("18"), new Date(), new Date());
 
             Inspiration inspiration = dao.getInspiration(id);
 
+            assertThat(inspiration.getId(), is(equalTo(id)));
             assertThat(inspiration.getText(), is(equalTo("This is my text")));
             assertThat(inspiration.getCreationDate(), is(not(nullValue())));
             assertThat(inspiration.getLastUpdateDate(), is(not(nullValue())));
+
+            assertThat(inspiration.getInspirationCategory(), is(not(nullValue())));
+            assertThat(inspiration.getInspirationCategory().getId(), is(equalTo(categoryId)));
+            assertThat(inspiration.getInspirationCategory().getName(), is(equalTo("My test category")));
 
         } finally {
             dao.close();
@@ -131,11 +152,18 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
         }
     }
 
-    protected List<Long> insertTestInspirations(TransactionalInspirationDAO dao) {
+    protected Long insertTestCategory(TransactionalInspirationCategoryDAO dao) {
+        return dao.insert("My test category");
+    }
+
+    protected List<Long> insertTestInspirations(TransactionalInspirationDAO dao, TransactionalInspirationCategoryDAO inspirationCategoryDAO) {
         List<Long> inspirationIds = new ArrayList<Long>();
 
-        for (int i = 0; i < 3; i++)
-            inspirationIds.add(dao.insert(String.format("Inspiration %s", i), new Date(), new Date()));
+        for (int k = 0; k < 3; k++) {
+               Long categoryId = inspirationCategoryDAO.insert(String.format("Inspiration Category %s", k));
+            for (int i = 0; i < 3; i++)
+                inspirationIds.add(dao.insert(String.format("Inspiration %s", i), categoryId, Long.parseLong(Integer.toString(i)), new Date(), new Date()));
+        }
 
         return inspirationIds;
     }
