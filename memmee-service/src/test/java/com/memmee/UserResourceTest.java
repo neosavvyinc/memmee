@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.mock;
 
 public class UserResourceTest extends ResourceIntegrationTest {
 
@@ -37,7 +38,8 @@ public class UserResourceTest extends ResourceIntegrationTest {
         passwordGenerator = new PasswordGeneratorImpl();
 
         //add resources
-        addResource(new UserResource(userDAO, passwordDAO, passwordGenerator, memmeeMailSender));
+        MemmeeUrlConfiguration mockMemmeeConfiguration = mock(MemmeeUrlConfiguration.class);
+        addResource(new UserResource(userDAO, passwordDAO, passwordGenerator, memmeeMailSender, mockMemmeeConfiguration));
     }
 
     @Test

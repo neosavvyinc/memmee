@@ -14,8 +14,17 @@ public class MemmeeConfiguration extends Configuration {
     @JsonProperty
     private DatabaseConfiguration database = new DatabaseConfiguration();
 
+    @Valid
+    @NotNull
+    @JsonProperty
+    private MemmeeUrlConfiguration memmeeUrlConfiguration = new MemmeeUrlConfiguration();
+
     public DatabaseConfiguration getDatabase() {
         return database;
+    }
+
+    public MemmeeUrlConfiguration getMemmeeUrlConfiguration() {
+        return memmeeUrlConfiguration;
     }
 
 }

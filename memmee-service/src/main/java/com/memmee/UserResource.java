@@ -27,13 +27,20 @@ public class UserResource {
     private static final Log LOG = Log.forClass(UserResource.class);
     private PasswordGenerator passwordGenerator;
     private MemmeeMailSender memmeeMailSender;
+    private MemmeeUrlConfiguration memmeeUrlConfiguration;
 
-    public UserResource(TransactionalUserDAO dao, TransactionalPasswordDAO passwordDao, PasswordGenerator passwordGenerator, MemmeeMailSender mailSender) {
+    public UserResource(
+            TransactionalUserDAO dao
+            ,TransactionalPasswordDAO passwordDao
+            ,PasswordGenerator passwordGenerator
+            ,MemmeeMailSender mailSender
+            ,MemmeeUrlConfiguration memmeeUrlConfiguration) {
         super();
         this.userDao = dao;
         this.passwordDao = passwordDao;
         this.passwordGenerator = passwordGenerator;
         this.memmeeMailSender = mailSender;
+        this.memmeeUrlConfiguration = memmeeUrlConfiguration;
     }
 
     @GET

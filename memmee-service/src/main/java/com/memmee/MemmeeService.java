@@ -33,6 +33,8 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
     @Override
     protected void initialize(MemmeeConfiguration userConfiguration, Environment environment) throws Exception {
 
+        updateWithCommandLineParameters(userConfiguration);
+
         //Monitors Database Exceptions From the DAOS
         addBundle(new DBIExceptionsBundle());
 
@@ -49,8 +51,21 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
 
         environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
                 "MEMMEE AUTHENTICATION"));
-        environment.addResource(new UserResource(userDao, passwordDAO, new PasswordGeneratorImpl(), new MemmeeMailSenderImpl()));
+        environment.addResource(new UserResource(
+                userDao
+                ,passwordDAO
+                ,new PasswordGeneratorImpl()
+                ,new MemmeeMailSenderImpl()
+                ,userConfiguration.getMemmeeUrlConfiguration()
+        ));
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao));
         environment.addResource(new InspirationResource(userDao, inspirationDao));
     }
+
+    private void updateWithCommandLineParameters(MemmeeConfiguration userConfiguration) {
+
+        userConfiguration.getMemmeeUrlConfiguration().setActiveEnvironmentUrl(userConfiguration);
+
+    }
+
 }

@@ -1,6 +1,16 @@
 #http:
 #    rootPath: "/memmeerest/*"
 
+memmeeUrlConfiguration:
+
+  selectedEnvironment: ${selectedEnvironment}
+
+  devUrl: local.memmee.com
+
+  qaUrl: memmee-dev.neosavvy.com
+
+  prodUrl: www.memmee.com
+
 database:
   # the name of your JDBC driver
   driverClass: com.mysql.jdbc.Driver
