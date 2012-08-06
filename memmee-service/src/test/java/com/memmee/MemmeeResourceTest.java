@@ -4,6 +4,7 @@ import base.ResourceIntegrationTest;
 import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.builder.MemmeeURLBuilder;
 import com.memmee.domain.attachment.dto.Attachment;
+import com.memmee.domain.inspirationcategories.dao.TransactionalInspirationCategoryDAO;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
@@ -39,12 +40,14 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     private static TransactionalMemmeeDAO txMemmeeDAO;
     private static TransactionalAttachmentDAO txAttachmentDAO;
     private static TransactionalInspirationDAO txInspirationDAO;
+    private static TransactionalInspirationCategoryDAO txInspirationCategoryDAO;
 
     private static Long userId;
     private static Long passwordId;
     private static Long memmeeId;
     private static Long attachmentId;
     private static Long inspirationId;
+    private static Long inspirationCategoryId;
 
     @Override
     protected void setUpResources() throws Exception {
@@ -56,6 +59,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         txMemmeeDAO = database.open(TransactionalMemmeeDAO.class);
         txAttachmentDAO = database.open(TransactionalAttachmentDAO.class);
         txInspirationDAO = database.open(TransactionalInspirationDAO.class);
+        txInspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
 
         passwordId = passwordDAO.insert("password", 0);
         userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date());
@@ -262,7 +266,8 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
 
     protected Long insertTestData() {
         attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "this_is_a_thumb_file_path.path", "image/jpeg");
-        inspirationId = txInspirationDAO.insert("this is the inspiration text", new Date(), new Date());
+        inspirationCategoryId = txInspirationCategoryDAO.insert("this is a category");
+        inspirationId = txInspirationDAO.insert("this is the inspiration text", inspirationCategoryId, Long.parseLong("1"), new Date(), new Date());
         Date date = DateUtil.getDate(2011, 6, 12);
         return txMemmeeDAO.insert(userId, "This is a memmee", date, date, date, "shareKey", attachmentId, Long.parseLong("1"), inspirationId);
     }

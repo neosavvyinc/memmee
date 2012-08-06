@@ -15,13 +15,6 @@ import org.skife.jdbi.v2.Handle;
 
 import static org.mockito.Mockito.mock;
 
-/**
- * Created with IntelliJ IDEA.
- * User: trevorewen
- * Date: 7/9/12
- * Time: 10:18 PM
- * To change this template use File | Settings | File Templates.
- */
 public class ResourceIntegrationTest extends ResourceTest {
 
     protected final DatabaseConfiguration mysqlConfig = new DatabaseConfiguration();
@@ -54,6 +47,7 @@ public class ResourceIntegrationTest extends ResourceTest {
             handle.createCall("DROP TABLE IF EXISTS attachment").invoke();
             handle.createCall("DROP TABLE IF EXISTS theme").invoke();
             handle.createCall("DROP TABLE IF EXISTS inspiration").invoke();
+            handle.createCall("DROP TABLE IF EXISTS inspirationcategory").invoke();
 
             handle.createCall(
                     "CREATE TABLE `user` (\n" +
@@ -111,11 +105,20 @@ public class ResourceIntegrationTest extends ResourceTest {
             ).invoke();
             handle.createCall(
                     "CREATE TABLE `inspiration` (\n" +
-                            "`id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                            "`text` varchar(1000) NOT NULL,\n" +
-                            "`creationDate` datetime NOT NULL,\n" +
-                            "`lastUpdateDate` datetime NOT NULL,\n" +
-                            "PRIMARY KEY (`id`)\n" +
+                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                            "  `inspirationCategoryId` int(11) NOT NULL,\n" +
+                            "  `text` varchar(1000) NOT NULL,\n" +
+                            "  `inspirationCategoryIndex` int(11) DEFAULT NULL,\n" +
+                            "  `creationDate` datetime DEFAULT NULL,\n" +
+                            "  `lastUpdateDate` datetime DEFAULT NULL,\n" +
+                            "  PRIMARY KEY (`id`)\n" +
+                            ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6"
+            ).invoke();
+            handle.createCall(
+                    "CREATE TABLE `inspirationcategory` (\n" +
+                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+                            "  `name` varchar(200) NOT NULL,\n" +
+                            "  PRIMARY KEY (`id`)\n" +
                             ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1"
             ).invoke();
 

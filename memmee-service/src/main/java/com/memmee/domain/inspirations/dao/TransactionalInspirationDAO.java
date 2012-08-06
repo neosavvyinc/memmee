@@ -12,26 +12,51 @@ import org.skife.jdbi.v2.sqlobject.mixins.GetHandle;
 import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 public interface TransactionalInspirationDAO extends Transactional<TransactionalInspirationDAO>, GetHandle, CloseMe {
 
-    @SqlQuery("select * from inspiration where id = :id")
+    @SqlQuery("select i.id, i.text, i.inspirationCategoryId, i.inspirationCategoryIndex, i.creationDate, i.lastUpdateDate, " +
+            "ic.id as inspirationCategoryId, ic.name as inspirationCategoryName from inspiration i " +
+            "LEFT OUTER JOIN inspirationcategory ic on i.inspirationCategoryId = inspirationCategoryId")
+    @Mapper(InspirationMapper.class)
+    List<Inspiration> getAllInspirations();
+
+    @SqlQuery("select i.id, i.text, i.inspirationCategoryId, i.inspirationCategoryIndex, i.creationDate, i.lastUpdateDate, " +
+            "ic.id as inspirationCategoryId, ic.name as inspirationCategoryName from inspiration i " +
+            "LEFT OUTER JOIN inspirationcategory ic on i.inspirationCategoryId = inspirationCategoryId " +
+            "where i.id = :id")
     @Mapper(InspirationMapper.class)
     Inspiration getInspiration(@Bind("id") Long id);
 
-    @SqlQuery("select * from inspiration order by rand() limit 1")
+    @SqlQuery("select i.id, i.text, i.inspirationCategoryId, i.inspirationCategoryIndex, i.creationDate, i.lastUpdateDate, " +
+            "ic.id as inspirationCategoryId, ic.name as inspirationCategoryName from inspiration i " +
+            "LEFT OUTER JOIN inspirationcategory ic on i.inspirationCategoryId = inspirationCategoryId " +
+            "order by rand() limit 1")
     @Mapper(InspirationMapper.class)
     Inspiration getRandomInspiration();
 
-    @SqlQuery("select * from inspiration where id <> :excludeId order by rand() limit 1")
+    @SqlQuery("select i.id, i.text, i.inspirationCategoryId, i.inspirationCategoryIndex, i.creationDate, i.lastUpdateDate, " +
+            "ic.id as inspirationCategoryId, ic.name as inspirationCategoryName from inspiration i " +
+            "LEFT OUTER JOIN inspirationcategory ic on i.inspirationCategoryId = inspirationCategoryId " +
+            "where i.id <> :excludeId order by rand() limit 1")
     @Mapper(InspirationMapper.class)
     Inspiration getRandomInspiration(@Bind("excludeId") Long excludeId);
 
-    @SqlUpdate("insert into inspiration (text, creationDate, lastUpdateDate) " +
-        "values (:text, :creationDate, :lastUpdateDate)")
+    @SqlQuery("select i.id, i.text, i.inspirationCategoryId, i.inspirationCategoryIndex, i.creationDate, i.lastUpdateDate, " +
+            "ic.id as inspirationCategoryId, ic.name as inspirationCategoryName from inspiration i " +
+            "LEFT OUTER JOIN inspirationcategory ic on i.inspirationCategoryId = inspirationCategoryId " +
+            "where i.inspirationCategoryId = :inspirationCategoryId group by i.id order by inspirationCategoryIndex")
+    @Mapper(InspirationMapper.class)
+    List<Inspiration> getInspirationsForInspirationCategory(@Bind("inspirationCategoryId") Long inspirationCategoryId);
+
+    @SqlUpdate("insert into inspiration (text, inspirationCategoryId, inspirationCategoryIndex, creationDate, lastUpdateDate) " +
+            "values (:text, :inspirationCategoryId, :inspirationCategoryIndex, :creationDate, :lastUpdateDate)")
     @GetGeneratedKeys
     Long insert(
             @Bind("text") String text,
+            @Bind("inspirationCategoryId") Long inspirationCategoryId,
+            @Bind("inspirationCategoryIndex") Long inspirationCategoryIndex,
             @Bind("creationDate") Date creationDate,
             @Bind("lastUpdateDate") Date lastUpdateDate
     );
