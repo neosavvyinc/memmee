@@ -41,6 +41,8 @@ public class UserResource {
         this.passwordGenerator = passwordGenerator;
         this.memmeeMailSender = mailSender;
         this.memmeeUrlConfiguration = memmeeUrlConfiguration;
+
+        this.memmeeMailSender.setUrlConfiguration( memmeeUrlConfiguration );
     }
 
     @GET
@@ -113,11 +115,20 @@ public class UserResource {
     }
 
 
+    /**
+     * Please note that a @Valid user can not be required
+     * to add a new user since we don't accept a Password argument
+     * when creating the user. Please don't use @Valid here.
+     *
+     * @param user
+     * @return
+     * @throws UserResourceException
+     */
     @POST
     @Path("/user")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public User add(@Valid User user) throws UserResourceException {
+    public User add(User user) throws UserResourceException {
         user.setApiKey(UUID.randomUUID().toString());
         memmeeMailSender.sendConfirmationEmail(user);
 
@@ -127,12 +138,12 @@ public class UserResource {
             else if (userDao.getUserCount(user.getEmail()) >= 1) {
                 throw new UserResourceException(UserResourceException.IN_USE_EMAIL);
             } else {
-                Long passwordId = passwordDao.insert(
-                        passwordGenerator.encrypt(user.getPassword().getValue()),
-                        user.getPassword().isTemp() ? 1 : 0);
+//                Long passwordId = passwordDao.insert(
+//                        passwordGenerator.encrypt(user.getPassword().getValue()),
+//                        user.getPassword().isTemp() ? 1 : 0);
                 Long userId = userDao.insert(user.getFirstName(),
                         user.getEmail(),
-                        passwordId,
+                        null,
                         user.getApiKey(),
                         new Date(),
                         new Date()

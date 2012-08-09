@@ -12,26 +12,6 @@
     </changeSet>
 
     <changeSet id="sprint2" author="adam">
-        <!--<insert tableName="user">-->
-        <!--<column name="id" value="-100"/>-->
-        <!--<column name="firstName" value="test"/>-->
-        <!--<column name="lastName" value="test"/>-->
-        <!--<column name="email" value="test@memmee.com"/>-->
-        <!--<column name="password" value="test"/>-->
-        <!--<column name="apiKey" value="test"/>-->
-        <!--<column name="apiDate" valueDate="2012-06-01"/>-->
-        <!--<column name="creationDate" valueDate="2012-06-01"/>-->
-        <!--</insert>-->
-        <!-- user -->
-        <insert tableName="user">
-            <column name="id" value="1"/>
-            <column name="firstName" value="Luke"/>
-            <column name="email" value="luke.lappin@gmail.com"/>
-            <column name="passwordId" value="1"/>
-            <column name="apiKey" value="lukesKey"/>
-            <column name="apiDate" valueDate="2012-06-01"/>
-            <column name="creationDate" valueDate="2012-06-01"/>
-        </insert>
         <insert tableName="user">
             <column name="id" value="2"/>
             <column name="firstName" value="Adam"/>

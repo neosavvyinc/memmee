@@ -90,7 +90,8 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
     @Test
     public void testAdd() {
-        User user = new User("Ed", "newemail@newemail.com", new Password("myPas64400"));
+        User user = new User();
+        user.setEmail("newemail@newemail.com");
         client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
         List<User> users = userDAO.findAll();
 
@@ -98,8 +99,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
         assertThat(users.get(0).getEmail(), is(equalTo("newemail@newemail.com")));
 
         assertThat(users.get(0).getPassword(), is(not(nullValue())));
-        assertThat(users.get(0).getPassword().getValue(), is(equalTo(passwordGenerator.encrypt("myPas64400"))));
-        assertThat(users.get(0).getPassword().getValue(), is(not(equalTo("myPas64400"))));
+        assertThat(users.get(0).getPassword().getValue(), is(nullValue()));
     }
 
     @Test

@@ -3,13 +3,20 @@
 
 memmeeUrlConfiguration:
 
-  selectedEnvironment: ${selectedEnvironment}
+  # Valid options are:
+  # - development
+  # - qualityAssurance
+  # - production
+  selectedEnvironment: development
 
   devUrl: local.memmee.com
+  devFromEmailAddress: aparrish@neosavvy.com
 
   qaUrl: memmee-dev.neosavvy.com
+  qaFromEmailAddress: qa.memmee@memmee.com
 
   prodUrl: www.memmee.com
+  prodFromEmailAddress: memmee@memmee.com
 
 database:
   # the name of your JDBC driver

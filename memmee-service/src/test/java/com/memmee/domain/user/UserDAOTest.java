@@ -34,7 +34,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
                             "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
                             "  `firstName` varchar(1024) DEFAULT NULL,\n" +
                             "  `email` varchar(4096) NOT NULL,\n" +
-                            "  `passwordId` int(11) NOT NULL,\n" +
+                            "  `passwordId` int(11),\n" +
                             "  `apiKey` varchar(1024) DEFAULT NULL,\n" +
                             "  `apiDate` datetime DEFAULT NULL,\n" +
                             "  `creationDate` datetime NOT NULL,\n" +

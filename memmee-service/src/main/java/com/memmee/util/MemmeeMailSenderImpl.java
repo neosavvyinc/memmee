@@ -8,6 +8,7 @@ import com.cribbstechnologies.clients.mandrill.model.response.message.SendMessag
 import com.cribbstechnologies.clients.mandrill.request.MandrillMessagesRequest;
 import com.cribbstechnologies.clients.mandrill.request.MandrillRESTRequest;
 import com.cribbstechnologies.clients.mandrill.util.MandrillConfiguration;
+import com.memmee.MemmeeUrlConfiguration;
 import com.memmee.domain.user.dto.User;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -23,6 +24,7 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
     private static MandrillMessagesRequest messagesRequest = new MandrillMessagesRequest();
     private static HttpClient client;
     private static ObjectMapper mapper = new ObjectMapper();
+    private MemmeeUrlConfiguration memmeeUrlConfiguration;
 
     @Override
     public void sendConfirmationEmail(User user) {
@@ -31,18 +33,18 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         MandrillMessageRequest mmr = new MandrillMessageRequest();
         MandrillHtmlMessage message = new MandrillHtmlMessage();
         Map<String, String> headers = new HashMap<String, String>();
-        message.setFrom_email("aparrish@memmee.com");
-        message.setFrom_name("Adam Parrish");
+        message.setFrom_email(memmeeUrlConfiguration.getActiveEmailAddress());
+        message.setFrom_name("Memmee Welcome Service");
         message.setHeaders(headers);
         message.setHtml("<html><body><h1>Welcome to Memmee.com!</h1>Please click here to confirm your account and fill " +
-                "out your profile.<a href=\"http://local.memmee.com/#/profile?apiKey="
+                "out your profile.<a href=\"http://" + memmeeUrlConfiguration.getActiveUrl() + "/#/profile?apiKey="
                 + user.getApiKey() + "\">Confirm your account</a></body></html>");
-        message.setSubject("This is the subject");
+        message.setSubject("Welcome to Memmee... Confirm your user!");
         MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("New Memmee User!", user.getEmail())};
         message.setTo(recipients);
         message.setTrack_clicks(true);
         message.setTrack_opens(true);
-        String[] tags = new String[]{"tag1", "tag2", "tag3"};
+        String[] tags = new String[]{"newUserEmail"};
         message.setTags(tags);
         mmr.setMessage(message);
 
@@ -64,7 +66,7 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         message.setFrom_name("Adam Parrish");
         message.setHeaders(headers);
         message.setHtml(String.format("<html><body><h1>Forgotten Password</h1>Your password is %s. " +
-                "Login at <a href=\"http://local.memmee.com/#\">Memmee</a> to see your profile now.",
+                "Login at <a href=\"http://"+ memmeeUrlConfiguration.getActiveUrl() + "/#\">Memmee</a> to see your profile now.",
                 user.getPassword()));
 
         message.setSubject("Memmee - Forgotten Password");
@@ -72,7 +74,7 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         message.setTo(recipients);
         message.setTrack_clicks(true);
         message.setTrack_opens(true);
-        String[] tags = new String[]{"tag1", "tag2", "tag3"};
+        String[] tags = new String[]{"forgotPasswordEmail"};
         message.setTags(tags);
         mmr.setMessage(message);
 
@@ -81,6 +83,11 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         } catch (RequestFailedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void setUrlConfiguration(MemmeeUrlConfiguration memmeeUrlConfiguration) {
+        this.memmeeUrlConfiguration = memmeeUrlConfiguration;
     }
 
     protected void loadMandrill() {

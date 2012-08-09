@@ -1,5 +1,6 @@
 package com.memmee.util;
 
+import com.memmee.MemmeeUrlConfiguration;
 import com.memmee.domain.user.dto.User;
 import org.junit.Test;
 
@@ -16,9 +17,13 @@ public class MemmeeMailSenderTest {
         User user = new User();
         user.setEmail("aparrish@neosavvy.com");
 
-        mailSender.sendConfirmationEmail(user);
+        MemmeeUrlConfiguration config = new MemmeeUrlConfiguration();
+        config.setActiveEmailAddress("aparrish@neosavvy.com");
+        config.setActiveUrl("test-cases.memmee.com");
 
-        assertTrue(true);
+
+        mailSender.setUrlConfiguration( config );
+        mailSender.sendConfirmationEmail(user);
     }
 
 }

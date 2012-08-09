@@ -40,7 +40,7 @@ CREATE TABLE user (
   id int(11) NOT NULL AUTO_INCREMENT,
   firstName varchar(1024) DEFAULT NULL,
   email varchar(4096) NOT NULL,
-  passwordId int(11) NOT NULL,
+  passwordId int(11),
   apiKey varchar(1024) DEFAULT NULL,
   apiDate datetime DEFAULT NULL,
   creationDate datetime NOT NULL,

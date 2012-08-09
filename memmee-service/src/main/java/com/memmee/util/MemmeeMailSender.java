@@ -1,5 +1,6 @@
 package com.memmee.util;
 
+import com.memmee.MemmeeUrlConfiguration;
 import com.memmee.domain.user.dto.User;
 
 /**
@@ -12,4 +13,6 @@ public interface MemmeeMailSender {
     public void sendConfirmationEmail(User user);
 
     public void sendForgotPasswordEmail(User user);
+
+    public void setUrlConfiguration(MemmeeUrlConfiguration memmeeUrlConfiguration);
 }
