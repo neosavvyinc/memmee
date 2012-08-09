@@ -265,9 +265,9 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         Memmee memmee2 = new Memmee();
         memmee2.setText("Memmee2");
         memmee2.setDisplayDate(DateUtil.getDate(2012, 8, 9));
-        memmee2.setInspiration(inspiration1);
+        memmee2.setInspiration(inspiration2);
         memmee2.setShareKey("myShareKey08101981");
-        memmee2.setAttachment(attachment1);
+        memmee2.setAttachment(attachment2);
         memmee2.setUserId(userId - 4);
 
         client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee2);

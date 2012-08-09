@@ -127,13 +127,13 @@ public class MemmeeResource {
 
                         if(memmee.getCreationDate() == null)
                         {
-                            LOG.error("Memmee is being attemptedly inserted with a null creation date");
+                            LOG.error("Memmee is being inserted with a null creation date");
                             memmee.setCreationDate(timeOfInsert);
                         }
 
                         if(memmee.getDisplayDate() == null)
                         {
-                            LOG.error("Memmee is being attemptedly inserted with a null display date");
+                            LOG.error("Memmee is being inserted with a null display date");
                             memmee.setDisplayDate(timeOfInsert);
                         }
 
