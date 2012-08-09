@@ -8,6 +8,8 @@ CREATE TABLE attachment
 
 CREATE TABLE inspiration (
   id int(11) NOT NULL AUTO_INCREMENT,
+  inspirationCategoryId int(11) NOT NULL,
+  inspirationCategoryIndex int(11) DEFAULT NULL,
   text varchar(1000) NOT NULL,
   creationDate datetime NOT NULL,
   lastUpdateDate datetime NOT NULL,
