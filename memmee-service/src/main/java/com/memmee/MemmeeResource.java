@@ -122,8 +122,23 @@ public class MemmeeResource {
 
                 memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                     public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
+
+                        Date timeOfInsert = new Date();
+
+                        if(memmee.getCreationDate() == null)
+                        {
+                            LOG.error("Memmee is being attemptedly inserted with a null creation date");
+                            memmee.setCreationDate(timeOfInsert);
+                        }
+
+                        if(memmee.getDisplayDate() == null)
+                        {
+                            LOG.error("Memmee is being attemptedly inserted with a null display date");
+                            memmee.setDisplayDate(timeOfInsert);
+                        }
+
                         Long memmeeId = memmeeDao.insert(user.getId(), memmee.getText(),
-                                new Date(), memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null, null);
+                                timeOfInsert, memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null, null);
 
                         Long attachmentId;
 

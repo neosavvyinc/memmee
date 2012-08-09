@@ -235,6 +235,49 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     }
 
     @Test
+    public void testInsertTwoMemmeesWithAttachmentAndVerifyOnlyTwoComeBack()
+    {
+        Long attOneId = txAttachmentDAO.insert("this_is_a_file_path.path1", "this_is_a_thumb_file_path.path1", "image/jpeg");
+        Long inspirationCategoryOneId = txInspirationCategoryDAO.insert("this is a category1");
+        Long inspirationOneId = txInspirationDAO.insert("this is the inspiration text1", inspirationCategoryOneId, Long.parseLong("1"), new Date(), new Date());
+
+        Attachment attachment1 = txAttachmentDAO.getAttachment(attOneId);
+        Inspiration inspiration1 = txInspirationDAO.getInspiration(inspirationOneId);
+
+        Memmee memmee1 = new Memmee();
+        memmee1.setText("Memmee1");
+        memmee1.setDisplayDate(DateUtil.getDate(2012, 8, 9));
+        memmee1.setInspiration(inspiration1);
+        memmee1.setShareKey("myShareKey08101981");
+        memmee1.setAttachment(attachment1);
+        memmee1.setUserId(userId - 4);
+
+        client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee1);
+
+        Long attTwoId = txAttachmentDAO.insert("this_is_a_file_path.path2", "this_is_a_thumb_file_path.path2", "image/jpeg");
+        Long inspirationCategoryTwoId = txInspirationCategoryDAO.insert("this is a category2");
+        Long inspirationTwoId = txInspirationDAO.insert("this is the inspiration text2", inspirationCategoryTwoId, Long.parseLong("1"), new Date(), new Date());
+
+        Attachment attachment2 = txAttachmentDAO.getAttachment(attTwoId);
+        Inspiration inspiration2 = txInspirationDAO.getInspiration(inspirationTwoId);
+
+
+        Memmee memmee2 = new Memmee();
+        memmee2.setText("Memmee2");
+        memmee2.setDisplayDate(DateUtil.getDate(2012, 8, 9));
+        memmee2.setInspiration(inspiration1);
+        memmee2.setShareKey("myShareKey08101981");
+        memmee2.setAttachment(attachment1);
+        memmee2.setUserId(userId - 4);
+
+        client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee2);
+
+        List<Memmee> memmees = client().resource("/memmeerest/getmemmees?apiKey=apiKey").get(List.class);
+        assertThat(memmees, is(notNullValue()));
+        assertThat(memmees.size(), is(2));
+    }
+
+    @Test
     public void testShareMemmee() {
         memmeeId = insertTestData();
 
