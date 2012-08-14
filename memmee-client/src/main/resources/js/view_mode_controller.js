@@ -7,9 +7,24 @@ function ViewModeController($scope, $http, broadCastService) {
             $scope.memmee = null;
         });
 
+    var isMemmeeValid = function()
+    {
+        if ( "You have no memmees." == $scope.memmee.text )
+        {
+            return false
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     //Action Handlers
     $scope.onDeleteMemmee = function () {
-        broadCastService.confirmDeleteViewModeController();
+        if( isMemmeeValid() )
+        {
+            broadCastService.confirmDeleteViewModeController();
+        }
     };
 
     $scope.generateAndShowPublicLink = function () {
@@ -26,18 +41,15 @@ function ViewModeController($scope, $http, broadCastService) {
 
     //Service Calls
     $scope.getDefaultMemmee = function () {
-//        if (broadCastService.selectedMemmee == null || broadCastService.selectedMemmee.id == null) {
         $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
             success(function (data, status, headers, config) {
                 console.log('your memmee has been loaded');
+                console.log("memmee: " + JSON.stringify(data));
                 $scope.memmee = broadCastService.selectedMemmee = data;
                 $scope.hideAttachmentDiv();
             }).error(function (data, status, headers, config) {
                 console.log('error loading your doggone memmee');
             });
-//        } else {
-//            $scope.memmee = broadCastService.selectedMemmee;
-//        }
     };
 
     $scope.deleteMemmee = function (memmee) {
@@ -93,7 +105,7 @@ function ViewModeController($scope, $http, broadCastService) {
 
         console.log("ViewModeController.hideAttachmentDiv()");
 
-        if ( "You have no memmees." == $scope.memmee.text )
+        if ( isMemmeeValid() )
         {
             console.log("ViewModeController.hideAttachmentDiv() -- no memmees left");
             $scope.attachmentVisible = false;
