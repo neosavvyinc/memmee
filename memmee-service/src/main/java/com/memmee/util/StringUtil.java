@@ -13,4 +13,9 @@ public class StringUtil {
         return val == null || val == "";
     }
 
+    //@TODO, this is temporary till I get a jar for random password generation
+    public static String generateRandom() {
+        return "r@ndom67";
+    }
+
 }

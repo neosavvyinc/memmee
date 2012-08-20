@@ -56,7 +56,7 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
     }
 
     @Override
-    public void sendForgotPasswordEmail(User user) {
+    public void sendForgotPasswordEmail(User user, String temporaryPassword) {
         loadMandrill();
 
         MandrillMessageRequest mmr = new MandrillMessageRequest();
@@ -67,7 +67,7 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         message.setHeaders(headers);
         message.setHtml(String.format("<html><body><h1>Forgotten Password</h1>Your password is %s. " +
                 "Login at <a href=\"http://"+ memmeeUrlConfiguration.getActiveUrl() + "/#\">Memmee</a> to see your profile now.",
-                user.getPassword().getValue()));
+                temporaryPassword));
 
         message.setSubject("Memmee - Forgotten Password");
         MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("New Memmee User!", user.getEmail())};
