@@ -32,10 +32,10 @@ public class UserResource {
 
     public UserResource(
             TransactionalUserDAO dao
-            ,TransactionalPasswordDAO passwordDao
-            ,PasswordGenerator passwordGenerator
-            ,MemmeeMailSender mailSender
-            ,MemmeeUrlConfiguration memmeeUrlConfiguration) {
+            , TransactionalPasswordDAO passwordDao
+            , PasswordGenerator passwordGenerator
+            , MemmeeMailSender mailSender
+            , MemmeeUrlConfiguration memmeeUrlConfiguration) {
         super();
         this.userDao = dao;
         this.passwordDao = passwordDao;
@@ -43,7 +43,7 @@ public class UserResource {
         this.memmeeMailSender = mailSender;
         this.memmeeUrlConfiguration = memmeeUrlConfiguration;
 
-        this.memmeeMailSender.setUrlConfiguration( memmeeUrlConfiguration );
+        this.memmeeMailSender.setUrlConfiguration(memmeeUrlConfiguration);
     }
 
     @GET
@@ -94,7 +94,7 @@ public class UserResource {
             passwordDao.update(
                     user.getPassword().getId(),
                     passwordGenerator.encrypt(user.getPassword().getValue()),
-                    user.getPassword().isTemp() ? 1 : 0);
+                    0);
             userDao.update(
                     id,
                     user.getFirstName(),
