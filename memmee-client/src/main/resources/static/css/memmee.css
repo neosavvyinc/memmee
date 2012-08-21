@@ -705,3 +705,11 @@ html{
 .isShown{
     display: block;
 }
+
+.isFrozen{
+    overflow: hidden;
+}
+
+.isUnfrozen{
+    overflow: auto;
+}
