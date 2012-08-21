@@ -1,5 +1,6 @@
 function AttachmentController($scope, broadCastService) {
     var dropbox = document.getElementById("dropbox")
+    $scope.files = [];
 
     function onDropboxChange(evt) {
         var input = document.getElementById("uploadInput")
@@ -8,7 +9,7 @@ function AttachmentController($scope, broadCastService) {
         var files = input.files;
         if (files.length > 0) {
             $scope.$apply(function () {
-                $scope.files = []
+                $scope.files = [];
                 for (var i = 0; i < files.length; i++) {
                     $scope.files.push(files[i])
                 }
@@ -56,6 +57,14 @@ function AttachmentController($scope, broadCastService) {
         })
         alert("The upload has been canceled by the user or the browser dropped the connection.")
     }
+
+    $scope.deleteCurrentAttachment = function() {
+        broadCastService.deleteAttachment();
+    }
+
+    $scope.$on("deleteAttachmentSuccess", function() {
+        $scope.files = [];
+    })
 }
 
 AttachmentController.$inject = ['$scope', 'memmeeBroadCastService'];

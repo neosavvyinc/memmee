@@ -17,19 +17,10 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="files.length" class="span3">
+            <div ng-show="files.length" class="span4">
+                <button class='btn' ng-click="deleteCurrentAttachment()"><i class="icon-remove-circle"></i></button>
                 <div ng-repeat="file in files">
                     <span>{{file.webkitRelativePath || file.name}}</span>
-                    (<span ng-switch="file.size > 1024*1024">
-                            <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
-                            <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
-                        </span>)
-                </div>
-                <div ng-show="progressVisible">
-                    <div class="percent">{{progress}}%</div>
-                    <div class="progress-bar">
-                        <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
-                    </div>
                 </div>
             </div>
             <div class="btn-group" style="float: right;">

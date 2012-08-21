@@ -353,6 +353,24 @@ public class MemmeeResource {
     }
 
 
+    @DELETE
+    @Path("/deleteattachment")
+    @Produces({MediaType.APPLICATION_JSON})
+    public void deleteAttachment(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id)
+    {
+        final User user = userDao.getUserByApiKey(apiKey);
+
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        memmeeDao.deleteAttachment( id );
+
+        LOG.info("Attachment with id: " + id + " was successfully deleted");
+
+    }
+
     @POST
     @Path("/uploadattachment")
     @Consumes(MediaType.MULTIPART_FORM_DATA)

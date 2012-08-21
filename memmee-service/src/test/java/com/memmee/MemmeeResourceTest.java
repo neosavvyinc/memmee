@@ -307,6 +307,24 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
 
     }
 
+    @Test
+    public void testCreateAndDeleteAttachment() {
+        attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "this_is_a_thumb_file_path.path", "image/jpeg");
+
+        client().resource(
+                new MemmeeURLBuilder()
+                        .setMethodURL("deleteattachment")
+                        .setApiKeyParam("apiKey")
+                        .setIdParam(attachmentId)
+                        .build())
+                .delete();
+
+        Attachment attachment = txAttachmentDAO.getAttachment(attachmentId);
+
+        assertThat(attachment, is(nullValue()));
+
+    }
+
     protected Long insertTestData() {
         attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "this_is_a_thumb_file_path.path", "image/jpeg");
         inspirationCategoryId = txInspirationCategoryDAO.insert("this is a category");
