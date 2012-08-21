@@ -355,11 +355,13 @@ html{
 }
 
 .modal.discard-memmee{
-    top: 45%; /*set via js*/
-    left: 45%; /*set via js*/
+    top: 50%;
+    left: 50%;
     width: 379px;
     height: 150px;
     padding: 9px 10px 14px 43px;
+    margin-top: -75px;
+    margin-left: -140.5px;
     background: transparent url('../img/bg-modal.png') top left no-repeat;
 }
 
