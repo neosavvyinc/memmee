@@ -695,3 +695,13 @@ html{
     height: 19px;
     background-position: 0 -286px;
 }
+
+
+/*STATE*/
+.isHidden{
+    display: none;
+}
+
+.isShown{
+    display: block;
+}
