@@ -1,5 +1,6 @@
 package com.memmee;
 
+import com.Ostermiller.util.RandPass;
 import com.memmee.auth.PasswordGenerator;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
 import com.memmee.error.UserResourceException;
@@ -171,7 +172,7 @@ public class UserResource {
         if (user == null)
             throw new UserResourceException("There is no user that exists with that email");
 
-        String temporaryPassword = StringUtil.generateRandom();
+        String temporaryPassword = new RandPass().getPass(10);
         passwordDao.update(user.getPassword().getId(), passwordGenerator.encrypt(temporaryPassword), 1);
         memmeeMailSender.sendForgotPasswordEmail(user, temporaryPassword);
     }
