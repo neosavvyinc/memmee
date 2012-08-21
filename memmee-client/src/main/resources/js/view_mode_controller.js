@@ -11,10 +11,12 @@ function ViewModeController($scope, $http, broadCastService) {
     {
         if ( "You have no memmees." == $scope.memmee.text )
         {
+            console.log("isMemmeValid():returning false");
             return false
         }
         else
         {
+            console.log("isMemmeValid():returning true");
             return true;
         }
     }
@@ -107,13 +109,13 @@ function ViewModeController($scope, $http, broadCastService) {
 
         if ( isMemmeeValid() )
         {
-            console.log("ViewModeController.hideAttachmentDiv() -- no memmees left");
-            $scope.attachmentVisible = false;
+            console.log("ViewModeController.hideAttachmentDiv() -- still a memmee left");
+            $scope.attachmentVisible = true;
         }
         else
         {
-            console.log("ViewModeController.hideAttachmentDiv() -- still a memmee left");
-            $scope.attachmentVisible = true;
+            console.log("ViewModeController.hideAttachmentDiv() -- no memmees left");
+            $scope.attachmentVisible = false;
         }
     }
 }
