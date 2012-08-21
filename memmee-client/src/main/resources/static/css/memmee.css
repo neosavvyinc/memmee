@@ -197,12 +197,7 @@ html{
     font: 17px/30px 'Courier New', Courier, 'Times New Roman', Times, sans-serif;
     background: transparent;
     border: none;
-    overflow: hidden;
-}
-
-.memmee-text.isEditable{
-    border: 2px solid #ccc;
-    overflow:auto;
+    overflow: hidden!important;
 }
 
 .memmee-controls{
