@@ -31,7 +31,13 @@ function NavigationController($scope, broadCastService, $location) {
 
         resetCreationButton();
 
-    })
+    });
+
+    $scope.$on(CreateModeControllerEvents.get('CREATE_MODE_STARTED'), function() {
+
+        $scope.createModeStyles = "btn btn-primary disabled";
+
+    });
 
     $scope.toggleCreateMode = function()
     {
