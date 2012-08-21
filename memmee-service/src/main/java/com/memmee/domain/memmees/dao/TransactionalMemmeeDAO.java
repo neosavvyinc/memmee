@@ -28,8 +28,8 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate, " +
             "i.lastUpdateDate as inspirationLastUpdateDate from memmee m " +
-            "LEFT OUTER JOIN attachment a on m.attachmentId = attachmentId " +
-            "LEFT OUTER JOIN inspiration i on m.inspirationId = inspirationId " +
+            "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
+            "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
             "where m.id = :id"
     )
     @Mapper(MemmeeAttachmentInspirationMapper.class)
@@ -39,8 +39,8 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate, " +
             "i.lastUpdateDate as inspirationLastUpdateDate from memmee m " +
-            "LEFT OUTER JOIN attachment a on m.attachmentId = attachmentId " +
-            "LEFT OUTER JOIN inspiration i on m.inspirationId = inspirationId " +
+            "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
+            "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
             "where m.shareKey = :shareKey"
     )
     @Mapper(MemmeeAttachmentInspirationMapper.class)

@@ -35,7 +35,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
     }
 
 
-    var createMode = false;
+    var createMode = true;
 
     broadCastService.isCreateMode = function () {
         return createMode;
