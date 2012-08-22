@@ -131,18 +131,14 @@ public class UserResource {
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public User add(User user) throws UserResourceException {
-        user.setApiKey(UUID.randomUUID().toString());
-        memmeeMailSender.sendConfirmationEmail(user);
-
         try {
             if (!EmailValidator.getInstance().isValid(user.getEmail()))
-                throw new UserResourceException(UserResourceException.INVALID_EMAIL);
+                throw new WebApplicationException(new UserResourceException(UserResourceException.INVALID_EMAIL));
             else if (userDao.getUserCount(user.getEmail()) >= 1) {
-                throw new UserResourceException(UserResourceException.IN_USE_EMAIL);
+                throw new WebApplicationException(new UserResourceException(UserResourceException.IN_USE_EMAIL));
             } else {
-//                Long passwordId = passwordDao.insert(
-//                        passwordGenerator.encrypt(user.getPassword().getValue()),
-//                        user.getPassword().isTemp() ? 1 : 0);
+                user.setApiKey(UUID.randomUUID().toString());
+                memmeeMailSender.sendConfirmationEmail(user);
                 Long userId = userDao.insert(user.getFirstName(),
                         user.getEmail(),
                         null,
