@@ -10,12 +10,16 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
 
     broadCastService.loginUser = function ($user) {
         this.user = $user;
-        $user.password = "";
+        $user.password.value = "";
         localStorage.setItem("user", JSON.stringify($user));
         $rootScope.$broadcast(LoginControllerEvents.get('LOGIN'));
 
-        if ($location.url() == "/home")
-            $location.url("/loggedin");
+        if ($location.url() == "/home" || $location.url() == "/requiredchangepassword") {
+            if ($user.password.temp)
+                $location.url("/requiredchangepassword");
+            else
+                $location.url("/loggedin");
+        }
     }
 
     broadCastService.logoutUser = function ($user) {

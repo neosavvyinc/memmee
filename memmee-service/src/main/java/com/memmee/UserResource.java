@@ -1,11 +1,13 @@
 package com.memmee;
 
+import com.Ostermiller.util.RandPass;
 import com.memmee.auth.PasswordGenerator;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
 import com.memmee.error.UserResourceException;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
+import com.memmee.util.StringUtil;
 import com.yammer.dropwizard.logging.Log;
 import org.apache.commons.validator.EmailValidator;
 import org.skife.jdbi.v2.exceptions.DBIException;
@@ -31,10 +33,10 @@ public class UserResource {
 
     public UserResource(
             TransactionalUserDAO dao
-            ,TransactionalPasswordDAO passwordDao
-            ,PasswordGenerator passwordGenerator
-            ,MemmeeMailSender mailSender
-            ,MemmeeUrlConfiguration memmeeUrlConfiguration) {
+            , TransactionalPasswordDAO passwordDao
+            , PasswordGenerator passwordGenerator
+            , MemmeeMailSender mailSender
+            , MemmeeUrlConfiguration memmeeUrlConfiguration) {
         super();
         this.userDao = dao;
         this.passwordDao = passwordDao;
@@ -42,7 +44,7 @@ public class UserResource {
         this.memmeeMailSender = mailSender;
         this.memmeeUrlConfiguration = memmeeUrlConfiguration;
 
-        this.memmeeMailSender.setUrlConfiguration( memmeeUrlConfiguration );
+        this.memmeeMailSender.setUrlConfiguration(memmeeUrlConfiguration);
     }
 
     @GET
@@ -93,7 +95,7 @@ public class UserResource {
             passwordDao.update(
                     user.getPassword().getId(),
                     passwordGenerator.encrypt(user.getPassword().getValue()),
-                    user.getPassword().isTemp() ? 1 : 0);
+                    0);
             userDao.update(
                     id,
                     user.getFirstName(),
@@ -170,7 +172,9 @@ public class UserResource {
         if (user == null)
             throw new UserResourceException("There is no user that exists with that email");
 
-        memmeeMailSender.sendForgotPasswordEmail(user);
+        String temporaryPassword = new RandPass().getPass(10);
+        passwordDao.update(user.getPassword().getId(), passwordGenerator.encrypt(temporaryPassword), 1);
+        memmeeMailSender.sendForgotPasswordEmail(user, temporaryPassword);
     }
 
     @DELETE
