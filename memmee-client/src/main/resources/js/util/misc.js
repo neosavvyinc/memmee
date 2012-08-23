@@ -7,7 +7,7 @@ window.onload = function() {
                 var len = parseInt(this.getAttribute("maxlength"), 10);
 
                 if(this.value.length > len) {
-                    alert('Maximum length exceeded: ' + len);
+                    console.log('Maximum length exceeded: ' + len);
                     this.value = this.value.substr(0, len);
                     return false;
                 }
@@ -15,6 +15,26 @@ window.onload = function() {
 
             txts[i].onkeyup = func;
             txts[i].onblur = func;
+        }
+    }
+}
+
+var keynum, lines = 1;
+
+function limitLines(obj, e) {
+    // IE
+    if(window.event) {
+        keynum = e.keyCode;
+        // Netscape/Firefox/Opera
+    } else if(e.which) {
+        keynum = e.which;
+    }
+
+    if(keynum == 13) {
+        if(lines == obj.rows) {
+            return false;
+        }else{
+            lines++;
         }
     }
 }
