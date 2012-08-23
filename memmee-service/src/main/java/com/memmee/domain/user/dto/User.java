@@ -27,6 +27,8 @@ public class User implements Serializable {
 
     private Date creationDate;
 
+    private Long loginCount;
+
     public User() { super(); }
 
     public User(String firstName, String email, Password password) {
@@ -97,5 +99,13 @@ public class User implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Long getLoginCount() {
+        return loginCount;
+    }
+
+    public void setLoginCount(Long loginCount) {
+        this.loginCount = loginCount;
     }
 }

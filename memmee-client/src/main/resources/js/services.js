@@ -76,21 +76,25 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
      */
     broadCastService.confirmDiscardCreateModeController = function () {
         $rootScope.$broadcast(CreateModeControllerEvents.get('CONFIRM_DISCARD'));
-    }
+    };
 
     broadCastService.memmeeCreatedCreateModeController = function () {
         $rootScope.$broadcast(CreateModeControllerEvents.get('MEMMEE_CREATED'));
-    }
+    };
 
     broadCastService.createModeCancelledCreateModeController = function () {
         createMode = false;
         $rootScope.$broadcast(CreateModeControllerEvents.get('CREATE_MODE_CANCELLED'));
-    }
+    };
 
     broadCastService.createModeStartedCreateModeController = function () {
         createMode = true;
         $rootScope.$broadcast(CreateModeControllerEvents.get('CREATE_MODE_STARTED'));
-    }
+    };
+
+    broadCastService.createModeNewUserLogin = function() {
+        $rootScope.$broadcast(CreateModeControllerEvents.get('NEW_USER_LOGIN'));
+    };
 
     /**
      * LoginController

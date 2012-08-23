@@ -34,7 +34,8 @@ var CreateModeControllerEvents = (function() {
         'DISCARD_CONFIRMED': 'discardConfirmed' + controllerName,
         'MEMMEE_CREATED': 'memmeeCreated' + controllerName,
         'CREATE_MODE_CANCELLED': 'createModeCancelled' + controllerName,
-        'CREATE_MODE_STARTED': 'createModeStarted' + controllerName
+        'CREATE_MODE_STARTED': 'createModeStarted' + controllerName,
+        'NEW_USER_LOGIN': 'newUserLogin' + controllerName
     };
 
     return {

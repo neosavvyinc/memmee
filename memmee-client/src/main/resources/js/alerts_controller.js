@@ -47,6 +47,10 @@ function AlertsController($scope, $http, broadCastService, $location) {
         $scope.toggleYesNoAlert(Notifications.get('DISCARD_MEMMEE_HEADER'), Notifications.get('DISCARD_MEMMEE_MESSAGE'), "Discard", "Cancel");
     });
 
+    $scope.$on(CreateModeControllerEvents.get('NEW_USER_LOGIN'), function () {
+        $scope.toggleAlert("Temporary Alert", "This will show on the first two logins for any new user. This is for instructions.");
+    });
+
     /* LoginController */
     $scope.$on(LoginControllerEvents.get('INVALID_LOGIN'), function () {
         $scope.toggleAlert(Errors.get('INVALID_LOGIN_HEADER'), Errors.get('INVALID_LOGIN_MESSAGE'));

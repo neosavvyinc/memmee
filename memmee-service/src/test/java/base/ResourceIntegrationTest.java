@@ -1,6 +1,8 @@
 package base;
 
 import com.memmee.MemmeeResource;
+import com.memmee.domain.password.PasswordDAOTest;
+import com.memmee.domain.user.UserDAOTest;
 import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.config.LoggingFactory;
@@ -49,26 +51,8 @@ public class ResourceIntegrationTest extends ResourceTest {
             handle.createCall("DROP TABLE IF EXISTS inspiration").invoke();
             handle.createCall("DROP TABLE IF EXISTS inspirationcategory").invoke();
 
-            handle.createCall(
-                    "CREATE TABLE `user` (\n" +
-                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                            "  `firstName` varchar(1024) DEFAULT NULL,\n" +
-                            "  `email` varchar(4096) NOT NULL,\n" +
-                            "  `passwordId` int(11),\n" +
-                            "  `apiKey` varchar(1024) DEFAULT NULL,\n" +
-                            "  `apiDate` datetime DEFAULT NULL,\n" +
-                            "  `creationDate` datetime NOT NULL,\n" +
-                            "  PRIMARY KEY (`id`)\n" +
-                            ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3"
-            ).invoke();
-            handle.createCall(
-                    "CREATE TABLE `password` (\n" +
-                    "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                    "  `value` varchar(1000) DEFAULT NULL,\n" +
-                    "  `temp` tinyint(4) DEFAULT NULL,\n" +
-                    "  PRIMARY KEY (`id`)\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1"
-            ).invoke();
+            handle.createCall(UserDAOTest.TABLE_DEFINITION).invoke();
+            handle.createCall(PasswordDAOTest.TABLE_DEFINITION).invoke();
             handle.createCall(
                     "CREATE TABLE `memmee` (\n" +
                             "`id` int(11) NOT NULL AUTO_INCREMENT,\n" +

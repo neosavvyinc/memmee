@@ -20,6 +20,7 @@
             <column name="apiKey" value="adamsKey"/>
             <column name="apiDate" valueDate="2012-06-01"/>
             <column name="creationDate" valueDate="2012-06-01"/>
+            <column name="loginCount" value="0"/>
         </insert>
 
         <!-- password -->

@@ -125,6 +125,11 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         $(clazz).data("date", $scope.getTodaysDate());
         $(clazz).datepicker({format:'mm-dd-yyyy'}).on('changeDate', $scope.dateChanged);
     };
+
+    //Show instructions in first two logins
+    if (broadCastService.user.loginCount < 3) {
+        broadCastService.createModeNewUserLogin();
+    }
 }
 
 CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];

@@ -16,27 +16,27 @@ import java.util.List;
 
 public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO>, GetHandle, CloseMe {
 
-    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
+    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, u.loginCount, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
             "LEFT OUTER JOIN password p on u.passwordId = p.id")
     @Mapper(UserMapper.class)
     List<User> findAll();
 
-    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
+    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, u.loginCount, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
             "LEFT OUTER JOIN password p on u.passwordId = p.id " +
             "where u.id = :id")
     @Mapper(UserMapper.class)
     User getUser(@Bind("id") Long id);
 
-    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
+    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, u.loginCount, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
             "LEFT OUTER JOIN password p on u.passwordId = p.id " +
             "where u.apiKey = :apiKey")
     @Mapper(UserMapper.class)
     User getUserByApiKey(@Bind("apiKey") String apiKey);
 
-    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
+    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, u.loginCount, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
             "LEFT OUTER JOIN password p on u.passwordId = p.id " +
             "where u.email = :email")
@@ -44,7 +44,7 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
     User getUserByEmail(
             @Bind("email") String email);
 
-    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, " +
+    @SqlQuery("select u.id, u.firstName, u.email, u.passwordId, u.apiKey, u.apiDate, u.creationDate, u.loginCount, " +
             "p.id as passwordId, p.value as passwordValue, p.temp as passwordTemp from user u " +
             "LEFT OUTER JOIN password p on u.passwordId = p.id " +
             "where u.email = :email AND p.value = :password")
@@ -54,8 +54,8 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
             @Bind("password") String password);
 
 
-    @SqlUpdate("insert into user (firstName, email, passwordId, apiKey, apiDate, creationDate)" +
-            " values (:firstName, :email, :passwordId, :apiKey, :apiDate, :creationDate)")
+    @SqlUpdate("insert into user (firstName, email, passwordId, apiKey, apiDate, creationDate, loginCount)" +
+            " values (:firstName, :email, :passwordId, :apiKey, :apiDate, :creationDate, :loginCount)")
     @GetGeneratedKeys
     Long insert(
             @Bind("firstName") String firstName
@@ -64,10 +64,11 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
             , @Bind("apiKey") String apiKey
             , @Bind("apiDate") Date apiDate
             , @Bind("creationDate") Date creationDate
+            , @Bind("loginCount") Long loginCount
     );
 
     @SqlUpdate("update user set firstName = :firstName, email = :email, passwordId = :passwordId, " +
-            "apiKey = :apiKey, apiDate = :apiDate where id = :id")
+            "apiKey = :apiKey, apiDate = :apiDate , loginCount = :loginCount where id = :id")
     int update(
             @Bind("id") Long id
             , @Bind("firstName") String firstName
@@ -75,6 +76,12 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
             , @Bind("passwordId") Long passwordId
             , @Bind("apiKey") String apiKey
             , @Bind("apiDate") Date apiDate
+            , @Bind("loginCount") Long loginCount
+    );
+
+    @SqlUpdate("update user set loginCount = loginCount + 1 where id = :id")
+    int incrementLoginCount(
+            @Bind("id") Long id
     );
 
     @SqlUpdate("delete from user where id = :id")
