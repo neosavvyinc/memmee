@@ -21,7 +21,7 @@
             <img ng-src="{{memmee.attachment.filePath}}" ng-show="attachmentVisible" />
         </div>
         <div id="text-view">
-            <label>{{memmee.text}}</label>
+            <span ng-bind-html-unsafe="memmee.text"></span>
         </div>
     </div>
 </div>
