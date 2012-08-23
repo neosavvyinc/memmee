@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +38,7 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
         passwordGenerator = new PasswordGeneratorImpl();
 
         //add resources
-        addResource(new InspirationResource(userDAO, inspirationDAO));
+        addResource(new InspirationResource(userDAO, inspirationDAO, inspirationCategoryDAO));
     }
 
     @Test
@@ -62,7 +63,7 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
         List<Long> inspirationIds = new ArrayList<Long>();
 
         for (int k = 0; k < 3; k++) {
-            Long categoryId = inspirationCategoryDAO.insert(String.format("Inspiration Category %s", k));
+            Long categoryId = inspirationCategoryDAO.insert(Long.parseLong(Integer.toString(k)), String.format("Inspiration Category %s", k));
             for (int i = 0; i < 3; i++)
                 inspirationIds.add(dao.insert(String.format("Inspiration %s", i), categoryId, Long.parseLong(Integer.toString(i)), new Date(), new Date()));
         }

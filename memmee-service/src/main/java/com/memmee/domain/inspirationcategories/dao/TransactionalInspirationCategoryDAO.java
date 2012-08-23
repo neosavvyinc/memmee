@@ -17,9 +17,17 @@ public interface TransactionalInspirationCategoryDAO extends Transactional<Trans
     @Mapper(InspirationCategoryMapper.class)
     InspirationCategory getInspirationCategory(@Bind("id") Long id);
 
-    @SqlUpdate("insert into inspirationcategory (name) values (:name)")
+    @SqlQuery("select * from inspirationcategory where idx = :idx")
+    @Mapper(InspirationCategoryMapper.class)
+    InspirationCategory getInspirationCategoryByIndex(@Bind("idx") Long index);
+
+    @SqlQuery("select * from inspirationcategory where idx = (select MAX(idx) from inspirationcategory)")
+    @Mapper(InspirationCategoryMapper.class)
+    InspirationCategory getHighestInspirationCategory();
+
+    @SqlUpdate("insert into inspirationcategory (idx, name) values (:idx, :name)")
     @GetGeneratedKeys
-    Long insert(@Bind("name") String name);
+    Long insert(@Bind("idx") Long index, @Bind("name") String name);
 
     void close();
 }

@@ -11,6 +11,8 @@ public class InspirationCategory implements Serializable {
     @NotNull
     private String name;
 
+    private Long index;
+
     public Long getId() {
         return id;
     }
@@ -25,6 +27,14 @@ public class InspirationCategory implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getIndex() {
+        return index;
+    }
+
+    public void setIndex(Long index) {
+        this.index = index;
     }
 
     @Override

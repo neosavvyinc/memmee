@@ -50,6 +50,21 @@ public interface TransactionalInspirationDAO extends Transactional<Transactional
     @Mapper(InspirationMapper.class)
     List<Inspiration> getInspirationsForInspirationCategory(@Bind("inspirationCategoryId") Long inspirationCategoryId);
 
+    @SqlQuery("select i.id, i.text, i.inspirationCategoryId, i.inspirationCategoryIndex, i.creationDate, i.lastUpdateDate, " +
+            "ic.id as inspirationCategoryId, ic.name as inspirationCategoryName from inspiration i " +
+            "LEFT OUTER JOIN inspirationcategory ic on i.inspirationCategoryId = inspirationCategoryId " +
+            "where i.inspirationCategoryId = :inspirationCategoryId and i.inspirationCategoryIndex = :inspirationCategoryIndex")
+    @Mapper(InspirationMapper.class)
+    Inspiration getInspirationForInspirationCategoryAndIndex(@Bind("inspirationCategoryId") Long inspirationCategoryId, @Bind("inspirationCategoryIndex") Long inspirationCategoryIndex);
+
+    @SqlQuery("select i.id, i.text, i.inspirationCategoryId, i.inspirationCategoryIndex, i.creationDate, i.lastUpdateDate, " +
+            "ic.id as inspirationCategoryId, ic.name as inspirationCategoryName from inspiration i " +
+            "LEFT OUTER JOIN inspirationcategory ic on i.inspirationCategoryId = ic.id " +
+            "where i.inspirationCategoryId = :inspirationCategoryId and i.inspirationCategoryIndex = (select MAX(inspirationCategoryIndex) " +
+            "from inspiration inneric where inneric.inspirationCategoryId = :inspirationCategoryId)")
+    @Mapper(InspirationMapper.class)
+    Inspiration getHighestInspirationForCategory(@Bind("inspirationCategoryId") Long inspirationCategoryId);
+
     @SqlUpdate("insert into inspiration (text, inspirationCategoryId, inspirationCategoryIndex, creationDate, lastUpdateDate) " +
             "values (:text, :inspirationCategoryId, :inspirationCategoryIndex, :creationDate, :lastUpdateDate)")
     @GetGeneratedKeys
