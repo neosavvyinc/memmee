@@ -34,6 +34,13 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast('attachmentUploadSuccess');
     }
 
+    broadCastService.deleteAttachment = function () {
+        $rootScope.$broadcast('deleteAttachment');
+    }
+
+    broadCastService.deleteAttachmentSuccess = function () {
+        $rootScope.$broadcast('deleteAttachmentSuccess');
+    }
 
     var createMode = true;
 

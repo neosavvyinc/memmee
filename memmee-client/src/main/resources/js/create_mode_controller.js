@@ -97,6 +97,22 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         console.log("attachment was uploaded");
     });
 
+    $scope.$on('deleteAttachment', function() {
+        console.log("deleting attachment from backend...");
+        $http({method:'DELETE', url:'/memmeerest/deleteattachment/?apiKey=' + broadCastService.user.apiKey + "&id=" + $scope.memmee.attachment.id}).
+            success(function (data, status, headers, config) {
+                console.log('you have deleted your current attachment');
+                delete $scope.memmee.attachment;
+
+                broadCastService.deleteAttachmentSuccess();
+            }).
+            error(function (data, status, headers, config) {
+                console.log('an error occurred while deleting your current attachment');
+
+            });
+    });
+
+
     $scope.$on(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), function (event, memmee) {
         if (memmee.id != $scope.memmee.id) {
             if ($scope.isUnchanged($scope.memmee)) {

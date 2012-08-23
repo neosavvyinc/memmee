@@ -67,7 +67,7 @@ function AlertsController($scope, $http, broadCastService, $location) {
 
     /* RegistrationController */
     $scope.$on(RegistrationControllerEvents.get('ERROR_SAVING'), function (event, message) {
-        $scope.toggleAlert(Errors.get('REGISTRATION_HEADER'), message);
+        $scope.toggleAlert(Errors.get('REGISTRATION_HEADER'), "We had a problem signing up with that email address, if you already created an account you should reset your password");
     });
 
     /* ViewModeController */
