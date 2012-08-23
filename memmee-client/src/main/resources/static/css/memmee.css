@@ -64,6 +64,15 @@ table {
 }
 
 @font-face{
+    font-family: "Josefin Sans";
+    src:
+        "../font/josefinsans/JosefinSans-Bold.ttf",
+        "../font/josefinsans/JosefinSans-BoldItalic.ttf",
+        "../font/josefinsans/JosefinSans-italic.ttf",
+        "../font/josefinsans/JosefinSans-Regular.ttf";
+}
+
+@font-face{
     font-family: "josefinslab";
     src:
         "../font/josefinslab/JosefinSlab-Regular.ttf",
@@ -142,6 +151,17 @@ html{
     height: 585px;
     margin-bottom: 50px;
     background: transparent url(../img/bg-card-main.png) top left no-repeat;
+}
+
+.memmee-bubble{
+    position: absolute;
+    top : 166px;
+    left: 650px;
+    width: 248px;
+    height: 272px;
+    padding: 15px 34px 28px 36px;
+    overflow: hidden;
+    background: transparent url(../img/bg-bubble.png) top left no-repeat;
 }
 
 .warning{
@@ -487,9 +507,34 @@ html{
     background-position: 0 -375px;
 }
 
+.list.steps{
+    display: block;
+    list-style-type: none;
+    color: white;
+}
+
+.list.steps dt{
+    margin-bottom: 2px;
+    font: bold 10px/21px 'Josefin Sans', 'josefinslab', Arial, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+.list.steps dd{
+    margin-bottom: 8px;
+    font: italic 21px/18px 'Crimson Text', 'Times New Roman', Times, serif;
+    text-align: center;
+}
+.list.steps dd:last-child{
+    margin-bottom: 0;
+}
+
 .link{
     display: inline-block;
     text-decoration: none;
+}
+
+.link .icon{
+    display: inline-block;
 }
 
 .link.more{
@@ -529,6 +574,23 @@ html{
     font-size: 12px;
     line-height: 19px;
     background: transparent url('../img/bg-link-today.png') 28px bottom no-repeat;
+}
+
+.link.bubble-close{
+    position: relative;
+    top: 5px;
+    left: 64px;
+    font: bold 10px/12px "josefinslab", Arial, sans-serif;
+    text-transform: uppercase;
+    color: white;
+}
+
+.link.bubble-close .icon{
+    margin-right: 12px;
+}
+
+.link.bubble-close:hover .icon{
+    background-position: -11px -600px;
 }
 
 .btn, .icon{
@@ -680,6 +742,7 @@ html{
 .btn.trash:hover{
     background-position: -22px -568px;
 }
+
 .icon.addStyle{
     width: 19px;
     height: 18px;
@@ -697,7 +760,12 @@ html{
     height: 19px;
     background-position: 0 -286px;
 }
-
+.icon.bubble-close{
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background-position: 0 -600px;
+}
 
 /*STATE*/
 .isHidden{
