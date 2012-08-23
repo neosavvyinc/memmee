@@ -40,8 +40,8 @@ please point them out.
 
 To create your user use the following commands:
 
-    CREATE memmee
-    CREATE memmeetest
+    CREATE database memmee;
+    CREATE database memmeetest;
 
     CREATE USER 'memmee'@'%' IDENTIFIED BY 'memmee';
     CREATE USER 'memmee'@'localhost' IDENTIFIED BY 'memmee';

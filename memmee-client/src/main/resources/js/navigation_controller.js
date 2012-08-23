@@ -6,7 +6,7 @@ function NavigationController($scope, broadCastService, $location) {
             $scope.loggedInUser = "";
 
             $scope.visibleLoggedInStyle = { visibility: 'hidden' };
-            $scope.createModeStyles = "btn btn-primary";
+            $scope.createModeStyles = "btn btn-primary disabled";
         });
 
     var resetCreationButton = function() {
@@ -16,7 +16,7 @@ function NavigationController($scope, broadCastService, $location) {
     var resetStyles = function() {
         $scope.visibleLoggedInStyle = {};
 
-        resetCreationButton();
+        $scope.createModeStyles = "btn btn-primary disabled";
     }
 
     $scope.$on(LoginControllerEvents.get('LOGIN'), function() {
@@ -31,7 +31,13 @@ function NavigationController($scope, broadCastService, $location) {
 
         resetCreationButton();
 
-    })
+    });
+
+    $scope.$on(CreateModeControllerEvents.get('CREATE_MODE_STARTED'), function() {
+
+        $scope.createModeStyles = "btn btn-primary disabled";
+
+    });
 
     $scope.toggleCreateMode = function()
     {
@@ -45,13 +51,13 @@ function NavigationController($scope, broadCastService, $location) {
         if( broadCastService.isCreateMode() )
         {
             console.log("Turning off create mode....");
-            $scope.createModeStyles = "btn btn-primary";
+            $scope.createModeStyles = "btn btn-primary disabled";
             broadCastService.createModeCancelledCreateModeController();
         }
         else
         {
             console.log("Turning on create mode....");
-            $scope.createModeStyles = "btn btn-primary disabled";
+            $scope.createModeStyles = "btn btn-primary";
             broadCastService.createModeStartedCreateModeController();
         }
     }

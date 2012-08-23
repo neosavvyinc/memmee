@@ -137,6 +137,8 @@ public class MemmeeResource {
                             memmee.setDisplayDate(timeOfInsert);
                         }
 
+                        //Save the hard returns as <br> tags
+                        memmee.setText(memmee.getText().replaceAll("(\r\n|\n)", "<br />"));
                         Long memmeeId = memmeeDao.insert(user.getId(), memmee.getText(),
                                 timeOfInsert, memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null, null);
 
@@ -152,6 +154,7 @@ public class MemmeeResource {
                     }
                 });
             } else {
+                memmee.setText(memmee.getText().replaceAll("(\r\n|\n)", "<br />"));
                 memmeeId = memmeeDao.insert(
                         user.getId()
                         , memmee.getText()
@@ -352,6 +355,24 @@ public class MemmeeResource {
         LOG.info("Memmee with id: " + id + " was successfully deleted");
     }
 
+
+    @DELETE
+    @Path("/deleteattachment")
+    @Produces({MediaType.APPLICATION_JSON})
+    public void deleteAttachment(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id)
+    {
+        final User user = userDao.getUserByApiKey(apiKey);
+
+        if (user == null) {
+            LOG.error("USER NOT FOUND FOR API KEY:" + apiKey);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+
+        memmeeDao.deleteAttachment( id );
+
+        LOG.info("Attachment with id: " + id + " was successfully deleted");
+
+    }
 
     @POST
     @Path("/uploadattachment")

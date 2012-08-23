@@ -22,6 +22,7 @@ function ProfileController($scope, $http, broadCastService) {
                 console.log('your user has been updated')
                 broadCastService.loginUser(data);
                 broadCastService.showProfileUpdatedSuccess();
+                broadCastService.createModeStartedCreateModeController();
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving your user');

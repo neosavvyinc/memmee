@@ -3,7 +3,7 @@ function LoggedInController($scope, $http, broadCastService) {
     //Super/Inherited Methods
     DefaultController($scope,
         /* load/tearDown */ function () {
-            $scope.bodyContentPartial = "partials/viewMode.html";
+            $scope.bodyContentPartial = "partials/createMode.html";
         });
 
     $scope.$on(CreateModeControllerEvents.get('CREATE_MODE_STARTED'), function() {

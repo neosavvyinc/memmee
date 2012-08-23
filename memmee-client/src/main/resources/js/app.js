@@ -3,6 +3,7 @@ angular.module('memmee-app', ['memmee-app.services']).
     $routeProvider.
         when('/home', {templateUrl:'partials/home.html'}).
         when('/loggedin', {templateUrl:'partials/loggedin.html'}).
+        when('/requiredchangepassword', {templateUrl:'partials/requiredChangePassword.html'}).
         when('/profile', {templateUrl:'partials/profile.html'}).
         when('/share', {templateUrl:'partials/shareMode.html'}).
         otherwise({redirectTo:'/home'});

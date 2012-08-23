@@ -12,7 +12,7 @@ import com.memmee.domain.user.dto.User;
 public interface MemmeeMailSender {
     public void sendConfirmationEmail(User user);
 
-    public void sendForgotPasswordEmail(User user);
+    public void sendForgotPasswordEmail(User user, String temporaryPassword);
 
     public void setUrlConfiguration(MemmeeUrlConfiguration memmeeUrlConfiguration);
 }
