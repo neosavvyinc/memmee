@@ -80,6 +80,16 @@ table {
         "../font/josefinslab/JosefinSlab-Italic.ttf";
 }
 
+@font-face{
+    font-family: "opensans";
+    src:
+        "../font/opensans/OpenSans-Bold.ttf",
+        "../font/opensans/OpenSans-BoldItalic.ttf",
+        "../font/opensans/OpenSans-Regular.ttf",
+        "../font/opensans/OpenSans-Semibold.ttf",
+        "../fon/opensans/OpenSans-Semibolditalic.ttf";
+}
+
 .crimson{
     font-family: "Crimson Text", "Times New Roman", Times, serif;
 }
@@ -90,6 +100,9 @@ table {
 
 .josefineslab{
     font-family: "josefinslab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.opensans{
+    font-family: "opensans", Arial, Helvetica, sans-serif;
 }
 
 a{
@@ -266,6 +279,7 @@ html{
 }
 
 .controls.io{
+    position: relative;
     padding-left: 10px;
 }
 
@@ -507,6 +521,7 @@ html{
     background-position: 0 -375px;
 }
 
+
 .list.steps{
     display: block;
     list-style-type: none;
@@ -527,6 +542,72 @@ html{
 .list.steps dd:last-child{
     margin-bottom: 0;
 }
+.memmee-style.dropdown{
+    display: none;
+}
+.calendar-container{
+    position: absolute;
+    top: 50px;
+    z-index: 999;
+    width: 197px;
+    height: 190px;
+    background: transparent url('../img/bg-calendar.png') top left no-repeat;
+}
+.controls.calendar{
+    position: relative;
+    left: 20px;
+    top: 16px;
+    width: 154px;
+    height: 10px;
+    line-height: 10px;
+}
+.controls.calendar. .btn.prevMonth{
+    position: absolute;
+}
+.controls.calendar .btn.nextMonth{
+    position: absolute;
+    right: 0;
+}
+.title-month{
+    display: inline-block;
+    width: 112.5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #476579;
+}
+table.calendar{
+    position: absolute;
+    left: 12px;
+    top: 38px;
+    width: 140px;
+    height: 120px;
+}
+
+.calendar td{
+    line-height: 20px;
+    vertical-align: center;
+}
+.calendar td a{
+    display: block;
+    width: 20px;
+    height: 20px;
+    /*line-height: 20px;*/
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #476579;
+    cursor: pointer;
+}
+.calendar td a:hover, .calendar td a.selected{
+    background-color: #476579;
+    color: white;
+}
+.calendar td a.prev-mo , .calendar td a.next-mo{
+    color: #7ca9b0;
+}
+
 
 .link{
     display: inline-block;
@@ -741,6 +822,16 @@ html{
 }
 .btn.trash:hover{
     background-position: -22px -568px;
+}
+.btn.prevMonth{
+    width: 10px;
+    height: 10px;
+    background-position: 0 -611px;
+}
+.btn.nextMonth{
+    width: 10px;
+    height: px;
+    background-position: -10px -611px;
 }
 
 .icon.addStyle{
