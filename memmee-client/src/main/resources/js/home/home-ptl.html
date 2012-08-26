@@ -1,0 +1,79 @@
+<div id="content">
+
+    <div class="memmee-card-top-home">
+        <span class="memmee-date lg">Welcome to Memmee</span>
+    </div>
+
+    <div class="memmee-card-home" style="float: left;">
+        <span class="memmee-date lg">Register</span>
+        <div style="padding: 100px 30px 30px 30px">
+
+            <form>
+                <span class="lg">Email Address is all you need:</span>
+
+                <br/>
+                <br/>
+
+                <input type="text"
+                       placeholder="Enter Your Email Address"
+                       ng-model="user.email"
+                       style="width: 50%"
+                        >
+
+                <br/>
+
+                <div class="memmee-controls">
+                    <a
+                        ng-click="register()"
+                        class="btn save">Sign Up »
+                    </a>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="memmee-card-home" style="float: right;">
+        <span class="memmee-date lg">Login here</span>
+        <div style="padding: 100px 30px 30px 30px">
+            <form >
+                <span class="lg">Login and capture some memmees!</span>
+
+                <p class="error"
+                   style="margin: auto auto 0 3px;"
+                   ng-style="forgotPasswordSuccessStyle"
+                   ng-show="forgotPasswordReminder != ''">{{forgotPasswordReminder}}</p>
+
+                <br/>
+
+                <input
+                        type="text"
+                        ng-model="user.email"
+                        style="width: 50%"
+                        placeholder="Username / Email Address">
+                <br/>
+
+                <input
+                        type="password"
+                        ng-model="user.password"
+                        style="width: 50%"
+                        placeholder="Password">
+                <br/>
+
+                <div class="memmee-controls">
+                    <a
+                            ng-click="login()"
+                            class="btn save">
+                        Login »
+                    </a>
+                    <a
+                            ng-click="forgotPassword()"
+                            class="btn cancel">
+                        Forgot Password »
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
