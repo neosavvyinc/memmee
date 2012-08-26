@@ -600,7 +600,7 @@ html{
     height: 136px;
     width: 12px;
 }
-.scrollbar-container .btn{
+.controls.styles .scrollbar-container .btn{
     display: block;
     line-height: 12px;
 }
