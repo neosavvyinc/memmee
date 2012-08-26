@@ -294,6 +294,7 @@ html{
 }
 
 .memmee-slideshow{
+    display: none;
     position: relative;
     left: -46px;
     height: 176px;
@@ -542,10 +543,80 @@ html{
 .list.steps dd:last-child{
     margin-bottom: 0;
 }
+.memmee-style.container{
+    position: relative;
+    width: 224px;
+    height: 141px;
+    padding: 38px 18px 18px 26px;
+    overflow: hidden;
+    background: transparent url('../img/bg-dropDown.png') top left no-repeat;
+}
 .memmee-style.dropdown{
-    display: none;
+   display: block;
+   list-style-type: none;
+   color: #476579;
+}
+.memmee-style.dropdown li{
+    display:block;
+    height: 25px;
+    margin:0 12px 3px;
+    padding-left: 11px;
+    font-size: 16px;
+    line-height: 25px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+}
+.memmee-style.dropdown li:hover{
+    background-color: white;
+}
+.memmee-style.dropdown a{
+    color: #476579;
+    text-decoration: none;
+}
+.memmee-style.dropdown .btn{
+    display: inline-block;
+}
+.memmee-style.dropdown .btn.style-news{
+    margin-right: 13px;
+}
+.memmee-style.dropdown .btn.style-coffee{
+    margin-right: 13px;
+}
+.memmee-style.dropdown .btn.style-saleTag{
+    position: relative;
+    left: -10px;
+    margin-right: 8px;
+}
+.memmee-style.dropdown .btn.style-pushPin{
+    margin-right: 30px;
+}
+
+.scrollbar-container{
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    height: 136px;
+    width: 12px;
+}
+.scrollbar-container .btn{
+    display: block;
+    line-height: 12px;
+}
+.scrollbar-container .btn.scrollDown{
+    position: absolute;
+    top: 100%;
+}
+.scrollbar-container .scrollbar{
+    position: absolute;
+    left: 4px;
+    width: 4px;
+    height: 64px;
+    background-color: #70756b;
 }
 .calendar-container{
+    display: none;
     position: absolute;
     top: 50px;
     z-index: 999;
@@ -715,44 +786,44 @@ table.calendar{
     background-position: -51px -93px;
 }
 .btn.style-news{
-    width: 36px;
-    height: 26px;
-    background-position: 0 -131px;
+    width: 30px;
+    height: 22px;
+    background-position: 0 -625px;
 }
 .btn.style-news:hover{
-    width: 36px;
-    height: 26px;
-    background-position: -38px -130px;
+    width: 30px;
+    height: 22px;
+    background-position: 0px -647px;
 }
 .btn.style-coffee{
-    width: 40px;
-    height: 30px;
-    background-position: 1px -156px;
+    width: 32px;
+    height: 23px;
+    background-position: -49px -624px;
 }
 .btn.style-coffee:hover{
-    width: 40px;
-    height: 30px;
-    background-position: -39px -157px;
+    width: 32px;
+    height: 26px;
+    background-position: -48px -646px;
 }
 .btn.style-pushPin{
-    width: 20px;
-    height: 30px;
-    background-position: 3px -186px;
+    width: 16px;
+    height: 20px;
+    background-position: -96px -625px;
 }
 .btn.style-pushPin:hover{
-    width: 20px;
-    height: 30px;
-    background-position: -17px -186px;
+    width: 16px;
+    height: 27px;
+    background-position: -95px -645px;
 }
 .btn.style-saleTag{
-    width: 46px;
-    height: 27px;
-    background-position: 0 -216px;
+    width: 37px;
+    height: 22px;
+    background-position: -120px -624px;
 }
 .btn.style-saleTag:hover{
-    width: 46px;
-    height: 27px;
-    background-position: -47px -216px;
+    width: 37px;
+    height: 23px;
+    background-position: -120px -646px;
 }
 .btn.save{
     width: 81px;
@@ -830,8 +901,18 @@ table.calendar{
 }
 .btn.nextMonth{
     width: 10px;
-    height: px;
+    height: 10px;
     background-position: -10px -611px;
+}
+.btn.scrollUp{
+    width: 12px;
+    height: 12px;
+    background-position: 0 -676px;
+}
+.btn.scrollDown{
+    width: 12px;
+    height: 12px;
+    background-position: -12px -676px;
 }
 
 .icon.addStyle{
