@@ -137,6 +137,8 @@ public class MemmeeResource {
                             memmee.setDisplayDate(timeOfInsert);
                         }
 
+                        //Save the hard returns as <br> tags
+                        memmee.setText(memmee.getText().replaceAll("(\r\n|\n)", "<br />"));
                         Long memmeeId = memmeeDao.insert(user.getId(), memmee.getText(),
                                 timeOfInsert, memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null, null);
 
@@ -152,6 +154,7 @@ public class MemmeeResource {
                     }
                 });
             } else {
+                memmee.setText(memmee.getText().replaceAll("(\r\n|\n)", "<br />"));
                 memmeeId = memmeeDao.insert(
                         user.getId()
                         , memmee.getText()

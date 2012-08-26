@@ -11,10 +11,10 @@ import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
 import com.memmee.util.MemmeeMailSenderImpl;
-import org.junit.Ignore;
+import com.sun.jersey.api.client.ClientResponse;
+
 import org.junit.Test;
 
-import javax.ws.rs.WebApplicationException;
 import java.util.Date;
 import java.util.List;
 
@@ -106,15 +106,14 @@ public class UserResourceTest extends ResourceIntegrationTest {
         assertThat(users.get(0).getPassword().getValue(), is(nullValue()));
     }
 
-    @Ignore
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testAddNonUniqueEmail() {
         insertTestData();
 
         User user = new User("Different Name", "trevorewen@gmail.com", new Password("pw555666"));
 
-        client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
-
+        ClientResponse response = client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(ClientResponse.class, user);
+        assertEquals(ClientResponse.Status.INTERNAL_SERVER_ERROR, response.getClientResponseStatus());
     }
 
     @Test

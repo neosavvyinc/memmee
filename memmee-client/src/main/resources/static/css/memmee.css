@@ -64,11 +64,30 @@ table {
 }
 
 @font-face{
+    font-family: "Josefin Sans";
+    src:
+        "../font/josefinsans/JosefinSans-Bold.ttf",
+        "../font/josefinsans/JosefinSans-BoldItalic.ttf",
+        "../font/josefinsans/JosefinSans-italic.ttf",
+        "../font/josefinsans/JosefinSans-Regular.ttf";
+}
+
+@font-face{
     font-family: "josefinslab";
     src:
         "../font/josefinslab/JosefinSlab-Regular.ttf",
         "../font/josefinslab/JosefinSlab-Bold.ttf",
         "../font/josefinslab/JosefinSlab-Italic.ttf";
+}
+
+@font-face{
+    font-family: "opensans";
+    src:
+        "../font/opensans/OpenSans-Bold.ttf",
+        "../font/opensans/OpenSans-BoldItalic.ttf",
+        "../font/opensans/OpenSans-Regular.ttf",
+        "../font/opensans/OpenSans-Semibold.ttf",
+        "../fon/opensans/OpenSans-Semibolditalic.ttf";
 }
 
 .crimson{
@@ -81,6 +100,9 @@ table {
 
 .josefineslab{
     font-family: "josefinslab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.opensans{
+    font-family: "opensans", Arial, Helvetica, sans-serif;
 }
 
 a{
@@ -144,6 +166,17 @@ html{
     background: transparent url(../img/bg-card-main.png) top left no-repeat;
 }
 
+.memmee-bubble{
+    position: absolute;
+    top : 166px;
+    left: 650px;
+    width: 248px;
+    height: 272px;
+    padding: 15px 34px 28px 36px;
+    overflow: hidden;
+    background: transparent url(../img/bg-bubble.png) top left no-repeat;
+}
+
 .warning{
     position: absolute;
     top: 20px;
@@ -197,7 +230,7 @@ html{
     font: 17px/30px 'Courier New', Courier, 'Times New Roman', Times, sans-serif;
     background: transparent;
     border: none;
-    overflow: scroll;
+    overflow: hidden!important;
 }
 
 .memmee-controls{
@@ -246,6 +279,7 @@ html{
 }
 
 .controls.io{
+    position: relative;
     padding-left: 10px;
 }
 
@@ -260,6 +294,7 @@ html{
 }
 
 .memmee-slideshow{
+    display: none;
     position: relative;
     left: -46px;
     height: 176px;
@@ -355,11 +390,13 @@ html{
 }
 
 .modal.discard-memmee{
-    top: 45%; /*set via js*/
-    left: 45%; /*set via js*/
+    top: 50%;
+    left: 50%;
     width: 379px;
     height: 150px;
     padding: 9px 10px 14px 43px;
+    margin-top: -75px;
+    margin-left: -140.5px;
     background: transparent url('../img/bg-modal.png') top left no-repeat;
 }
 
@@ -485,9 +522,171 @@ html{
     background-position: 0 -375px;
 }
 
+
+.list.steps{
+    display: block;
+    list-style-type: none;
+    color: white;
+}
+
+.list.steps dt{
+    margin-bottom: 2px;
+    font: bold 10px/21px 'Josefin Sans', 'josefinslab', Arial, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+.list.steps dd{
+    margin-bottom: 8px;
+    font: italic 21px/18px 'Crimson Text', 'Times New Roman', Times, serif;
+    text-align: center;
+}
+.list.steps dd:last-child{
+    margin-bottom: 0;
+}
+.memmee-style.container{
+    position: relative;
+    width: 224px;
+    height: 141px;
+    padding: 38px 18px 18px 26px;
+    overflow: hidden;
+    background: transparent url('../img/bg-dropDown.png') top left no-repeat;
+}
+.memmee-style.dropdown{
+   display: block;
+   list-style-type: none;
+   color: #476579;
+}
+.memmee-style.dropdown li{
+    display:block;
+    height: 25px;
+    margin:0 12px 3px;
+    padding-left: 11px;
+    font-size: 16px;
+    line-height: 25px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+}
+.memmee-style.dropdown li:hover{
+    background-color: white;
+}
+.memmee-style.dropdown a{
+    color: #476579;
+    text-decoration: none;
+}
+.memmee-style.dropdown .btn{
+    display: inline-block;
+}
+.memmee-style.dropdown .btn.style-news{
+    margin-right: 13px;
+}
+.memmee-style.dropdown .btn.style-coffee{
+    margin-right: 13px;
+}
+.memmee-style.dropdown .btn.style-saleTag{
+    position: relative;
+    left: -10px;
+    margin-right: 8px;
+}
+.memmee-style.dropdown .btn.style-pushPin{
+    margin-right: 30px;
+}
+
+.scrollbar-container{
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    height: 136px;
+    width: 12px;
+}
+.controls.styles .scrollbar-container .btn{
+    display: block;
+    line-height: 12px;
+}
+.scrollbar-container .btn.scrollDown{
+    position: absolute;
+    top: 100%;
+}
+.scrollbar-container .scrollbar{
+    position: absolute;
+    left: 4px;
+    width: 4px;
+    height: 64px;
+    background-color: #70756b;
+}
+.calendar-container{
+    display: none;
+    position: absolute;
+    top: 50px;
+    z-index: 999;
+    width: 197px;
+    height: 190px;
+    background: transparent url('../img/bg-calendar.png') top left no-repeat;
+}
+.controls.calendar{
+    position: relative;
+    left: 20px;
+    top: 16px;
+    width: 154px;
+    height: 10px;
+    line-height: 10px;
+}
+.controls.calendar. .btn.prevMonth{
+    position: absolute;
+}
+.controls.calendar .btn.nextMonth{
+    position: absolute;
+    right: 0;
+}
+.title-month{
+    display: inline-block;
+    width: 112.5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #476579;
+}
+table.calendar{
+    position: absolute;
+    left: 12px;
+    top: 38px;
+    width: 140px;
+    height: 120px;
+}
+
+.calendar td{
+    line-height: 20px;
+    vertical-align: center;
+}
+.calendar td a{
+    display: block;
+    width: 20px;
+    height: 20px;
+    /*line-height: 20px;*/
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #476579;
+    cursor: pointer;
+}
+.calendar td a:hover, .calendar td a.selected{
+    background-color: #476579;
+    color: white;
+}
+.calendar td a.prev-mo , .calendar td a.next-mo{
+    color: #7ca9b0;
+}
+
+
 .link{
     display: inline-block;
     text-decoration: none;
+}
+
+.link .icon{
+    display: inline-block;
 }
 
 .link.more{
@@ -527,6 +726,23 @@ html{
     font-size: 12px;
     line-height: 19px;
     background: transparent url('../img/bg-link-today.png') 28px bottom no-repeat;
+}
+
+.link.bubble-close{
+    position: relative;
+    top: 5px;
+    left: 64px;
+    font: bold 10px/12px "josefinslab", Arial, sans-serif;
+    text-transform: uppercase;
+    color: white;
+}
+
+.link.bubble-close .icon{
+    margin-right: 12px;
+}
+
+.link.bubble-close:hover .icon{
+    background-position: -11px -600px;
 }
 
 .btn, .icon{
@@ -570,44 +786,44 @@ html{
     background-position: -51px -93px;
 }
 .btn.style-news{
-    width: 36px;
-    height: 26px;
-    background-position: 0 -131px;
+    width: 30px;
+    height: 22px;
+    background-position: 0 -625px;
 }
 .btn.style-news:hover{
-    width: 36px;
-    height: 26px;
-    background-position: -38px -130px;
+    width: 30px;
+    height: 22px;
+    background-position: 0px -647px;
 }
 .btn.style-coffee{
-    width: 40px;
-    height: 30px;
-    background-position: 1px -156px;
+    width: 32px;
+    height: 23px;
+    background-position: -49px -624px;
 }
 .btn.style-coffee:hover{
-    width: 40px;
-    height: 30px;
-    background-position: -39px -157px;
+    width: 32px;
+    height: 26px;
+    background-position: -48px -646px;
 }
 .btn.style-pushPin{
-    width: 20px;
-    height: 30px;
-    background-position: 3px -186px;
+    width: 16px;
+    height: 20px;
+    background-position: -96px -625px;
 }
 .btn.style-pushPin:hover{
-    width: 20px;
-    height: 30px;
-    background-position: -17px -186px;
+    width: 16px;
+    height: 27px;
+    background-position: -95px -645px;
 }
 .btn.style-saleTag{
-    width: 46px;
-    height: 27px;
-    background-position: 0 -216px;
+    width: 37px;
+    height: 22px;
+    background-position: -120px -624px;
 }
 .btn.style-saleTag:hover{
-    width: 46px;
-    height: 27px;
-    background-position: -47px -216px;
+    width: 37px;
+    height: 23px;
+    background-position: -120px -646px;
 }
 .btn.save{
     width: 81px;
@@ -678,6 +894,27 @@ html{
 .btn.trash:hover{
     background-position: -22px -568px;
 }
+.btn.prevMonth{
+    width: 10px;
+    height: 10px;
+    background-position: 0 -611px;
+}
+.btn.nextMonth{
+    width: 10px;
+    height: 10px;
+    background-position: -10px -611px;
+}
+.btn.scrollUp{
+    width: 12px;
+    height: 12px;
+    background-position: 0 -676px;
+}
+.btn.scrollDown{
+    width: 12px;
+    height: 12px;
+    background-position: -12px -676px;
+}
+
 .icon.addStyle{
     width: 19px;
     height: 18px;
@@ -694,4 +931,27 @@ html{
     width: 20px;
     height: 19px;
     background-position: 0 -286px;
+}
+.icon.bubble-close{
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background-position: 0 -600px;
+}
+
+/*STATE*/
+.isHidden{
+    display: none;
+}
+
+.isShown{
+    display: block;
+}
+
+.isFrozen{
+    overflow: hidden;
+}
+
+.isUnfrozen{
+    overflow: auto;
 }

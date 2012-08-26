@@ -139,7 +139,7 @@ public class UserResource {
     @Path("/user")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public User add(User user) throws UserResourceException {
+    public User add(User user) {
         try {
             if (!EmailValidator.getInstance().isValid(user.getEmail()))
                 throw new WebApplicationException(new UserResourceException(UserResourceException.INVALID_EMAIL));
