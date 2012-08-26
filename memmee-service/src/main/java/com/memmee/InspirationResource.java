@@ -73,7 +73,7 @@ public class InspirationResource extends BaseResource {
             if (previousInspirationCategory == null) {
                 previousInspirationCategory = inspirationCategoryDAO.getHighestInspirationCategory();
             }
-            returnInspiration = inspirationDAO.getInspirationForInspirationCategoryAndIndex(previousInspirationCategory.getId(), Long.parseLong("0"));
+            returnInspiration = inspirationDAO.getInspirationForInspirationCategoryAndIndex(previousInspirationCategory.getId(), Long.parseLong(Integer.toString(inspirationDAO.getInspirationsForInspirationCategory(previousInspirationCategory.getId()).size() - 1)));
         }
         return returnInspiration;
     }

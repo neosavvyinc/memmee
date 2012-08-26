@@ -7,7 +7,7 @@ function InspirationController($scope, $http, broadCastService) {
         };
 
         return {
-            get: function (name) {
+            get:function (name) {
                 return private[name];
             }
         }
@@ -22,32 +22,52 @@ function InspirationController($scope, $http, broadCastService) {
         });
 
     //State Handers
-    $scope.hiddenInspiration = function() {
+    $scope.hiddenInspiration = function () {
         return $scope.viewState == ViewStates.get('HIDDEN_INSPIRATION_STATE');
     };
 
-    $scope.viewInspiration = function() {
+    $scope.viewInspiration = function () {
         return $scope.viewState == ViewStates.get('VIEW_INSPIRATION_STATE');
     };
 
     //Action Handlers
-    $scope.getRandomInspiration = function (excludeId) {
-        var appendedParams = "";
-
-        if (excludeId != undefined && excludeId != null) {
-             appendedParams = "&excludeId=" + excludeId.toString();
-        }
-
-       $http({method: 'GET', url: '/memmeeinspirationrest/getrandominspiration?apiKey=' + $scope.user.apiKey + appendedParams}).
-           success(function (data, status, headers, config) {
-               console.log('The random inspiration has been loaded');
-               $scope.inspiration = data;
-           }).error(function (data, status, headers, config) {
-               console.log('error loading your doggone inspiration');
-           });
+    $scope.getRandomInspiration = function () {
+        $http({method:'GET', url:'/memmeeinspirationrest/getrandominspiration?apiKey=' + $scope.user.apiKey}).
+            success(function (data, status, headers, config) {
+                console.log('The random inspiration has been loaded');
+                $scope.inspiration = data;
+            }).error(function (data, status, headers, config) {
+                console.log('error loading your doggone inspiration');
+            });
     };
 
-    $scope.toggleViewState = function() {
+    $scope.getNextInspiration = function () {
+        if ($scope.inspiration == undefined || $scope.inspiration == null)
+            throw "You must have a selected inspiration to choose the next inspiration."
+
+        $http({method:'GET', url:'/memmeeinspirationrest/getnextinspiration?apiKey=' + $scope.user.apiKey + "&currentId=" + $scope.inspiration.id.toString()}).
+            success(function (data, status, headers, config) {
+                console.log('The next inspiration has been loaded');
+                $scope.inspiration = data;
+            }).error(function (data, status, headers, config) {
+                console.log('error loading your doggone inspiration');
+            });
+    };
+
+    $scope.getPreviousInspiration = function () {
+        if ($scope.inspiration == undefined || $scope.inspiration == null)
+            throw "You must have a selected inspiration to choose the next inspiration."
+
+        $http({method:'GET', url:'/memmeeinspirationrest/getpreviousinspiration?apiKey=' + $scope.user.apiKey + "&currentId=" + $scope.inspiration.id.toString()}).
+            success(function (data, status, headers, config) {
+                console.log('The previous inspiration has been loaded');
+                $scope.inspiration = data;
+            }).error(function (data, status, headers, config) {
+                console.log('error loading your doggone inspiration');
+            });
+    };
+
+    $scope.toggleViewState = function () {
         if ($scope.viewInspiration()) {
             $scope.viewState = ViewStates.get('HIDDEN_INSPIRATION_STATE');
             $scope.getRandomInspiration();

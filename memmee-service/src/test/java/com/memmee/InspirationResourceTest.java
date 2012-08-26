@@ -95,8 +95,8 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
                 build()).get(Inspiration.class);
 
         assertThat(inspiration, is(not(nullValue())));
-        assertThat(inspiration.getText(), is(equalTo("Inspiration 0")));
-        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("0"))));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 2")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("2"))));
         assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("2"))));
 
         inspiration = client().resource(new MemmeeURLBuilder().

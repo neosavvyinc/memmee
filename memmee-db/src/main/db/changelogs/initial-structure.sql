@@ -18,6 +18,7 @@ CREATE TABLE inspiration (
 
 CREATE TABLE inspirationcategory (
   id int(11) NOT NULL AUTO_INCREMENT,
+  idx int(11) NOT NULL,
   name varchar(200) NOT NULL,
   PRIMARY KEY (id)
 );
