@@ -54,9 +54,67 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
         assertThat(inspiration, is(not(nullValue())));
     }
 
-    protected void insertTestData() {
+    @Test
+    public void testGetNextInspiration() {
+        List<Long> inspirationIds = insertTestData();
+
+        Inspiration inspiration = client().resource(new MemmeeURLBuilder().
+                setBaseURL(InspirationResource.BASE_URL).
+                setMethodURL("getnextinspiration").
+                setApiKeyParam("apiKey500").
+                setParam("currentId", inspirationIds.get(0).toString()).
+                build()).get(Inspiration.class);
+
+        assertThat(inspiration, is(not(nullValue())));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 1")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("1"))));
+        assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("0"))));
+
+        inspiration = client().resource(new MemmeeURLBuilder().
+                setBaseURL(InspirationResource.BASE_URL).
+                setMethodURL("getnextinspiration").
+                setApiKeyParam("apiKey500").
+                setParam("currentId", inspirationIds.get(inspirationIds.size() -  1).toString()).
+                build()).get(Inspiration.class);
+
+        assertThat(inspiration, is(not(nullValue())));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 0")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("0"))));
+        assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("0"))));
+    }
+
+    @Test
+    public void testGetPreviousInspiration() {
+        List<Long> inspirationIds = insertTestData();
+
+        Inspiration inspiration = client().resource(new MemmeeURLBuilder().
+                setBaseURL(InspirationResource.BASE_URL).
+                setMethodURL("getpreviousinspiration").
+                setApiKeyParam("apiKey500").
+                setParam("currentId", inspirationIds.get(0).toString()).
+                build()).get(Inspiration.class);
+
+        assertThat(inspiration, is(not(nullValue())));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 0")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("0"))));
+        assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("2"))));
+
+        inspiration = client().resource(new MemmeeURLBuilder().
+                setBaseURL(InspirationResource.BASE_URL).
+                setMethodURL("getpreviousinspiration").
+                setApiKeyParam("apiKey500").
+                setParam("currentId", inspirationIds.get(inspirationIds.size() -  1).toString()).
+                build()).get(Inspiration.class);
+
+        assertThat(inspiration, is(not(nullValue())));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 1")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("1"))));
+        assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("2"))));
+    }
+
+    protected List<Long> insertTestData() {
         insertTestUser();
-        insertTestInspirations(inspirationDAO, inspirationCategoryDAO);
+        return insertTestInspirations(inspirationDAO, inspirationCategoryDAO);
     }
 
     protected List<Long> insertTestInspirations(TransactionalInspirationDAO dao, TransactionalInspirationCategoryDAO inspirationCategoryDAO) {

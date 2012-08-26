@@ -20,6 +20,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class UserDAOTest extends AbstractMemmeeDAOTest {
+    public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS user";
     public static final String TABLE_DEFINITION = "CREATE TABLE `user` (\n" +
             "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `firstName` varchar(1024) DEFAULT NULL,\n" +
@@ -38,7 +39,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
         final Handle handle = database.open();
         try {
 
-            handle.createCall("DROP TABLE IF EXISTS user").invoke();
+            handle.createCall(UserDAOTest.DROP_TABLE_STATEMENT).invoke();
             handle.createCall("DROP TABLE IF EXISTS password").invoke();
 
             handle.createCall(UserDAOTest.TABLE_DEFINITION).invoke();

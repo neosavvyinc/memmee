@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
 public class PasswordDAOTest extends AbstractMemmeeDAOTest {
-
+    public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS password";
     public static final String TABLE_DEFINITION = "CREATE TABLE `password` (\n" +
             "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `value` varchar(1000) DEFAULT NULL,\n" +
@@ -26,7 +26,7 @@ public class PasswordDAOTest extends AbstractMemmeeDAOTest {
         this.database = factory.build(mysqlConfig, "mysql");
         final Handle handle = database.open();
         try {
-            handle.createCall("DROP TABLE IF EXISTS password").invoke();
+            handle.createCall(PasswordDAOTest.DROP_TABLE_STATEMENT).invoke();
             handle.createCall(PasswordDAOTest.TABLE_DEFINITION).invoke();
         } catch (Exception e) {
             System.err.println(e);

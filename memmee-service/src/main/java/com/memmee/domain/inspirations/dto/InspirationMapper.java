@@ -22,6 +22,7 @@ public class InspirationMapper implements ResultSetMapper<Inspiration> {
         InspirationCategory inspirationCategory = new InspirationCategory();
         inspirationCategory.setId(resultSet.getLong("inspirationCategoryId"));
         inspirationCategory.setName(resultSet.getString("inspirationCategoryName"));
+        inspirationCategory.setIndex(resultSet.getLong("inspirationCategoryCategoryIndex"));
         inspiration.setInspirationCategory(inspirationCategory);
 
         return inspiration;

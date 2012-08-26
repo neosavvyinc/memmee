@@ -3,6 +3,7 @@ package com.memmee.domain.inspiration;
 import base.AbstractMemmeeDAOTest;
 import com.memmee.domain.inspirationcategories.InspirationCategoryDAOTest;
 import com.memmee.domain.inspirationcategories.dao.TransactionalInspirationCategoryDAO;
+import com.memmee.domain.inspirationcategories.domain.InspirationCategory;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
 import org.junit.*;
@@ -224,16 +225,17 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
         final TransactionalInspirationCategoryDAO inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
 
         try {
-            insertTestInspirations(dao, inspirationCategoryDAO);
+            List<Long> inspirationIds = insertTestInspirations(dao, inspirationCategoryDAO);
 
-            Inspiration highestInspiration = dao.getHighestInspirationForCategory(Long.parseLong("1"));
+            InspirationCategory inspirationCategoryA = dao.getInspiration(inspirationIds.get(0)).getInspirationCategory();
+            InspirationCategory inspirationCategoryB = dao.getInspiration(inspirationIds.get(inspirationIds.size() - 1)).getInspirationCategory();
+
+            Inspiration highestInspiration = dao.getHighestInspirationForCategory(inspirationCategoryA.getId());
             assertThat(highestInspiration, is(not(nullValue())));
             assertThat(highestInspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("2"))));
-            assertThat(highestInspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("2"))));
 
-            highestInspiration = dao.getHighestInspirationForCategory(Long.parseLong("0"));
+            highestInspiration = dao.getHighestInspirationForCategory(inspirationCategoryB.getId());
             assertThat(highestInspiration, is(not(nullValue())));
-            assertThat(highestInspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("1"))));
             assertThat(highestInspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("2"))));
         } finally {
             dao.close();

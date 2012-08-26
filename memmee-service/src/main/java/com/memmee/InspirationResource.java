@@ -51,7 +51,9 @@ public class InspirationResource extends BaseResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Inspiration getPreviousInspiration(@QueryParam("apiKey") String apiKey, @QueryParam("currentId") Long currentId) {
         validateAccess(apiKey);
-        return null;
+        Inspiration givenInspiration = inspirationDAO.getInspiration(currentId);
+        Inspiration returnInspiration = inspirationDAO.getInspirationForInspirationCategoryAndIndex(givenInspiration.getInspirationCategory().getId(), givenInspiration.getInspirationCategoryIndex() - 1);
+        return previousInspiration(givenInspiration, returnInspiration);
     }
 
     protected Inspiration nextInspiration(Inspiration givenInspiration, Inspiration returnInspiration) {
