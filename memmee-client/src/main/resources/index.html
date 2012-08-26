@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html ng-app="memmee-app">
+<html ng-app="memmee-app" ng-controller="SecurityController">
 <head>
     <title>Memmee</title>
     <link rel="stylesheet" type="text/css" media="all" href="css/memmee.css" />
@@ -9,18 +9,33 @@
 
         <ng-include src="'js/header/header-ptl.html'"></ng-include>
 
-        <ng-include src="'js/home/home-ptl.html'"></ng-include>
+        <!--<ng-include src="'js/home/home-ptl.html'"></ng-include>-->
         <!--<ng-include src="'js/memmee/create/create-ptl.html'"></ng-include>-->
-        <!--<ng-include src="'js/memmee/view/view-ptl.html'"></ng-include>-->
+        <ng-include src="'js/memmee/view/view-ptl.html'"></ng-include>
 
         <ng-include src="'js/footer/footer-ptl.html'"></ng-include>
 
+        <!-- Libraries -->
         <script src="../lib/angular.js"></script>
         <script src="../lib/angular-resource.js"></script>
         <script src="../lib/date.js"></script>
 
+        <!-- Constants/Utils -->
+        <script src="js/const/event/events.js"></script>
+        <script src="js/const/message/errors.js"></script>
+        <script src="js/const/message/notifications.js"></script>
+        <script src="js/util/memmee_date_util.js"></script>
+        <script src="js/util/misc.js"></script>
+
+        <!-- App -->
         <script src="js/app.js"></script>
         <script src="js/services.js"></script>
+
+        <!-- Controllers -->
+        <script src="js/default-ctrl.js"></script>
+        <script src="js/security-ctrl.js"></script>
+        <script src="js/memmee/view/view-ctrl.js"></script>
+        <script src="js/memmee/create/create-ctrl.js"></script>
 
 
     </div>
