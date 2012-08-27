@@ -143,7 +143,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     };
 
     //Show instructions in first two logins
-    if (broadCastService.user.loginCount < 3) {
+    if (broadCastService.user && broadCastService.user.loginCount < 3) {
         broadCastService.createModeNewUserLogin();
     }
 }
