@@ -1,11 +1,21 @@
 <div id="content">
     <div class="memmee-card" ng-controller="CreateMemmeesController">
-        <div class="warning">
-            <a href="#" class="btn close" title="Close">Close</a>
-            <div class="flipper crimson">
-                <a href="#" title="Previous" class="btn prev-arrow">Previous</a>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur faucibus sollicitudin ante a ultrices. Suspendisse potenti. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra augue et purus adipiscing volutpat sagittis justo varius. Etiam nec enim quis lacus semper tempus convallis in mi. Curabitur eget lorem purus. In blandit ipsum at mi feugiat tempor. In dapibus, dui vitae aliquam scelerisque, leo nisi tempus leo, sed lacinia arcu erat ornare enim. Ut at quam orci, ut gravida dui. Suspendisse ut sapien id dui blandit tempor. Fusce mauris nisl, tempus ut lacinia eu, egestas id velit.</p>
-                <a href="#" title="Next" class="btn next-arrow">Next</a>
+
+        <div ng-controller="InspirationController">
+            <!-- Hidden Inspiration State -->
+            <h1 ng-show="hiddenInspiration()" class="memmee-create-heading">Give us a litte something. Memmee away...</h1>
+            <a ng-click="toggleViewState()" ng-show="hiddenInspiration()" class="btn inspiration">Drawing a blank? We can help.</a>
+
+
+            <div class="warning" ng-hide="hiddenInspiration()" >
+                <!-- View Inspiration State -->
+                <a class="btn close" ng-click="toggleViewState()">Close</a>
+                <div class="flipper crimson" ng-show="viewInspiration()">
+
+                    <a class="btn prev-arrow" ng-click="getPreviousInspiration()">Previous</a>
+                    <p>{{inspiration.text}}</p>
+                    <a class="btn next-arrow" ng-click="getNextInspiration()">Next</a>
+                </div>
             </div>
         </div>
 
