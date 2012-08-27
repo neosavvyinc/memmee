@@ -294,7 +294,7 @@ html{
 }
 
 .memmee-slideshow{
-    display: none;
+    /*display: none; I turned this off - hope that's ok. -AP*/
     position: relative;
     left: -46px;
     height: 176px;

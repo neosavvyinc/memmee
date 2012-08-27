@@ -312,7 +312,7 @@ html{
 }
 
 .memmee-slideshow{
-    display: none;
+    /*display: none;*/
     position: relative;
     left: -46px;
     height: 176px;
