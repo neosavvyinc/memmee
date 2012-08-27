@@ -1,8 +1,9 @@
 angular.module('memmee-app', ['memmee-app.services']).
     config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
-        when('/home', {templateUrl:'partials/home.html'}).
-        when('/loggedin', {templateUrl:'partials/loggedin.html'}).
+        when('/home', {templateUrl:'js/home/home-ptl.html'}).
+        when('/create', {templateUrl:'js/memmee/create/create-ptl.html'}).
+        when('/view', {templateUrl:'js/memmee/view/view-ptl.html'}).
         when('/requiredchangepassword', {templateUrl:'partials/requiredChangePassword.html'}).
         when('/profile', {templateUrl:'partials/profile.html'}).
         when('/share', {templateUrl:'partials/shareMode.html'}).

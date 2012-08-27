@@ -18,7 +18,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
             if ($user.password.temp)
                 $location.url("/requiredchangepassword");
             else
-                $location.url("/loggedin");
+                $location.url("/create");
         }
     }
 

@@ -9,9 +9,12 @@
 
         <ng-include src="'js/header/header-ptl.html'"></ng-include>
 
+        <div class="container" ng-view>
+        </div> <!-- /container -->
+
         <!--<ng-include src="'js/home/home-ptl.html'"></ng-include>-->
         <!--<ng-include src="'js/memmee/create/create-ptl.html'"></ng-include>-->
-        <ng-include src="'js/memmee/view/view-ptl.html'"></ng-include>
+        <!--<ng-include src="'js/memmee/view/view-ptl.html'"></ng-include>-->
 
         <ng-include src="'js/footer/footer-ptl.html'"></ng-include>
 
@@ -34,8 +37,10 @@
         <!-- Controllers -->
         <script src="js/default-ctrl.js"></script>
         <script src="js/security-ctrl.js"></script>
+        <script src="js/home/login-ctrl.js"></script>
         <script src="js/memmee/view/view-ctrl.js"></script>
         <script src="js/memmee/create/create-ctrl.js"></script>
+
 
 
     </div>
