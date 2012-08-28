@@ -725,6 +725,42 @@ table.calendar{
     color: #7ca9b0;
 }
 
+.memmee-form{
+
+}
+
+.memme-form label{
+    display: block;
+    color: #797a79;
+    font: 14px/30px 'Crimson Text', 'Times New Roman', Times, Serif;
+}
+
+.memmee-form input{
+    width: 214px;
+    height: 27px;
+    padding: 0 16px;
+    line-height: 27px;
+    color: black;
+    font: 18px/27px 'Crimson Text', 'Times New Roman', Times, Serif;
+    background-color: white;
+    border: none;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -ms-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.feedback-form{
+    background-image: url('../img/sprite-ui.png');
+    background-repeat: no-repeat;
+}
+.feedback-form.invalid{
+    background-position: 0 -px;
+}
+.feedback-form.valid{
+    color: #3b89d2;
+    background-position: 0 -px;
+}
 
 .link{
     display: inline-block;
