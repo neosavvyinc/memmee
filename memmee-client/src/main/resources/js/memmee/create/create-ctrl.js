@@ -100,9 +100,27 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         return angular.equals(memmee, $scope.master);
     };
 
+    $scope.selectedTheme = "memmee-card";
+
     //Setters
     $scope.setTheme = function (number) {
-        broadCastService.setTheme(number);
+        switch (number) {
+            case 0:
+                $scope.selectedTheme = "memmee-card";
+                break;
+            case 1:
+                $scope.selectedTheme = "memmee-card style-coffee";
+                break;
+            case 2:
+                $scope.selectedTheme = "memmee-card style-travel";
+                break;
+            case 3:
+                $scope.selectedTheme = "memmee-card style-inspiration";
+                break;
+            default:
+                $scope.selectedTheme = "memmee-card";
+                break;
+        }
         $scope.toggleMemmeeThemeSelection();
     }
 
