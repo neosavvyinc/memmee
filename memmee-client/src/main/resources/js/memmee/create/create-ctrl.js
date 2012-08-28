@@ -22,6 +22,20 @@ function CreateMemmeesController($scope, $http, broadCastService) {
             };
         });
 
+    $scope.memmeeStyleSelectorVisibilityStyle = "isHidden";
+    $scope.toggleMemmeeThemeSelection = function()
+    {
+        console.log("mouse over happening.")
+        if( $scope.memmeeStyleSelectorVisibilityStyle == "isHidden" )
+        {
+            $scope.memmeeStyleSelectorVisibilityStyle = "isVisible";
+        }
+        else
+        {
+            $scope.memmeeStyleSelectorVisibilityStyle = "isHidden";
+        }
+    }
+
     //Action Handlers
     $scope.update = function (memmee) {
         $scope.master = angular.copy(memmee);
@@ -89,6 +103,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     //Setters
     $scope.setTheme = function (number) {
         broadCastService.setTheme(number);
+        $scope.toggleMemmeeThemeSelection();
     }
 
     //Broadcast and Event Handlers
@@ -114,6 +129,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
 
 
     $scope.$on(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), function (event, memmee) {
+        console.log(">>>memmee selected event in the create-ctrl");
         if (memmee.id != $scope.memmee.id) {
             if ($scope.isUnchanged($scope.memmee)) {
                 $scope.selectMemmee(event, memmee);

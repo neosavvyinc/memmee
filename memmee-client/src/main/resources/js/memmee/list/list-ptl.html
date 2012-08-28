@@ -4,13 +4,13 @@
 
     <div class="slideshow-container">
         <p class="crimson" ng-show="(memmees == null || memmees.length == 0)">
-            <a href="#">You have no Memmees</a> Create a Memmee
+            <a href="#create">You have no Memmees</a> Create a Memmee
         </p>
 
         <div class="slideshow" ng-hide="(memmees == null || memmees.length == 0)">
-            <div class="slidecard-container" ng-repeat="memmee in memmees">
+            <div class="slidecard-container" ng-repeat="memmee in memmees" ng-click="onMemmeeSelect(memmee);">
                 <span class="slidecard-date">{{getDisplayDate(memmee)}}</span>
-                <a href="#" class="slidecard note crimson">{{memmee.text}}</a>
+                <a href="#view" ng-click="onMemmeeSelect(memmee);" class="slidecard note crimson">{{memmee.text}}</a>
                 <!--<span class="slidecard note crimson" ng-bind-html-unsafe="memmee.text"></span>-->
             </div>
 

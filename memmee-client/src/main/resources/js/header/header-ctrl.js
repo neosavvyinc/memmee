@@ -8,9 +8,7 @@ function HeaderController($scope, broadCastService, $location) {
             $scope.visibleLoggedInStyle = 'isHidden';
         });
 
-//    var resetCreationButton = function() {
-//        $scope.createModeStyles = "btn btn-primary";
-//    }
+
 
 //    var resetStyles = function() {
 //        $scope.visibleLoggedInStyle = 'isHidden';
@@ -27,34 +25,22 @@ function HeaderController($scope, broadCastService, $location) {
 
     });
 
-//    $scope.$on(CreateModeControllerEvents.get('CREATE_MODE_CANCELLED'), function() {
-//
-//        resetCreationButton();
-//
-//    });
-//
-//    $scope.$on(CreateModeControllerEvents.get('CREATE_MODE_STARTED'), function() {
-//
-//        $scope.createModeStyles = "btn btn-primary disabled";
-//
-//    });
-
-//    $scope.toggleCreateMode = function()
-//    {
-//        console.log("About to toggle create mode")
-//        if( broadCastService.isCreateMode() )
-//        {
-//            console.log("Turning off create mode....");
-////            $scope.createModeStyles = "btn btn-primary disabled";
-//            broadCastService.createModeCancelledCreateModeController();
-//        }
-//        else
-//        {
-//            console.log("Turning on create mode....");
-////            $scope.createModeStyles = "btn btn-primary";
-//            broadCastService.createModeStartedCreateModeController();
-//        }
-//    }
+    $scope.toggleCreateMode = function()
+    {
+        console.log("About to toggle create mode")
+        if( broadCastService.isCreateMode() )
+        {
+            console.log("Turning off create mode....");
+            broadCastService.createModeCancelledCreateModeController();
+            $location.path("view");
+        }
+        else
+        {
+            console.log("Turning on create mode....");
+            broadCastService.createModeStartedCreateModeController();
+            $location.path("create");
+        }
+    }
 
 //    $scope.signOut = function()
 //    {

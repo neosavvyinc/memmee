@@ -25,15 +25,14 @@
 
         <div class="memmee-controls">
             <div class="controls styles">
-                <a href="#" class="link addStyle crimson">Style your Memmee: </a>
+                <a ng-click="toggleMemmeeThemeSelection()" class="link addStyle crimson">Style your Memmee: </a>
 
-                <div class="memmee-style container isHidden">
+                <div class="memmee-style container" ng-class="memmeeStyleSelectorVisibilityStyle">
                     <ul class="memmee-style dropdown crimson">
-                        <li><a href="#" class="btn style-news"></a> <a href="#">Quick Note</a></li>
-                        <li><a href="#" class="btn style-coffee"></a> <a href="#">Daydream</a></li>
-                        <li><a href="#" class="btn style-saleTag"></a> <a href="#">On the Go</a></li>
-                        <li><a href="#" class="btn style-pushPin"></a> <a href="#">Inspiration</a></li>
-                        <li><a href="#" class="btn style-pushPin"></a> <a href="#">Pure Whisky</a></li>
+                        <li><a ng-click="setTheme(0)" class="btn style-news"></a> <a ng-click="setTheme(0)">Quick Note</a></li>
+                        <li><a ng-click="setTheme(1)" class="btn style-coffee"></a> <a ng-click="setTheme(1)">Daydream</a></li>
+                        <li><a ng-click="setTheme(2)" class="btn style-saleTag"></a> <a ng-click="setTheme(2)">On the Go</a></li>
+                        <li><a ng-click="setTheme(3)" class="btn style-pushPin"></a> <a ng-click="setTheme(3)">Inspiration</a></li>
                     </ul>
 
                     <div class="scrollbar-container">
@@ -50,7 +49,7 @@
 
             <div class="controls io">
                 <a href="#" class="link today crimson"><span class="icon today">Today</span> Today</a>
-                <div class="calendar-container opensans">
+                <div class="calendar-container opensans isVisible">
                     <div class="controls calendar clearfix">
                         <a href="#" class="btn prevMonth">Previous Month</a>
                         <span class="title-month">August 2012</span>
@@ -115,8 +114,8 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="#" class="btn save" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Save</a>
-                <a href="#" class="btn cancel" ng-click="cancel()">Cancel</a>
+                <a href="#view" class="btn save" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Save</a>
+                <a href="#view" class="btn cancel" ng-click="cancel()">Cancel</a>
             </div>
         </div>
     </div>
