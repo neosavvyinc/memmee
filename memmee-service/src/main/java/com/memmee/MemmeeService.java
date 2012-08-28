@@ -2,6 +2,7 @@ package com.memmee;
 
 import com.memmee.auth.MemmeeAuthenticator;
 import com.memmee.auth.PasswordGeneratorImpl;
+import com.memmee.domain.inspirationcategories.dao.TransactionalInspirationCategoryDAO;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
@@ -48,6 +49,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         final TransactionalMemmeeDAO memmeeDao = db.onDemand(TransactionalMemmeeDAO.class);
         final TransactionalAttachmentDAO attachmentDao = db.onDemand(TransactionalAttachmentDAO.class);
         final TransactionalInspirationDAO inspirationDao = db.onDemand(TransactionalInspirationDAO.class);
+        final TransactionalInspirationCategoryDAO inspirationCategoryDAO = db.onDemand(TransactionalInspirationCategoryDAO.class);
 
         environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
                 "MEMMEE AUTHENTICATION"));
@@ -59,7 +61,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
                 ,userConfiguration.getMemmeeUrlConfiguration()
         ));
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao));
-        environment.addResource(new InspirationResource(userDao, inspirationDao));
+        environment.addResource(new InspirationResource(userDao, inspirationDao, inspirationCategoryDAO));
     }
 
     private void updateWithCommandLineParameters(MemmeeConfiguration userConfiguration) {

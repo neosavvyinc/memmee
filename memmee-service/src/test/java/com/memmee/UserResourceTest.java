@@ -56,6 +56,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
         assertThat(user, is(not(nullValue())));
         assertThat(user.getFirstName(), is(equalTo("Adam")));
+        assertThat(user.getLoginCount(), is(equalTo(Long.parseLong("2"))));
     }
 
     @Test
@@ -70,6 +71,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
         assertThat(user, is(not(nullValue())));
         assertThat(user.getPassword(), is(not(nullValue())));
         assertThat(user.getPassword().getValue(), is(nullValue()));
+        assertThat(user.getLoginCount(), is(equalTo(Long.parseLong("2"))));
     }
 
     @Test
@@ -146,6 +148,6 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
     protected Long insertTestData() {
         Long passwordId = passwordDAO.insert(passwordGenerator.encrypt("abc123"), 0);
-        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date());
+        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date(), Long.parseLong("1"));
     }
 }

@@ -1,0 +1,125 @@
+<div id="content">
+    <div class="memmee-card" ng-controller="CreateMemmeesController">
+
+        <div ng-controller="InspirationController">
+            <!-- Hidden Inspiration State -->
+            <h1 ng-show="hiddenInspiration()" class="memmee-create-heading">Give us a litte something. Memmee away...</h1>
+            <a ng-click="toggleViewState()" ng-show="hiddenInspiration()" class="btn inspiration">Drawing a blank? We can help.</a>
+
+
+            <div class="warning" ng-hide="hiddenInspiration()" >
+                <!-- View Inspiration State -->
+                <a class="btn close" ng-click="toggleViewState()">Close</a>
+                <div class="flipper crimson" ng-show="viewInspiration()">
+
+                    <a class="btn prev-arrow" ng-click="getPreviousInspiration()">Previous</a>
+                    <p>{{inspiration.text}}</p>
+                    <a class="btn next-arrow" ng-click="getNextInspiration()">Next</a>
+                </div>
+            </div>
+        </div>
+
+
+        <textarea class="memmee-text" ng-model="memmee.text"></textarea>
+
+
+        <div class="memmee-controls">
+            <div class="controls styles">
+                <a href="#" class="link addStyle crimson">Style your Memmee: </a>
+
+                <div class="memmee-style container isHidden">
+                    <ul class="memmee-style dropdown crimson">
+                        <li><a href="#" class="btn style-news"></a> <a href="#">Quick Note</a></li>
+                        <li><a href="#" class="btn style-coffee"></a> <a href="#">Daydream</a></li>
+                        <li><a href="#" class="btn style-saleTag"></a> <a href="#">On the Go</a></li>
+                        <li><a href="#" class="btn style-pushPin"></a> <a href="#">Inspiration</a></li>
+                        <li><a href="#" class="btn style-pushPin"></a> <a href="#">Pure Whisky</a></li>
+                    </ul>
+
+                    <div class="scrollbar-container">
+                        <a href="#" class="btn scrollUp">Up</a>
+                        <div class="scrollbar"></div>
+                        <a href="#" class="btn scrollDown">Down</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls photo">
+                <a href="#" class="link photo crimson"><span class="icon photo">Photo</span> Add a Photo <span class="optional">optional</span></a>
+            </div>
+
+            <div class="controls io">
+                <a href="#" class="link today crimson"><span class="icon today">Today</span> Today</a>
+                <div class="calendar-container opensans">
+                    <div class="controls calendar clearfix">
+                        <a href="#" class="btn prevMonth">Previous Month</a>
+                        <span class="title-month">August 2012</span>
+                        <a href="#" class="btn nextMonth">Next Month</a>
+                    </div>
+                    <table class="calendar">
+                        <tbody>
+                        <tr>
+                            <td><a href="#" class="prev-mo">26</a></td>
+                            <td><a href="#" class="prev-mo">27</a></td>
+                            <td><a href="#" class="prev-mo">28</a></td>
+                            <td><a href="#" class="prev-mo">29</a></td>
+                            <td><a href="#" class="prev-mo">30</a></td>
+                            <td><a href="#" class="prev-mo">31</a></td>
+                            <td><a href="#">1</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">2</a></td>
+                            <td><a href="#">3</a></td>
+                            <td><a href="#">4</a></td>
+                            <td><a href="#">5</a></td>
+                            <td><a href="#">6</a></td>
+                            <td><a href="#">7</a></td>
+                            <td><a href="#">8</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">9</a></td>
+                            <td><a href="#">10</a></td>
+                            <td><a href="#">11</a></td>
+                            <td><a href="#">12</a></td>
+                            <td><a href="#">13</a></td>
+                            <td><a href="#">14</a></td>
+                            <td><a href="#">15</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">16</a></td>
+                            <td><a href="#">17</a></td>
+                            <td><a href="#">18</a></td>
+                            <td><a href="#">19</a></td>
+                            <td><a href="#">20</a></td>
+                            <td><a href="#">21</a></td>
+                            <td><a href="#">22</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">23</a></td>
+                            <td><a href="#">24</a></td>
+                            <td><a href="#">25</a></td>
+                            <td><a href="#">26</a></td>
+                            <td><a href="#">27</a></td>
+                            <td><a href="#">28</a></td>
+                            <td><a href="#">29</a></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">30</a></td>
+                            <td><a href="#">31</a></td>
+                            <td><a href="#" class="next-mo">1</a></td>
+                            <td><a href="#" class="next-mo">2</a></td>
+                            <td><a href="#" class="next-mo">3</a></td>
+                            <td><a href="#" class="next-mo">4</a></td>
+                            <td><a href="#" class="next-mo">5</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="#" class="btn save" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Save</a>
+                <a href="#" class="btn cancel" ng-click="cancel()">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <ng-include src="'/js/memmee/list/list-ptl.html'"></ng-include>
+</div>

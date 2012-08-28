@@ -20,6 +20,7 @@ public class UserMapper implements ResultSetMapper<User> {
         user.setApiKey(resultSet.getString("apiKey"));
         user.setApiDate(resultSet.getDate("apiDate"));
         user.setCreationDate(resultSet.getDate("creationDate"));
+        user.setLoginCount(resultSet.getLong("loginCount"));
 
         Password password = new Password();
         password.setId(resultSet.getLong("passwordId"));

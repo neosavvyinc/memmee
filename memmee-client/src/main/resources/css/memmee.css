@@ -1,0 +1,975 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+@font-face{
+    font-family: "Crimson Text";
+    src:
+        "../font/crimson/Crimson-Text-Roman.ttf",
+        "../font/crimson/Crimson-Text-Bold.ttf",
+        "../font/crimson/Crimson-Text-Italic.ttf";
+}
+
+@font-face{
+    font-family: "rokkitt";
+    src:
+        "../font/rokkitt/Rokkitt-Rregular.ttf",
+        "../font/rokkitt/Rokkitt-Bold.ttf",
+        "../font/rokkitt/Rokkitt-Light.ttf";
+}
+
+@font-face{
+    font-family: "Josefin Sans";
+    src:
+        "../font/josefinsans/JosefinSans-Bold.ttf",
+        "../font/josefinsans/JosefinSans-BoldItalic.ttf",
+        "../font/josefinsans/JosefinSans-italic.ttf",
+        "../font/josefinsans/JosefinSans-Regular.ttf";
+}
+
+@font-face{
+    font-family: "josefinslab";
+    src:
+        "../font/josefinslab/JosefinSlab-Regular.ttf",
+        "../font/josefinslab/JosefinSlab-Bold.ttf",
+        "../font/josefinslab/JosefinSlab-Italic.ttf";
+}
+
+@font-face{
+    font-family: "opensans";
+    src:
+        "../font/opensans/OpenSans-Bold.ttf",
+        "../font/opensans/OpenSans-BoldItalic.ttf",
+        "../font/opensans/OpenSans-Regular.ttf",
+        "../font/opensans/OpenSans-Semibold.ttf",
+        "../fon/opensans/OpenSans-Semibolditalic.ttf";
+}
+
+.crimson{
+    font-family: "Crimson Text", "Times New Roman", Times, serif;
+}
+
+.rokkitt{
+    font-family: "rokkitt", "Times New Roman", Times, serif;
+}
+
+.josefineslab{
+    font-family: "josefinslab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.opensans{
+    font-family: "opensans", Arial, Helvetica, sans-serif;
+}
+
+a{
+    color: #4b90a4;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+html{
+    min-height: 941px;
+    background: #d0ebe4 url('../img/bg-page.png') top left repeat-x;
+    text-align: center;
+}
+
+#container {
+    width: 967px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#header {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    margin-bottom: 40px;
+    /*padding: 0 50px;*/
+    line-height: 60px;
+}
+
+#primaryNav{
+    position: absolute;
+    top: 13px;
+    right: 0;
+}
+
+#primaryNav li{
+    float: left;
+}
+
+#content{
+    min-height: 807px;
+    /*padding: px px px px;*/
+}
+
+.memmee-card-home{
+    position: relative;
+    width: 438px;
+    height: 250px;
+    margin-bottom: 50px;
+    background: transparent url(../img/bg-card-main.png) top left no-repeat;
+}
+
+.memmee-card-top-home{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 877px;
+    height: 292px;
+    margin-bottom: 50px;
+    background: transparent url(../img/bg-card-main.png) top left no-repeat;
+}
+
+.memmee-card{
+    position: relative;
+    width: 877px;
+    height: 585px;
+    margin-bottom: 50px;
+    background: transparent url(../img/bg-card-main.png) top left no-repeat;
+}
+
+.memmee-bubble{
+    position: absolute;
+    top : 166px;
+    left: 650px;
+    width: 248px;
+    height: 272px;
+    padding: 15px 34px 28px 36px;
+    overflow: hidden;
+    background: transparent url(../img/bg-bubble.png) top left no-repeat;
+}
+
+.warning{
+    position: absolute;
+    top: 20px;
+    left: 44px;
+    width: 840px;
+    height: 86px;
+    padding: 10px;
+    font-size: 21px;
+    line-height: 25px;
+    color: #364a62;
+    overflow: hidden;
+    background: transparent url(../img/bg-warning.png)
+}
+
+.warning .btn.close{
+    float: right;
+}
+
+.flipper{
+
+}
+
+.flipper .btn{
+    margin-top: 34px;
+    vertical-align: top;
+}
+
+.flipper .btn, .flipper p{
+    display: inline-block;
+}
+
+.flipper .btn.prev-arrow{
+    margin-right: 76px;
+}
+
+.flipper p{
+    width: 470px;
+    height: 80px;
+    margin-right: 55px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.memmee-text{
+    position: absolute;
+    top: 130px;
+    left: 44px;
+    width: 494px;
+    height: 346px;
+    padding: 12px 60px;
+    font: 17px/30px 'Courier New', Courier, 'Times New Roman', Times, sans-serif;
+    background: transparent;
+    border: none;
+    overflow: hidden!important;
+}
+
+.memmee-controls{
+    position: absolute;
+    bottom: 11px;
+    width: 100%;
+    height: 53px;
+    line-height: 53px;
+}
+
+.memmee-controls .controls{
+    display: inline-block;
+    height: 53px;
+    font-size: 12px;
+    line-height: 53px;
+    vertical-align: top;
+}
+
+.controls .icon{
+   display: inline-block;
+}
+
+.controls a{
+    vertical-align: middle;
+}
+
+.controls.styles{
+    padding-left: 26px;
+}
+
+.controls.styles .btn{
+    display: inline-block;
+    margin-right: 18px;
+}
+
+.controls.photo{
+    width: 131px;
+    padding-left: 16px;
+    padding-right: 16px;
+    background: transparent url('../img/bg-control-photo.png') left center no-repeat;
+}
+
+.controls.photo .icon{
+    margin-right: 6px;
+    vertical-align: text-top;
+}
+
+.controls.io{
+    position: relative;
+    padding-left: 10px;
+}
+
+.controls.io a{
+   display: inline-block;
+    margin-right: 5px;
+}
+
+.controls.io .icon{
+    margin-right: 6px;
+    vertical-align: text-top;
+}
+
+.memmee-slideshow{
+    /*display: none;*/
+    position: relative;
+    left: -46px;
+    height: 176px;
+}
+
+.memmee-slideshow .btn{
+    position: absolute;
+    top: 80px;
+}
+
+.memmee-slideshow .btn.next{
+    left: 938px;
+}
+
+.memmee-slideshow .slideshow-container{
+    position: relative;
+    left: 48px;
+    width: 883px;
+    height: 176px;
+    overflow: hidden;
+}
+
+.slideshow-container p{
+    position: absolute;
+    top: 80px;
+    width: 100%;
+    text-align: center;
+    line-height: 18px;
+    font-size: 14px;
+}
+
+.slideshow-container p a{
+    display: block;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+#footer{
+    padding-top: 14px;
+}
+
+#footerNav li{
+    float: left;
+    margin-right: 16px;
+}
+
+#footerNav li a{
+    display: block;
+    padding-right: 19px;
+    font-size: 12px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #5a5b50;
+    background: transparent url('../img/icon-footerLink.png') center right no-repeat;
+}
+
+.memmee-create-heading{
+    position: absolute;
+    top: 36px;
+    left: 60px;
+    width: 715px;
+    height: 19px;
+    background: transparent url('../img/sprite-ui.png') 0 -428px no-repeat;
+    text-indent: -100000000px;
+}
+
+.memmee-card .btn.inspiration{
+    position: absolute;
+    top: 18px;
+    right: -30px;
+    -moz-transform: rotate(-1deg);
+    -webkit-transform: rotate(-1deg);
+    -ms-trasform: rotate(-1deg);
+    -o-transform: rotate(-1deg);
+    transform: rotate(-1deg);
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 900;
+    background-color: #000;
+    opacity: 0.8;
+}
+
+.modal{
+    position: absolute;
+    z-index: 901;
+    text-align: left;
+}
+
+.modal.discard-memmee{
+    top: 50%;
+    left: 50%;
+    width: 379px;
+    height: 150px;
+    padding: 9px 10px 14px 43px;
+    margin-top: -75px;
+    margin-left: -140.5px;
+    background: transparent url('../img/bg-modal.png') top left no-repeat;
+}
+
+.modal.discard-memmee .modal-ext{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.modal.discard-memmee .controls{
+    position: absolute;
+    bottom: 14px;
+    right: 17px;
+}
+
+.modal-heading{
+    margin-bottom: 24px;
+    padding-top: 16px;
+    font-size: 24px;
+    font-weight: normal;
+    line-height: 20px;
+    color: #354c51;
+}
+
+.modal-msg{
+    font-size: 18px;
+    line-height: 26px;
+    color: #285f70;
+}
+
+.memmee-date.lg{
+    display: block;
+    position: absolute;
+    top: 34px;
+    left: 96px;
+    padding: 0 6px 9px;
+    color: #d44e3c;
+    text-transform: uppercase;
+    background: transparent url('../img/bg-memmee-date.png') bottom left repeat-x;
+}
+
+.controls.share{
+    position: absolute;
+    top: 14px;
+    right: 24px;
+    display: inline-block;
+}
+
+.controls.share .btn{
+    display: inline-block;
+}
+
+.controls.share .btn.trash{
+    margin-right: 9px;
+}
+
+.slidecard-container{
+    display: inline-block;
+    height: 176px;
+    margin-right: 18px;
+    overflow: hidden;
+}
+
+.slideshow{
+    width: 20000px; /*dynamic value to set via js.*/
+}
+
+.slidecard-date{
+    display: block;
+    padding-left: 4px;
+    margin-bottom: 11px;
+    color: #d44e3c;
+    text-transform: uppercase;
+}
+
+.slidecard{
+    display: block;
+    padding: 20px 20px 20px 14px;
+    text-decoration: none;
+    /*white-space: nowrap;
+    -webkit-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;*/
+    overflow: hidden;
+    font-size: 21px;
+    line-height: 24px;
+    background-image: url('../img/sprite-memmee-card.png');
+    background-repeat: no-repeat;
+}
+
+.slidecard.note{
+    width: 148px;
+    height: 81px;
+    color: #404445;
+    background-position: 0 0;
+}
+
+.slidecard.art{
+    width: 148px;
+    height: 80px;
+    color: #7c3f36;
+    background-position: 0 -125px;
+}
+
+.slidecard.pushpin{
+    position: relative;
+    top: -6px;
+    width: 154px;
+    height: 88px;
+    color: #417280;
+    background-position: 0 -246px;
+}
+
+.slidecard.luggage{
+    position: relative;
+    top: -3px;
+    width: 153px;
+    height: 78px;
+    padding-left: 40px;
+    color: #7f7676;
+    background-position: 0 -375px;
+}
+
+
+.list.steps{
+    display: block;
+    list-style-type: none;
+    color: white;
+}
+
+.list.steps dt{
+    margin-bottom: 2px;
+    font: bold 10px/21px 'Josefin Sans', 'josefinslab', Arial, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+.list.steps dd{
+    margin-bottom: 8px;
+    font: italic 21px/18px 'Crimson Text', 'Times New Roman', Times, serif;
+    text-align: center;
+}
+.list.steps dd:last-child{
+    margin-bottom: 0;
+}
+.memmee-style.container{
+    position: relative;
+    width: 224px;
+    height: 141px;
+    padding: 38px 18px 18px 26px;
+    overflow: hidden;
+    background: transparent url('../img/bg-dropDown.png') top left no-repeat;
+}
+.memmee-style.dropdown{
+   display: block;
+   list-style-type: none;
+   color: #476579;
+}
+.memmee-style.dropdown li{
+    display:block;
+    height: 25px;
+    margin:0 12px 3px;
+    padding-left: 11px;
+    font-size: 16px;
+    line-height: 25px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+}
+.memmee-style.dropdown li:hover{
+    background-color: white;
+}
+.memmee-style.dropdown a{
+    color: #476579;
+    text-decoration: none;
+}
+.memmee-style.dropdown .btn{
+    display: inline-block;
+}
+.memmee-style.dropdown .btn.style-news{
+    margin-right: 13px;
+}
+.memmee-style.dropdown .btn.style-coffee{
+    margin-right: 13px;
+}
+.memmee-style.dropdown .btn.style-saleTag{
+    position: relative;
+    left: -10px;
+    margin-right: 8px;
+}
+.memmee-style.dropdown .btn.style-pushPin{
+    margin-right: 30px;
+}
+
+.scrollbar-container{
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    height: 136px;
+    width: 12px;
+}
+.controls.styles .scrollbar-container .btn{
+    display: block;
+    line-height: 12px;
+}
+.scrollbar-container .btn.scrollDown{
+    position: absolute;
+    top: 100%;
+}
+.scrollbar-container .scrollbar{
+    position: absolute;
+    left: 4px;
+    width: 4px;
+    height: 64px;
+    background-color: #70756b;
+}
+.calendar-container{
+    display: none;
+    position: absolute;
+    top: 50px;
+    z-index: 999;
+    width: 197px;
+    height: 190px;
+    background: transparent url('../img/bg-calendar.png') top left no-repeat;
+}
+.controls.calendar{
+    position: relative;
+    left: 20px;
+    top: 16px;
+    width: 154px;
+    height: 10px;
+    line-height: 10px;
+}
+.controls.calendar. .btn.prevMonth{
+    position: absolute;
+}
+.controls.calendar .btn.nextMonth{
+    position: absolute;
+    right: 0;
+}
+.title-month{
+    display: inline-block;
+    width: 112.5px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #476579;
+}
+table.calendar{
+    position: absolute;
+    left: 12px;
+    top: 38px;
+    width: 140px;
+    height: 120px;
+}
+
+.calendar td{
+    line-height: 20px;
+    vertical-align: center;
+}
+.calendar td a{
+    display: block;
+    width: 20px;
+    height: 20px;
+    /*line-height: 20px;*/
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #476579;
+    cursor: pointer;
+}
+.calendar td a:hover, .calendar td a.selected{
+    background-color: #476579;
+    color: white;
+}
+.calendar td a.prev-mo , .calendar td a.next-mo{
+    color: #7ca9b0;
+}
+
+
+.link{
+    display: inline-block;
+    text-decoration: none;
+}
+
+.link .icon{
+    display: inline-block;
+}
+
+.link.more{
+    position: relative;
+    top: -12px;
+    display: inline-block;
+    margin-left: 20px;
+    font-size: 12px;
+    font-style: italic;
+    line-height: 12px;
+    color: #70706f;
+}
+
+.link.addStyle{
+    font-size: 16px;
+    margin-right: 14px;
+}
+
+.link.photo{
+    display: inline-block;
+    height: 19px;
+    font-size: 12px;
+    line-height: 19px;
+    background: transparent url('../img/bg-link-photo.png') 28px bottom no-repeat;
+}
+
+.link.photo .optional{
+    font-size: 10px;
+    line-height: 12px;
+    font-style: italic;
+    color: #c85c2c;
+}
+
+.link.today{
+    display: inline-block;
+    height: 19px;
+    font-size: 12px;
+    line-height: 19px;
+    background: transparent url('../img/bg-link-today.png') 28px bottom no-repeat;
+}
+
+.link.bubble-close{
+    position: relative;
+    top: 5px;
+    left: 64px;
+    font: bold 10px/12px "josefinslab", Arial, sans-serif;
+    text-transform: uppercase;
+    color: white;
+}
+
+.link.bubble-close .icon{
+    margin-right: 12px;
+}
+
+.link.bubble-close:hover .icon{
+    background-position: -11px -600px;
+}
+
+.btn, .icon{
+    display: block;
+    text-indent: -100000000px;
+    cursor: pointer;
+    background-image: url('../img/sprite-ui.png');
+    background-repeat: no-repeat;
+}
+
+.btn.newMemmee{
+    width: 165px;
+    height: 51px;
+    background-position: 0px 0px;
+}
+.btn.newMemmee:hover, .btn.newMemmee.active{
+    background-position: -165px 0;
+}
+.btn.close{
+    width: 64px;
+    height: 21px;
+    background-position: 0 -52px;
+}
+.btn.close:hover{
+   background-position: -65px -52px;
+}
+.btn.prev-arrow{
+    width: 51px;
+    height: 19px;
+    background-position: 0 -73px;
+}
+.btn.prev-arrow:hover{
+    background-position: -51px -73px;
+}
+.btn.next-arrow{
+    width: 51px;
+    height: 20px;
+    background-position: 0 -93px;
+}
+.btn.next-arrow:hover{
+    background-position: -51px -93px;
+}
+.btn.style-news{
+    width: 30px;
+    height: 22px;
+    background-position: 0 -625px;
+}
+.btn.style-news:hover{
+    width: 30px;
+    height: 22px;
+    background-position: 0px -647px;
+}
+.btn.style-coffee{
+    width: 32px;
+    height: 23px;
+    background-position: -49px -624px;
+}
+.btn.style-coffee:hover{
+    width: 32px;
+    height: 26px;
+    background-position: -48px -646px;
+}
+.btn.style-pushPin{
+    width: 16px;
+    height: 20px;
+    background-position: -96px -625px;
+}
+.btn.style-pushPin:hover{
+    width: 16px;
+    height: 27px;
+    background-position: -95px -645px;
+}
+.btn.style-saleTag{
+    width: 37px;
+    height: 22px;
+    background-position: -120px -624px;
+}
+.btn.style-saleTag:hover{
+    width: 37px;
+    height: 23px;
+    background-position: -120px -646px;
+}
+.btn.save{
+    width: 81px;
+    height: 34px;
+    background-position: -1px -305px;
+}
+.btn.save:hover{
+    background-position: -82px -305px;
+}
+.btn.cancel{
+    width: 82px;
+    height: 29px;
+    background-position: 0 -338px;
+}
+.btn.cancel:hover{
+    background-position: -82px -338px;
+}
+.btn.prev{
+    width: 30px;
+    height: 30px;
+    background-position: 0 -368px;
+}
+.btn.next{
+    width: 30px;
+    height: 30px;
+    background-position: 0 -398px;
+}
+.btn.inspiration{
+    width: 192px;
+    height: 42px;
+    background-position: 0 -448px;
+}
+.btn.removePhoto{
+    display: inline-block;
+    width: 136px;
+    height: 23px;
+    background-position: 0 -263px;
+}
+.btn.delete{
+    width: 81px;
+    height: 34px;
+    background-position: 0 -534px;
+}
+.btn.delete:hover{
+    background-position: -81px -534px;
+}
+.btn.modal-ext{
+    width: 13px;
+    height: 13px;
+    background-position: 0 -520px;
+}
+.btn.modal-ext:hover{
+    background-position: -13px -520px;
+}
+.btn.share{
+    width: 119px;
+    height: 27px;
+    background-position: 0 -492px;
+}
+.btn.share:hover{
+    background-position: -120px -492px;
+}
+.btn.trash{
+    width: 16px;
+    height: 32px;
+    background-position: 0 -568px;
+}
+.btn.trash:hover{
+    background-position: -22px -568px;
+}
+.btn.prevMonth{
+    width: 10px;
+    height: 10px;
+    background-position: 0 -611px;
+}
+.btn.nextMonth{
+    width: 10px;
+    height: 10px;
+    background-position: -10px -611px;
+}
+.btn.scrollUp{
+    width: 12px;
+    height: 12px;
+    background-position: 0 -676px;
+}
+.btn.scrollDown{
+    width: 12px;
+    height: 12px;
+    background-position: -12px -676px;
+}
+
+.icon.addStyle{
+    width: 19px;
+    height: 18px;
+    margin-right: 13px;
+    background-position: 0 -113px;
+    vertical-align: text-bottom;
+}
+.icon.photo{
+    width: 23px;
+    height: 19px;
+    background-position: 0 -243px;
+}
+.icon.today{
+    width: 20px;
+    height: 19px;
+    background-position: 0 -286px;
+}
+.icon.bubble-close{
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    background-position: 0 -600px;
+}
+
+/*STATE*/
+.isHidden{
+    display: none;
+}
+
+.isShown{
+    display: block;
+}
+
+.isFrozen{
+    overflow: hidden;
+}
+
+.isUnfrozen{
+    overflow: auto;
+}

@@ -1,6 +1,7 @@
 package com.memmee.domain.user;
 
 import base.AbstractMemmeeDAOTest;
+import com.memmee.domain.password.PasswordDAOTest;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
@@ -9,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.util.StringMapper;
+import sun.util.resources.LocaleNames_ga;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -18,7 +20,18 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 public class UserDAOTest extends AbstractMemmeeDAOTest {
-
+    public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS user";
+    public static final String TABLE_DEFINITION = "CREATE TABLE `user` (\n" +
+            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+            "  `firstName` varchar(1024) DEFAULT NULL,\n" +
+            "  `email` varchar(4096) NOT NULL,\n" +
+            "  `passwordId` int(11) DEFAULT NULL,\n" +
+            "  `apiKey` varchar(1024) DEFAULT NULL,\n" +
+            "  `apiDate` datetime DEFAULT NULL,\n" +
+            "  `creationDate` datetime NOT NULL,\n" +
+            "  `loginCount` int(11) DEFAULT NULL,\n" +
+            "  PRIMARY KEY (`id`)\n" +
+            ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3";
 
     @Before
     public void setUp() throws Exception {
@@ -26,28 +39,11 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
         final Handle handle = database.open();
         try {
 
-            handle.createCall("DROP TABLE IF EXISTS user").invoke();
+            handle.createCall(UserDAOTest.DROP_TABLE_STATEMENT).invoke();
             handle.createCall("DROP TABLE IF EXISTS password").invoke();
 
-            handle.createCall(
-                    "CREATE TABLE `user` (\n" +
-                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                            "  `firstName` varchar(1024) DEFAULT NULL,\n" +
-                            "  `email` varchar(4096) NOT NULL,\n" +
-                            "  `passwordId` int(11),\n" +
-                            "  `apiKey` varchar(1024) DEFAULT NULL,\n" +
-                            "  `apiDate` datetime DEFAULT NULL,\n" +
-                            "  `creationDate` datetime NOT NULL,\n" +
-                            "  PRIMARY KEY (`id`)\n" +
-                            ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3"
-            ).invoke();
-            handle.createCall("CREATE TABLE `password` (\n" +
-                    "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                    "  `value` varchar(1000) DEFAULT NULL,\n" +
-                    "  `temp` tinyint(4) DEFAULT NULL,\n" +
-                    "  PRIMARY KEY (`id`)\n" +
-                    ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1"
-            ).invoke();
+            handle.createCall(UserDAOTest.TABLE_DEFINITION).invoke();
+            handle.createCall(PasswordDAOTest.TABLE_DEFINITION).invoke();
 
         } catch (Exception e) {
             System.err.println(e);
@@ -72,7 +68,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            insertTestData(dao,passwordDAO);
+            insertTestData(dao, passwordDAO);
             final String result = handle.createQuery("SELECT COUNT(*) FROM user").map(StringMapper.FIRST).first();
 
             assertThat(Integer.parseInt(result), equalTo(1));
@@ -109,8 +105,8 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            Long id = dao.insert("Adam", "aparrish@neosavvy.com", Long.parseLong("2"), "apiKey", new Date(), new Date());
-            final int result = dao.update(id, "Luke", "lukelappin@gmail.com", Long.parseLong("1"), "apiKey", new Date());
+            Long id = dao.insert("Adam", "aparrish@neosavvy.com", Long.parseLong("2"), "apiKey", new Date(), new Date(), Long.parseLong("1"));
+            final int result = dao.update(id, "Luke", "lukelappin@gmail.com", Long.parseLong("1"), "apiKey", new Date(), Long.parseLong("2"));
 
             assertThat(result, equalTo(1));
         } finally {
@@ -179,7 +175,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
     }
 
     @Test
-     public void testLoginUser() throws Exception {
+    public void testLoginUser() throws Exception {
         final Handle handle = database.open();
         final TransactionalUserDAO dao = database.open(TransactionalUserDAO.class);
         final TransactionalPasswordDAO passwordDAO = database.open(TransactionalPasswordDAO.class);
@@ -218,9 +214,25 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
         assertThat(dao.getUserCount("aparrish@neosavvy.com"), is(equalTo(1)));
     }
 
+    @Test
+    public void testIncrementLoginCount() throws Exception {
+        final Handle handle = database.open();
+        final TransactionalUserDAO dao = database.open(TransactionalUserDAO.class);
+        final TransactionalPasswordDAO passwordDAO = database.open(TransactionalPasswordDAO.class);
+        Long id = insertTestData(dao, passwordDAO);
+
+        dao.incrementLoginCount(id);
+        assertThat(dao.getUser(id).getLoginCount(), is(equalTo(Long.parseLong("2"))));
+        dao.incrementLoginCount(id);
+        assertThat(dao.getUser(id).getLoginCount(), is(equalTo(Long.parseLong("3"))));
+        dao.incrementLoginCount(id);
+        assertThat(dao.getUser(id).getLoginCount(), is(equalTo(Long.parseLong("4"))));
+        assertThat(dao.getUser(id).getLoginCount(), is(equalTo(Long.parseLong("4"))));
+    }
+
     protected Long insertTestData(TransactionalUserDAO dao, TransactionalPasswordDAO passwordDAO) {
         Long passwordId = passwordDAO.insert("password", 0);
-        return dao.insert("Adam", "aparrish@neosavvy.com", passwordId, "apiKey", new Date(), new Date());
+        return dao.insert("Adam", "aparrish@neosavvy.com", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"));
     }
 }
 

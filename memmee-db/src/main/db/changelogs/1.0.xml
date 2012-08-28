@@ -20,6 +20,7 @@
             <column name="apiKey" value="adamsKey"/>
             <column name="apiDate" valueDate="2012-06-01"/>
             <column name="creationDate" valueDate="2012-06-01"/>
+            <column name="loginCount" value="0"/>
         </insert>
 
         <!-- password -->
@@ -39,11 +40,13 @@
         <insert tableName="inspirationcategory">
             <column name="id" value="1"/>
             <column name="name" value="Animals"/>
+            <column name="idx" value="0" />
         </insert>
 
         <insert tableName="inspirationcategory">
             <column name="id" value="2"/>
             <column name="name" value="Food"/>
+            <column name="idx" value="1" />
         </insert>
 
         <!-- inspiration -->
@@ -51,7 +54,7 @@
             <column name="id" value="1"/>
             <column name="text" value="Remember your first time at Sea World"/>
             <column name="inspirationCategoryId" value="1"/>
-            <column name="inspirationCategoryIndex" value="1"/>
+            <column name="inspirationCategoryIndex" value="0"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -59,7 +62,7 @@
             <column name="id" value="2"/>
             <column name="text" value="Tastes just like chicken, but burns the soul"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="1"/>
+            <column name="inspirationCategoryIndex" value="0"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -67,7 +70,7 @@
             <column name="id" value="3"/>
             <column name="text" value="Most metal animals/creatures of all time!"/>
             <column name="inspirationCategoryId" value="1"/>
-            <column name="inspirationCategoryIndex" value="2"/>
+            <column name="inspirationCategoryIndex" value="1"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -75,7 +78,7 @@
             <column name="id" value="4"/>
             <column name="text" value="I'm thinking of breakfast, remember any good ones?"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="2"/>
+            <column name="inspirationCategoryIndex" value="1"/>
             <column name="creationDate" value="2012-07-29"/>
             <column name="lastUpdateDate" value="2012-07-29"/>
         </insert>
@@ -83,7 +86,7 @@
             <column name="id" value="5"/>
             <column name="text" value="Mmmm, reeses blizzard!"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="3"/>
+            <column name="inspirationCategoryIndex" value="2"/>
             <column name="creationDate" value="2012-07-29"/>
             <column name="lastUpdateDate" value="2012-07-29"/>
         </insert>

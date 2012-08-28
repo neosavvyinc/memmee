@@ -18,6 +18,7 @@ CREATE TABLE inspiration (
 
 CREATE TABLE inspirationcategory (
   id int(11) NOT NULL AUTO_INCREMENT,
+  idx int(11) NOT NULL,
   name varchar(200) NOT NULL,
   PRIMARY KEY (id)
 );
@@ -40,10 +41,11 @@ CREATE TABLE user (
   id int(11) NOT NULL AUTO_INCREMENT,
   firstName varchar(1024) DEFAULT NULL,
   email varchar(4096) NOT NULL,
-  passwordId int(11),
+  passwordId int(11) DEFAULT NULL,
   apiKey varchar(1024) DEFAULT NULL,
   apiDate datetime DEFAULT NULL,
   creationDate datetime NOT NULL,
+  loginCount int(11) DEFAULT NULL,
   PRIMARY KEY (id)
 );
 

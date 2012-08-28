@@ -62,7 +62,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         txInspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
 
         passwordId = passwordDAO.insert("password", 0);
-        userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date());
+        userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"));
 
         //add resources
         addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO));
@@ -238,7 +238,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     public void testInsertTwoMemmeesWithAttachmentAndVerifyOnlyTwoComeBack()
     {
         Long attOneId = txAttachmentDAO.insert("this_is_a_file_path.path1", "this_is_a_thumb_file_path.path1", "image/jpeg");
-        Long inspirationCategoryOneId = txInspirationCategoryDAO.insert("this is a category1");
+        Long inspirationCategoryOneId = txInspirationCategoryDAO.insert(Long.parseLong("1"), "this is a category1");
         Long inspirationOneId = txInspirationDAO.insert("this is the inspiration text1", inspirationCategoryOneId, Long.parseLong("1"), new Date(), new Date());
 
         Attachment attachment1 = txAttachmentDAO.getAttachment(attOneId);
@@ -255,7 +255,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee1);
 
         Long attTwoId = txAttachmentDAO.insert("this_is_a_file_path.path2", "this_is_a_thumb_file_path.path2", "image/jpeg");
-        Long inspirationCategoryTwoId = txInspirationCategoryDAO.insert("this is a category2");
+        Long inspirationCategoryTwoId = txInspirationCategoryDAO.insert(Long.parseLong("2"), "this is a category2");
         Long inspirationTwoId = txInspirationDAO.insert("this is the inspiration text2", inspirationCategoryTwoId, Long.parseLong("1"), new Date(), new Date());
 
         Attachment attachment2 = txAttachmentDAO.getAttachment(attTwoId);
@@ -307,27 +307,9 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
 
     }
 
-    @Test
-    public void testCreateAndDeleteAttachment() {
-        attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "this_is_a_thumb_file_path.path", "image/jpeg");
-
-        client().resource(
-                new MemmeeURLBuilder()
-                        .setMethodURL("deleteattachment")
-                        .setApiKeyParam("apiKey")
-                        .setIdParam(attachmentId)
-                        .build())
-                .delete();
-
-        Attachment attachment = txAttachmentDAO.getAttachment(attachmentId);
-
-        assertThat(attachment, is(nullValue()));
-
-    }
-
     protected Long insertTestData() {
         attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "this_is_a_thumb_file_path.path", "image/jpeg");
-        inspirationCategoryId = txInspirationCategoryDAO.insert("this is a category");
+        inspirationCategoryId = txInspirationCategoryDAO.insert(Long.parseLong("1"), "this is a category");
         inspirationId = txInspirationDAO.insert("this is the inspiration text", inspirationCategoryId, Long.parseLong("1"), new Date(), new Date());
         Date date = DateUtil.getDate(2011, 6, 12);
         return txMemmeeDAO.insert(userId, "This is a memmee", date, date, date, "shareKey", attachmentId, Long.parseLong("1"), inspirationId);

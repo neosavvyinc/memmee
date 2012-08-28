@@ -12,8 +12,10 @@ public class InspirationCategoryMapper implements ResultSetMapper<InspirationCat
     @Override
     public InspirationCategory map(int i, ResultSet resultSet, StatementContext statementContext) throws SQLException {
         InspirationCategory inspirationCategory = new InspirationCategory();
+
         inspirationCategory.setId(resultSet.getLong("id"));
         inspirationCategory.setName(resultSet.getString("name"));
+        inspirationCategory.setIndex(resultSet.getLong("idx"));
 
         return inspirationCategory;
     }

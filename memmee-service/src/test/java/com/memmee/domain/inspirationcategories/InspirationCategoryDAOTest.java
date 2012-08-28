@@ -17,9 +17,10 @@ public class InspirationCategoryDAOTest extends AbstractMemmeeDAOTest {
     public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS inspirationcategory";
     public static final String TABLE_DEFINITION = "CREATE TABLE `inspirationcategory` (\n" +
             "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+            "  `idx` int(11) NOT NULL,\n" +
             "  `name` varchar(200) NOT NULL,\n" +
             "  PRIMARY KEY (`id`)\n" +
-            ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
+            ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3";
 
     @Before
     public void setUp() throws Exception {
@@ -56,6 +57,49 @@ public class InspirationCategoryDAOTest extends AbstractMemmeeDAOTest {
             assertThat(inspirationCategory, is(not(nullValue())));
             assertThat(inspirationCategory.getId(), is(equalTo(id)));
             assertThat(inspirationCategory.getName(), is(equalTo("This is my inspiration category")));
+            assertThat(inspirationCategory.getIndex(), is(equalTo(Long.parseLong("3"))));
+
+        } finally {
+            dao.close();
+            handle.close();
+        }
+    }
+
+    @Test
+    public void testGetInspirationCategoryByIndex() {
+        final Handle handle = database.open();
+        final TransactionalInspirationCategoryDAO dao = database.open(TransactionalInspirationCategoryDAO.class);
+
+        try {
+            Long id = insertTestData(dao);
+
+            InspirationCategory inspirationCategory = dao.getInspirationCategoryByIndex(Long.parseLong("3"));
+
+            assertThat(inspirationCategory, is(not(nullValue())));
+            assertThat(inspirationCategory.getId(), is(equalTo(id)));
+            assertThat(inspirationCategory.getName(), is(equalTo("This is my inspiration category")));
+            assertThat(inspirationCategory.getIndex(), is(equalTo(Long.parseLong("3"))));
+
+        } finally {
+            dao.close();
+            handle.close();
+        }
+    }
+
+    @Test
+    public void testGetHighestInspirationCategory() {
+        final Handle handle = database.open();
+        final TransactionalInspirationCategoryDAO dao = database.open(TransactionalInspirationCategoryDAO.class);
+
+        try {
+            Long firstId = dao.insert(Long.parseLong("4"), "This is the first category");
+            Long secondId = dao.insert(Long.parseLong("5"), "This is the second category");
+
+            InspirationCategory inspirationCategory = dao.getHighestInspirationCategory();
+
+            assertThat(inspirationCategory, is(not(nullValue())));
+            assertThat(inspirationCategory.getIndex(), is(equalTo(Long.parseLong("5"))));
+            assertThat(inspirationCategory.getName(), is(equalTo("This is the second category")));
 
         } finally {
             dao.close();
@@ -69,12 +113,13 @@ public class InspirationCategoryDAOTest extends AbstractMemmeeDAOTest {
         final TransactionalInspirationCategoryDAO dao = database.open(TransactionalInspirationCategoryDAO.class);
 
         try {
-            Long id = dao.insert("New Inspiration Category 7");
+            Long id = dao.insert(Long.parseLong("17"), "New Inspiration Category 7");
             InspirationCategory inspirationCategory = dao.getInspirationCategory(id);
 
             assertThat(inspirationCategory, is(not(nullValue())));
             assertThat(inspirationCategory.getId(), is(equalTo(id)));
             assertThat(inspirationCategory.getName(), is(equalTo("New Inspiration Category 7")));
+            assertThat(inspirationCategory.getIndex(), is(equalTo(Long.parseLong("17"))));
 
         } finally {
             dao.close();
@@ -83,6 +128,6 @@ public class InspirationCategoryDAOTest extends AbstractMemmeeDAOTest {
     }
 
     protected Long insertTestData(TransactionalInspirationCategoryDAO dao) {
-        return dao.insert("This is my inspiration category");
+        return dao.insert(Long.parseLong("3"), "This is my inspiration category");
     }
 }

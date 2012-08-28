@@ -1,0 +1,23 @@
+<div class="navbar">
+    <div class="navbar-inner" ng-controller="NavigationController">
+        <div class="container">
+
+            <a class="brand" href="#home">Memmee</a>
+
+            <ul class="nav pull-right" ng-style="visibleLoggedInStyle">
+                <li id="fat-menu" class="dropdown">
+                    <a href="#fat-menu" class="dropdown-toggle" data-toggle="dropdown"data-target="#fat-menu">{{loggedInUser.firstName}} {{loggedInUser.lastName}}<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/profile" >Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" ng-click="signOut()">Sign Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="nav pull-right" ng-style="visibleLoggedInStyle">
+                <a ng-click="toggleCreateMode()" ng-class="createModeStyles"><i class="icon-pencil icon-white"></i> Toggle Create Mode </a>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,1 +1,0 @@
-angular.module('user-app', ['user-app.services']).run()

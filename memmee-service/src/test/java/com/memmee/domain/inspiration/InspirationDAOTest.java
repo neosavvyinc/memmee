@@ -3,6 +3,7 @@ package com.memmee.domain.inspiration;
 import base.AbstractMemmeeDAOTest;
 import com.memmee.domain.inspirationcategories.InspirationCategoryDAOTest;
 import com.memmee.domain.inspirationcategories.dao.TransactionalInspirationCategoryDAO;
+import com.memmee.domain.inspirationcategories.domain.InspirationCategory;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
 import org.junit.*;
@@ -158,7 +159,7 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
         final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);
         final TransactionalInspirationCategoryDAO inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
 
-        try{
+        try {
             Long categoryId = insertTestCategory(inspirationCategoryDAO);
             Long otherCategoryId = insertTestCategory(inspirationCategoryDAO);
             dao.insert("Cookies are awesome", categoryId, Long.parseLong("1"), new Date(), new Date());
@@ -185,15 +186,73 @@ public class InspirationDAOTest extends AbstractMemmeeDAOTest {
 
     }
 
+    @Test
+    public void testGetInspirationForInspirationCategoryAndIndex() {
+        final Handle handle = database.open();
+        final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);
+        final TransactionalInspirationCategoryDAO inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
+
+        try {
+            Long categoryId = insertTestCategory(inspirationCategoryDAO);
+            Long otherCategoryId = insertTestCategory(inspirationCategoryDAO);
+            dao.insert("Cookies are awesome", otherCategoryId, Long.parseLong("1"), new Date(), new Date());
+            dao.insert("Wookies are awesome", categoryId, Long.parseLong("7"), new Date(), new Date());
+            dao.insert("Bookies are awesome 57", categoryId, Long.parseLong("3"), new Date(), new Date());
+
+            Inspiration inspiration = dao.getInspirationForInspirationCategoryAndIndex(categoryId, Long.parseLong("7"));
+
+            assertThat(inspiration, is(not(nullValue())));
+            assertThat(inspiration.getText(), is(equalTo("Wookies are awesome")));
+            assertThat(inspiration.getInspirationCategory(), is(equalTo(inspirationCategoryDAO.getInspirationCategory(categoryId))));
+
+            inspiration = dao.getInspirationForInspirationCategoryAndIndex(otherCategoryId, Long.parseLong("1"));
+
+            assertThat(inspiration, is(not(nullValue())));
+            assertThat(inspiration.getText(), is(equalTo("Cookies are awesome")));
+            assertThat(inspiration.getInspirationCategory(), is(equalTo(inspirationCategoryDAO.getInspirationCategory(otherCategoryId))));
+        } finally {
+            dao.close();
+            inspirationCategoryDAO.close();
+            handle.close();
+        }
+
+    }
+
+    @Test
+    public void testGetHighestInspiration() {
+        final Handle handle = database.open();
+        final TransactionalInspirationDAO dao = database.open(TransactionalInspirationDAO.class);
+        final TransactionalInspirationCategoryDAO inspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
+
+        try {
+            List<Long> inspirationIds = insertTestInspirations(dao, inspirationCategoryDAO);
+
+            InspirationCategory inspirationCategoryA = dao.getInspiration(inspirationIds.get(0)).getInspirationCategory();
+            InspirationCategory inspirationCategoryB = dao.getInspiration(inspirationIds.get(inspirationIds.size() - 1)).getInspirationCategory();
+
+            Inspiration highestInspiration = dao.getHighestInspirationForCategory(inspirationCategoryA.getId());
+            assertThat(highestInspiration, is(not(nullValue())));
+            assertThat(highestInspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("2"))));
+
+            highestInspiration = dao.getHighestInspirationForCategory(inspirationCategoryB.getId());
+            assertThat(highestInspiration, is(not(nullValue())));
+            assertThat(highestInspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("2"))));
+        } finally {
+            dao.close();
+            inspirationCategoryDAO.close();
+            handle.close();
+        }
+    }
+
     protected Long insertTestCategory(TransactionalInspirationCategoryDAO dao) {
-        return dao.insert("My test category");
+        return dao.insert(Long.parseLong("1"), "My test category");
     }
 
     protected List<Long> insertTestInspirations(TransactionalInspirationDAO dao, TransactionalInspirationCategoryDAO inspirationCategoryDAO) {
         List<Long> inspirationIds = new ArrayList<Long>();
 
         for (int k = 0; k < 3; k++) {
-            Long categoryId = inspirationCategoryDAO.insert(String.format("Inspiration Category %s", k));
+            Long categoryId = inspirationCategoryDAO.insert(Long.parseLong(Integer.toString(k)), String.format("Inspiration Category %s", k));
             for (int i = 0; i < 3; i++)
                 inspirationIds.add(dao.insert(String.format("Inspiration %s, Category %s", i, k), categoryId, Long.parseLong(Integer.toString(i)), new Date(), new Date()));
         }

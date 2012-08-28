@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,7 +38,7 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
         passwordGenerator = new PasswordGeneratorImpl();
 
         //add resources
-        addResource(new InspirationResource(userDAO, inspirationDAO));
+        addResource(new InspirationResource(userDAO, inspirationDAO, inspirationCategoryDAO));
     }
 
     @Test
@@ -53,16 +54,74 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
         assertThat(inspiration, is(not(nullValue())));
     }
 
-    protected void insertTestData() {
+    @Test
+    public void testGetNextInspiration() {
+        List<Long> inspirationIds = insertTestData();
+
+        Inspiration inspiration = client().resource(new MemmeeURLBuilder().
+                setBaseURL(InspirationResource.BASE_URL).
+                setMethodURL("getnextinspiration").
+                setApiKeyParam("apiKey500").
+                setParam("currentId", inspirationIds.get(0).toString()).
+                build()).get(Inspiration.class);
+
+        assertThat(inspiration, is(not(nullValue())));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 1")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("1"))));
+        assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("0"))));
+
+        inspiration = client().resource(new MemmeeURLBuilder().
+                setBaseURL(InspirationResource.BASE_URL).
+                setMethodURL("getnextinspiration").
+                setApiKeyParam("apiKey500").
+                setParam("currentId", inspirationIds.get(inspirationIds.size() -  1).toString()).
+                build()).get(Inspiration.class);
+
+        assertThat(inspiration, is(not(nullValue())));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 0")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("0"))));
+        assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("0"))));
+    }
+
+    @Test
+    public void testGetPreviousInspiration() {
+        List<Long> inspirationIds = insertTestData();
+
+        Inspiration inspiration = client().resource(new MemmeeURLBuilder().
+                setBaseURL(InspirationResource.BASE_URL).
+                setMethodURL("getpreviousinspiration").
+                setApiKeyParam("apiKey500").
+                setParam("currentId", inspirationIds.get(0).toString()).
+                build()).get(Inspiration.class);
+
+        assertThat(inspiration, is(not(nullValue())));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 2")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("2"))));
+        assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("2"))));
+
+        inspiration = client().resource(new MemmeeURLBuilder().
+                setBaseURL(InspirationResource.BASE_URL).
+                setMethodURL("getpreviousinspiration").
+                setApiKeyParam("apiKey500").
+                setParam("currentId", inspirationIds.get(inspirationIds.size() -  1).toString()).
+                build()).get(Inspiration.class);
+
+        assertThat(inspiration, is(not(nullValue())));
+        assertThat(inspiration.getText(), is(equalTo("Inspiration 1")));
+        assertThat(inspiration.getInspirationCategoryIndex(), is(equalTo(Long.parseLong("1"))));
+        assertThat(inspiration.getInspirationCategory().getIndex(), is(equalTo(Long.parseLong("2"))));
+    }
+
+    protected List<Long> insertTestData() {
         insertTestUser();
-        insertTestInspirations(inspirationDAO, inspirationCategoryDAO);
+        return insertTestInspirations(inspirationDAO, inspirationCategoryDAO);
     }
 
     protected List<Long> insertTestInspirations(TransactionalInspirationDAO dao, TransactionalInspirationCategoryDAO inspirationCategoryDAO) {
         List<Long> inspirationIds = new ArrayList<Long>();
 
         for (int k = 0; k < 3; k++) {
-            Long categoryId = inspirationCategoryDAO.insert(String.format("Inspiration Category %s", k));
+            Long categoryId = inspirationCategoryDAO.insert(Long.parseLong(Integer.toString(k)), String.format("Inspiration Category %s", k));
             for (int i = 0; i < 3; i++)
                 inspirationIds.add(dao.insert(String.format("Inspiration %s", i), categoryId, Long.parseLong(Integer.toString(i)), new Date(), new Date()));
         }
@@ -72,7 +131,7 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
 
     protected Long insertTestUser() {
         Long passwordId = passwordDAO.insert(passwordGenerator.encrypt("abc123"), 0);
-        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date());
+        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date(), Long.parseLong("1"));
     }
 
 }

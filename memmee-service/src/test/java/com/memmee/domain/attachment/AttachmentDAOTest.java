@@ -1,6 +1,6 @@
 package com.memmee.domain.attachment;
 
-import com.memmee.domain.attachment.dao.AttachmentDAO;
+import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.domain.attachment.dto.Attachment;
 import base.AbstractMemmeeDAOTest;
 import com.yammer.dropwizard.db.Database;
@@ -18,30 +18,27 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 import static org.mockito.Mockito.verify;
 
-public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
+public class AttachmentDAOTest extends AbstractMemmeeDAOTest {
 
+    public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS attachment";
+    public static final String TABLE_DEFINITION = "CREATE TABLE `attachment` (\n" +
+            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+            "  `filePath` varchar(1024) DEFAULT NULL,\n" +
+            "  `thumbFilePath` varchar(1024) DEFAULT NULL,\n" +
+            "  `type` varchar(20) DEFAULT NULL,\n" +
+            "  PRIMARY KEY (`id`)\n" +
+            ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 
     @Before
     public void setUp() throws Exception {
         this.database = factory.build(mysqlConfig, "mysql");
         final Handle handle = database.open();
         try {
-        	
-            handle.createCall("DROP TABLE IF EXISTS attachment").invoke();
 
-            handle.createCall(
-                "CREATE TABLE `attachment` (\n" +
-                " `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                " `memmeeId` int(11) NOT NULL,\n" +
-                " `filePath` varchar(1024) DEFAULT NULL,\n" +
-                " `thumbFilePath` varchar(1024) DEFAULT NULL,\n" +
-                " `type` varchar(20) DEFAULT NULL,\n" +
-                " PRIMARY KEY (`id`)\n" +
-                ") ENGINE=InnoDB DEFAULT CHARSET=latin1").invoke();
-            		
-         
-        } catch (Exception e)
-        {
+            handle.createCall(AttachmentDAOTest.DROP_TABLE_STATEMENT).invoke();
+            handle.createCall(AttachmentDAOTest.TABLE_DEFINITION).invoke();
+
+        } catch (Exception e) {
             System.err.println(e);
 
         } finally {
@@ -55,88 +52,87 @@ public class AttachmentDAOTest extends AbstractMemmeeDAOTest{
         this.database = null;
     }
 
-    
+
     @Test
     public void testSave() throws Exception {
-    	
-    	final Handle handle = database.open();
-    	final AttachmentDAO dao = database.open(AttachmentDAO.class);
-    	
-    	try {
-	      
-	        dao.insert(new Long(1), "filePath", "thumbFilePath", "Image");
-	        final String result = handle.createQuery("SELECT COUNT(*) FROM attachment").map(StringMapper.FIRST).first();
-	
-	        assertThat(Integer.parseInt(result), equalTo(1));
-        
-    	}finally{
-    		dao.close();
-    		handle.close();
-    	}
-        
-        
+
+        final Handle handle = database.open();
+        final TransactionalAttachmentDAO dao = database.open(TransactionalAttachmentDAO.class);
+
+        try {
+
+            dao.insert("filePath", "thumbFilePath", "Image");
+            final String result = handle.createQuery("SELECT COUNT(*) FROM attachment").map(StringMapper.FIRST).first();
+
+            assertThat(Integer.parseInt(result), equalTo(1));
+
+        } finally {
+            dao.close();
+            handle.close();
+        }
+
 
     }
-    
-    
+
+
     @Test
     public void testRead() throws Exception {
         final Handle handle = database.open();
-        final AttachmentDAO dao = database.open(AttachmentDAO.class);
-        
-    try{
+        final TransactionalAttachmentDAO dao = database.open(TransactionalAttachmentDAO.class);
 
-    	Long id = dao.insert(new Long(1), "filePath", "thumbFilePath", "Image");
-        final Attachment attachment = dao.getAttachment(new Long(1));
-       
+        try {
 
-        assertThat(attachment.getId(), equalTo(id));
-        
-    }finally{
-    	dao.close();
-		handle.close();
-	}
+            Long id = dao.insert("filePath", "thumbFilePath", "Image");
+            final Attachment attachment = dao.getAttachment(new Long(1));
 
-    }
-    
-    
-    @Test
-    public void testUpdate() throws Exception {
-        final AttachmentDAO dao = database.open(AttachmentDAO.class);
-        
-        try{
-        	
-         Long id  = dao.insert(new Long(1), "filePath", "thumbFilePath", "Image");
-         final int result = dao.update(id, "filePath2", "thumbFilePath2", "Image2");
 
-         assertThat(result,equalTo(1));
-        }finally{
-        	dao.close();
-        }
-    }
-    
-    
-    @Test
-    public void testDelete() throws Exception {
-    
-        final Handle handle = database.open();
-        final AttachmentDAO dao = database.open(AttachmentDAO.class);
+            assertThat(attachment.getId(), equalTo(id));
 
-        try{
-
-            dao.delete(new Long(1));
-            final String result = handle.createQuery("SELECT COUNT(*) FROM attachment").map(StringMapper.FIRST).first();
-
-            assertThat(Integer.parseInt(result),equalTo(0));
-
-        }finally{
+        } finally {
             dao.close();
             handle.close();
         }
 
     }
-   
-    
+
+
+    @Test
+    public void testUpdate() throws Exception {
+        final TransactionalAttachmentDAO dao = database.open(TransactionalAttachmentDAO.class);
+
+        try {
+
+            Long id = dao.insert("filePath", "thumbFilePath", "Image");
+            final int result = dao.update(id, "filePath2", "thumbFilePath2", "Image2");
+
+            assertThat(result, equalTo(1));
+        } finally {
+            dao.close();
+        }
+    }
+
+
+    @Test
+    public void testDelete() throws Exception {
+
+        final Handle handle = database.open();
+        final TransactionalAttachmentDAO dao = database.open(TransactionalAttachmentDAO.class);
+
+        try {
+
+            dao.delete(new Long(1));
+            final String result = handle.createQuery("SELECT COUNT(*) FROM attachment").map(StringMapper.FIRST).first();
+
+            assertThat(Integer.parseInt(result), equalTo(0));
+
+        } finally {
+            dao.close();
+            handle.close();
+        }
+
+    }
+
+
     @Test
     public void managesTheDatabaseWithTheEnvironment() throws Exception {
         final Database db = factory.build(mysqlConfig, "hsql");

@@ -54,6 +54,10 @@ public class UserResource {
     public User loginUserByApiKey(@QueryParam("apiKey") String apiKey) {
         final User userLookup = userDao.getUserByApiKey(apiKey);
 
+        //Keeps track of the number of times the user has logged in
+        userDao.incrementLoginCount(userLookup.getId());
+        userLookup.setLoginCount(userLookup.getLoginCount() + 1);
+
         userLookup.hidePassword();
 
         return userLookup;
@@ -70,6 +74,10 @@ public class UserResource {
         if (returnValue == null || invalidPassword(user, returnValue)) {
             throw new WebApplicationException(Status.UNAUTHORIZED);
         }
+
+        //Keeps track of the number of times the user has logged in
+        userDao.incrementLoginCount(returnValue.getId());
+        returnValue.setLoginCount(returnValue.getLoginCount() + 1);
 
         returnValue.hidePassword();
 
@@ -102,7 +110,8 @@ public class UserResource {
                     user.getEmail(),
                     user.getPassword().getId(),
                     user.getApiKey(),
-                    new Date()
+                    new Date(),
+                    user.getLoginCount()
             );
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
@@ -144,7 +153,8 @@ public class UserResource {
                         null,
                         user.getApiKey(),
                         new Date(),
-                        new Date()
+                        new Date(),
+                        Long.parseLong("1")
                 );
                 user = userDao.getUser(userId);
             }
