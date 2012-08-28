@@ -12,11 +12,9 @@
         <div class="container" ng-view>
         </div> <!-- /container -->
 
-        <!--<ng-include src="'js/home/home-ptl.html'"></ng-include>-->
-        <!--<ng-include src="'js/memmee/create/create-ptl.html'"></ng-include>-->
-        <!--<ng-include src="'js/memmee/view/view-ptl.html'"></ng-include>-->
-
         <ng-include src="'js/footer/footer-ptl.html'"></ng-include>
+
+        <div ng-include="'js/alerts/alerts-ptl.html'"></div>
 
         <!-- Libraries -->
         <script src="../lib/angular.js"></script>
@@ -37,6 +35,7 @@
         <!-- Controllers -->
         <script src="js/default-ctrl.js"></script>
         <script src="js/security-ctrl.js"></script>
+        <script src="js/alerts/alerts-ctrl.js"></script>
         <script src="js/header/header-ctrl.js"></script>
         <script src="js/profile/profile-ctrl.js"></script>
         <script src="js/home/login-ctrl.js"></script>

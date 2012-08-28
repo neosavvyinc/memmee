@@ -22,6 +22,20 @@ function CreateMemmeesController($scope, $http, broadCastService) {
             };
         });
 
+    $scope.memmeeStyleSelectorVisibilityStyle = "isHidden";
+    $scope.toggleMemmeeThemeSelection = function()
+    {
+        console.log("mouse over happening.")
+        if( $scope.memmeeStyleSelectorVisibilityStyle == "isHidden" )
+        {
+            $scope.memmeeStyleSelectorVisibilityStyle = "isVisible";
+        }
+        else
+        {
+            $scope.memmeeStyleSelectorVisibilityStyle = "isHidden";
+        }
+    }
+
     //Action Handlers
     $scope.update = function (memmee) {
         $scope.master = angular.copy(memmee);
@@ -86,9 +100,28 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         return angular.equals(memmee, $scope.master);
     };
 
+    $scope.selectedTheme = "memmee-card";
+
     //Setters
     $scope.setTheme = function (number) {
-        broadCastService.setTheme(number);
+        switch (number) {
+            case 0:
+                $scope.selectedTheme = "memmee-card";
+                break;
+            case 1:
+                $scope.selectedTheme = "memmee-card style-coffee";
+                break;
+            case 2:
+                $scope.selectedTheme = "memmee-card style-travel";
+                break;
+            case 3:
+                $scope.selectedTheme = "memmee-card style-inspiration";
+                break;
+            default:
+                $scope.selectedTheme = "memmee-card";
+                break;
+        }
+        $scope.toggleMemmeeThemeSelection();
     }
 
     //Broadcast and Event Handlers
@@ -114,6 +147,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
 
 
     $scope.$on(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), function (event, memmee) {
+        console.log(">>>memmee selected event in the create-ctrl");
         if (memmee.id != $scope.memmee.id) {
             if ($scope.isUnchanged($scope.memmee)) {
                 $scope.selectMemmee(event, memmee);
