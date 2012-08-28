@@ -18,6 +18,10 @@ public interface TransactionalThemeDAO extends Transactional<TransactionalThemeD
     @Mapper(ThemeMapper.class)
     Theme getTheme(@Bind("id") Long id);
 
+    @SqlQuery("select * from theme where name = :name")
+    @Mapper(ThemeMapper.class)
+    Theme getThemeByName(@Bind("name") String name);
+
     @SqlUpdate("insert into theme (name, stylePath) values (:name, :stylePath)")
     @GetGeneratedKeys
     Long insert(
