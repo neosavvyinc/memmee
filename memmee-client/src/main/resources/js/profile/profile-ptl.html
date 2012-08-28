@@ -1,0 +1,31 @@
+<div>
+    <div>
+        <h2>Complete Your Profile</h2>
+
+        <div id="profile" ng-controller="ProfileController">
+            <form class="well" >
+                <label>Firstname:</label>
+                <input type="text"
+                       placeholder="First Name"
+                       ng-model="user.firstName"
+                        >
+                <label>Email:</label>
+                <input type="text"
+                       placeholder="Email Address"
+                       ng-model="user.email"
+                        >
+                <label>Password:</label>
+                <input type="password"
+                       placeholder="Password"
+                       ng-model="user.password.value"
+                        >
+                <label>Confirm:</label>
+                <input type="password"
+                       placeholder="Confirm"
+                       ng-model="confirmedPass"
+                        >
+            </form>
+            <a href="#create" ng-click="update()" >Update »</a>
+        </div>
+    </div>
+</div>
