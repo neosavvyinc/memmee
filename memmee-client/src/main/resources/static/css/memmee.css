@@ -163,7 +163,39 @@ html{
     width: 877px;
     height: 585px;
     margin-bottom: 50px;
-    background: transparent url(../img/bg-card-main.png) top left no-repeat;
+    background-color: transparent;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-image: url('../img/bg-card-main.png');
+}
+.memmee-card.style-coffee{
+    width: 876px;
+    height: 594px;
+    font: 24px/36px 'rokkitt', Arial, Helvetica, sans-serif;
+    color: #7c3f36;
+    background-image: url('../img/bg-card-coffee.png');
+}
+.memmee-card.style-whimsy{
+    width: 883px;
+    height: 630px;
+    font: 22px/35px 'josefinslab', Arial, Helvetica, sans-serif;
+    color: #513f48;
+    background-image: url('../img/bg-card-whimsy.png');
+}
+.memmee-card.style-inspiration{
+    width: 885px;
+    height: 629px;
+    font: 22px/35px 'Josefin Sans', Arial, Helvetica, sans-serif;
+    color: #407280;
+    background-image: url('../img/bg-card-inspiration.png');
+}
+.memmee-card.style-travel{
+    width: 979px;
+    height: 597px;
+    padding-left: 200px;
+    font: 24px/36px 'Crimson Text', 'Times New Roman', Times, serif;
+    color: #7f7676;
+    background-image: url('../img/bg-card-travel.png');
 }
 
 .memmee-bubble{
@@ -258,6 +290,7 @@ html{
 }
 
 .controls.styles{
+    width: 228px;
     padding-left: 26px;
 }
 
@@ -279,6 +312,7 @@ html{
 }
 
 .controls.io{
+    width: 412px;
     position: relative;
     padding-left: 10px;
 }
@@ -291,6 +325,16 @@ html{
 .controls.io .icon{
     margin-right: 6px;
     vertical-align: text-top;
+}
+.controls.io .save{
+    position: absolute;
+    top: 14px;
+    right: 90px;
+}
+.controls.io .cancel{
+    position: absolute;
+    top: 17px;
+    right: 0;
 }
 
 .memmee-slideshow{
@@ -544,6 +588,7 @@ html{
     margin-bottom: 0;
 }
 .memmee-style.container{
+    display: none;
     position: relative;
     width: 224px;
     height: 141px;
@@ -552,6 +597,7 @@ html{
     background: transparent url('../img/bg-dropDown.png') top left no-repeat;
 }
 .memmee-style.dropdown{
+    width: 196px;
    display: block;
    list-style-type: none;
    color: #476579;
@@ -703,6 +749,7 @@ table.calendar{
 .link.addStyle{
     font-size: 16px;
     margin-right: 14px;
+    background: transparent url('../img/bg-link-photo.png') bottom left repeat-x;
 }
 
 .link.photo{
@@ -941,17 +988,17 @@ table.calendar{
 
 /*STATE*/
 .isHidden{
-    display: none;
+    display: none!important;
 }
 
 .isShown{
-    display: block;
+    display: block!important;
 }
 
 .isFrozen{
-    overflow: hidden;
+    overflow: hidden!important;
 }
 
 .isUnfrozen{
-    overflow: auto;
+    overflow: auto!important;
 }
