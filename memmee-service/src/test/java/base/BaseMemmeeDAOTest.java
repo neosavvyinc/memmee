@@ -1,7 +1,9 @@
 package base;
 
+import com.memmee.domain.attachment.AttachmentDAOTest;
 import com.memmee.domain.inspiration.InspirationDAOTest;
 import com.memmee.domain.user.UserDAOTest;
+import com.memmee.theme.ThemeDAOTest;
 import org.junit.After;
 import org.junit.Before;
 import org.skife.jdbi.v2.Handle;
@@ -38,31 +40,14 @@ public class BaseMemmeeDAOTest extends AbstractMemmeeDAOTest {
 
             handle.createCall(UserDAOTest.DROP_TABLE_STATEMENT).invoke();
             handle.createCall(BaseMemmeeDAOTest.DROP_TABLE_STATEMENT).invoke();
-            handle.createCall("DROP TABLE IF EXISTS attachment").invoke();
-            handle.createCall("DROP TABLE IF EXISTS theme").invoke();
+            handle.createCall(AttachmentDAOTest.DROP_TABLE_STATEMENT).invoke();
+            handle.createCall(ThemeDAOTest.DROP_TABLE_STATEMENT).invoke();
             handle.createCall(InspirationDAOTest.DROP_TABLE_STATEMENT).invoke();
 
             handle.createCall(UserDAOTest.TABLE_DEFINITION).invoke();
             handle.createCall(BaseMemmeeDAOTest.TABLE_DEFINITION).invoke();
-            handle.createCall(
-                    "CREATE TABLE `attachment` (\n" +
-                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                            "  `memmeeId` int(11) DEFAULT NULL,\n" +
-                            "  `filePath` varchar(1024) DEFAULT NULL,\n" +
-                            "  `thumbFilePath` varchar(1024) DEFAULT NULL,\n" +
-                            "  `type` varchar(20) DEFAULT NULL,\n" +
-                            "  PRIMARY KEY (`id`)\n" +
-                            ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3"
-
-            ).invoke();
-            handle.createCall(
-                    "CREATE TABLE `theme` (\n" +
-                            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-                            "  `name` varchar(100) DEFAULT NULL,\n" +
-                            "  `stylePath` varchar(1024) DEFAULT NULL,\n" +
-                            "  PRIMARY KEY (`id`)\n" +
-                            ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1"
-            ).invoke();
+            handle.createCall(AttachmentDAOTest.TABLE_DEFINITION).invoke();
+            handle.createCall(ThemeDAOTest.TABLE_DEFINITION).invoke();
             handle.createCall(InspirationDAOTest.TABLE_DEFINITION).invoke();
 
         } catch (Exception e) {

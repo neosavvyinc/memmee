@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.memmee.domain.attachment.dto.Attachment;
 import com.memmee.domain.inspirations.dto.Inspiration;
+import com.memmee.theme.dto.Theme;
 
 import javax.validation.constraints.NotNull;
 
@@ -23,6 +24,8 @@ public class Memmee implements Serializable {
     private String text;
 
     private Attachment attachment;
+
+    private Theme theme;
 
     private Inspiration inspiration;
 
@@ -111,6 +114,14 @@ public class Memmee implements Serializable {
 
     public void setInspiration(Inspiration inspiration) {
         this.inspiration = inspiration;
+    }
+
+    public Theme getTheme() {
+        return theme;
+    }
+
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 
     @Override

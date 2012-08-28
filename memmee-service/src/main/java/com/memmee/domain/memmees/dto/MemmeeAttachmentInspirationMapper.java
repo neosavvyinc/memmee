@@ -1,6 +1,7 @@
 package com.memmee.domain.memmees.dto;
 
 import com.memmee.domain.inspirations.dto.Inspiration;
+import com.memmee.theme.dto.Theme;
 import org.skife.jdbi.v2.StatementContext;
 
 import java.sql.ResultSet;
@@ -18,6 +19,12 @@ public class MemmeeAttachmentInspirationMapper extends MemmeeAttachmentMapper {
         inspiration.setCreationDate(resultSet.getDate("inspirationCreationDate"));
         inspiration.setLastUpdateDate(resultSet.getDate("inspirationLastUpdateDate"));
         memmee.setInspiration(inspiration);
+
+        Theme theme = new Theme();
+        theme.setId(resultSet.getLong("themeId"));
+        theme.setName(resultSet.getString("themeName"));
+        theme.setStylePath(resultSet.getString("themeStylePath"));
+        memmee.setTheme(theme);
 
         return memmee;
     }
