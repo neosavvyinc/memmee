@@ -50,6 +50,9 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     };
 
     $scope.createMemmee = function () {
+        //@TODO, this logic and naming will eventually be changed
+        $scope.memmee.theme.name = $scope.selectedTheme;
+
         $http({method:'POST', url:'/memmeerest/insertmemmee/?apiKey=' + broadCastService.user.apiKey, data:$scope.memmee}).
             success(function (data, status, headers, config) {
                 console.log('you have saved a memmee');

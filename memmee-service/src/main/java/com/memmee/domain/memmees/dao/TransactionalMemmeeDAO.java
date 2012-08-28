@@ -24,9 +24,10 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     Memmee getMemmeeMin(@Bind("id") Long id);
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
-            "m.themeId as themeId, a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
+            "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
-            "i.lastUpdateDate as inspirationLastUpdateDate, t.name as themeName, t.stylePath as themeStylePath from memmee m " +
+            "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, " +
+            "t.name as themeName, t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
             "LEFT OUTER JOIN theme t on m.themeId = t.id " +
@@ -36,9 +37,10 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     Memmee getMemmee(@Bind("id") Long id);
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
-            "m.themeId as themeId, a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
+            "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
-            "i.lastUpdateDate as inspirationLastUpdateDate, t.name as themeName, t.stylePath as themeStylePath from memmee m " +
+            "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, " +
+            "t.name as themeName, t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
             "LEFT OUTER JOIN theme t on m.themeId = t.id " +
@@ -48,9 +50,10 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     Memmee getMemmee(@Bind("shareKey") String shareKey);
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
-            "m.themeId as themeId, a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
+            "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
-            "i.lastUpdateDate as inspirationLastUpdateDate, t.name as themeName, t.stylePath as themeStylePath from memmee m " +
+            "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, t.name as themeName, " +
+            "t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
             "LEFT OUTER JOIN theme t on m.themeId = t.id " +

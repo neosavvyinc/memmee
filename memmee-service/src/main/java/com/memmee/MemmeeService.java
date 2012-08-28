@@ -7,6 +7,7 @@ import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
+import com.memmee.theme.dao.TransactionalThemeDAO;
 import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
 import com.yammer.dropwizard.bundles.DBIExceptionsBundle;
@@ -50,6 +51,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         final TransactionalAttachmentDAO attachmentDao = db.onDemand(TransactionalAttachmentDAO.class);
         final TransactionalInspirationDAO inspirationDao = db.onDemand(TransactionalInspirationDAO.class);
         final TransactionalInspirationCategoryDAO inspirationCategoryDAO = db.onDemand(TransactionalInspirationCategoryDAO.class);
+        final TransactionalThemeDAO themeDAO = db.onDemand(TransactionalThemeDAO.class);
 
         environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
                 "MEMMEE AUTHENTICATION"));
@@ -60,7 +62,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
                 ,new MemmeeMailSenderImpl()
                 ,userConfiguration.getMemmeeUrlConfiguration()
         ));
-        environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao));
+        environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao, themeDAO));
         environment.addResource(new InspirationResource(userDao, inspirationDao, inspirationCategoryDAO));
     }
 
