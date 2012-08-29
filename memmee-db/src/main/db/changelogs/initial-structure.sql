@@ -23,6 +23,13 @@ CREATE TABLE inspirationcategory (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE theme (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(100) DEFAULT NULL,
+  stylePath varchar(1024) DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
 CREATE TABLE memmee (
   id int(11) NOT NULL AUTO_INCREMENT,
   userId int(11) NOT NULL,

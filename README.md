@@ -50,6 +50,11 @@ To create your user use the following commands:
     GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'%' WITH GRANT OPTION;
     GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmee'@'localhost' WITH GRANT OPTION;
 
+    CREATE USER 'memmeetest'@'%' IDENTIFIED BY 'memmeetest';
+    CREATE USER 'memmeetest'@'localhost' IDENTIFIED BY 'memmeetest';
+    GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmeetest'@'%' WITH GRANT OPTION;
+    GRANT ALL PRIVILEGES ON memmeetest.* TO 'memmeetest'@'localhost' WITH GRANT OPTION;
+
 To initialize the database you just have to go into the memmee-db directory and run:
 
     mvn liquibase:update

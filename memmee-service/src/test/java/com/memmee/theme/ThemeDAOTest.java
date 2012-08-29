@@ -1,6 +1,6 @@
 package com.memmee.theme;
 
-import com.memmee.theme.dao.ThemeDAO;
+import com.memmee.theme.dao.TransactionalThemeDAO;
 import com.memmee.theme.dto.Theme;
 import base.AbstractMemmeeDAOTest;
 import com.yammer.dropwizard.db.Database;
@@ -13,11 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.skife.jdbi.v2.util.StringMapper;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class ThemeDAOTest extends AbstractMemmeeDAOTest {
@@ -52,12 +50,31 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
         this.database = null;
     }
 
+    @Test
+    public void testGetThemeByName() throws Exception {
+        final Handle handle = database.open();
+        final TransactionalThemeDAO dao = database.open(TransactionalThemeDAO.class);
+
+        try {
+            Long id = insertTestTheme(dao, "Best Cheeto Ever!");
+
+            Theme theme = dao.getThemeByName("Best Cheeto Ever!");
+
+            assertThat(theme, is(not(nullValue())));
+            assertThat(theme.getName(), is(equalTo("Best Cheeto Ever!")));
+            assertThat(theme.getId(), is(equalTo(id)));
+            assertThat(theme.getStylePath(), is(not(nullValue())));
+        } finally {
+            dao.close();
+            handle.close();
+        }
+    }
 
     @Test
     public void testSave() throws Exception {
 
         final Handle handle = database.open();
-        final ThemeDAO dao = database.open(ThemeDAO.class);
+        final TransactionalThemeDAO dao = database.open(TransactionalThemeDAO.class);
 
         try {
 
@@ -70,15 +87,13 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
             dao.close();
             handle.close();
         }
-
-
     }
 
 
     @Test
     public void testRead() throws Exception {
         final Handle handle = database.open();
-        final ThemeDAO dao = database.open(ThemeDAO.class);
+        final TransactionalThemeDAO dao = database.open(TransactionalThemeDAO.class);
 
         try {
 
@@ -98,7 +113,7 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
 
     @Test
     public void testUpdate() throws Exception {
-        final ThemeDAO dao = database.open(ThemeDAO.class);
+        final TransactionalThemeDAO dao = database.open(TransactionalThemeDAO.class);
 
         try {
 
@@ -116,7 +131,7 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
     public void testDelete() throws Exception {
 
         final Handle handle = database.open();
-        final ThemeDAO dao = database.open(ThemeDAO.class);
+        final TransactionalThemeDAO dao = database.open(TransactionalThemeDAO.class);
 
         try {
 
@@ -150,6 +165,10 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
             e.printStackTrace();
             fail("shouldn't have thrown an exception but did");
         }
+    }
+
+    protected Long insertTestTheme(TransactionalThemeDAO dao, String name) {
+        return dao.insert(name, "Style Path");
     }
 }
 

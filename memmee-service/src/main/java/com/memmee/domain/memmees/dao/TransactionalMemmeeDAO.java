@@ -14,7 +14,6 @@ import org.skife.jdbi.v2.sqlobject.mixins.GetHandle;
 import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
 import com.memmee.domain.memmees.dto.Memmee;
-import com.memmee.domain.memmees.dto.MemmeeAttachmentMapper;
 import com.memmee.domain.memmees.dto.MemmeeMapper;
 
 public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemmeeDAO>, GetHandle, CloseMe {
@@ -26,10 +25,12 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
-            "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate, " +
-            "i.lastUpdateDate as inspirationLastUpdateDate from memmee m " +
+            "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
+            "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, " +
+            "t.name as themeName, t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
+            "LEFT OUTER JOIN theme t on m.themeId = t.id " +
             "where m.id = :id"
     )
     @Mapper(MemmeeAttachmentInspirationMapper.class)
@@ -37,21 +38,25 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
 
     @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
-            "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate, " +
-            "i.lastUpdateDate as inspirationLastUpdateDate from memmee m " +
+            "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
+            "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, " +
+            "t.name as themeName, t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
+            "LEFT OUTER JOIN theme t on m.themeId = t.id " +
             "where m.shareKey = :shareKey"
     )
     @Mapper(MemmeeAttachmentInspirationMapper.class)
     Memmee getMemmee(@Bind("shareKey") String shareKey);
 
-    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, m.attachmentId, m.inspirationId, " +
-            "a.id, a.filePath, a.thumbFilePath, a.type, " +
-            "i.id, i.text as inspirationText, i.creationDate as inspirationCreationDate, " +
-            "i.lastUpdateDate as inspirationLastUpdateDate from memmee m " +
+    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, " +
+            "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
+            "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
+            "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, t.name as themeName, " +
+            "t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
+            "LEFT OUTER JOIN theme t on m.themeId = t.id " +
             "where m.userId = :userId " +
             "ORDER BY m.displayDate DESC"
     )

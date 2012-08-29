@@ -3,10 +3,10 @@ function SecurityController($scope, broadCastService, $timeout, $location, $rout
     //Super/Inherited Methods
     DefaultController($scope,
         /* load/tearDown */ function () {
-            $scope.defaultTheme = "../css/bootstrap.css";
-            $scope.theme1 = "../css/bootstrap1.css";
-            $scope.theme2 = "../css/bootstrap2.css";
-            $scope.theme3 = "../css/bootstrap3.css";
+            $scope.defaultTheme = "css/bootstrap.css";
+            $scope.theme1 = "css/bootstrap1.css";
+            $scope.theme2 = "css/bootstrap2.css";
+            $scope.theme3 = "css/bootstrap3.css";
 
             $scope.cssThemeUrl = $scope.defaultTheme;
         });

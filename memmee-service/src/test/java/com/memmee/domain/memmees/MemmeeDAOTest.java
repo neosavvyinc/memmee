@@ -1,14 +1,11 @@
 package com.memmee.domain.memmees;
 
-import base.AbstractMemmeeDAOTest;
 import base.BaseMemmeeDAOTest;
-import com.memmee.domain.memmees.dao.MemmeeDAO;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 
-import com.memmee.util.DateUtil;
-import org.junit.After;
-import org.junit.Before;
+import com.memmee.theme.dao.TransactionalThemeDAO;
+import com.memmee.theme.dto.Theme;
 import org.junit.Test;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.util.StringMapper;
@@ -28,8 +25,9 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
     public void testGetMemmeeMin() throws Exception {
         final Handle handle = database.open();
         final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
+        final TransactionalThemeDAO themeDao = database.open(TransactionalThemeDAO.class);
 
-        List<Long> ids = insertMemmees(dao, 1);
+        List<Long> ids = insertMemmees(dao, themeDao, 1);
 
         try {
 
@@ -38,6 +36,9 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
 
                 assertThat(memmee, is(not(nullValue())));
                 assertThat(memmee.getId(), is(equalTo(id)));
+                assertThat(memmee.getTheme(), is(nullValue()));
+                assertThat(memmee.getInspiration(), is(nullValue()));
+                assertThat(memmee.getAttachment(), is(nullValue()));
             }
 
         } finally {
@@ -50,8 +51,9 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
     public void testGetMemmee() throws Exception {
         final Handle handle = database.open();
         final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
+        final TransactionalThemeDAO themeDao = database.open(TransactionalThemeDAO.class);
 
-        List<Long> ids = insertMemmees(dao, 1);
+        List<Long> ids = insertMemmees(dao, themeDao, 1);
 
         try {
 
@@ -62,6 +64,7 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
                 assertThat(memmee.getId(), is(equalTo(id)));
                 assertThat(memmee.getAttachment(), is(not(nullValue())));
                 assertThat(memmee.getInspiration(), is(not(nullValue())));
+                themeTests(memmee.getTheme());
             }
 
         } finally {
@@ -74,8 +77,9 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
     public void testGetMemmeesByUser() throws Exception {
         final Handle handle = database.open();
         final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
+        final TransactionalThemeDAO themeDao = database.open(TransactionalThemeDAO.class);
 
-        insertMemmees(dao, 7);
+        insertMemmees(dao, themeDao, 7);
 
         try {
 
@@ -87,6 +91,7 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
             for (Memmee memmee : memmees) {
                 assertThat(memmee.getAttachment(), is(not(nullValue())));
                 assertThat(memmee.getInspiration(), is(not(nullValue())));
+                themeTests(memmee.getTheme());
             }
 
         } finally {
@@ -134,7 +139,7 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
     public void testDelete() throws Exception {
 
         final Handle handle = database.open();
-        final MemmeeDAO dao = database.open(MemmeeDAO.class);
+        final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
 
         try {
 
@@ -150,21 +155,6 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
 
     }
 
-    protected List<Long> insertMemmees(TransactionalMemmeeDAO dao, int userId) {
-        List<Long> returnIds = new ArrayList<Long>();
-
-        for (Integer i = 0; i < 3; i++)
-            returnIds.add(dao.insert((long) userId,
-                    String.format("Text %s", i),
-                    new Date(),
-                    new Date(),
-                    new Date(),
-                    String.format("Share Key %s", i),
-                    (long) i, (long) i, (long) i));
-
-        return returnIds;
-    }
-
     @Test
     public void pingWorks() throws Exception {
         try {
@@ -173,6 +163,29 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
             e.printStackTrace();
             fail("shouldn't have thrown an exception but did");
         }
+    }
+
+    protected List<Long> insertMemmees(TransactionalMemmeeDAO dao, TransactionalThemeDAO themeDao, int userId) {
+        List<Long> returnIds = new ArrayList<Long>();
+
+        for (Integer i = 0; i < 3; i++) {
+            Long themeId = themeDao.insert(String.format("Theme %s", i), String.format("Style path %s", i));
+            returnIds.add(dao.insert((long) userId,
+                    String.format("Text %s", i),
+                    new Date(),
+                    new Date(),
+                    new Date(),
+                    String.format("Share Key %s", i),
+                    (long) i, themeId, (long) i));
+        }
+
+        return returnIds;
+    }
+
+    protected void themeTests(Theme theme) {
+        assertThat(theme, is(not(nullValue())));
+        assertThat(theme.getName(), is(not(nullValue())));
+        assertThat(theme.getStylePath(), is(not(nullValue())));
     }
 }
 

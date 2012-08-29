@@ -11,6 +11,7 @@ import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
+import com.memmee.theme.dao.TransactionalThemeDAO;
 import com.memmee.util.DateUtil;
 import org.junit.*;
 
@@ -41,6 +42,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     private static TransactionalAttachmentDAO txAttachmentDAO;
     private static TransactionalInspirationDAO txInspirationDAO;
     private static TransactionalInspirationCategoryDAO txInspirationCategoryDAO;
+    private static TransactionalThemeDAO txThemeDAO;
 
     private static Long userId;
     private static Long passwordId;
@@ -60,12 +62,13 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         txAttachmentDAO = database.open(TransactionalAttachmentDAO.class);
         txInspirationDAO = database.open(TransactionalInspirationDAO.class);
         txInspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
+        txThemeDAO = database.open(TransactionalThemeDAO.class);
 
         passwordId = passwordDAO.insert("password", 0);
         userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"));
 
         //add resources
-        addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO));
+        addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO, txThemeDAO));
     }
 
     @Test

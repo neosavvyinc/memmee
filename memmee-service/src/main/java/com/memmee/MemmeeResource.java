@@ -11,6 +11,8 @@ import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
+import com.memmee.theme.dao.TransactionalThemeDAO;
+import com.memmee.theme.dto.Theme;
 import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
 import com.yammer.dropwizard.logging.Log;
@@ -49,14 +51,16 @@ public class MemmeeResource {
     private final TransactionalMemmeeDAO memmeeDao;
     private final TransactionalAttachmentDAO attachmentDAO;
     private final TransactionalInspirationDAO inspirationDAO;
+    private final TransactionalThemeDAO themeDAO;
     private static final Log LOG = Log.forClass(MemmeeResource.class);
 
-    public MemmeeResource(TransactionalUserDAO userDao, TransactionalMemmeeDAO memmeeDao, TransactionalAttachmentDAO attachmentDao, TransactionalInspirationDAO inspirationDao) {
+    public MemmeeResource(TransactionalUserDAO userDao, TransactionalMemmeeDAO memmeeDao, TransactionalAttachmentDAO attachmentDao, TransactionalInspirationDAO inspirationDao, TransactionalThemeDAO themeDao) {
         super();
         this.userDao = userDao;
         this.memmeeDao = memmeeDao;
         this.attachmentDAO = attachmentDao;
         this.inspirationDAO = inspirationDao;
+        this.themeDAO = themeDao;
     }
 
 
@@ -118,6 +122,7 @@ public class MemmeeResource {
         try {
             final Attachment attachment = memmee.getAttachment();
             final Long inspirationId = memmee.getInspiration() != null ? memmee.getInspiration().getId() : null;
+            final Long themeId = getOrCreateMemmeeTheme(memmee.getTheme());
             if (attachment != null) {
 
                 memmeeId = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
@@ -125,14 +130,12 @@ public class MemmeeResource {
 
                         Date timeOfInsert = new Date();
 
-                        if(memmee.getCreationDate() == null)
-                        {
+                        if (memmee.getCreationDate() == null) {
                             LOG.error("Memmee is being inserted with a null creation date");
                             memmee.setCreationDate(timeOfInsert);
                         }
 
-                        if(memmee.getDisplayDate() == null)
-                        {
+                        if (memmee.getDisplayDate() == null) {
                             LOG.error("Memmee is being inserted with a null display date");
                             memmee.setDisplayDate(timeOfInsert);
                         }
@@ -140,7 +143,7 @@ public class MemmeeResource {
                         //Save the hard returns as <br> tags
                         memmee.setText(memmee.getText().replaceAll("(\r\n|\n)", "<br />"));
                         Long memmeeId = memmeeDao.insert(user.getId(), memmee.getText(),
-                                timeOfInsert, memmee.getCreationDate(), memmee.getDisplayDate(), "", null, null, null);
+                                timeOfInsert, memmee.getCreationDate(), memmee.getDisplayDate(), "", null, themeId, inspirationId);
 
                         Long attachmentId;
 
@@ -148,7 +151,7 @@ public class MemmeeResource {
 
                         attachmentId = attachment.getId();
 
-                        memmeeDao.update(memmeeId, memmee.getText(), new Date(), memmee.getDisplayDate(), null, attachmentId, null);
+                        memmeeDao.update(memmeeId, memmee.getText(), new Date(), memmee.getDisplayDate(), null, attachmentId, themeId);
 
                         return memmeeId.intValue();
                     }
@@ -163,7 +166,7 @@ public class MemmeeResource {
                         , memmee.getDisplayDate()
                         , memmee.getShareKey()
                         , null
-                        , null
+                        , themeId
                         , inspirationId).intValue();
             }
 
@@ -199,11 +202,12 @@ public class MemmeeResource {
         try {
 
             final Attachment attachment = memmee.getAttachment();
+            final Long themeId = memmee.getTheme() != null ? memmee.getTheme().getId() : null;
             count = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                 public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
 
                     int count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                            new Date(), new Date(), memmee.getShareKey(), attachment.getId(), null);
+                            new Date(), new Date(), memmee.getShareKey(), attachment.getId(), themeId);
 
                     memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
 
@@ -247,7 +251,7 @@ public class MemmeeResource {
 
 
             count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                    new Date(), new Date(), memmee.getShareKey(), memmee.getAttachment().getId(), null);
+                    new Date(), new Date(), memmee.getShareKey(), memmee.getAttachment().getId(), memmee.getTheme().getId());
 
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
@@ -284,12 +288,12 @@ public class MemmeeResource {
             String shareKey = (UUID.randomUUID().toString());
             count = memmeeDao.update(
                     memmee.getId()
-                    ,memmee.getText()
-                    ,new Date()                     //Last Update Date is updated to server supplied
-                    ,memmee.getDisplayDate()        //Updating Display Date to user supplied value
-                    ,shareKey
-                    ,memmee.getAttachment().getId()
-                    ,null);
+                    , memmee.getText()
+                    , new Date()                     //Last Update Date is updated to server supplied
+                    , memmee.getDisplayDate()        //Updating Display Date to user supplied value
+                    , shareKey
+                    , memmee.getAttachment().getId()
+                    , memmee.getTheme().getId());
 
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
@@ -308,13 +312,12 @@ public class MemmeeResource {
     @GET
     @Path("/open")
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee openShare(@QueryParam("shareKey") String shareKey ) {
+    public Memmee openShare(@QueryParam("shareKey") String shareKey) {
 
         try {
 
-            Memmee memmee = memmeeDao.getMemmee( shareKey );
-            if( memmee == null )
-            {
+            Memmee memmee = memmeeDao.getMemmee(shareKey);
+            if (memmee == null) {
                 throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
             }
             return memmee;
@@ -330,8 +333,7 @@ public class MemmeeResource {
     @DELETE
     @Path("/deletememmee")
     @Produces({MediaType.APPLICATION_JSON})
-    public void delete(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id)
-    {
+    public void delete(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id) {
         final User user = userDao.getUserByApiKey(apiKey);
 
         if (user == null) {
@@ -342,9 +344,8 @@ public class MemmeeResource {
         memmeeDao.inTransaction(new Transaction<Long, TransactionalMemmeeDAO>() {
             public Long inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
                 Memmee memmee = memmeeDao.getMemmee(id);
-                if( memmee != null && memmee.getAttachment() != null )
-                {
-                    memmeeDao.deleteAttachment( memmee.getAttachment().getId() );
+                if (memmee != null && memmee.getAttachment() != null) {
+                    memmeeDao.deleteAttachment(memmee.getAttachment().getId());
                 }
                 memmeeDao.delete(id);
 
@@ -359,8 +360,7 @@ public class MemmeeResource {
     @DELETE
     @Path("/deleteattachment")
     @Produces({MediaType.APPLICATION_JSON})
-    public void deleteAttachment(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id)
-    {
+    public void deleteAttachment(@QueryParam("apiKey") String apiKey, @QueryParam("id") final Long id) {
         final User user = userDao.getUserByApiKey(apiKey);
 
         if (user == null) {
@@ -368,7 +368,7 @@ public class MemmeeResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
 
-        memmeeDao.deleteAttachment( id );
+        memmeeDao.deleteAttachment(id);
 
         LOG.info("Attachment with id: " + id + " was successfully deleted");
 
@@ -415,25 +415,39 @@ public class MemmeeResource {
             Long attachmentId = attachmentDAO.insert(uploadedFileLocationToWrite, uploadedThumbFileLocation, "Image");
             attachment = attachmentDAO.getAttachment(attachmentId);
 
-        }
-        catch (WebApplicationException e) {
-            if( e.getResponse().getStatus() == Status.UNSUPPORTED_MEDIA_TYPE.getStatusCode() )
-            {
+        } catch (WebApplicationException e) {
+            if (e.getResponse().getStatus() == Status.UNSUPPORTED_MEDIA_TYPE.getStatusCode()) {
                 LOG.error("The user attempted to upload a file that isn't supported ");
-            }
-            else
-            {
-                LOG.error("Unhandled exception occurred: " +  e.getResponse().getStatus() );
+            } else {
+                LOG.error("Unhandled exception occurred: " + e.getResponse().getStatus());
             }
             LOG.error("ERROR UPLOADING ATTACHMENT ");
 
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             LOG.error("ERROR UPLOADING ATTACHMENT FOR UNKNOWN REASON");
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
         return attachment;
+    }
+
+    //@TODO, this may later be replaced by a more robust process where all theems are fed from the backend
+    protected Long getOrCreateMemmeeTheme(Theme theme) {
+        Long themeId = null;
+
+        if (theme != null) {
+            if (theme.getId() != null && theme.getId() > 0)
+                themeId = theme.getId();
+            else {
+                Theme dbTheme = themeDAO.getThemeByName(theme.getName());
+                if (dbTheme == null)
+                    themeId = themeDAO.insert(theme.getName(), theme.getStylePath());
+                else
+                    themeId = dbTheme.getId();
+            }
+        }
+
+        return themeId;
     }
 
     private void ensureParentDirectory(String parentDirectory) {
@@ -477,16 +491,13 @@ public class MemmeeResource {
         IMOperation op = new IMOperation();
         String sourceImage = fileName;
         String destinationImage;
-        if (sourceImage.toLowerCase().indexOf(".jpg") > -1 ) {
+        if (sourceImage.toLowerCase().indexOf(".jpg") > -1) {
             destinationImage = sourceImage.replaceFirst(".jpg", "-thumb.jpg");
-        }
-        else if (sourceImage.toLowerCase().indexOf(".jpeg") > -1) {
+        } else if (sourceImage.toLowerCase().indexOf(".jpeg") > -1) {
             destinationImage = sourceImage.replaceFirst(".png", "-thumb.jpeg");
-        }
-        else if (sourceImage.toLowerCase().indexOf(".png") > -1) {
+        } else if (sourceImage.toLowerCase().indexOf(".png") > -1) {
             destinationImage = sourceImage.replaceFirst(".png", "-thumb.png");
-        }
-        else {
+        } else {
             WebApplicationException unsupportedMediaException = new WebApplicationException(Status.UNSUPPORTED_MEDIA_TYPE);
             LOG.error("Attempting to save a file named " + sourceImage.toLowerCase());
             throw unsupportedMediaException;
