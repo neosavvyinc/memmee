@@ -439,11 +439,11 @@ public class MemmeeResource {
             if (theme.getId() != null && theme.getId() > 0)
                 themeId = theme.getId();
             else {
-                try {
-                    themeId = themeDAO.getThemeByName(theme.getName()).getId();
-                } catch (Error error) {
+                Theme dbTheme = themeDAO.getThemeByName(theme.getName());
+                if (dbTheme == null)
                     themeId = themeDAO.insert(theme.getName(), theme.getStylePath());
-                }
+                else
+                    themeId = dbTheme.getId();
             }
         }
 

@@ -23,15 +23,12 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         });
 
     $scope.memmeeStyleSelectorVisibilityStyle = "isHidden";
-    $scope.toggleMemmeeThemeSelection = function()
-    {
+    $scope.toggleMemmeeThemeSelection = function () {
         console.log("mouse over happening.")
-        if( $scope.memmeeStyleSelectorVisibilityStyle == "isHidden" )
-        {
+        if ($scope.memmeeStyleSelectorVisibilityStyle == "isHidden") {
             $scope.memmeeStyleSelectorVisibilityStyle = "isVisible";
         }
-        else
-        {
+        else {
             $scope.memmeeStyleSelectorVisibilityStyle = "isHidden";
         }
     }
@@ -51,6 +48,10 @@ function CreateMemmeesController($scope, $http, broadCastService) {
 
     $scope.createMemmee = function () {
         //@TODO, this logic and naming will eventually be changed
+        if (!$scope.memmee.theme) {
+            $scope.memmee.theme = {};
+        }
+
         $scope.memmee.theme.name = $scope.selectedTheme;
 
         $http({method:'POST', url:'/memmeerest/insertmemmee/?apiKey=' + broadCastService.user.apiKey, data:$scope.memmee}).
@@ -133,7 +134,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         console.log("attachment was uploaded");
     });
 
-    $scope.$on('deleteAttachment', function() {
+    $scope.$on('deleteAttachment', function () {
         console.log("deleting attachment from backend...");
         $http({method:'DELETE', url:'/memmeerest/deleteattachment/?apiKey=' + broadCastService.user.apiKey + "&id=" + $scope.memmee.attachment.id}).
             success(function (data, status, headers, config) {
