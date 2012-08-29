@@ -338,7 +338,6 @@ html{
 }
 
 .memmee-slideshow{
-    /*display: none; I turned this off - hope that's ok. -AP*/
     position: relative;
     left: -46px;
     height: 176px;
@@ -724,12 +723,31 @@ table.calendar{
 .calendar td a.prev-mo , .calendar td a.next-mo{
     color: #7ca9b0;
 }
-
-.memmee-form{
-
+.memmee-profile{
+    position: absolute;
+    top: 72px;
+    left: -200px;
+    width: 976px;
+    height: 546px;
+    background: transparent url('../img/bg-form-extra.png') 2px -31px no-repeat;
 }
-
-.memme-form label{
+.memmee-profile .memmee-date.lg{
+    position: static;
+    margin-bottom: 25px;
+}
+.memmee-form{
+    float: left;
+    width: 305px;
+    height: 332px;
+    margin-left: 274px;
+    padding: 70px 23px 46px 70px;
+    background: transparent url('../img/bg-register-form.png') top left no-repeat;
+}
+.memmee-form fieldset{
+    display: block;
+    margin-bottom: 12px;
+}
+.memmee-form label{
     display: block;
     color: #797a79;
     font: 14px/30px 'Crimson Text', 'Times New Roman', Times, Serif;
@@ -749,8 +767,12 @@ table.calendar{
     -ms-border-radius: 8px;
     border-radius: 8px;
 }
+.memmee-form input:focus{
+    border: none;
+}
 
 .feedback-form{
+    display: none;
     background-image: url('../img/sprite-ui.png');
     background-repeat: no-repeat;
 }
@@ -761,7 +783,15 @@ table.calendar{
     color: #3b89d2;
     background-position: 0 -px;
 }
-
+.memmee-benefits{
+    float: right;
+    width: 280px;
+    height: 452px;
+    background: transparent url('../img/bg-membership-benefits.png') top left no-repeat;
+}
+.memmee-benefits * {
+    display: none;
+}
 .link{
     display: inline-block;
     text-decoration: none;
