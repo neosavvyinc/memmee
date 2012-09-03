@@ -70,7 +70,7 @@ function ViewModeController($scope, $http, broadCastService) {
 
     //Broadcast Handlers
     $scope.$on(ArchiveListControllerEvents.get('MEMMEE_SELECTED'), function (event, memmee) {
-        console.log(">>>memmee selected event in the view-ctrl");
+        console.log(">>>memmee selected event in the view-ctrl: " + memmee.text);
         $scope.memmee = memmee;
     });
 
