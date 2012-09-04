@@ -33,6 +33,17 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         }
     }
 
+    $scope.calendarVisibleStyle = "isHidden";
+    $scope.toggleCalendar = function () {
+        console.log("mouse over happening.")
+        if ($scope.calendarVisibleStyle == "isHidden") {
+            $scope.calendarVisibleStyle = "isVisible";
+        }
+        else {
+            $scope.calendarVisibleStyle = "isHidden";
+        }
+    }
+
     //Action Handlers
     $scope.update = function (memmee) {
         $scope.master = angular.copy(memmee);
@@ -127,6 +138,10 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         }
         $scope.toggleMemmeeThemeSelection();
     }
+
+
+
+
 
     //Broadcast and Event Handlers
     $scope.$on('attachmentUploadSuccess', function () {

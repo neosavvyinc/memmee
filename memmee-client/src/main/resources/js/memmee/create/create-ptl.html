@@ -43,13 +43,15 @@
                 </div>
             </div>
 
-            <div class="controls photo">
-                <a href="#" class="link photo crimson"><span class="icon photo">Photo</span> Add a Photo <span class="optional">optional</span></a>
+            <!-- TODO:a Talk to John about this -->
+            <div id="dropbox" class="controls photo" file-button ng-controller="AttachmentController">
+                <a ng-hide="files.length" class="link photo crimson"><span class="icon photo">Photo</span> Add a Photo <span class="optional">optional</span></a>
+                <a ng-click="deleteCurrentAttachment()" class="btn removePhoto"> {{files[0].webkitRelativePath || files[0].name}}</a>
             </div>
 
             <div class="controls io">
-                <a href="#" class="link today crimson"><span class="icon today">Today</span> Today</a>
-                <div class="calendar-container opensans isVisible">
+                <a ng-click="toggleCalendar()" class="link today crimson"><span class="icon today">Today</span> Today</a>
+                <div class="calendar-container opensans" ng-class="calendarVisibleStyle">
                     <div class="controls calendar clearfix">
                         <a href="#" class="btn prevMonth">Previous Month</a>
                         <span class="title-month">August 2012</span>

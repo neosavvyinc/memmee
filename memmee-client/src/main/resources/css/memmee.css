@@ -680,7 +680,6 @@ html{
     background-color: #70756b;
 }
 .calendar-container{
-    display: none;
     position: absolute;
     top: 50px;
     z-index: 999;
