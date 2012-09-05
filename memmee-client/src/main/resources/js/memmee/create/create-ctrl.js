@@ -64,6 +64,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         }
 
         $scope.memmee.theme.name = $scope.selectedTheme;
+        $scope.memmee.theme.listName = $scope.selectedListTheme;
 
         $http({method:'POST', url:'/memmeerest/insertmemmee/?apiKey=' + broadCastService.user.apiKey, data:$scope.memmee}).
             success(function (data, status, headers, config) {
@@ -122,18 +123,23 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         switch (number) {
             case 0:
                 $scope.selectedTheme = "memmee-card";
+                $scope.selectedListTheme = "slidecard note crimson"
                 break;
             case 1:
                 $scope.selectedTheme = "memmee-card style-coffee";
+                $scope.selectedListTheme = "slidecard art rokkitt"
                 break;
             case 2:
                 $scope.selectedTheme = "memmee-card style-travel";
+                $scope.selectedListTheme = "slidecard luggage crimson";
                 break;
             case 3:
                 $scope.selectedTheme = "memmee-card style-inspiration";
+                $scope.selectedListTheme = "slidecard pushpin josefinslab";
                 break;
             default:
                 $scope.selectedTheme = "memmee-card";
+                $scope.selectedListTheme = "slidecard note crimson"
                 break;
         }
         $scope.toggleMemmeeThemeSelection();

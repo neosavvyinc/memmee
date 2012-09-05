@@ -15,6 +15,7 @@ public class ThemeMapper implements ResultSetMapper<Theme> {
 
         theme.setId(resultSet.getLong("id"));
         theme.setStylePath(resultSet.getString("stylePath"));
+        theme.setListName(resultSet.getString("listName"));
         theme.setName(resultSet.getString("name"));
 
         return theme;

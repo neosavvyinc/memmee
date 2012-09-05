@@ -26,6 +26,7 @@ CREATE TABLE inspirationcategory (
 CREATE TABLE theme (
   id int(11) NOT NULL AUTO_INCREMENT,
   name varchar(100) DEFAULT NULL,
+  listName varchar(100) DEFAULT NULL,
   stylePath varchar(1024) DEFAULT NULL,
   PRIMARY KEY (id)
 );
