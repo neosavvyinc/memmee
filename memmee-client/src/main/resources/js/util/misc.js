@@ -22,6 +22,7 @@ window.onload = function() {
 var keynum, lines = 1;
 
 function limitLines(obj, e) {
+
     // IE
     if(window.event) {
         keynum = e.keyCode;
@@ -31,10 +32,13 @@ function limitLines(obj, e) {
     }
 
     if(keynum == 13) {
-        if(lines == obj.rows) {
+        if(lines == obj.rows - 1) {
             return false;
-        }else{
-            lines++;
         }
+    }
+
+    lines = obj.value.match(/\n/g).length;
+    if( lines == obj.rows) {
+        return false;
     }
 }

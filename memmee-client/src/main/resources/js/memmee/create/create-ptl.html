@@ -20,7 +20,7 @@
         </div>
 
 
-        <textarea class="memmee-text" ng-model="memmee.text"></textarea>
+        <textarea maxlength="500" onkeydown="return limitLines(this, event)" rows="12" class="memmee-text" ng-model="memmee.text"></textarea>
 
 
         <div class="memmee-controls">
