@@ -756,10 +756,11 @@ table.calendar{
 .memmee-form input{
     width: 214px;
     height: 27px;
+    margin-right: 16px;
     padding: 0 16px;
     line-height: 27px;
     color: black;
-    font: 18px/27px 'Crimson Text', 'Times New Roman', Times, Serif;
+    font: italic 18px/27px 'Crimson Text', 'Times New Roman', Times, Serif;
     background-color: white;
     border: none;
     -moz-border-radius: 8px;
@@ -770,28 +771,52 @@ table.calendar{
 .memmee-form input:focus{
     border: none;
 }
+.memmee-form input.invalid{
+    color: #c56659;
+}
 
 .feedback-form{
-    display: none;
-    background-image: url('../img/sprite-ui.png');
+    display: inline-block;
+    visibility: visible;/*toggle*/
     background-repeat: no-repeat;
-}
-.feedback-form.invalid{
-    background-position: 0 -px;
 }
 .feedback-form.valid{
     color: #3b89d2;
-    background-position: 0 -px;
 }
+
 .memmee-benefits{
     float: right;
-    width: 280px;
-    height: 452px;
-    background: transparent url('../img/bg-membership-benefits.png') top left no-repeat;
+    width: 232px;
+    height: 422px;
+    padding: 30px 26px 0 26px;
+    background: transparent url('../img/bg-benefits.png') top left no-repeat;
+    font-family: 'Crimson Text', 'Times New Roman', Times, Serif;
 }
-.memmee-benefits * {
-    display: none;
+.title-benefits{
+    margin-bottom: 5px;
+    font-size: 18px;
+    line-height: 36px;
+    text-align: center;
+    color: #5b574d;
 }
+.memmee-benefits li{
+    display: block;
+    list-style-type: none;
+    margin-bottom: 6px;
+    font-size: 14px;
+    line-height: 14px;
+    text-align: center;
+    color: #364a62;
+}
+.memmee-benefits li strong{
+    font-weight: bold;
+}
+
+.benefit-number{
+    display: block;
+    margin-bottom: 9px;
+}
+
 .link{
     display: inline-block;
     text-decoration: none;
@@ -1050,6 +1075,18 @@ table.calendar{
     width: 11px;
     height: 11px;
     background-position: 0 -600px;
+}
+.icon.valid{
+    display:inline-block;
+    width: 19px;
+    height: 16px;
+    background-position: 0 -688px;
+}
+.icon.invalid{
+    display:inline-block;
+    width: 17px;
+    height: 20px;
+    background-position: -19px -688px;
 }
 
 /*STATE*/

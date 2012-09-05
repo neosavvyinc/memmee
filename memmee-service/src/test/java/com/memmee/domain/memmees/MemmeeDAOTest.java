@@ -169,7 +169,7 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
         List<Long> returnIds = new ArrayList<Long>();
 
         for (Integer i = 0; i < 3; i++) {
-            Long themeId = themeDao.insert(String.format("Theme %s", i), String.format("Style path %s", i));
+            Long themeId = themeDao.insert(String.format("Theme %s", i), String.format("Theme list %s", i), String.format("Style path %s", i));
             returnIds.add(dao.insert((long) userId,
                     String.format("Text %s", i),
                     new Date(),

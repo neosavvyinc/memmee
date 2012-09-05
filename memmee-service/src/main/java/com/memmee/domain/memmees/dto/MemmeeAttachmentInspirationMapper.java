@@ -23,6 +23,7 @@ public class MemmeeAttachmentInspirationMapper extends MemmeeAttachmentMapper {
         Theme theme = new Theme();
         theme.setId(resultSet.getLong("themeId"));
         theme.setName(resultSet.getString("themeName"));
+        theme.setListName(resultSet.getString("themeListName"));
         theme.setStylePath(resultSet.getString("themeStylePath"));
         memmee.setTheme(theme);
 

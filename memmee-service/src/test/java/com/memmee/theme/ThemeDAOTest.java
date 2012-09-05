@@ -16,16 +16,18 @@ import org.skife.jdbi.v2.util.StringMapper;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 
 public class ThemeDAOTest extends AbstractMemmeeDAOTest {
     public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS theme";
     public static final String TABLE_DEFINITION = "CREATE TABLE `theme` (\n" +
-            " `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-            " `name` varchar(100) DEFAULT NULL,\n" +
-            " `stylePath` varchar(1024) DEFAULT NULL,\n" +
-            " PRIMARY KEY (`id`)\n" +
-            ") ENGINE=InnoDB DEFAULT CHARSET=latin1";
+            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+            "  `name` varchar(100) DEFAULT NULL,\n" +
+            "  `listName` varchar(100) DEFAULT NULL,\n" +
+            "  `stylePath` varchar(1024) DEFAULT NULL,\n" +
+            "  PRIMARY KEY (`id`)\n" +
+            ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2";
 
     @Before
     public void setUp() throws Exception {
@@ -62,6 +64,7 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
 
             assertThat(theme, is(not(nullValue())));
             assertThat(theme.getName(), is(equalTo("Best Cheeto Ever!")));
+            assertThat(theme.getListName(), is(equalTo("List Best Cheeto Ever!")));
             assertThat(theme.getId(), is(equalTo(id)));
             assertThat(theme.getStylePath(), is(not(nullValue())));
         } finally {
@@ -78,7 +81,7 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            dao.insert("name", "stylePath");
+            dao.insert("name", "listName", "stylePath");
             final String result = handle.createQuery("SELECT COUNT(*) FROM theme").map(StringMapper.FIRST).first();
 
             assertThat(Integer.parseInt(result), equalTo(1));
@@ -97,7 +100,7 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            Long id = dao.insert("name", "stylePath");
+            Long id = dao.insert("name", "listName", "stylePath");
             final Theme theme = dao.getTheme(id);
 
 
@@ -117,10 +120,20 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            Long id = dao.insert("name", "stylePath");
-            final int result = dao.update(id, "name2", "stylePath2");
+            Long id = dao.insert("name", "listName", "stylePath");
 
+            Theme theme = dao.getTheme(id);
+            assertThat(theme.getName(), is(equalTo("name")));
+            assertThat(theme.getListName(), is(equalTo("listName")));
+            assertThat(theme.getStylePath(), is(equalTo("stylePath")));
+
+            final int result = dao.update(id, "name2", "listName2", "stylePath2");
+            theme = dao.getTheme(id);
             assertThat(result, equalTo(1));
+            assertThat(theme.getName(), is(equalTo("name2")));
+            assertThat(theme.getListName(), is(equalTo("listName2")));
+            assertThat(theme.getStylePath(), is(equalTo("stylePath2")));
+
         } finally {
             dao.close();
         }
@@ -168,7 +181,7 @@ public class ThemeDAOTest extends AbstractMemmeeDAOTest {
     }
 
     protected Long insertTestTheme(TransactionalThemeDAO dao, String name) {
-        return dao.insert(name, "Style Path");
+        return dao.insert(name, String.format("List %s", name), "Style Path");
     }
 }
 
