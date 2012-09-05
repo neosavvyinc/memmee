@@ -27,7 +27,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
             "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, " +
-            "t.name as themeName, t.stylePath as themeStylePath from memmee m " +
+            "t.name as themeName, t.listName as themeListName, t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
             "LEFT OUTER JOIN theme t on m.themeId = t.id " +
@@ -40,7 +40,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
             "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, " +
-            "t.name as themeName, t.stylePath as themeStylePath from memmee m " +
+            "t.name as themeName, t.listName as themeListName, t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
             "LEFT OUTER JOIN theme t on m.themeId = t.id " +
@@ -53,7 +53,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
             "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, t.name as themeName, " +
-            "t.stylePath as themeStylePath from memmee m " +
+            "t.listName as themeListName, t.stylePath as themeStylePath from memmee m " +
             "LEFT OUTER JOIN attachment a on m.attachmentId = a.id " +
             "LEFT OUTER JOIN inspiration i on m.inspirationId = i.id " +
             "LEFT OUTER JOIN theme t on m.themeId = t.id " +

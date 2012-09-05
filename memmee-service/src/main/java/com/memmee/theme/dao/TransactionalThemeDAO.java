@@ -22,18 +22,20 @@ public interface TransactionalThemeDAO extends Transactional<TransactionalThemeD
     @Mapper(ThemeMapper.class)
     Theme getThemeByName(@Bind("name") String name);
 
-    @SqlUpdate("insert into theme (name, stylePath) values (:name, :stylePath)")
+    @SqlUpdate("insert into theme (name, listName, stylePath) values (:name, :listName, :stylePath)")
     @GetGeneratedKeys
     Long insert(
             @Bind("name") String name
+            , @Bind("listName") String listName
             , @Bind("stylePath") String stylePath
     );
 
-    @SqlUpdate("update theme set stylePath = :stylePath, name = :name where id = :id")
+    @SqlUpdate("update theme set name = :name, listName = :listName, stylePath = :stylePath where id = :id")
     int update(
             @Bind("id") Long id
-            , @Bind("stylePath") String stylePath
-            , @Bind("name") String name
+            , @Bind("name") String stylePath
+            , @Bind("listName") String listName
+            , @Bind("stylePath") String name
     );
 
     @SqlUpdate("delete from theme where id = :id")

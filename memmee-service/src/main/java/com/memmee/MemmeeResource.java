@@ -441,7 +441,7 @@ public class MemmeeResource {
             else {
                 Theme dbTheme = themeDAO.getThemeByName(theme.getName());
                 if (dbTheme == null)
-                    themeId = themeDAO.insert(theme.getName(), theme.getStylePath());
+                    themeId = themeDAO.insert(theme.getName(), theme.getListName(), theme.getStylePath());
                 else
                     themeId = dbTheme.getId();
             }

@@ -11,6 +11,8 @@ public class Theme implements Serializable {
 
     private String name;
 
+    private String listName;
+
     private String stylePath;
 
     public Long getId() {
@@ -27,6 +29,14 @@ public class Theme implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getListName() {
+        return listName;
+    }
+
+    public void setListName(String listName) {
+        this.listName = listName;
     }
 
     public String getStylePath() {
