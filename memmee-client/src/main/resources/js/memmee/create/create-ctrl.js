@@ -146,7 +146,12 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     }
 
 
-
+    $scope.showImage = function () {
+        if ($scope.memmee && $scope.memmee.attachment && $scope.memmee.attachment.filePath) {
+            return true;
+        }
+        return false;
+    }
 
 
     //Broadcast and Event Handlers
