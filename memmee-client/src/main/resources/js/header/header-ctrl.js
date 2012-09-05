@@ -42,12 +42,23 @@ function HeaderController($scope, broadCastService, $location) {
         }
     }
 
-//    $scope.signOut = function()
-//    {
-//        broadCastService.logoutUser();
-//        $scope.loggedInUser = "";
-//        $scope.visibleLoggedInStyle = "isHidden";
-//    }
+    $scope.userSettingsDropdownStyle = "isHidden";
+    $scope.toggleSettingsDropdown = function () {
+        console.log("mouse over happening.")
+        if ($scope.userSettingsDropdownStyle == "isHidden") {
+            $scope.userSettingsDropdownStyle = "isVisible";
+        }
+        else {
+            $scope.userSettingsDropdownStyle = "isHidden";
+        }
+    }
+
+    $scope.signOut = function()
+    {
+        broadCastService.logoutUser();
+        $scope.loggedInUser = "";
+        $scope.visibleLoggedInStyle = "isHidden";
+    }
 
 }
 
