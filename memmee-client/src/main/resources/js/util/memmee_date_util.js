@@ -58,13 +58,9 @@ var MemmeeDateUtil = (function () {
         isToday:method['isToday'],
         standardDate:function (date) {
             if (date != null) {
-                if (method['isToday'](date)) {
-                    return "Today";
-                } else {
                     return method['longMonth'](date.getMonth()) +
                         " " + date.getDate().toString() +
                         ", " + date.getFullYear().toString();
-                }
             }
             return null;
         }
