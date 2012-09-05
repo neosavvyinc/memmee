@@ -1,35 +1,5 @@
 <div id="content">
-    <div class="memmee-card" ng-controller="ViewModeController">
-        <span class="memmee-date lg" style="width: 100px">{{memmee.displayDate}}</span>
-
-        <div class="controls share">
-            <a class="btn trash" ng-click="onDeleteMemmee()">Trash</a>
-            <a class="btn share">Share</a>
-        </div>
-
-        <p class="memmee-text" ng-bind-html-unsafe="memmee.text"></p >
-
-
-        <div class="memmee-controls isHidden">
-            <div class="controls styles">
-                <a href="#" class="link addStyle"><span class="icon addStyle"></span>Style your Memmee: </a>
-                <a href="#" class="btn style-news">Style 1</a>
-                <a href="#" class="btn style-coffee">Style 2</a>
-                <a href="#" class="btn style-pushPin">Style 3</a>
-                <a href="#" class="btn style-saleTag">Style 4</a>
-            </div>
-
-            <div class="controls photo isHidden">
-                <a href="#" class="btn removePhoto">Remove xxx.jpg</a>
-            </div>
-
-            <div class="controls io isHidden">
-                <a href="#" class="link today"><span class="icon today">Today</span> Today</a>
-                <a href="#" class="btn save">Save</a>
-                <a href="#" class="btn cancel">Cancel</a>
-            </div>
-        </div>
-    </div>
+    <ng-include src="'/js/memmee/view/view-card-ptl.html'"></ng-include>
 
     <ng-include src="'/js/memmee/list/list-ptl.html'"></ng-include>
 </div>

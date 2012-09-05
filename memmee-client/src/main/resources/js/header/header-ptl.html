@@ -3,6 +3,20 @@
 
     <ul id="primaryNav" class="clearfix" ng-class="visibleLoggedInStyle">
         <li><a ng-click="toggleCreateMode()" title="New Memmee" class="btn newMemmee">New Memmee</a></li>
-        <li><a href="#profile" class="link more crimson">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a></li>
+        <li ng-show="loggedInUser.firstName || loggedInUser.lastName"><a ng-click="toggleSettingsDropdown()"
+               class="link more crimson">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a></li>
+        <li ng-hide="loggedInUser.firstName || loggedInUser.lastName"><a ng-click="toggleSettingsDropdown()"
+             class="link more crimson">New User</a></li>
+        <div class="memmee-style container" ng-class="userSettingsDropdownStyle">
+            <ul class="memmee-style dropdown crimson">
+                <li><a href="#profile" ng-click="toggleSettingsDropdown()">Profile</a></li>
+                <li><a ng-click="signOut()">Sign Out</a></li>
+            </ul>
+        </div>
+
     </ul>
+
+
+
+
 </div>
