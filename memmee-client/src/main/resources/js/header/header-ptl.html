@@ -2,6 +2,7 @@
     <a href="#home" title="Memmee"><img src="img/logo.png" alt="memmee" /></a>
 
     <ul id="primaryNav" class="clearfix" ng-class="visibleLoggedInStyle">
+        <li><a ng-click="toggleCreateMode()" title="View Memmees" class="btn newMemmee">View Memmees</a></li>
         <li><a ng-click="toggleCreateMode()" title="New Memmee" class="btn newMemmee">New Memmee</a></li>
         <li ng-show="loggedInUser.firstName || loggedInUser.lastName"><a ng-click="toggleSettingsDropdown()"
                class="link more crimson">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a></li>
