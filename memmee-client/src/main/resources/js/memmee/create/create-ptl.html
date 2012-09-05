@@ -19,7 +19,9 @@
             </div>
         </div>
 
-        <div class="memmee-user-photo"></div>
+        <div class="memmee-user-photo">
+            <img style="max-height: 180px; max-width: 270px;" ng-src="{{memmee.attachment.filePath}}"/>
+        </div>
 
         <textarea maxlength="500" onkeydown="return limitLines(this, event)" rows="12" class="memmee-text" ng-model="memmee.text"></textarea>
 

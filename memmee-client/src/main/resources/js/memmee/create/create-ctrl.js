@@ -152,7 +152,9 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     //Broadcast and Event Handlers
     $scope.$on('attachmentUploadSuccess', function () {
         $scope.memmee.attachment = broadCastService.attachment;
+        console.log("attachment url" + $scope.memmee.attachment.filePath);
         console.log("attachment was uploaded");
+        $scope.$apply();
     });
 
     $scope.$on('deleteAttachment', function () {
