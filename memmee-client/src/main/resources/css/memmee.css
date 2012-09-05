@@ -283,6 +283,16 @@ html{
     overflow: hidden!important;
 }
 
+.memmee-user-photo{
+    position: absolute;
+    top: 216px;
+    right: -130px;
+    width: 276px;
+    height: 187px;
+    padding-top: 23px;
+    background: transparent url('../img/bg-photo-frame.png') top left no-repeat;
+}
+
 .memmee-controls{
     position: absolute;
     bottom: 11px;
@@ -605,13 +615,12 @@ html{
     margin-bottom: 0;
 }
 .memmee-style.container{
-    /*display: none;*/
+    display: none;
     position: relative;
     width: 224px;
     height: 141px;
     padding: 38px 18px 18px 26px;
     overflow: hidden;
-    z-index: 100;
     background: transparent url('../img/bg-dropdown.png') top left no-repeat;
 }
 .memmee-style.dropdown{
@@ -779,7 +788,7 @@ table.calendar{
     line-height: 27px;
     color: black;
     font: italic 18px/27px 'Crimson Text', 'Times New Roman', Times, Serif;
-    background-color: white;
+    background-color: #cee8df;
     border: none;
     -moz-border-radius: 8px;
     -webkit-border-radius: 8px;
@@ -788,6 +797,7 @@ table.calendar{
 }
 .memmee-form input:focus{
     border: none;
+    background-color: white;
 }
 .memmee-form input.invalid{
     color: #c56659;

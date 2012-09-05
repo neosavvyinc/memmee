@@ -597,12 +597,13 @@ html{
     margin-bottom: 0;
 }
 .memmee-style.container{
-    display: none;
+    /*display: none;*/
     position: relative;
     width: 224px;
     height: 141px;
     padding: 38px 18px 18px 26px;
     overflow: hidden;
+    z-index: 100;
     background: transparent url('../img/bg-dropdown.png') top left no-repeat;
 }
 .memmee-style.dropdown{
@@ -671,7 +672,7 @@ html{
     background-color: #70756b;
 }
 .calendar-container{
-    display: none;
+    /*display: none;*/
     position: absolute;
     top: 50px;
     z-index: 999;
