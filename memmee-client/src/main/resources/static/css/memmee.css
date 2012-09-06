@@ -1109,6 +1109,12 @@ table.calendar{
 }
 
 /*STATE*/
+.isRelative{
+    position: relative!important;
+}
+.isAbsolute{
+    position: absolute!important;
+}
 .isHidden{
     display: none!important;
 }
