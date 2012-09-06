@@ -146,11 +146,12 @@ html{
 #primaryNav{
     position: absolute;
     top: 13px;
-    right: 0;
+    right: 15px;
 }
 
 #primaryNav li{
     float: left;
+    margin-right: 5px;
 }
 
 #content{
