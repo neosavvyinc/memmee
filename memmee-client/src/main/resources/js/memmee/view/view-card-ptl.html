@@ -6,6 +6,11 @@
         <a class="btn share">Share</a>
     </div>
 
+    <div class="memmee-user-photo" ng-show="showImage()">
+        <img style="max-height: 180px; max-width: 270px;" ng-src="{{memmee.attachment.filePath}}"/>
+    </div>
+
+
     <p class="memmee-text" ng-bind-html-unsafe="memmee.text"></p >
 
 

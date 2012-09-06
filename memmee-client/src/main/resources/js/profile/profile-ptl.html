@@ -1,8 +1,7 @@
 <div id="content">
-    <ng-include src="'/js/memmee/list/view-card-ptl.html'"></ng-include>
+    <!--<ng-include src="'/js/memmee/view/view-card-ptl.html'"></ng-include>-->
 
-    <ng-include src="'/js/memmee/list/list-ptl.html'"></ng-include>
-
+    <div class="memmee-card">
     <div class="memmee-profile clearfix" ng-controller="ProfileController">
         <div class="memmee-form">
             <h1 class="title-form memmee-date lg">Complete Your Profile</h1>
@@ -78,5 +77,9 @@
             </ul>
         </div>
     </div>
+    </div>
+
+    <ng-include src="'/js/memmee/list/list-ptl.html'"></ng-include>
+
 
 </div>

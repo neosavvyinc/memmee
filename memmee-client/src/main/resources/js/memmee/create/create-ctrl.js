@@ -117,6 +117,8 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     };
 
     $scope.selectedTheme = "memmee-card";
+    $scope.selectedListTheme = "slidecard note crimson";
+
 
     //Setters
     $scope.setTheme = function (number) {
@@ -146,13 +148,20 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     }
 
 
-
+    $scope.showImage = function () {
+        if ($scope.memmee && $scope.memmee.attachment && $scope.memmee.attachment.filePath) {
+            return true;
+        }
+        return false;
+    }
 
 
     //Broadcast and Event Handlers
     $scope.$on('attachmentUploadSuccess', function () {
         $scope.memmee.attachment = broadCastService.attachment;
+        console.log("attachment url" + $scope.memmee.attachment.filePath);
         console.log("attachment was uploaded");
+        $scope.$apply();
     });
 
     $scope.$on('deleteAttachment', function () {
