@@ -48,6 +48,11 @@ function ViewModeController($scope, $http, broadCastService) {
                 console.log('your memmee has been loaded');
                 console.log("memmee: " + JSON.stringify(data));
                 $scope.memmee = broadCastService.selectedMemmee = data;
+
+                if( !$scope.memmee.theme || !$scope.memmee.theme.name )
+                {
+                    $scope.memmee.theme = {name: "memmee-card" };
+                }
                 $scope.hideAttachmentDiv();
             }).error(function (data, status, headers, config) {
                 console.log('error loading your doggone memmee');
