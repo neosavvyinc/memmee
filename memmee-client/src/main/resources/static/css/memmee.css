@@ -910,6 +910,14 @@ table.calendar{
 .btn.newMemmee:hover, .btn.newMemmee.active{
     background-position: -165px 0;
 }
+.btn.viewMemmee{
+    width: 173px;
+    height: 51px;
+    background-position: -330px 0;
+}
+.btn.viewMemmee:hover{
+    background-position: -504px -1px;
+}
 .btn.close{
     width: 64px;
     height: 21px;
