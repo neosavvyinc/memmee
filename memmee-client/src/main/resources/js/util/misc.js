@@ -37,6 +37,7 @@ function limitLines(obj, e) {
         }
     }
 
+    //TODO FIX NPE
     lines = obj.value.match(/\n/g).length;
     if( lines == obj.rows) {
         return false;
