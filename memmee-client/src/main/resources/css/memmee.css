@@ -210,7 +210,6 @@ html{
 .memmee-card.style-travel{
     width: 979px;
     height: 597px;
-    padding-left: 200px;
     font: 24px/36px 'Crimson Text', 'Times New Roman', Times, serif;
     color: #7f7676;
     background-image: url('../img/bg-card-travel.png');
@@ -927,6 +926,14 @@ table.calendar{
 .btn.newMemmee:hover, .btn.newMemmee.active{
     background-position: -165px 0;
 }
+.btn.viewMemmee{
+    width: 173px;
+    height: 51px;
+    background-position: -330px 0;
+}
+.btn.viewMemmee:hover{
+    background-position: -504px -1px;
+}
 .btn.close{
     width: 64px;
     height: 21px;
@@ -1118,6 +1125,12 @@ table.calendar{
 }
 
 /*STATE*/
+.isRelative{
+    position: relative!important;
+}
+.isAbsolute{
+    position: absolute!important;
+}
 .isHidden{
     display: none!important;
 }

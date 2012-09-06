@@ -25,22 +25,34 @@ function HeaderController($scope, broadCastService, $location) {
 
     });
 
-    $scope.toggleCreateMode = function()
+    $scope.createModeClicked = function()
     {
-        console.log("About to toggle create mode")
-        if( broadCastService.isCreateMode() )
-        {
-            console.log("Turning off create mode....");
-            broadCastService.createModeCancelledCreateModeController();
-            $location.path("view");
-        }
-        else
-        {
-            console.log("Turning on create mode....");
-            broadCastService.createModeStartedCreateModeController();
-            $location.path("create");
-        }
+        broadCastService.createModeStartedCreateModeController();
+        $location.path("create");
     }
+
+    $scope.viewModeClicked = function()
+    {
+        broadCastService.createModeCancelledCreateModeController();
+        $location.path("view");
+    }
+
+//    $scope.toggleCreateMode = function()
+//    {
+//        console.log("About to toggle create mode")
+//        if( broadCastService.isCreateMode() )
+//        {
+//            console.log("Turning off create mode....");
+//            broadCastService.createModeCancelledCreateModeController();
+//            $location.path("view");
+//        }
+//        else
+//        {
+//            console.log("Turning on create mode....");
+//            broadCastService.createModeStartedCreateModeController();
+//            $location.path("create");
+//        }
+//    }
 
     $scope.userSettingsDropdownStyle = "isHidden";
     $scope.toggleSettingsDropdown = function () {
