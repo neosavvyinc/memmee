@@ -1,4 +1,4 @@
-<div ng-controller="AlertsController">
+<div class="overlay" ng-class="isModalPresent" ng-controller="AlertsController">
 
     <!-- For reference, only -->
     <!--<div class="modal hide" id="modalAlert">-->
@@ -29,13 +29,27 @@
         <!--</div>-->
     <!--</div>-->
 
-    <div class="modal discard-memmee crimson" ng-show="showDiscardAlert">
-        <a href="#" class="btn modal-ext">Exit</a>
-        <h1 class="modal-heading">Discard Memmee</h1>
-        <p class="modal-msg">You have not saved your Memmee. Would you like to discard it?</p>
+
+    <div class="modal discard-memmee crimson" ng-class="isModalAlertPresent" id="modalAlert">
+
+        <a class="btn modal-ext" data-dismiss="modal">×</a>
+        <h1 class="modal-heading">{{header}}</h1>
+
         <div class="controls io">
-            <a href="#" class="btn cancel">Cancel</a>
-            <a href="#" class="btn delete">Delete</a>
+            <p>{{message}}</p>
+            <a class="btn delete" ng-click="yesClick()">Ok</a>
+        </div>
+    </div>
+
+    <div class="modal discard-memmee crimson" ng-class="isModalYesNoAlertPresent" id="modalYesNoAlert">
+
+        <a class="btn modal-ext" ng-click="">×</a>
+        <h1 class="modal-heading">{{header}}</h1>
+
+        <div class="controls io">
+            <p>{{message}}</p>
+            <a class="btn cancel" ng-click="noClick()">{{noText}}</a>
+            <a class="btn delete" ng-click="yesClick()">{{yesText}}</a>
         </div>
     </div>
 

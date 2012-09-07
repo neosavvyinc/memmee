@@ -922,10 +922,10 @@ table.calendar{
 .btn.newMemmee{
     width: 165px;
     height: 51px;
-    background-position: 0px 0px;
+    background-position: -165px 0;
 }
 .btn.newMemmee:hover, .btn.newMemmee.active{
-    background-position: -165px 0;
+    background-position: 0px 0px;
 }
 .btn.viewMemmee{
     width: 173px;

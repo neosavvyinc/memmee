@@ -1,4 +1,4 @@
-function HeaderController($scope, broadCastService, $location) {
+function HeaderController($scope, broadCastService, $location, $timeout) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -54,6 +54,8 @@ function HeaderController($scope, broadCastService, $location) {
 //        }
 //    }
 
+    var closedropdownTimer;
+
     $scope.userSettingsDropdownStyle = "isHidden";
     $scope.toggleSettingsDropdown = function () {
         console.log("mouse over happening.")
@@ -63,7 +65,26 @@ function HeaderController($scope, broadCastService, $location) {
         else {
             $scope.userSettingsDropdownStyle = "isHidden";
         }
+
+        if( closedropdownTimer )
+        {
+            closedropdownTimer = undefined;
+        }
     }
+
+
+
+    $scope.closeDropdownIfMouseOutside = function( ){
+        closedropdownTimer = $timeout( $scope.toggleSettingsDropdown, 100);
+    }
+
+    $scope.cancelDropdownTimer = function() {
+        if( closedropdownTimer )
+        {
+            $timeout.cancel( closedropdownTimer );
+        }
+    }
+
 
     $scope.signOut = function()
     {
@@ -74,4 +95,4 @@ function HeaderController($scope, broadCastService, $location) {
 
 }
 
-HeaderController.$inject = ['$scope', 'memmeeBroadCastService', '$location'];
+HeaderController.$inject = ['$scope', 'memmeeBroadCastService', '$location', '$timeout'];
