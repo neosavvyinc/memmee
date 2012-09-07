@@ -59,7 +59,7 @@ function AlertsController($scope, $http, broadCastService, $location) {
     });
 
     $scope.$on(CreateModeControllerEvents.get('NEW_USER_LOGIN'), function () {
-        $scope.showAlert("Temporary Alert", "This will show on the first two logins for any new user. This is for instructions.");
+//        $scope.showAlert("Temporary Alert", "This will show on the first two logins for any new user. This is for instructions.");
     });
 
     /* LoginController */
