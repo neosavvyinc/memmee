@@ -1,29 +1,41 @@
 <div ng-controller="AlertsController">
 
-    <div class="modal hide" id="modalAlert">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h3>{{header}}</h3>
-        </div>
-        <div class="modal-body">
-            <p>{{message}}</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal">Ok</a>
-        </div>
-    </div>
+    <!-- For reference, only -->
+    <!--<div class="modal hide" id="modalAlert">-->
+        <!--<div class="modal-header">-->
+            <!--<button type="button" class="close" data-dismiss="modal">×</button>-->
+            <!--<h3>{{header}}</h3>-->
+        <!--</div>-->
+        <!--<div class="modal-body">-->
+            <!--<p>{{message}}</p>-->
+        <!--</div>-->
+        <!--<div class="modal-footer">-->
+            <!--<a href="#" class="btn" data-dismiss="modal">Ok</a>-->
+        <!--</div>-->
+    <!--</div>-->
 
-    <div class="modal hide" id="modalYesNoAlert">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">×</button>
-            <h3>{{header}}</h3>
-        </div>
-        <div class="modal-body">
-            <p>{{message}}</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#" class="btn" data-dismiss="modal" ng-click="noClick()">{{noText}}</a>
-            <a href="#" class="btn btn-danger" data-dismiss="modal" ng-click="yesClick()">{{yesText}}</a>
+    <!-- For reference, only -->
+    <!--<div class="modal hide" id="modalYesNoAlert">-->
+        <!--<div class="modal-header">-->
+            <!--<button type="button" class="close" data-dismiss="modal">×</button>-->
+            <!--<h3>{{header}}</h3>-->
+        <!--</div>-->
+        <!--<div class="modal-body">-->
+            <!--<p>{{message}}</p>-->
+        <!--</div>-->
+        <!--<div class="modal-footer">-->
+            <!--<a href="#" class="btn" data-dismiss="modal" ng-click="noClick()">{{noText}}</a>-->
+            <!--<a href="#" class="btn btn-danger" data-dismiss="modal" ng-click="yesClick()">{{yesText}}</a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="modal discard-memmee crimson" ng-show="showDiscardAlert">
+        <a href="#" class="btn modal-ext">Exit</a>
+        <h1 class="modal-heading">Discard Memmee</h1>
+        <p class="modal-msg">You have not saved your Memmee. Would you like to discard it?</p>
+        <div class="controls io">
+            <a href="#" class="btn cancel">Cancel</a>
+            <a href="#" class="btn delete">Delete</a>
         </div>
     </div>
 

@@ -71,10 +71,14 @@ function AlertsController($scope, $http, broadCastService, $location) {
     });
 
     /* ViewModeController */
+
+    //Delete
     $scope.$on(ViewModeControllerEvents.get('CONFIRM_DELETE'), function() {
-        $scope.promptingEvent = ViewModeControllerEvents.get('CONFIRM_DELETE');
-        $scope.toggleYesNoAlert(Notifications.get('DELETE_MEMMEE_HEADER'), Notifications.get('DELETE_MEMMEE_MESSAGE'), "Delete", "Cancel");
+        $scope.showDiscardAlert = true;
     });
+    $scope.onDeleteClick = function() {
+
+    };
 
     $scope.$on(ViewModeControllerEvents.get('SHOW_SHARE_LINK'), function( event, message) {
         console.log("Memmee with id: " + message[0].id + " sharekey: " + message[0].shareKey);
@@ -84,6 +88,8 @@ function AlertsController($scope, $http, broadCastService, $location) {
     //Initialization
     $scope.header = null;
     $scope.message = null;
+
+    $scope.showDiscardAlert = false;
 }
 
 AlertsController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location'];

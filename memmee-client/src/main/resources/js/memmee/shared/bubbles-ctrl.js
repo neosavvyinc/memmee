@@ -25,7 +25,7 @@ function BubblesController($scope, $http, broadCastService, $location) {
     window.addEventListener('resize', $scope.setNewUserCreateModeStyle, false);
 
     //Initialization
-    $scope.showNewUserCreateMode = false;
+    $scope.clearALlBubbles();
     $scope.setNewUserCreateModeStyle();
 }
 
