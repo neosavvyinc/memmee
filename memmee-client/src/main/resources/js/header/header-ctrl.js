@@ -9,14 +9,13 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
         });
 
 
-
 //    var resetStyles = function() {
 //        $scope.visibleLoggedInStyle = 'isHidden';
 //
 //        $scope.createModeStyles = "btn btn-primary disabled";
 //    }
 
-    $scope.$on(LoginControllerEvents.get('LOGIN'), function() {
+    $scope.$on(LoginControllerEvents.get('LOGIN'), function () {
 
         console.log("NavigationController:handleLogin()");
 
@@ -25,16 +24,18 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
 
     });
 
-    $scope.createModeClicked = function()
-    {
+    $scope.createModeClicked = function () {
         broadCastService.createModeStartedCreateModeController();
         $location.path("create");
     }
 
-    $scope.viewModeClicked = function()
-    {
+    $scope.viewModeClicked = function () {
         broadCastService.createModeCancelledCreateModeController();
         $location.path("view");
+    }
+
+    $scope.isCreateMode = function () {
+        return broadCastService.isCreateMode();
     }
 
 //    $scope.toggleCreateMode = function()
@@ -66,28 +67,24 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
             $scope.userSettingsDropdownStyle = "isHidden";
         }
 
-        if( closedropdownTimer )
-        {
+        if (closedropdownTimer) {
             closedropdownTimer = undefined;
         }
     }
 
 
-
-    $scope.closeDropdownIfMouseOutside = function( ){
-        closedropdownTimer = $timeout( $scope.toggleSettingsDropdown, 100);
+    $scope.closeDropdownIfMouseOutside = function () {
+        closedropdownTimer = $timeout($scope.toggleSettingsDropdown, 100);
     }
 
-    $scope.cancelDropdownTimer = function() {
-        if( closedropdownTimer )
-        {
-            $timeout.cancel( closedropdownTimer );
+    $scope.cancelDropdownTimer = function () {
+        if (closedropdownTimer) {
+            $timeout.cancel(closedropdownTimer);
         }
     }
 
 
-    $scope.signOut = function()
-    {
+    $scope.signOut = function () {
         broadCastService.logoutUser();
         $scope.loggedInUser = "";
         $scope.visibleLoggedInStyle = "isHidden";
