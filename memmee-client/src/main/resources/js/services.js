@@ -91,6 +91,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
 
     broadCastService.createModeCancelledCreateModeController = function () {
         createMode = false;
+        $location.url("/view");
         $rootScope.$broadcast(CreateModeControllerEvents.get('CREATE_MODE_CANCELLED'));
     };
 
@@ -119,6 +120,10 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
 
     broadCastService.showProfileUpdatedError = function () {
         $rootScope.$broadcast(ProfileControllerEvents.get('UPDATE_FAILURE'));
+    }
+
+    broadCastService.profileOpenedProfileController = function() {
+        $rootScope.$broadcast(ProfileControllerEvents.get('PROFILE_OPENED'));
     }
 
     /**

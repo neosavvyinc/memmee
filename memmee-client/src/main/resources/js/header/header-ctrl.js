@@ -70,12 +70,16 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
         if (closedropdownTimer) {
             closedropdownTimer = undefined;
         }
-    }
+    };
 
+    $scope.onClickProfile = function() {
+        $scope.toggleSettingsDropdown();
+        broadCastService.profileOpenedProfileController();
+    };
 
     $scope.closeDropdownIfMouseOutside = function () {
         closedropdownTimer = $timeout($scope.toggleSettingsDropdown, 100);
-    }
+    };
 
     $scope.cancelDropdownTimer = function () {
         if (closedropdownTimer) {
