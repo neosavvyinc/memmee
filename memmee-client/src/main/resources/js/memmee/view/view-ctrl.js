@@ -1,4 +1,4 @@
-function ViewModeController($scope, $http, broadCastService) {
+function ViewModeController($scope, $http, broadCastService, $timeout) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -21,6 +21,34 @@ function ViewModeController($scope, $http, broadCastService) {
         }
     }
 
+    var closedropdownTimer;
+    $scope.shareVisibilityStyle = "isHidden";
+    $scope.toggleShareDropdown = function () {
+        console.log("mouse over happening.")
+        if ($scope.shareVisibilityStyle == "isHidden") {
+            $scope.shareVisibilityStyle = "isVisible";
+        }
+        else {
+            $scope.shareVisibilityStyle = "isHidden";
+        }
+
+        if (closedropdownTimer) {
+            closedropdownTimer = undefined;
+        }
+    }
+
+    $scope.closeShareIfMouseOutside = function () {
+        console.log("mouse down outside...");
+        closedropdownTimer = $timeout($scope.toggleShareDropdown, 100);
+    }
+
+    $scope.cancelShareTimer = function () {
+        console.log("cancel share timer....");
+        if (closedropdownTimer) {
+            $timeout.cancel(closedropdownTimer);
+        }
+    }
+
     //Action Handlers
     $scope.onDeleteMemmee = function () {
         if( isMemmeeValid() )
@@ -35,6 +63,7 @@ function ViewModeController($scope, $http, broadCastService) {
                 console.log('you have generated a share link');
                 $scope.memmee = data;
                 broadCastService.showShareLinkViewModeController($scope.memmee);
+                $scope.toggleShareDropdown();
             }).
             error(function (data, status, headers, config) {
                 console.log('there was an error generating your share link');
@@ -126,4 +155,4 @@ function ViewModeController($scope, $http, broadCastService) {
     }
 }
 
-ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
+ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$timeout'];

@@ -6,7 +6,7 @@ angular.module('memmee-app', ['memmee-app.services']).
         when('/view', {templateUrl:'js/memmee/view/view-ptl.html'}).
         when('/requiredchangepassword', {templateUrl:'partials/requiredChangePassword.html'}).
         when('/profile', {templateUrl:'js/profile/profile-ptl.html'}).
-        when('/share', {templateUrl:'partials/shareMode.html'}).
+        when('/share', {templateUrl:'js/memmee/share/share-ptl.html'}).
         otherwise({redirectTo:'/home'});
 }]).
     config(['$locationProvider', function ($locationProvider) {
