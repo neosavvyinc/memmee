@@ -97,7 +97,7 @@ function AlertsController($scope, $http, broadCastService, $location) {
         console.log("Memmee with id: " + message[0].id + " sharekey: " + message[0].shareKey);
         var shareUrl = $location.protocol() + "://" + $location.host() + "/#/share?shareKey=" + message[0].shareKey;
         console.log("location:::" + shareUrl);
-        $scope.showAlert("Send this to some friends",
+        $scope.showAlert("copy and paste the link below to share. (don't worry, your other memmees will remain private)",
             "<a target='_blank' href='" + shareUrl + "'>SHARE ME</a>" );
     });
 
