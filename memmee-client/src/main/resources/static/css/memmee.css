@@ -578,6 +578,7 @@ html{
 
 .list.steps{
     display: block;
+
     list-style-type: none;
     color: white;
 }
@@ -599,9 +600,10 @@ html{
 .memmee-style.container{
     /*display: none;*/
     position: relative;
+    top: -20px;
     width: 224px;
     height: 141px;
-    padding: 38px 18px 18px 26px;
+    padding: 38px 18px 18px 15px;
     overflow: hidden;
     z-index: 900;
     background: transparent url('../img/bg-dropdown.png') top left no-repeat;
