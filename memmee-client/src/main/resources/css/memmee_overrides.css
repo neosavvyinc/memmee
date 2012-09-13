@@ -10,6 +10,10 @@
     left: 180px;
 }
 
+.memmee-card.style-travel .inspiration-container {
+    margin-left: 60px;
+}
+
 .datepicker-dropdown-menu {
     position: absolute;
     top: 100%;
