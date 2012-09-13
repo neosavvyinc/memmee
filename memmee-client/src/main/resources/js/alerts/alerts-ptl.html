@@ -2,7 +2,7 @@
 
     <div class="modal discard-memmee crimson" ng-class="isModalAlertPresent" id="modalAlert">
 
-        <a class="btn modal-ext" data-dismiss="modal">×</a>
+        <a class="btn modal-ext" data-dismiss="yesClick()">×</a>
         <h1 class="modal-heading">{{header}}</h1>
 
         <div class="controls io">
@@ -13,7 +13,7 @@
 
     <div class="modal discard-memmee crimson" ng-class="isModalYesNoAlertPresent" id="modalYesNoAlert">
 
-        <a class="btn modal-ext" ng-click="">×</a>
+        <a class="btn modal-ext" ng-click="noClick()">×</a>
         <h1 class="modal-heading">{{header}}</h1>
 
         <div class="controls io">
