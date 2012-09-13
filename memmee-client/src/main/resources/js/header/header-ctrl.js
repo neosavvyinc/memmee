@@ -9,13 +9,14 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
         });
 
 
+
 //    var resetStyles = function() {
 //        $scope.visibleLoggedInStyle = 'isHidden';
 //
 //        $scope.createModeStyles = "btn btn-primary disabled";
 //    }
 
-    $scope.$on(LoginControllerEvents.get('LOGIN'), function () {
+    $scope.$on(LoginControllerEvents.get('LOGIN'), function() {
 
         console.log("NavigationController:handleLogin()");
 
@@ -24,12 +25,14 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
 
     });
 
-    $scope.createModeClicked = function () {
+    $scope.createModeClicked = function()
+    {
         broadCastService.createModeStartedCreateModeController();
         $location.path("create");
     }
 
-    $scope.viewModeClicked = function () {
+    $scope.viewModeClicked = function()
+    {
         broadCastService.createModeCancelledCreateModeController();
         $location.path("view");
     }
@@ -38,22 +41,11 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
         return broadCastService.isCreateMode();
     }
 
-//    $scope.toggleCreateMode = function()
-//    {
-//        console.log("About to toggle create mode")
-//        if( broadCastService.isCreateMode() )
-//        {
-//            console.log("Turning off create mode....");
-//            broadCastService.createModeCancelledCreateModeController();
-//            $location.path("view");
-//        }
-//        else
-//        {
-//            console.log("Turning on create mode....");
-//            broadCastService.createModeStartedCreateModeController();
-//            $location.path("create");
-//        }
-//    }
+    $scope.isProfileMode = function() {
+        var urlPath = $location.path();
+        var isProfile = urlPath.indexOf("profile") > -1 ? true : false;
+        return isProfile;
+    }
 
     var closedropdownTimer;
 
@@ -67,7 +59,8 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
             $scope.userSettingsDropdownStyle = "isHidden";
         }
 
-        if (closedropdownTimer) {
+        if( closedropdownTimer )
+        {
             closedropdownTimer = undefined;
         }
     };
@@ -77,22 +70,23 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
         broadCastService.profileOpenedProfileController();
     };
 
-    $scope.closeDropdownIfMouseOutside = function () {
-        closedropdownTimer = $timeout($scope.toggleSettingsDropdown, 100);
+    $scope.closeDropdownIfMouseOutside = function( ){
+        closedropdownTimer = $timeout( $scope.toggleSettingsDropdown, 100);
     };
 
-    $scope.cancelDropdownTimer = function () {
-        if (closedropdownTimer) {
-            $timeout.cancel(closedropdownTimer);
+    $scope.cancelDropdownTimer = function() {
+        if( closedropdownTimer )
+        {
+            $timeout.cancel( closedropdownTimer );
         }
-    }
+    };
 
-
-    $scope.signOut = function () {
+    $scope.signOut = function()
+    {
         broadCastService.logoutUser();
         $scope.loggedInUser = "";
         $scope.visibleLoggedInStyle = "isHidden";
-    }
+    };
 
 }
 

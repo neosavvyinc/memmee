@@ -34,12 +34,12 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         MandrillHtmlMessage message = new MandrillHtmlMessage();
         Map<String, String> headers = new HashMap<String, String>();
         message.setFrom_email(memmeeUrlConfiguration.getActiveEmailAddress());
-        message.setFrom_name("Memmee Welcome Service");
+        message.setFrom_name("memmee");
         message.setHeaders(headers);
-        message.setHtml("<html><body><h1>Welcome to Memmee.com!</h1>Please click here to confirm your account and fill " +
-                "out your profile.<a href=\"http://" + memmeeUrlConfiguration.getActiveUrl() + "/#/profile?apiKey="
-                + user.getApiKey() + "\">Confirm your account</a></body></html>");
-        message.setSubject("Welcome to Memmee... Confirm your user!");
+        message.setHtml("<html><body>we're so excited for you to join memmee!<br> to seal the deal, click on this " +
+                "<a href=\"http://" + memmeeUrlConfiguration.getActiveUrl() + "/#/profile?apiKey="
+                + user.getApiKey() + "\">link</a> and confirm your email address.</body></html>");
+        message.setSubject("confirm your memmee membership!");
         MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("New Memmee User!", user.getEmail())};
         message.setTo(recipients);
         message.setTrack_clicks(true);
@@ -62,14 +62,15 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         MandrillMessageRequest mmr = new MandrillMessageRequest();
         MandrillHtmlMessage message = new MandrillHtmlMessage();
         Map<String, String> headers = new HashMap<String, String>();
-        message.setFrom_email("aparrish@memmee.com");
-        message.setFrom_name("Adam Parrish");
+        message.setFrom_email(memmeeUrlConfiguration.getActiveEmailAddress());
+        message.setFrom_name("memmee");
         message.setHeaders(headers);
-        message.setHtml(String.format("<html><body><h1>Forgotten Password</h1>Your password is %s. " +
-                "Login at <a href=\"http://"+ memmeeUrlConfiguration.getActiveUrl() + "/#\">Memmee</a> to see your profile now.",
+        message.setHtml(String.format("<html><body>forgotten password<br>Your password is %s. " +
+                "login at <a href=\"http://"+ memmeeUrlConfiguration.getActiveUrl() + "/#\">memmee</a> and update your " +
+                "profile now. thanks for being a part of memmee.",
                 temporaryPassword));
 
-        message.setSubject("Memmee - Forgotten Password");
+        message.setSubject("memmee - forgotten password");
         MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("New Memmee User!", user.getEmail())};
         message.setTo(recipients);
         message.setTrack_clicks(true);

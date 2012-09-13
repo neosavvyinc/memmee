@@ -1,18 +1,6 @@
-<div ng-class="memmee.theme.name" ng-controller="ViewModeController">
+<div ng-class="memmee.theme.name" ng-controller="ShareModeController">
     <span class="memmee-date lg" style="width: 100px">{{memmee.displayDate}}</span>
 
-    <div class="controls share">
-        <a class="btn trash" ng-click="onDeleteMemmee()">Trash</a>
-        <a class="btn share" ng-click="toggleShareDropdown()">Share</a>
-        <div class="isRelative">
-            <div  class="memmee-style container isAbsolute" style="top: 0px; right: -100px;" ng-class="shareVisibilityStyle">
-                <ul class="memmee-style dropdown crimson" ng-mouseleave="closeShareIfMouseOutside($event)" >
-                    <li ng-mouseenter="cancelShareTimer()" style="width: 180px;"><a ng-click="generateAndShowPublicLink()">Email</a></li>
-                    <li ng-mouseenter="cancelShareTimer()" style="width: 180px;"><a >Facebook</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
 
     <div class="memmee-user-photo" ng-show="showImage()">
         <img style="max-height: 180px; max-width: 270px;" ng-src="{{memmee.attachment.filePath}}"/>
