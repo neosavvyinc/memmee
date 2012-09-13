@@ -1,53 +1,23 @@
 <div class="overlay" ng-class="isModalPresent" ng-controller="AlertsController">
 
-    <!-- For reference, only -->
-    <!--<div class="modal hide" id="modalAlert">-->
-        <!--<div class="modal-header">-->
-            <!--<button type="button" class="close" data-dismiss="modal">×</button>-->
-            <!--<h3>{{header}}</h3>-->
-        <!--</div>-->
-        <!--<div class="modal-body">-->
-            <!--<p>{{message}}</p>-->
-        <!--</div>-->
-        <!--<div class="modal-footer">-->
-            <!--<a href="#" class="btn" data-dismiss="modal">Ok</a>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <!-- For reference, only -->
-    <!--<div class="modal hide" id="modalYesNoAlert">-->
-        <!--<div class="modal-header">-->
-            <!--<button type="button" class="close" data-dismiss="modal">×</button>-->
-            <!--<h3>{{header}}</h3>-->
-        <!--</div>-->
-        <!--<div class="modal-body">-->
-            <!--<p>{{message}}</p>-->
-        <!--</div>-->
-        <!--<div class="modal-footer">-->
-            <!--<a href="#" class="btn" data-dismiss="modal" ng-click="noClick()">{{noText}}</a>-->
-            <!--<a href="#" class="btn btn-danger" data-dismiss="modal" ng-click="yesClick()">{{yesText}}</a>-->
-        <!--</div>-->
-    <!--</div>-->
-
-
     <div class="modal discard-memmee crimson" ng-class="isModalAlertPresent" id="modalAlert">
 
-        <a class="btn modal-ext" data-dismiss="modal">×</a>
+        <a class="btn modal-ext" data-dismiss="yesClick()">×</a>
         <h1 class="modal-heading">{{header}}</h1>
 
         <div class="controls io">
-            <p>{{message}}</p>
+            <p ng-bind-html-unsafe="message"></p>
             <a class="btn delete" ng-click="yesClick()">Ok</a>
         </div>
     </div>
 
     <div class="modal discard-memmee crimson" ng-class="isModalYesNoAlertPresent" id="modalYesNoAlert">
 
-        <a class="btn modal-ext" ng-click="">×</a>
+        <a class="btn modal-ext" ng-click="noClick()">×</a>
         <h1 class="modal-heading">{{header}}</h1>
 
         <div class="controls io">
-            <p>{{message}}</p>
+            <p ng-bind-html-unsafe="message"></p>
             <a class="btn cancel" ng-click="noClick()">{{noText}}</a>
             <a class="btn delete" ng-click="yesClick()">{{yesText}}</a>
         </div>

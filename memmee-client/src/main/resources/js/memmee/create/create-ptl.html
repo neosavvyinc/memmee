@@ -23,7 +23,16 @@
             <img style="max-height: 180px; max-width: 270px;" ng-src="{{memmee.attachment.filePath}}"/>
         </div>
 
-        <textarea maxlength="500" onkeydown="return limitLines(this, event)" rows="12" class="memmee-text" ng-model="memmee.text"></textarea>
+        <textarea
+                  ng-mousedown="removePrompt()"
+                  ng-mouseleave="addDefaultPrompt()"
+                  maxlength="500"
+                  onkeydown="return limitLines(this, event)"
+                  rows="12"
+                  class="memmee-text"
+                  ng-model="memmee.text">
+        </textarea>
+
 
 
         <div class="memmee-controls">
@@ -36,13 +45,14 @@
                         <li><a ng-click="setTheme(1)" class="btn style-coffee"></a> <a ng-click="setTheme(1)">Daydream</a></li>
                         <li><a ng-click="setTheme(2)" class="btn style-saleTag"></a> <a ng-click="setTheme(2)">On the Go</a></li>
                         <li><a ng-click="setTheme(3)" class="btn style-pushPin"></a> <a ng-click="setTheme(3)">Inspiration</a></li>
+                        <li><a ng-click="setTheme(4)" class="btn style-whimsy"></a> <a ng-click="setTheme(4)">Pure Whimsy</a></li>
                     </ul>
 
-                    <div class="scrollbar-container">
-                        <a href="#" class="btn scrollUp">Up</a>
-                        <div class="scrollbar"></div>
-                        <a href="#" class="btn scrollDown">Down</a>
-                    </div>
+                    <!--<div class="scrollbar-container">-->
+                        <!--<a href="#" class="btn scrollUp">Up</a>-->
+                        <!--<div class="scrollbar"></div>-->
+                        <!--<a href="#" class="btn scrollDown">Down</a>-->
+                    <!--</div>-->
                 </div>
             </div>
 
@@ -53,72 +63,7 @@
             </div>
 
             <div class="controls io">
-                <a ng-click="toggleCalendar()" class="link today crimson"><span class="icon today">Today</span> Today</a>
-                <div class="calendar-container opensans" ng-class="calendarVisibleStyle">
-                    <div class="controls calendar clearfix">
-                        <a href="#" class="btn prevMonth">Previous Month</a>
-                        <span class="title-month">August 2012</span>
-                        <a href="#" class="btn nextMonth">Next Month</a>
-                    </div>
-                    <table class="calendar">
-                        <tbody>
-                        <tr>
-                            <td><a href="#" class="prev-mo">26</a></td>
-                            <td><a href="#" class="prev-mo">27</a></td>
-                            <td><a href="#" class="prev-mo">28</a></td>
-                            <td><a href="#" class="prev-mo">29</a></td>
-                            <td><a href="#" class="prev-mo">30</a></td>
-                            <td><a href="#" class="prev-mo">31</a></td>
-                            <td><a href="#">1</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">2</a></td>
-                            <td><a href="#">3</a></td>
-                            <td><a href="#">4</a></td>
-                            <td><a href="#">5</a></td>
-                            <td><a href="#">6</a></td>
-                            <td><a href="#">7</a></td>
-                            <td><a href="#">8</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">9</a></td>
-                            <td><a href="#">10</a></td>
-                            <td><a href="#">11</a></td>
-                            <td><a href="#">12</a></td>
-                            <td><a href="#">13</a></td>
-                            <td><a href="#">14</a></td>
-                            <td><a href="#">15</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">16</a></td>
-                            <td><a href="#">17</a></td>
-                            <td><a href="#">18</a></td>
-                            <td><a href="#">19</a></td>
-                            <td><a href="#">20</a></td>
-                            <td><a href="#">21</a></td>
-                            <td><a href="#">22</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">23</a></td>
-                            <td><a href="#">24</a></td>
-                            <td><a href="#">25</a></td>
-                            <td><a href="#">26</a></td>
-                            <td><a href="#">27</a></td>
-                            <td><a href="#">28</a></td>
-                            <td><a href="#">29</a></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">30</a></td>
-                            <td><a href="#">31</a></td>
-                            <td><a href="#" class="next-mo">1</a></td>
-                            <td><a href="#" class="next-mo">2</a></td>
-                            <td><a href="#" class="next-mo">3</a></td>
-                            <td><a href="#" class="next-mo">4</a></td>
-                            <td><a href="#" class="next-mo">5</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <a class="datepicker link today crimson" data-date-format="mm-dd-yyyy" ng-init="initializeDatePicker('.datepicker')">{{getDisplayDate()}}</a>
                 <a href="#view" class="btn save" ng-click="createMemmee()" ng-disabled="isUnchanged(memmee)">Save</a>
                 <a href="#view" class="btn cancel" ng-click="cancel()">Cancel</a>
             </div>

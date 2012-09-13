@@ -1,8 +1,8 @@
 <div id="header" ng-controller="HeaderController">
     <a href="#home" title="Memmee"><img src="img/logo.png" alt="memmee"/></a>
     <ul id="primaryNav" class="clearfix" ng-class="visibleLoggedInStyle">
-        <li ng-show="isCreateMode()"><a ng-click="viewModeClicked()" title="View Memmee" class="btn viewMemmee">View Memmee</a></li>
-        <li ng-show="!isCreateMode()"><a ng-click="createModeClicked()" title="New Memmee" class="btn newMemmee">New Memmee</a></li>
+        <li ng-show="isCreateMode() || isProfileMode()"><a ng-click="viewModeClicked()" title="View Memmee" class="btn viewMemmee">View Memmee</a></li>
+        <li ng-show="!isCreateMode() || isProfileMode()"><a ng-click="createModeClicked()" title="New Memmee" class="btn newMemmee">New Memmee</a></li>
         <li ng-show="loggedInUser.firstName || loggedInUser.lastName">
             <a ng-click="toggleSettingsDropdown()" class="link more crimson">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a>
         </li>
@@ -13,7 +13,7 @@
         <li class="isRelative">
             <div  class="memmee-style container isAbsolute" style="top: 40px; right: -100px;" ng-class="userSettingsDropdownStyle">
                 <ul class="memmee-style dropdown crimson" ng-mouseleave="closeDropdownIfMouseOutside($event)" >
-                    <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;"><a href="#profile" ng-click="toggleSettingsDropdown()">Profile</a></li>
+                    <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;"><a href="#profile" ng-click="toggleSettingsDropdown();profileModeClicked()">Profile</a></li>
                     <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;"><a ng-click="signOut()">Sign Out</a></li>
                 </ul>
             </div>

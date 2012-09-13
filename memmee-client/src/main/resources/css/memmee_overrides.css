@@ -1,0 +1,39 @@
+.datepicker-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+}
+
+.controls.calendar {
+    left: 0;
+    top: 6px;
+}
+
+table.calendar {
+    left: -6px;
+    top: 28px;
+}
+
+.calendar td {
+    padding: 1px 2px;
+}
+
+.title-month {
+    font-size: 12px;
+    margin-right: 16px;
+}
+
+.btn.prevMonth {
+    display: inline-block;
+    margin-right: 14px;
+}
+
+.btn.nextMonth {
+    display: inline-block;
+}
+
+.slidecard-date {
+    cursor: pointer;
+}

@@ -9,10 +9,10 @@ memmeeUrlConfiguration:
   # - production
   selectedEnvironment: development
 
-  devUrl: local.memmee.com/boostrapped/
+  devUrl: local.memmee.com
   devFromEmailAddress: aparrish@neosavvy.com
 
-  qaUrl: memmee-dev.neosavvy.com/boostrapped/
+  qaUrl: memmee-dev.neosavvy.com
   qaFromEmailAddress: qa.memmee@memmee.com
 
   prodUrl: prod.memmee.com

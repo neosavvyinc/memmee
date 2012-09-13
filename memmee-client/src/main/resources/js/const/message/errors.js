@@ -1,10 +1,10 @@
 var Errors = (function () {
     var private = {
-        'INVALID_LOGIN_HEADER':'There was a problem logging in',
-        'INVALID_LOGIN_MESSAGE':'You have entered an invalid username or password.',
-        'PROFILE_UPDATE_HEADER':'There was a problem updating your profile',
-        'PROFILE_UPDATE_MESSAGE':'You need to try again to update this profile',
-        'REGISTRATION_HEADER': 'There was a problem signing up'
+        'INVALID_LOGIN_HEADER':'there was a problem logging in',
+        'INVALID_LOGIN_MESSAGE':'you have entered an invalid username or password.',
+        'PROFILE_UPDATE_HEADER':'there was a problem updating your profile',
+        'PROFILE_UPDATE_MESSAGE':"thanks for updating your profile. let's memmee.",
+        'REGISTRATION_HEADER': 'there was a problem signing up'
     };
 
     return {
