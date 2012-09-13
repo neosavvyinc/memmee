@@ -1,12 +1,14 @@
 function CreateMemmeesController($scope, $http, broadCastService) {
 
+    var DEFAULT_PROMPT = "start typing here...";
+
     //Super/Inherited Methods
     DefaultController($scope,
         /* load/tearDown */ function () {
             $scope.master = {
                 id:'',
                 userId:broadCastService.user ? broadCastService.user.id : null,
-                text:'',
+                text: DEFAULT_PROMPT,
                 creationDate:Date.today(),
                 lastUpdateDate:Date.today(),
                 displayDate:Date.today()
@@ -15,7 +17,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
             $scope.memmee = {
                 id:'',
                 userId:broadCastService.user ? broadCastService.user.id : null,
-                text:'',
+                text: DEFAULT_PROMPT,
                 creationDate:Date.today(),
                 lastUpdateDate:Date.today(),
                 displayDate:Date.today()
@@ -56,6 +58,20 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     $scope.cancel = function () {
         broadCastService.createModeCancelledCreateModeController();
     };
+
+    $scope.removePrompt = function () {
+        if ( $scope.memmee.text == DEFAULT_PROMPT )
+        {
+            $scope.memmee.text = "";
+        }
+    }
+
+    $scope.addDefaultPrompt = function () {
+        if( $scope.memmee.text == "" )
+        {
+            $scope.memmee.text = DEFAULT_PROMPT;
+        }
+    }
 
     $scope.createMemmee = function () {
         //@TODO, this logic and naming will eventually be changed
