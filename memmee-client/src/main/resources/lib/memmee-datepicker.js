@@ -156,20 +156,23 @@
 			nextMonth = nextMonth.valueOf();
 			html = [];
 			var clsName;
+            var linkClsName;
 			while(prevMonth.valueOf() < nextMonth) {
 				if (prevMonth.getDay() == this.weekStart) {
 					html.push('<tr>');
 				}
 				clsName = '';
+                linkClsName = '';
 				if (prevMonth.getMonth() < month) {
-					clsName += ' old prev-mo';
+					clsName += ' old';
+                    linkClsName += ' prev-mo'
 				} else if (prevMonth.getMonth() > month) {
 					clsName += ' new';
 				}
 				if (prevMonth.valueOf() == currentDate) {
 					clsName += ' active';
 				}
-				html.push('<td class="day"><a class="'+clsName+'">'+prevMonth.getDate() + '</a></td>');
+				html.push('<td class="day'+clsName+'"><a class="'+linkClsName+'">'+prevMonth.getDate() + '</a></td>');
 				if (prevMonth.getDay() == this.weekEnd) {
 					html.push('</tr>');
 				}
@@ -205,35 +208,29 @@
 		click: function(e) {
 			e.stopPropagation();
 			e.preventDefault();
-			var target = $(e.target).closest('span, td, th');
+			var target = $(e.target).closest('label, span, td, th');
 			if (target.length == 1) {
 				switch(target[0].nodeName.toLowerCase()) {
-					case 'th':
-						switch(target[0].className) {
-							case 'switch':
-								this.showMode(1);
-								break;
-							case 'prev':
-							case 'next':
-								this.viewDate['set'+DPGlobal.modes[this.viewMode].navFnc].call(
-									this.viewDate,
-									this.viewDate['get'+DPGlobal.modes[this.viewMode].navFnc].call(this.viewDate) +
-									DPGlobal.modes[this.viewMode].navStep * (target[0].className == 'prev' ? -1 : 1)
-								);
-								this.fill();
-								break;
+					case 'label':
+						if (this.checkClassList(target[0].classList, "next") || this.checkClassList(target[0].classList, "prev")) {
+                            this.viewDate['set'+DPGlobal.modes[this.viewMode].navFnc].call(
+                                this.viewDate,
+                                this.viewDate['get'+DPGlobal.modes[this.viewMode].navFnc].call(this.viewDate) +
+                                DPGlobal.modes[this.viewMode].navStep * (this.checkClassList(target[0].classList, "prev") ? -1 : 1)
+                            );
+                            this.fill();
 						}
 						break;
 					case 'span':
-						if (target.is('.month')) {
-							var month = target.parent().find('span').index(target);
-							this.viewDate.setMonth(month);
-						} else {
-							var year = parseInt(target.text(), 10)||0;
-							this.viewDate.setFullYear(year);
-						}
-						this.showMode(-1);
-						this.fill();
+//						if (target.is('.month')) {
+//							var month = target.parent().find('span').index(target);
+//							this.viewDate.setMonth(month);
+//						} else {
+//							var year = parseInt(target.text(), 10)||0;
+//							this.viewDate.setFullYear(year);
+//						}
+//						this.showMode(-1);
+//						this.fill();
 						break;
 					case 'td':
 						if (target.is('.day')){
@@ -258,6 +255,17 @@
 				}
 			}
 		},
+
+        checkClassList: function(classList, className) {
+           if (classList && className) {
+              for (var i = 0; i < classList.length; i++) {
+                  if (classList[i] == className) {
+                      return true;
+                  }
+              }
+           }
+            return false;
+        },
 
 		mousedown: function(e){
 			e.stopPropagation();
@@ -369,9 +377,9 @@
 			return date.join(format.separator);
 		},
 		headTemplate: '<div class="controls calendar clearfix">'+
-                        '<a href="#" class="btn prevMonth">Previous Month</a>'+
+                        '<label href="#" class="btn prevMonth prev">Previous Month</label>'+
                         '<span class="title-month"></span>'+
-                        '<a href="#" class="btn nextMonth">Next Month</a>'+
+                        '<label class="btn nextMonth next">Next Month</label>'+
                       '</div>',
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>'
 	};
