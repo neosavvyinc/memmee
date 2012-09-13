@@ -4,7 +4,7 @@ angular.module('memmee-app', ['memmee-app.services']).
         when('/home', {templateUrl:'js/home/home-ptl.html'}).
         when('/create', {templateUrl:'js/memmee/create/create-ptl.html'}).
         when('/view', {templateUrl:'js/memmee/view/view-ptl.html'}).
-        when('/requiredchangepassword', {templateUrl:'partials/requiredChangePassword.html'}).
+        when('/requiredchangepassword', {templateUrl:'js/profile/change-password-ptl.html'}).
         when('/profile', {templateUrl:'js/profile/profile-ptl.html'}).
         when('/share', {templateUrl:'js/memmee/share/share-ptl.html'}).
         otherwise({redirectTo:'/home'});

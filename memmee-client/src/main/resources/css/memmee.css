@@ -615,6 +615,7 @@ html{
     margin-bottom: 0;
 }
 .memmee-style.container{
+    /*display: none;*/
     position: relative;
     width: 224px;
     height: 141px;
@@ -689,6 +690,7 @@ html{
     background-color: #70756b;
 }
 .calendar-container{
+    /*display: none;*/
     position: absolute;
     top: 50px;
     z-index: 999;
@@ -922,10 +924,10 @@ table.calendar{
 .btn.newMemmee{
     width: 165px;
     height: 51px;
-    background-position: -165px 0;
+    background-position: 0px 0px;
 }
 .btn.newMemmee:hover, .btn.newMemmee.active{
-    background-position: 0px 0px;
+    background-position: -165px 0;
 }
 .btn.viewMemmee{
     width: 173px;

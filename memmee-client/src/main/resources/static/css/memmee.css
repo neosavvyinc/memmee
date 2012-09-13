@@ -159,6 +159,24 @@ html{
     /*padding: px px px px;*/
 }
 
+.memmee-card-home{
+    position: relative;
+    width: 438px;
+    height: 250px;
+    margin-bottom: 50px;
+    background: transparent url(../img/bg-card-main.png) top left no-repeat;
+}
+
+.memmee-card-top-home{
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    width: 877px;
+    height: 292px;
+    margin-bottom: 50px;
+    background: transparent url(../img/bg-card-main.png) top left no-repeat;
+}
+
 .memmee-card{
     position: relative;
     width: 877px;

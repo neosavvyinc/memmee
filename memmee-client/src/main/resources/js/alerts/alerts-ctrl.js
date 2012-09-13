@@ -78,7 +78,7 @@ function AlertsController($scope, $http, broadCastService, $location) {
 
     /* RegistrationController */
     $scope.$on(RegistrationControllerEvents.get('ERROR_SAVING'), function (event, message) {
-        $scope.showAlert(Errors.get('REGISTRATION_HEADER'), "We had a problem signing up with that email address, if you already created an account you should reset your password");
+        $scope.showAlert(Errors.get('REGISTRATION_HEADER'), "we had a problem signing up with that email address, if you already created an account you should reset your password");
     });
 
     /* ViewModeController */
@@ -97,8 +97,8 @@ function AlertsController($scope, $http, broadCastService, $location) {
         console.log("Memmee with id: " + message[0].id + " sharekey: " + message[0].shareKey);
         var shareUrl = $location.protocol() + "://" + $location.host() + "/#/share?shareKey=" + message[0].shareKey;
         console.log("location:::" + shareUrl);
-        $scope.showAlert("copy and paste the link below to share. (don't worry, your other memmees will remain private)",
-            "<a target='_blank' href='" + shareUrl + "'>SHARE ME</a>" );
+        $scope.showAlert("copy and paste the link below to share.",
+            "(don't worry, your other memmees will remain private)<br><br>"+shareUrl );
     });
 
     //Initialization
