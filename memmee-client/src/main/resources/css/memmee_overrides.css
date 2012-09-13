@@ -1,3 +1,15 @@
+.memmee-text {
+    left: 130px;
+}
+
+.memmee-card.style-travel {
+    padding-left: 100px;
+}
+
+.memmee-card.style-travel .memmee-text {
+    left: 180px;
+}
+
 .datepicker-dropdown-menu {
     position: absolute;
     top: 100%;
