@@ -33,3 +33,7 @@ table.calendar {
 .btn.nextMonth {
     display: inline-block;
 }
+
+.slidecard-date {
+    cursor: pointer;
+}
