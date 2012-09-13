@@ -538,6 +538,7 @@ html{
 .slidecard-date{
     display: block;
     padding-left: 4px;
+    cursor: pointer;
     margin-bottom: 11px;
     color: #d44e3c;
     text-transform: lowercase;
