@@ -12,7 +12,6 @@ function ArchiveListController($scope, $http, broadCastService) {
     //Action Handlers
     $scope.onMemmeeSelect = function (memmee) {
         //console.log("onMemmeeSelect() ---- memmee: " + memmee.text);
-        broadCastService.createModeCancelledCreateModeController();
         broadCastService.memmeeSelectedArchiveListController(memmee);
     };
 

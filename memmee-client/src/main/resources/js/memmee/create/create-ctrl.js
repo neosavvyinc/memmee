@@ -206,8 +206,8 @@ function CreateMemmeesController($scope, $http, broadCastService) {
 
     //UI Initialization
     $scope.initializeDatePicker = function (clazz) {
-        $(clazz).data("date", $scope.getTodaysDate());
-        $(clazz).datepicker({format:'mm-dd-yyyy'}).on('changeDate', $scope.dateChanged);
+        //$(clazz).data("date", $scope.getTodaysDate());
+        //$(clazz).datepicker({format:'mm-dd-yyyy'}).on('changeDate', $scope.dateChanged);
     };
 
     //Show instructions in first two logins
