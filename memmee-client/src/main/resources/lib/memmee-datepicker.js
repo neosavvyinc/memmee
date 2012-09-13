@@ -16,11 +16,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================= */
- 
+
 !function( $ ) {
-	
+
 	// Picker object
-	
+
 	var Datepicker = function(element, options){
 		this.element = $(element);
 		this.format = DPGlobal.parseFormat(options.format||this.element.data('date-format')||'mm/dd/yyyy');
@@ -32,7 +32,7 @@
 							});
 		this.isInput = this.element.is('input');
 		this.component = this.element.is('.date') ? this.element.find('.add-on') : false;
-		
+
 		if (this.isInput) {
 			this.element.on({
 				focus: $.proxy(this.show, this),
@@ -46,7 +46,7 @@
 				this.element.on('click', $.proxy(this.show, this));
 			}
 		}
-		
+
 		this.viewMode = 0;
 		this.weekStart = options.weekStart||this.element.data('date-weekstart')||0;
 		this.weekEnd = this.weekStart == 0 ? 6 : this.weekStart - 1;
@@ -55,10 +55,10 @@
 		this.update();
 		this.showMode();
 	};
-	
+
 	Datepicker.prototype = {
 		constructor: Datepicker,
-		
+
 		show: function(e) {
 			this.picker.show();
 			this.height = this.component ? this.component.outerHeight() : this.element.outerHeight();
@@ -76,7 +76,7 @@
 				date: this.date
 			});
 		},
-		
+
 		hide: function(){
 			this.picker.hide();
 			$(window).off('resize', this.place);
@@ -91,7 +91,7 @@
 				date: this.date
 			});
 		},
-		
+
 		setValue: function() {
 			var formated = DPGlobal.formatDate(this.date, this.format);
 			if (!this.isInput) {
@@ -103,7 +103,7 @@
 				this.element.prop('value', formated);
 			}
 		},
-		
+
 		place: function(){
 			var offset = this.component ? this.component.offset() : this.element.offset();
 			this.picker.css({
@@ -111,7 +111,7 @@
 				left: offset.left
 			});
 		},
-		
+
 		update: function(){
 			this.date = DPGlobal.parseDate(
 				this.isInput ? this.element.prop('value') : this.element.data('date'),
@@ -120,17 +120,17 @@
 			this.viewDate = new Date(this.date);
 			this.fill();
 		},
-		
+
 		fillDow: function(){
-			var dowCnt = this.weekStart;
-			var html = '<tr>';
-			while (dowCnt < this.weekStart + 7) {
-				html += '<th class="dow">'+DPGlobal.dates.daysMin[(dowCnt++)%7]+'</th>';
-			}
-			html += '</tr>';
-			this.picker.find('.datepicker-days thead').append(html);
+//			var dowCnt = this.weekStart;
+//			var html = '<tr>';
+//			while (dowCnt < this.weekStart + 7) {
+//				html += '<th class="dow">'+DPGlobal.dates.daysMin[(dowCnt++)%7]+'</th>';
+//			}
+//			html += '</tr>';
+//			this.picker.find('.datepicker-days thead').append(html);
 		},
-		
+
 		fillMonths: function(){
 			var html = '';
 			var i = 0
@@ -139,13 +139,13 @@
 			}
 			this.picker.find('.datepicker-months td').append(html);
 		},
-		
+
 		fill: function() {
 			var d = new Date(this.viewDate),
 				year = d.getFullYear(),
 				month = d.getMonth(),
 				currentDate = this.date.valueOf();
-			this.picker.find('.datepicker-days th:eq(1)')
+			this.picker.find('.title-month')
 						.text(DPGlobal.dates.months[month]+' '+year);
 			var prevMonth = new Date(year, month-1, 28,0,0,0,0),
 				day = DPGlobal.getDaysInMonth(prevMonth.getFullYear(), prevMonth.getMonth());
@@ -162,14 +162,14 @@
 				}
 				clsName = '';
 				if (prevMonth.getMonth() < month) {
-					clsName += ' old';
+					clsName += ' old prev-mo';
 				} else if (prevMonth.getMonth() > month) {
 					clsName += ' new';
 				}
 				if (prevMonth.valueOf() == currentDate) {
 					clsName += ' active';
 				}
-				html.push('<td class="day'+clsName+'">'+prevMonth.getDate() + '</td>');
+				html.push('<td class="day"><a class="'+clsName+'">'+prevMonth.getDate() + '</a></td>');
 				if (prevMonth.getDay() == this.weekEnd) {
 					html.push('</tr>');
 				}
@@ -177,7 +177,7 @@
 			}
 			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
 			var currentYear = this.date.getFullYear();
-			
+
 			var months = this.picker.find('.datepicker-months')
 						.find('th:eq(1)')
 							.text(year)
@@ -186,7 +186,7 @@
 			if (currentYear == year) {
 				months.eq(this.date.getMonth()).addClass('active');
 			}
-			
+
 			html = '';
 			year = parseInt(year/10, 10) * 10;
 			var yearCont = this.picker.find('.datepicker-years')
@@ -201,7 +201,7 @@
 			}
 			yearCont.html(html);
 		},
-		
+
 		click: function(e) {
 			e.stopPropagation();
 			e.preventDefault();
@@ -217,7 +217,7 @@
 							case 'next':
 								this.viewDate['set'+DPGlobal.modes[this.viewMode].navFnc].call(
 									this.viewDate,
-									this.viewDate['get'+DPGlobal.modes[this.viewMode].navFnc].call(this.viewDate) + 
+									this.viewDate['get'+DPGlobal.modes[this.viewMode].navFnc].call(this.viewDate) +
 									DPGlobal.modes[this.viewMode].navStep * (target[0].className == 'prev' ? -1 : 1)
 								);
 								this.fill();
@@ -258,12 +258,12 @@
 				}
 			}
 		},
-		
+
 		mousedown: function(e){
 			e.stopPropagation();
 			e.preventDefault();
 		},
-		
+
 		showMode: function(dir) {
 			if (dir) {
 				this.viewMode = Math.max(0, Math.min(2, this.viewMode + dir));
@@ -271,7 +271,7 @@
 			this.picker.find('>div').hide().filter('.datepicker-'+DPGlobal.modes[this.viewMode].clsName).show();
 		}
 	};
-	
+
 	$.fn.datepicker = function ( option ) {
 		return this.each(function () {
 			var $this = $(this),
@@ -287,7 +287,7 @@
 	$.fn.datepicker.defaults = {
 	};
 	$.fn.datepicker.Constructor = Datepicker;
-	
+
 	var DPGlobal = {
 		modes: [
 			{
@@ -368,19 +368,17 @@
 			}
 			return date.join(format.separator);
 		},
-		headTemplate: '<thead>'+
-							'<tr>'+
-								'<th class="prev"><i class="icon-arrow-left"/></th>'+
-								'<th colspan="5" class="switch"></th>'+
-								'<th class="next"><i class="icon-arrow-right"/></th>'+
-							'</tr>'+
-						'</thead>',
+		headTemplate: '<div class="controls calendar clearfix">'+
+                        '<a href="#" class="btn prevMonth">Previous Month</a>'+
+                        '<span class="title-month"></span>'+
+                        '<a href="#" class="btn nextMonth">Next Month</a>'+
+                      '</div>',
 		contTemplate: '<tbody><tr><td colspan="7"></td></tr></tbody>'
 	};
-	DPGlobal.template = '<div class="datepicker dropdown-menu">'+
-							'<div class="datepicker-days">'+
-								'<table class=" table-condensed">'+
-									DPGlobal.headTemplate+
+	DPGlobal.template = '<div class="datepicker datepicker-dropdown-menu calendar-container opensans">'+
+							'<div class="datepicker-days controls calendar clearfix">'+
+                                DPGlobal.headTemplate+
+                                '<table class="table-condensed calendar">'+
 									'<tbody></tbody>'+
 								'</table>'+
 							'</div>'+

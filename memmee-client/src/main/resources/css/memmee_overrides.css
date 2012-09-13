@@ -1,0 +1,16 @@
+.datepicker-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+}
+
+.controls.calendar {
+    left: 0;
+    top: 0;
+}
+
+.title-month {
+    font-size: 12px;
+}
