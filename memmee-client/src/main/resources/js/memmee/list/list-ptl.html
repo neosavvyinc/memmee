@@ -9,7 +9,7 @@
 
         <div class="slideshow" ng-hide="(memmees == null || memmees.length == 0)">
             <div class="slidecard-container" ng-repeat="memmee in memmees">
-                <span class="slidecard-date opensans">{{getDisplayDate(memmee)}}</span>
+                <span ng-click="onMemmeeSelect(memmee)" class="slidecard-date opensans">{{getDisplayDate(memmee)}}</span>
                 <a ng-click="onMemmeeSelect(memmee)" ng-class="memmee.theme.listName" ng-bind-html-unsafe="memmee.text"></a>
             </div>
         </div>
