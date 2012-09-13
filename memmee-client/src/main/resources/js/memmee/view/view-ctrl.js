@@ -153,6 +153,13 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
             $scope.attachmentVisible = false;
         }
     }
+
+    $scope.getDisplayDate = function (memmee) {
+        if (memmee.displayDate != null) {
+            return MemmeeDateUtil.standardDate(new Date.parse(memmee.displayDate));
+        }
+        return null;
+    };
 }
 
 ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$timeout'];

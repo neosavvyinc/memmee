@@ -87,7 +87,7 @@ table {
         "../font/opensans/OpenSans-BoldItalic.ttf",
         "../font/opensans/OpenSans-Regular.ttf",
         "../font/opensans/OpenSans-Semibold.ttf",
-        "../fon/opensans/OpenSans-Semibolditalic.ttf";
+        "../font/opensans/OpenSans-Semibolditalic.ttf";
 }
 
 .crimson{
@@ -416,7 +416,7 @@ html{
     display: block;
     padding-right: 19px;
     font-size: 12px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     text-decoration: none;
     color: #5a5b50;
     background: transparent url('../img/icon-footerLink.png') center right no-repeat;
@@ -505,7 +505,7 @@ html{
     left: 96px;
     padding: 0 6px 9px;
     color: #d44e3c;
-    text-transform: uppercase;
+    text-transform: lowercase;
     background: transparent url('../img/bg-memmee-date.png') bottom left repeat-x;
 }
 
@@ -540,7 +540,7 @@ html{
     padding-left: 4px;
     margin-bottom: 11px;
     color: #d44e3c;
-    text-transform: uppercase;
+    text-transform: lowercase;
 }
 
 .slidecard{
@@ -603,7 +603,7 @@ html{
 .list.steps dt{
     margin-bottom: 2px;
     font: bold 10px/21px 'Josefin Sans', 'josefinslab', Arial, sans-serif;
-    text-transform: uppercase;
+    text-transform: lowercase;
     text-align: center;
 }
 .list.steps dd{
@@ -717,7 +717,7 @@ html{
     display: inline-block;
     width: 112.5px;
     text-align: center;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: bold;
     color: #476579;
 }
@@ -901,7 +901,7 @@ table.calendar{
     top: 5px;
     left: 64px;
     font: bold 10px/12px "josefinslab", Arial, sans-serif;
-    text-transform: uppercase;
+    text-transform: lowercase;
     color: white;
 }
 
