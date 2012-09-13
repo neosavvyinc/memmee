@@ -6,13 +6,6 @@ import org.apache.http.impl.cookie.DateUtils;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created with IntelliJ IDEA.
- * User: trevorewen
- * Date: 7/12/12
- * Time: 10:29 PM
- * To change this template use File | Settings | File Templates.
- */
 public class DateUtil {
 
     public static Date getDate(int year, int month, int day) {
@@ -37,6 +30,26 @@ public class DateUtil {
         } catch (DateParseException e) {
             return null;
         }
+    }
+
+    public static Date updateHoursMinsSecondsFromAnotherDate(Date toBeUpdated, Date updateFrom) {
+        if (toBeUpdated != null && updateFrom != null) {
+            Calendar calendarToBeUpdated = calendarFromDate(toBeUpdated);
+            Calendar calendarUpdateFrom = calendarFromDate(updateFrom);
+
+            calendarToBeUpdated.set(Calendar.HOUR_OF_DAY, calendarUpdateFrom.get(Calendar.HOUR_OF_DAY));
+            calendarToBeUpdated.set(Calendar.MINUTE, calendarUpdateFrom.get(Calendar.MINUTE));
+            calendarToBeUpdated.set(Calendar.SECOND, calendarUpdateFrom.get(Calendar.SECOND));
+
+            return calendarToBeUpdated.getTime();
+        }
+        return null;
+    }
+
+    public static Calendar calendarFromDate(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
     }
 
 }

@@ -13,6 +13,7 @@ import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.theme.dao.TransactionalThemeDAO;
 import com.memmee.theme.dto.Theme;
+import com.memmee.util.DateUtil;
 import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
 import com.yammer.dropwizard.logging.Log;
@@ -138,6 +139,8 @@ public class MemmeeResource {
                         if (memmee.getDisplayDate() == null) {
                             LOG.error("Memmee is being inserted with a null display date");
                             memmee.setDisplayDate(timeOfInsert);
+                        } else {
+                            memmee.setDisplayDate(DateUtil.updateHoursMinsSecondsFromAnotherDate(memmee.getDisplayDate(), timeOfInsert));
                         }
 
                         //Save the hard returns as <br> tags
@@ -163,7 +166,7 @@ public class MemmeeResource {
                         , memmee.getText()
                         , new Date()
                         , new Date()
-                        , memmee.getDisplayDate()
+                        , DateUtil.updateHoursMinsSecondsFromAnotherDate(memmee.getDisplayDate(), new Date())
                         , memmee.getShareKey()
                         , null
                         , themeId
