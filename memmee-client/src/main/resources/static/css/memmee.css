@@ -870,7 +870,15 @@ html.homepage{
     padding: 38px 18px 18px 15px;
     overflow: hidden;
     z-index: 900;
-    background: transparent url('../img/bg-dropdown.png') top left no-repeat;
+    background-color: transparent;
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.memmee-style.container.left{
+    background-image: url('../img/bg-dropdown.png');
+}
+.memmee-style.container.right{
+    background-image: url('../img/bg-dropdown-right.png');
 }
 .memmee-style.dropdown{
     width: 196px;
@@ -1285,6 +1293,12 @@ table.calendar{
     width: 136px;
     height: 23px;
     background-position: 0 -263px;
+    text-indent: 0;
+    position: relative;
+    text-overflow:ellipsis;
+}
+.btn.removePhoto input{
+    position: absolute;
 }
 .btn.delete{
     width: 81px;
