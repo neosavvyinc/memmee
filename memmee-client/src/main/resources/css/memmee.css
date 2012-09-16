@@ -109,6 +109,171 @@ a{
     color: #4b90a4;
 }
 
+/*HOMEPAGE*/
+.btn.login{
+    width: 79px;
+    height: 30px;
+    line-height: 29px;
+    background-position: -164px -338px;
+}
+.btn.signup{
+    width: 79px;
+    height: 30px;
+    line-height: 29px;
+    background-position: -164px -306px;
+}
+#header .btn.signup{
+    position: absolute;
+    top: 16px;
+    right: 122px;
+}
+#login{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 364px;
+    height: 52px;
+    padding: 0 8px;
+    margin-right: 8px;
+    background: transparent url('../img/separator-login-form.png') center right no-repeat;
+}
+#login fieldset{
+    display: inline-block;
+}
+#login input {
+    height: 28px;
+    padding-left: 10px;
+    line-height: 28px;
+    color: #797a79;
+    font-family: "Crimson Text", "Times New Roman", Times, serif;
+    border: 1px solid #ddd;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.home-top{
+    background-color: white;
+    padding-bottom: 48px;
+}
+.memmee-carousel{
+    position: relative;
+    width: 931px;
+    height: 388px;
+    margin-bottom: 4px;
+}
+.memmee-carousel .btn.prev{
+    width: 35px;
+    height: 36px;
+    position: absolute;
+    top: 174px;
+    left: -22px;
+    background-position: 0 -844px;
+}
+.memmee-carousel .btn.prev:hover{
+    background-position: 0 -880px;
+}
+.memmee-carousel .btn.next{
+    width: 33px;
+    height: 34px;
+    position: absolute;
+    top: 174px;
+    right: -22px;
+    background-position: -36px -846px;
+}
+.memmee-carousel .btn.next:hover{
+    background-position: -36px -881px;
+}
+.memmee-carousel-item{
+    width: inherit;
+    height: inherit;
+    background: transparent url('../img/bg-carousel.png')
+}
+.signup.stretched{
+    display: table-cell;
+    vertical-align: middle;
+    width: 851px;
+    height: 91px;
+    padding-left: 52px;
+    padding-right: 33px;
+    background: transparent url('../img/bg-signup.png') top left no-repeat;
+}
+.signup-title{
+    display: inline-block;
+    margin-right: 12px;
+    font: italic 28px/1em 'Crimson Text', 'Times New Roman', Times, serif;
+    color: #144758;
+}
+.signup.stretched form{
+    display: inline-block;
+}
+.signup.stretched label{
+    display: inline-block;
+    margin-right: 30px;
+    font: 21px/1em 'Crimson Text', 'Times New Roman', Times, serif;
+    color: #364a62;
+}
+.signup.stretched fieldset{
+    display: inline-block;
+}
+.signup.stretched input{
+    width: 225px;
+    height: 28px;
+    padding-left: 10px;
+    line-height: 28px;
+    color: #797a79;
+    font-family: "Crimson Text", "Times New Roman", Times, serif;
+    border: 1px solid #ddd;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white;
+}
+.memmee-beforeAfter{
+    margin-bottom: 48px;
+}
+.memmee-before{
+    margin-right: 24px;
+}
+.memmee-before, .memmee-after{
+    position: relative;
+    float: left;
+    width: 458px;
+    height: 346px;
+    background: transparent url('../img/bg-beforeAfter.png') top left no-repeat;
+}
+.memmee-before h3, .memmee-after h3{
+    position: absolute;
+    top: 163px;
+    left: 150px;
+    font: 24px 'Crimson Text', 'Times New Roman', Times, serif;
+    color: #48a6c2;
+}
+.postcard{
+    width: 935px;
+    height: 330px;
+    margin-bottom: 25px;
+    background: transparent url('../img/bg-green-postcard.png') top left no-repeat;
+}
+.callout{
+    float: left;
+    width: 601px;
+    height: 262px;
+    margin-right: 28px;
+    background: transparent url('../img/bg-callout.png') top left no-repeat;
+}
+.signup.sm{
+    position: relative;
+    top: 19px;
+    float: left;
+    width: 304px;
+    height: 242px;
+    background: transparent url('../img/bg-signup-small.png') top left no-repeat;
+}
+/*END HOMEPAGE*/
 .clearfix:after {
     content: ".";
     display: block;
@@ -538,7 +703,6 @@ html{
 .slidecard-date{
     display: block;
     padding-left: 4px;
-    cursor: pointer;
     margin-bottom: 11px;
     color: #d44e3c;
     text-transform: lowercase;
@@ -618,9 +782,10 @@ html{
 .memmee-style.container{
     /*display: none;*/
     position: relative;
+    top: -20px;
     width: 224px;
     height: 141px;
-    padding: 38px 18px 18px 26px;
+    padding: 38px 18px 18px 15px;
     overflow: hidden;
     z-index: 900;
     background: transparent url('../img/bg-dropdown.png') top left no-repeat;
