@@ -109,6 +109,20 @@ a{
     color: #4b90a4;
 }
 
+input.rounded{
+    height: 28px;
+    padding-left: 10px;
+    line-height: 28px;
+    color: #797a79;
+    font-family: "Crimson Text", "Times New Roman", Times, serif;
+    border: 1px solid #ddd;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white;
+}
+
 /*HOMEPAGE*/
 .btn.login{
     width: 79px;
@@ -125,13 +139,13 @@ a{
 #header .btn.signup{
     position: absolute;
     top: 16px;
-    right: 122px;
+    right: 86px;
 }
 #login{
     display: block;
     position: absolute;
     top: 0;
-    left: 364px;
+    left: 400px;
     height: 52px;
     padding: 0 8px;
     margin-right: 8px;
@@ -155,8 +169,31 @@ a{
 }
 
 .home-top{
+    position: relative;
     background-color: white;
     padding-bottom: 48px;
+}
+.home-top .icon.free{
+    top: 374px;
+    left: -106px;
+
+}
+.home-btm{
+    position: relative;
+    min-height: 1029px;
+    padding-top: 60px;
+}
+.home-btm .icon.free{
+    bottom: 173px;
+    right: -80px;
+    z-index: 10;
+}
+.icon.free{
+    cursor: none;
+    position: absolute;
+    width: 137px;
+    height: 137px;
+    background-position: 0 -708px;
 }
 .memmee-carousel{
     position: relative;
@@ -260,8 +297,9 @@ a{
 }
 .callout{
     float: left;
-    width: 601px;
-    height: 262px;
+    width: 541px;
+    height: 203px;
+    padding: 25px 30px 35px;
     margin-right: 28px;
     background: transparent url('../img/bg-callout.png') top left no-repeat;
 }
@@ -269,9 +307,61 @@ a{
     position: relative;
     top: 19px;
     float: left;
-    width: 304px;
-    height: 242px;
+    width: 254px;
+    height: 166px;
+    padding: 36px 25px 40px;
     background: transparent url('../img/bg-signup-small.png') top left no-repeat;
+}
+.signup.sm .signup-title{
+    margin-bottom: 20px;
+}
+.signup.sm p{
+    display: block;
+    margin-bottom: 20px;
+    font: 21px/24px 'Crimson Text', 'Times New Roman', Times, serif;
+    color: #364a62;
+}
+.signup.sm fieldset{
+    display: inline-block;
+}
+.signup.sm input{
+    display: inline-block;
+    width: 150px;
+    height: 28px;
+    padding-left: 10px;
+    line-height: 28px;
+    color: #797a79;
+    font-family: "Crimson Text", "Times New Roman", Times, serif;
+    border: 1px solid #ddd;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -ms-border-radius: 4px;
+    border-radius: 4px;
+    background-color: white;
+}
+.announce{
+    float: left;
+    width: 225px;
+    margin-right: 84px;
+    font-family: 'Crimson Text', 'Times New Roman', Times, serif;
+}
+.announce:last-child{
+    margin-right: 0;
+}
+.announce-date{
+    display: block;
+    font: 10px/55px 'opensans', Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    color: #d44e3c;
+}
+.announce-list dt{
+    margin-bottom: 25px;
+    font-size: 24px;
+    line-height: 1em;
+}
+.announce-list dd{
+    font-size: 14px;
+    line-height: 18px;
 }
 /*END HOMEPAGE*/
 .clearfix:after {
@@ -291,6 +381,10 @@ html{
     min-height: 941px;
     background: #d0ebe4 url('../img/bg-page.png') top left repeat-x;
     text-align: center;
+}
+html.homepage{
+    min-height: 1800px;
+    background: transparent url('../img/bg-homepage.jpg') top left repeat-x;
 }
 
 #container {
@@ -694,6 +788,7 @@ html{
     height: 176px;
     margin-right: 18px;
     overflow: hidden;
+    vertical-align: middle;
 }
 
 .slideshow{
@@ -788,7 +883,15 @@ html{
     padding: 38px 18px 18px 15px;
     overflow: hidden;
     z-index: 900;
-    background: transparent url('../img/bg-dropdown.png') top left no-repeat;
+    background-color: transparent;
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+.memmee-style.container.left{
+    background-image: url('../img/bg-dropdown.png');
+}
+.memmee-style.container.right{
+    background-image: url('../img/bg-dropdown-right.png');
 }
 .memmee-style.dropdown{
     width: 196px;
@@ -1200,9 +1303,18 @@ table.calendar{
 }
 .btn.removePhoto{
     display: inline-block;
-    width: 136px;
+    width: 112px;
     height: 23px;
+    padding: 0 24px 0 5px;
+    line-height: 23px;
+    overflow: hidden;
+    text-overflow:ellipsis;
     background-position: 0 -263px;
+    text-indent: 0;
+    position: relative;
+}
+.btn.removePhoto input{
+    position: absolute;
 }
 .btn.delete{
     width: 81px;

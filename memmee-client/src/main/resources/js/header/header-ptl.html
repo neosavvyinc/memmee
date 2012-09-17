@@ -1,5 +1,20 @@
 <div id="header" ng-controller="HeaderController">
-    <a href="#home" title="Memmee"><img src="img/logo.png" alt="memmee"/></a>
+    <a href="#" title="Memmee"><img src="img/logo.png" alt="memmee" /></a>
+
+
+    <!-- Logged out Header -->
+    <form id="login" method="post" action="#" ng-controller="LoginController" ng-class="visibleLoggedOutStyle">
+        <fieldset>
+            <input type="text" id="email" name="email" ng-model="user.email" placeholder="Email Address"/>
+            <input type="password" id="pwd" name="pwd" ng-model="user.password" placeholder="Password" />
+        </fieldset>
+        <fieldset>
+            <a href="#" class="btn login" ng-click="login()">Login</a>
+        </fieldset>
+    </form>
+
+
+    <!-- Logged in Header -->
     <ul id="primaryNav" class="clearfix" ng-class="visibleLoggedInStyle">
         <li ng-show="isCreateMode() || isProfileMode()"><a ng-click="viewModeClicked()" title="View Memmee" class="btn viewMemmee">View Memmee</a></li>
         <li ng-show="!isCreateMode() || isProfileMode()"><a ng-click="createModeClicked()" title="New Memmee" class="btn newMemmee">New Memmee</a></li>
@@ -11,7 +26,7 @@
         </li>
         <!-- Option 1: http://jsfiddle.net/upPdx/1/ -->
         <li class="isRelative">
-            <div  class="memmee-style container isAbsolute" style="top: 40px; right: -100px;" ng-class="userSettingsDropdownStyle">
+            <div  class="memmee-style container right isAbsolute" style="top: 40px; right: -50px;" ng-class="userSettingsDropdownStyle">
                 <ul class="memmee-style dropdown crimson" ng-mouseleave="closeDropdownIfMouseOutside($event)" >
                     <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;"><a href="#profile" ng-click="toggleSettingsDropdown();profileModeClicked()">Profile</a></li>
                     <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;"><a ng-click="signOut()">Sign Out</a></li>

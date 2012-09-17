@@ -6,6 +6,7 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
             $scope.loggedInUser = "";
 
             $scope.visibleLoggedInStyle = 'isHidden';
+            $scope.visibleLoggedOutStyle = 'isVisible';
         });
 
 
@@ -21,6 +22,7 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
         console.log("NavigationController:handleLogin()");
 
         $scope.visibleLoggedInStyle = 'isVisible';
+        $scope.visibleLoggedOutStyle = 'isHidden';
         $scope.loggedInUser = broadCastService.user;
 
     });
@@ -86,6 +88,7 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
         broadCastService.logoutUser();
         $scope.loggedInUser = "";
         $scope.visibleLoggedInStyle = "isHidden";
+        $scope.visibleLoggedOutStyle = 'isVisible';
     };
 
 }
