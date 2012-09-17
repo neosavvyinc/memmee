@@ -3,13 +3,13 @@
 
 
     <!-- Logged out Header -->
-    <form id="login" method="post" action="#" ng-controller="LoginController" ng-class="visibleLoggedOutStyle">
+    <form id="login" method="post" ng-controller="LoginController" ng-class="visibleLoggedOutStyle">
         <fieldset>
             <input type="text" id="email" name="email" ng-model="user.email" placeholder="Email Address"/>
             <input type="password" id="pwd" name="pwd" ng-model="user.password" placeholder="Password" />
         </fieldset>
         <fieldset>
-            <a href="#" class="btn login" ng-click="login()">Login</a>
+            <a class="btn login" ng-click="login()">Login</a>
         </fieldset>
     </form>
 

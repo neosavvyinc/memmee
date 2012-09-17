@@ -145,11 +145,11 @@ input.rounded{
     display: block;
     position: absolute;
     top: 0;
-    left: 400px;
+    right: 0px;
     height: 52px;
     padding: 0 8px;
     margin-right: 8px;
-    background: transparent url('../img/separator-login-form.png') center right no-repeat;
+    /*background: transparent url('../img/separator-login-form.png') center right no-repeat;*/
 }
 #login fieldset{
     display: inline-block;

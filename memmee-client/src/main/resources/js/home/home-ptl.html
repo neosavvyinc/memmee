@@ -2,22 +2,22 @@
     <div class="home-top">
         <span class="icon free">Free</span>
         <div class="memmee-carousel">
-            <a href="#" class="btn prev">Previous</a>
+            <a class="btn prev">Previous</a>
             <div class="memmee-carousel-item">
             </div>
-            <a href="#" class="btn next">Next</a>
+            <a class="btn next">Next</a>
         </div>
 
         <div class="signup stretched">
             <h2 class="signup-title">Sign Up Now</h2>
 
-            <form method="post" action="#">
+            <form method="post" ng-controller="RegistrationController">
                 <fieldset>
                     <label for="signup">Email address is all you need to get started</label>
-                    <input type="text" name="signup" value="Email Address" />
+                    <input type="text" name="signup" value="Email Address" ng-model="user.email"/>
                 </fieldset>
                 <fieldset>
-                    <a href="#" class="btn signup">Signup</a>
+                    <a class="btn signup" ng-click="register()">Signup</a>
                 </fieldset>
             </form>
         </div>
@@ -57,7 +57,7 @@
 
         <div class="signup sm" ng-controller="RegistrationController">
             <h2 class="signup-title">Sign up Now</h2>
-            <form id="signup" method="post" action="#">
+            <form id="signupLower" method="post" >
                 <p>Email address is all you need to get started</p>
                 <fieldset>
                     <input type="text" id="signup" name="signup" placeholder="Email Address" ng-model="user.email"/>
@@ -69,84 +69,3 @@
         </div>
     </div>
 </div>
-
-
-<!--<div id="content">-->
-
-    <!--<div class="memmee-card-top-home">-->
-        <!--<span class="memmee-date lg">Welcome to Memmee</span>-->
-    <!--</div>-->
-
-    <!--<div class="memmee-card-home" style="float: left;" ng-controller="RegistrationController">-->
-        <!--<span class="memmee-date lg">Register</span>-->
-        <!--<div style="padding: 100px 30px 30px 30px">-->
-
-            <!--<form>-->
-                <!--<span class="lg">Email Address is all you need:</span>-->
-
-                <!--<br/>-->
-                <!--<br/>-->
-
-                <!--<input type="text"-->
-                       <!--placeholder="Enter Your Email Address"-->
-                       <!--ng-model="user.email"-->
-                       <!--style="width: 50%"-->
-                        <!-->-->
-
-                <!--<br/>-->
-
-                <!--<div class="memmee-controls">-->
-                    <!--<a-->
-                        <!--ng-click="register()"-->
-                        <!--class="btn save">Sign Up »-->
-                    <!--</a>-->
-                <!--</div>-->
-            <!--</form>-->
-
-        <!--</div>-->
-
-    <!--</div>-->
-
-    <!--<div class="memmee-card-home" style="float: right;" ng-controller="LoginController">-->
-        <!--<span class="memmee-date lg">Login here</span>-->
-        <!--<div style="padding: 100px 30px 30px 30px">-->
-            <!--<form >-->
-                <!--<span class="lg">Login and capture some memmees!</span>-->
-
-                <!--<p class="error"-->
-                   <!--style="margin: auto auto 0 3px;"-->
-                   <!--ng-style="forgotPasswordSuccessStyle"-->
-                   <!--ng-show="forgotPasswordReminder != ''">{{forgotPasswordReminder}}</p>-->
-
-                <!--<br/>-->
-
-                <!--<input-->
-                        <!--type="text"-->
-                        <!--ng-model="user.email"-->
-                        <!--style="width: 50%"-->
-                        <!--placeholder="Username / Email Address">-->
-                <!--<br/>-->
-
-                <!--<input-->
-                        <!--type="password"-->
-                        <!--ng-model="user.password"-->
-                        <!--style="width: 50%"-->
-                        <!--placeholder="Password">-->
-                <!--<br/>-->
-
-                <!--<div class="memmee-controls">-->
-                    <!--<a-->
-                            <!--ng-click="login()"-->
-                            <!--class="btn save">-->
-                        <!--Login »-->
-                    <!--</a>-->
-                    <!--<a-->
-                            <!--ng-click="forgotPassword()"-->
-                            <!--class="btn cancel">-->
-                        <!--Forgot Password »-->
-                    <!--</a>-->
-                <!--</div>-->
-            <!--</form>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
