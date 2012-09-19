@@ -870,7 +870,7 @@ html.homepage{
 }
 .list.steps dd{
     margin-bottom: 8px;
-    font: italic 21px/18px 'Crimson Text', 'Times New Roman', Times, serif;
+    font: italic 14px/18px 'Crimson Text', 'Times New Roman', Times, serif;
     text-align: center;
 }
 .list.steps dd:last-child{
