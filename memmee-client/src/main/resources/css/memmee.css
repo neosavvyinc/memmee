@@ -456,6 +456,7 @@ html.homepage{
 .memmee-card.style-whimsy{
     width: 883px;
     height: 630px;
+    top: -35px;
     font: 22px/35px 'josefinslab', Arial, Helvetica, sans-serif;
     color: #513f48;
     background-image: url('../img/bg-card-whimsy.png');
@@ -463,6 +464,7 @@ html.homepage{
 .memmee-card.style-inspiration{
     width: 885px;
     height: 629px;
+    top: -35px;
     font: 22px/35px 'Josefin Sans', Arial, Helvetica, sans-serif;
     color: #407280;
     background-image: url('../img/bg-card-inspiration.png');
