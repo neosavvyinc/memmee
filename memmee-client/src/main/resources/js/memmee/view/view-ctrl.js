@@ -155,7 +155,7 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
     }
 
     $scope.getDisplayDate = function (memmee) {
-        if (memmee.displayDate != null) {
+        if (memmee && memmee.displayDate) {
             return MemmeeDateUtil.standardDate(new Date.parse(memmee.displayDate));
         }
         return null;

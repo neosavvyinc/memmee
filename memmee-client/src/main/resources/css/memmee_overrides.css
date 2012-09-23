@@ -50,6 +50,11 @@ table.calendar {
     display: inline-block;
 }
 
+.slideshow {
+    position: absolute;
+    width: 10000px;
+}
+
 .slidecard-date {
     cursor: pointer;
 }
