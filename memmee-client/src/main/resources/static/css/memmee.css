@@ -554,18 +554,20 @@ html.homepage{
 
 .memmee-controls{
     position: absolute;
-    bottom: 11px;
-    width: 100%;
-    height: 53px;
-    line-height: 53px;
+    bottom: 18px;
+    left: 45px;
+    width: 813px;
+    height: 51px;
+    line-height: 51px;
+    background: transparent url('../img/bg-memmee-controls.png') top left no-repeat;
 }
 
 .memmee-controls .controls{
     display: inline-block;
-    height: 53px;
-    font-size: 12px;
-    line-height: 53px;
+    height: inherit;
+    line-height: inherit;
     vertical-align: top;
+    font-size: 12px;
 }
 
 .controls .icon{
@@ -577,19 +579,23 @@ html.homepage{
 }
 
 .controls.styles{
-    width: 228px;
-    padding-left: 26px;
+    width: 186px;
+    padding: 0 30px 0 26px
 }
 
-.controls.styles .btn{
-    display: inline-block;
-    margin-right: 18px;
+.controls.styles .memmee-style.container{
+    display: none;
+     top: -20px;
+     left: -60px;
+}
+
+.controls.styles:hover .memmee-style.container{ /*Replace with JS*/
+    display: block;
 }
 
 .controls.photo{
-    width: 131px;
-    padding-left: 16px;
-    padding-right: 16px;
+    width: 145px;
+    padding: 0 20px;
     background: transparent url('../img/bg-control-photo.png') left center no-repeat;
 }
 
@@ -599,9 +605,9 @@ html.homepage{
 }
 
 .controls.io{
-    width: 412px;
+    width: 337px;
     position: relative;
-    padding-left: 10px;
+    padding: 0 24px 0 15px
 }
 
 .controls.io a{
@@ -615,13 +621,13 @@ html.homepage{
 }
 .controls.io .save{
     position: absolute;
-    top: 14px;
-    right: 90px;
+    top: 10px;
+    right: 110px;
 }
 .controls.io .cancel{
     position: absolute;
-    top: 17px;
-    right: 0;
+    top: 12px;
+    right: 20px;
 }
 
 .memmee-slideshow{
@@ -1139,6 +1145,7 @@ table.calendar{
 
 .link.addStyle{
     font-size: 16px;
+    line-height: 30px;
     margin-right: 14px;
     background: transparent url('../img/bg-link-photo.png') bottom left repeat-x;
 }
