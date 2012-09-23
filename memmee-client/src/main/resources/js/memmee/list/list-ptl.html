@@ -2,12 +2,12 @@
     <a class="btn prev">Previous</a>
 
 
-    <div class="slideshow-container">
+    <div class="slideshow-container" ng-init="initializeScrolling('.slideshow-container')">
         <p class="crimson" ng-show="(memmees == null || memmees.length == 0)">
             <a href="#create">You have no Memmees</a> Create a Memmee
         </p>
 
-        <div class="slideshow" ng-hide="(memmees == null || memmees.length == 0)">
+        <div class="slideshow items" ng-hide="(memmees == null || memmees.length == 0)">
             <div class="slidecard-container" ng-repeat="memmee in memmees">
                 <label ng-click="onMemmeeSelect(memmee)" class="slidecard-date opensans">{{getDisplayDate(memmee)}}</label>
                 <a ng-click="onMemmeeSelect(memmee)" ng-class="memmee.theme.listName" ng-bind-html-unsafe="memmee.text"></a>

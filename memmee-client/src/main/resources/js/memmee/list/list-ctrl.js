@@ -89,6 +89,10 @@ function ArchiveListController($scope, $http, broadCastService) {
         }
     };
 
+    $scope.initializeScrolling = function(clazz) {
+       $(clazz).scrollable();
+    }
+
     //Initialization
     $scope.getMemmees();
 }

@@ -14,7 +14,7 @@ function BubblesController($scope, $http, broadCastService, $location) {
         $scope.newUserCreateModeStyle = {
             'top':"270px",
             'left':((window.innerWidth / 2) + 185).toString() + "px"};
-        $scope.$apply();
+        //$scope.$apply();
     }
 
     //Listeners
