@@ -1192,21 +1192,35 @@ table.calendar{
     background-repeat: no-repeat;
 }
 
+.btn.newMemmee, .btn.viewMemmee {
+    color: #2B231D;
+    text-decoration: none;
+    font-weight: bold;
+    text-indent: 55px;
+    line-height: 40px;
+    display: block;
+    font: 14px/40px 'Crimson Text', 'Times New Roman', Times, serif;
+}
+
+.btn.newMemmee:hover, .btn.newMemmee.active, .btn.viewMemmee:hover {
+    color: #A1A7A5;
+}
+
 .btn.newMemmee{
     width: 165px;
     height: 51px;
-    background-position: 0px 0px;
+    background-position: -330px -925px;
 }
 .btn.newMemmee:hover, .btn.newMemmee.active{
-    background-position: -165px 0;
+    background-position: -504px -926px;
 }
 .btn.viewMemmee{
     width: 173px;
     height: 51px;
-    background-position: -330px 0;
+    background-position: -330px -925px;
 }
 .btn.viewMemmee:hover{
-    background-position: -504px -1px;
+    background-position: -504px -926px;
 }
 .btn.close{
     width: 64px;
