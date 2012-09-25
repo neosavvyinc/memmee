@@ -1287,20 +1287,22 @@ table.calendar{
     background-position: -120px -646px;
 }
 .btn.save{
+    text-indent: 0;
     width: 81px;
     height: 34px;
-    background-position: -1px -305px;
+    background-position: -1px -1231px;
 }
 .btn.save:hover{
-    background-position: -82px -305px;
+    background-position: -82px -1231px;
 }
 .btn.cancel{
+    text-indent: 0;
     width: 82px;
     height: 29px;
-    background-position: 0 -338px;
+    background-position: 0 -1231px;
 }
 .btn.cancel:hover{
-    background-position: -82px -338px;
+    background-position: -82px -1231px;
 }
 .btn.prev{
     width: 30px;
