@@ -202,6 +202,7 @@ input.rounded{
     margin-bottom: 4px;
 }
 .memmee-carousel .btn.prev{
+    text-indent: -100000px;
     width: 35px;
     height: 36px;
     position: absolute;
@@ -213,6 +214,7 @@ input.rounded{
     background-position: 0 -880px;
 }
 .memmee-carousel .btn.next{
+    text-indent: -100000px;
     width: 33px;
     height: 34px;
     position: absolute;
@@ -977,7 +979,7 @@ html.homepage{
     height: 10px;
     line-height: 10px;
 }
-.controls.calendar. .btn.prevMonth{
+.controls.calendar .btn.prevMonth{
     position: absolute;
 }
 .controls.calendar .btn.nextMonth{
@@ -1223,6 +1225,7 @@ table.calendar{
     background-position: -504px -926px;
 }
 .btn.close{
+    text-indent: -100000px;
     width: 64px;
     height: 21px;
     background-position: 0 -52px;
@@ -1231,6 +1234,7 @@ table.calendar{
     background-position: -65px -52px;
 }
 .btn.prev-arrow{
+    text-indent: -100000px;
     width: 51px;
     height: 19px;
     background-position: 0 -73px;
@@ -1239,6 +1243,7 @@ table.calendar{
     background-position: -51px -73px;
 }
 .btn.next-arrow{
+    text-indent: -100000px;
     width: 51px;
     height: 20px;
     background-position: 0 -93px;
@@ -1287,7 +1292,13 @@ table.calendar{
     background-position: -120px -646px;
 }
 .btn.save{
-    text-indent: 0;
+    color: #4E5F61;
+    text-decoration: none;
+    font-weight: bold;
+    text-indent: 25px;
+    line-height: 40px;
+    display: block;
+    font: 14px/35px 'Crimson Text', 'Times New Roman', Times, serif;
     width: 81px;
     height: 34px;
     background-position: -1px -1231px;
@@ -1296,7 +1307,13 @@ table.calendar{
     background-position: -82px -1231px;
 }
 .btn.cancel{
-    text-indent: 0;
+    color: #4E5F61;
+    text-decoration: none;
+    font-weight: bold;
+    text-indent: 25px;
+    line-height: 40px;
+    display: block;
+    font: 14px/32px 'Crimson Text', 'Times New Roman', Times, serif;
     width: 82px;
     height: 29px;
     background-position: 0 -1231px;
@@ -1305,11 +1322,13 @@ table.calendar{
     background-position: -82px -1231px;
 }
 .btn.prev{
+    text-indent: -100000px;
     width: 30px;
     height: 30px;
     background-position: 0 -368px;
 }
 .btn.next{
+    text-indent: -100000px;
     width: 30px;
     height: 30px;
     background-position: 0 -398px;
@@ -1351,6 +1370,7 @@ table.calendar{
     background-position: -13px -520px;
 }
 .btn.share{
+    text-indent: -100000px;
     width: 119px;
     height: 27px;
     background-position: 0 -492px;
@@ -1359,6 +1379,7 @@ table.calendar{
     background-position: -120px -492px;
 }
 .btn.trash{
+    text-indent: -100000px;
     width: 16px;
     height: 32px;
     background-position: 0 -568px;
@@ -1367,11 +1388,13 @@ table.calendar{
     background-position: -22px -568px;
 }
 .btn.prevMonth{
+    text-indent: -100000px;
     width: 10px;
     height: 10px;
     background-position: 0 -611px;
 }
 .btn.nextMonth{
+    text-indent: -100000px;
     width: 10px;
     height: 10px;
     background-position: -10px -611px;
