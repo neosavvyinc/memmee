@@ -1281,7 +1281,7 @@ table.calendar{
     text-indent: 55px;
     line-height: 40px;
     display: block;
-    font: 14px/40px 'Crimson Text', 'Times New Roman', Times, serif;
+    font: 14px/10px 'Crimson Text', 'Times New Roman', Times, serif;
 }
 
 .btn.newMemmee:hover, .btn.newMemmee.active, .btn.viewMemmee:hover {
@@ -1514,6 +1514,16 @@ table.calendar{
     width: 23px;
     height: 19px;
     background-position: 0 -243px;
+}
+.icon.magnifying{
+    width: 23px;
+    height: 19px;
+    background-position: 0 -1632px;
+}
+.icon.pen{
+    width: 23px;
+    height: 19px;
+    background-position: -26px -1632px;
 }
 .icon.today{
     width: 20px;

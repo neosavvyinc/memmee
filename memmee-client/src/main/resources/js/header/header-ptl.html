@@ -16,8 +16,8 @@
 
     <!-- Logged in Header -->
     <ul id="primaryNav" class="clearfix" ng-class="visibleLoggedInStyle">
-        <li ng-show="isCreateMode() || isProfileMode()"><a ng-click="viewModeClicked()" title="View Memmee" class="btn viewMemmee">View Memmee</a></li>
-        <li ng-show="!isCreateMode() || isProfileMode()"><a ng-click="createModeClicked()" title="New Memmee" class="btn newMemmee">New Memmee</a></li>
+        <li ng-show="isCreateMode() || isProfileMode()"><a ng-click="viewModeClicked()" title="View Memmee" class="btn viewMemmee"><span class="icon magnifying"></span>View Memmee</a></li>
+        <li ng-show="!isCreateMode() || isProfileMode()"><a ng-click="createModeClicked()" title="New Memmee" class="btn newMemmee"><span class="icon pen"></span>New Memmee</a></li>
         <li ng-show="loggedInUser.firstName || loggedInUser.lastName">
             <a ng-click="toggleSettingsDropdown()" class="link more crimson">{{loggedInUser.firstName}} {{loggedInUser.lastName}}</a>
         </li>
