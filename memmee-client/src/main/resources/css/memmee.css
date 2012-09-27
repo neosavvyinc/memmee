@@ -1435,14 +1435,22 @@ table.calendar{
     position: absolute;
 }
 .btn.delete{
+    color: #4E5F61;
+    text-decoration: none;
+    font-weight: bold;
+    text-indent: 25px;
+    line-height: 40px;
+    display: block;
+    font: 14px/32px 'Crimson Text', 'Times New Roman', Times, serif;
     width: 81px;
     height: 34px;
-    background-position: 0 -534px;
+    background-position: 0 -1461px;
 }
 .btn.delete:hover{
-    background-position: -81px -534px;
+    background-position: -81px -1461px;
 }
 .btn.modal-ext{
+    text-decoration: none;
     width: 13px;
     height: 13px;
     background-position: 0 -520px;
