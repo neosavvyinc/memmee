@@ -87,7 +87,7 @@ function AlertsController($scope, $http, broadCastService, $location) {
     $scope.$on(ViewModeControllerEvents.get('CONFIRM_DELETE'), function() {
         $scope.showDiscardAlert = true;
         $scope.promptingEvent = ViewModeControllerEvents.get('CONFIRM_DELETE');
-        $scope.showYesNoAlert(Notifications.get('DELETE_MEMMEE_HEADER'), Notifications.get('DELETE_MEMMEE_MESSAGE'), "Delete", "Cancel");
+        $scope.showYesNoAlert(Notifications.get('DELETE_MEMMEE_HEADER'), Notifications.get('DELETE_MEMMEE_MESSAGE'), "Delete", "Keep");
     });
     $scope.onDeleteClick = function() {
 

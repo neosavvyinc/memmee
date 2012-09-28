@@ -1458,12 +1458,13 @@ table.calendar{
 .btn.delete{
     width: 81px;
     height: 34px;
-    background-position: 0 -534px;
+    background-position: 0 -1461px;
 }
 .btn.delete:hover{
-    background-position: -81px -534px;
+    background-position: -81px -1461px;
 }
 .btn.modal-ext{
+    text-decoration: none;
     width: 13px;
     height: 13px;
     background-position: 0 -520px;
