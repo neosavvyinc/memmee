@@ -785,19 +785,21 @@ html.homepage{
 }
 
 .memmee-create-heading{
+    text-decoration: none;
     position: absolute;
     top: 36px;
     left: 60px;
     width: 715px;
     height: 19px;
     background: transparent url('../img/sprite-ui.png') 0 -428px no-repeat;
-    text-indent: -100000000px;
+    text-indent: -90000px;
 }
 
 .memmee-card .btn.inspiration{
     position: absolute;
     top: 18px;
     right: -30px;
+    text-indent: 0px;
     -moz-transform: rotate(-1deg);
     -webkit-transform: rotate(-1deg);
     -ms-trasform: rotate(-1deg);
@@ -1310,6 +1312,8 @@ table.calendar{
 }
 
 .btn.newMemmee{
+    position: relative;
+    line-height: 38px;
     width: 165px;
     height: 51px;
     background-position: -330px 0px;
@@ -1318,6 +1322,8 @@ table.calendar{
     background-position: -504px 0px;
 }
 .btn.viewMemmee{
+    position: relative;
+    line-height: 38px;
     width: 173px;
     height: 51px;
     background-position: -330px 0px;
@@ -1465,10 +1471,10 @@ table.calendar{
     font: 14px/32px 'Crimson Text', 'Times New Roman', Times, serif;
     width: 81px;
     height: 34px;
-    background-position: 0 -1461px;
+    background-position: 0 -534px;
 }
 .btn.delete:hover{
-    background-position: -81px -1461px;
+    background-position: -81px -534px;
 }
 .btn.modal-ext{
     text-decoration: none;
@@ -1480,7 +1486,12 @@ table.calendar{
     background-position: -13px -520px;
 }
 .btn.share{
-    text-indent: -100000px;
+    color: #4E5F61;
+    text-decoration: none;
+    font-weight: bold;
+    text-indent: 25px;
+    display: block;
+    font: 14px/32px 'Crimson Text', 'Times New Roman', Times, serif;
     width: 119px;
     height: 27px;
     background-position: 0 -492px;
@@ -1537,11 +1548,17 @@ table.calendar{
     background-position: 0 -243px;
 }
 .icon.magnifying{
+    position: absolute;
+    top: 8px;
+    left: 16px;
     width: 29px;
     height: 26px;
     background-position: 0 -980px;
 }
 .icon.pen{
+    position: absolute;
+    top: 8px;
+    left: 16px;
     width: 29px;
     height: 26px;
     background-position: 0px -953px;
