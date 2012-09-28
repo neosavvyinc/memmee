@@ -436,6 +436,27 @@ input.rounded{
 }
 
 /*END HOMEPAGE*/
+
+/*BLOG*/
+.blog #content{
+    width: 875px;
+
+}
+.blog-col{
+    float: left;
+}
+.blog-col.left{
+    width: 200px;
+}
+
+.blog-col.center{
+    width: 475px;
+}
+
+.blog-col.right{
+    width: 200px;
+}
+
 .clearfix:after {
     content: ".";
     display: block;
