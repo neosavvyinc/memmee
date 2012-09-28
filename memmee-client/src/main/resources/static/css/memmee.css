@@ -457,6 +457,41 @@ input.rounded{
     width: 200px;
 }
 
+.blogpage #header{display: none;}
+
+.blog-nav a{
+    display: block;
+    width: 162px;
+    height: 39px;
+    margin-bottom: 9px;
+    padding-left: 15px;
+    font: 18px/39px 'Crimson Text', 'Times New Roman', Times, Serif;
+    text-decoration: none;
+    color: #323435;
+    background: transparent url('../img/blog-sprite-ui.png') top left no-repeat;
+}
+
+.blog-nav a.selected{
+   width: 193px;
+   background-position: 0 -40px;
+}
+
+.blog-post.lg{
+    width: 478px;
+    min-height: 50px;
+    margin-bottom: 20px;
+}
+.blog-post.lg .tape{
+    display: block;
+    width: 104px;
+    height: 30px;
+    margin: 0 auto;
+    background: transparent url('../img/blog-sprite-ui.png') 0 -349px no-repeat;
+}
+.blog-post.lg .post-copy{
+
+}
+
 .clearfix:after {
     content: ".";
     display: block;
