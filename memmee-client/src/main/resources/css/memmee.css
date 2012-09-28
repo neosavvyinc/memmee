@@ -1312,18 +1312,18 @@ table.calendar{
 .btn.newMemmee{
     width: 165px;
     height: 51px;
-    background-position: -330px -925px;
+    background-position: -330px 0px;
 }
 .btn.newMemmee:hover, .btn.newMemmee.active{
-    background-position: -504px -926px;
+    background-position: -504px 0px;
 }
 .btn.viewMemmee{
     width: 173px;
     height: 51px;
-    background-position: -330px -925px;
+    background-position: -330px 0px;
 }
 .btn.viewMemmee:hover{
-    background-position: -504px -926px;
+    background-position: -504px 0px;
 }
 .btn.close{
     text-indent: -100000px;
@@ -1537,14 +1537,14 @@ table.calendar{
     background-position: 0 -243px;
 }
 .icon.magnifying{
-    width: 23px;
-    height: 19px;
-    background-position: 0 -1632px;
+    width: 29px;
+    height: 26px;
+    background-position: 0 -980px;
 }
 .icon.pen{
-    width: 23px;
-    height: 19px;
-    background-position: -26px -1632px;
+    width: 29px;
+    height: 26px;
+    background-position: 0px -953px;
 }
 .icon.today{
     width: 20px;
