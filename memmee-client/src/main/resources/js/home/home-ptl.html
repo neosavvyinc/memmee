@@ -1,30 +1,35 @@
 <div id="content">
     <div class="home-top">
-        <span class="icon free">Free</span>
         <div class="memmee-carousel">
-            <a class="btn prev">Previous</a>
-            <div class="memmee-carousel-item">
+            <a href="#" class="btn prev">Previous</a>
+            <div class="memmee-carousel-item clearfix">
+                <dl class="memmee-pts crison">
+                    <dt>memmee:</dt>
+                    <dd class="memmee-pt-1">can keep a secret</dd>
+                    <dd class="memmee-pt-2">is an afternoon pick-me-up</dd>
+                    <dd class="memmee-pt-3">is a way to blow off steam</dd>
+                    <dd class="memmee-pt-4">doesn't care if you're messy</dd>
+                    <dd class="memmee-pt-5">will make you laugh out loud</dd>
+                </dl>
+
+                <div class="signup sm">
+                    <h2 class="signup-title">Sign Up Now</h2>
+                    <form method="post" ng-controller="RegistrationController">
+                        <p>email address is all you need to get started</p>
+                        <fieldset>
+                            <input type="text" name="signup" value="Email Address" ng-model="user.email"/>
+                        </fieldset>
+                        <fieldset>
+                            <a class="btn signup" ng-click="register()">Signup</a>
+                        </fieldset>
+                    </form>
+                </div>
             </div>
-            <a class="btn next">Next</a>
-        </div>
-
-        <div class="signup stretched">
-            <h2 class="signup-title">Sign Up Now</h2>
-
-            <form method="post" ng-controller="RegistrationController">
-                <fieldset>
-                    <label for="signup">Email address is all you need to get started</label>
-                    <input type="text" name="signup" value="Email Address" ng-model="user.email"/>
-                </fieldset>
-                <fieldset>
-                    <a class="btn signup" ng-click="register()">Signup</a>
-                </fieldset>
-            </form>
+            <a href="#" class="btn next">Next</a>
         </div>
     </div>
 
     <div class="home-btm">
-        <span class="icon free"></span>
         <div class="memmee-beforeAfter clearfix">
             <div class="memmee-before">
                 <h3>Before Memmee</h3>
@@ -34,38 +39,38 @@
             </div>
         </div>
 
-        <div class="postcard">
+        <div class="blog-container">
+            <div class="blog">
+                <h2 class="title-blog">blog</h2>
 
-        </div>
-
-        <div class="callout clearfix">
-            <div class="announce">
-                <span class="announce-date">May 29, 2012</span>
-                <dl class="announce-list">
-                    <dt>News Title Goes Here</dt>
-                    <dd>Xerspera tecepuditium quiatur siti sedit quam, volor reicabo rrovidebis porest, quodiam quis et, numqui volecti stionseri ut debis doles am et faceri optae lam harum corem fugit, intotat. </dd>
-                </dl>
+                <div class="blog-post">
+                    <span class="post-date">09.29,2012</span>
+                    <dl class="blog-list">
+                        <dt>hello world</dt>
+                        <dd>well, we made it. it's the first memmee blog post which means it's time for us to forget forgetting, to remember remembering, and to celebrate the little things that add up to a life worth living.</dd>
+                    </dl>
+                </div>
+                <div class="blog-post">
+                    <span class="post-date">09.29,2012</span>
+                    <dl class="blog-list">
+                        <dt>hello world</dt>
+                        <dd>Person Who Remotely Cares About My State of Being says: "Hey, what's shakin?" Me: "Nothing much. Same old, same old" STOP THE MADNESS????</dd>
+                    </dl>
+                </div>
             </div>
-            <div class="announce">
-                <span class="announce-date">Sept 21, 2012</span>
-                <dl class="announce-list">
-                    <dt>News Title Goes Here</dt>
-                    <dd>Xerspera tecepuditium quiatur siti sedit quam, volor reicabo rrovidebis porest, quodiam quis et, numqui volecti stionseri ut debis doles am et faceri optae lam harum corem fugit, intotat. </dd>
-                </dl>
-            </div>
-        </div>
 
-        <div class="signup sm" ng-controller="RegistrationController">
-            <h2 class="signup-title">Sign up Now</h2>
-            <form id="signupLower" method="post" >
-                <p>Email address is all you need to get started</p>
-                <fieldset>
-                    <input type="text" id="signup" name="signup" placeholder="Email Address" ng-model="user.email"/>
-                </fieldset>
-                <fieldset>
-                    <a class="btn signup" ng-click="register()">Signup</a>
-                </fieldset>
-            </form>
+            <div class="signup sm" ng-controller="RegistrationController">
+                <h2 class="signup-title">Sign up Now</h2>
+                <form id="signupLower" method="post" >
+                    <p>Email address is all you need to get started</p>
+                    <fieldset>
+                        <input type="text" id="signup" name="signup" placeholder="Email Address" ng-model="user.email"/>
+                    </fieldset>
+                    <fieldset>
+                        <a class="btn signup" ng-click="register()">Signup</a>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
 </div>
