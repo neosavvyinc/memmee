@@ -1402,10 +1402,10 @@ table.calendar{
     font: 14px/35px 'Crimson Text', 'Times New Roman', Times, serif;
     width: 81px;
     height: 34px;
-    background-position: -1px -1231px;
+    background-position: -1px -303px;
 }
 .btn.save:hover{
-    background-position: -82px -1231px;
+    background-position: -82px -303px;
 }
 .btn.cancel{
     color: #4E5F61;
@@ -1417,10 +1417,10 @@ table.calendar{
     font: 14px/32px 'Crimson Text', 'Times New Roman', Times, serif;
     width: 82px;
     height: 29px;
-    background-position: 0 -1231px;
+    background-position: 0 -340px;
 }
 .btn.cancel:hover{
-    background-position: -82px -1231px;
+    background-position: -82px -340px;
 }
 .btn.prev{
     text-indent: -100000px;
