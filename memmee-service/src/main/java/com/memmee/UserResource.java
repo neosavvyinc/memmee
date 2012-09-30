@@ -100,10 +100,24 @@ public class UserResource {
         }
 
         try {
-            passwordDao.update(
-                    user.getPassword().getId(),
-                    passwordGenerator.encrypt(user.getPassword().getValue()),
-                    0);
+
+            if( userLookup.getPassword().getId() > -1L )
+            {
+                passwordDao.update(
+                        userLookup.getPassword().getId(),
+                        passwordGenerator.encrypt(user.getPassword().getValue()),
+                        0);
+            }
+            else
+            {
+                Long newPassId = passwordDao.insert(
+                        passwordGenerator.encrypt(user.getPassword().getValue()),
+                        0);
+
+                user.getPassword().setId(newPassId);
+            }
+
+
             userDao.update(
                     id,
                     user.getFirstName(),
@@ -150,7 +164,7 @@ public class UserResource {
                 memmeeMailSender.sendConfirmationEmail(user);
                 Long userId = userDao.insert(user.getFirstName(),
                         user.getEmail(),
-                        null,
+                        -1L,
                         user.getApiKey(),
                         new Date(),
                         new Date(),

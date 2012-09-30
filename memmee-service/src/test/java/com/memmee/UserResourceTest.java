@@ -41,6 +41,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
         //add resources
         MemmeeUrlConfiguration mockMemmeeConfiguration = mock(MemmeeUrlConfiguration.class);
+        mockMemmeeConfiguration.setActiveEmailAddress("test-cases@nowhere.com");
         addResource(new UserResource(userDAO, passwordDAO, passwordGenerator, memmeeMailSender, mockMemmeeConfiguration));
     }
 
@@ -61,12 +62,33 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
     @Test
     public void testLoginUser() {
-        insertTestData();
+//        insertTestData();
 
+        User testUser = new User();
+        testUser.setEmail("waparrish@gmail.com");
+
+        //Add the user as if they are signing up
+        testUser = client().resource(new MemmeeURLBuilder()
+                .setBaseURL(UserResource.BASE_URL)
+                .setMethodURL("user")
+                .build()).post(User.class, testUser);
+
+
+        //Update their profile as if they clicked profile
+        testUser.setPassword(new Password());
+        testUser.getPassword().setValue("newValue");
+        client().resource(new MemmeeURLBuilder()
+                .setBaseURL(UserResource.BASE_URL)
+                .setMethodURL("user/" + testUser.getId())
+                .setApiKeyParam(testUser.getApiKey())
+                .build()).put(testUser);
+
+
+        //Attempt to sign them in
         User user = client().resource(new MemmeeURLBuilder().
                 setBaseURL(UserResource.BASE_URL).
                 setMethodURL("user/login").
-                build()).post(User.class, new User("Adam", "trevorewen@gmail.com", new Password("abc123")));
+                build()).post(User.class, new User("Adam", "waparrish@gmail.com", new Password("newValue")));
 
         assertThat(user, is(not(nullValue())));
         assertThat(user.getPassword(), is(not(nullValue())));

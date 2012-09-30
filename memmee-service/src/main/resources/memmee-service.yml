@@ -56,3 +56,16 @@ database:
 
   # the maximum lifetime of an idle connection
   closeConnectionIfIdleFor: 1 minute
+
+logging:
+
+  loggers:
+    "com.memmee.UserResource": INFO
+
+    "com.memmee.domain.attachment.dao.TransactionalAttachmentDAO": TRACE
+    "com.memmee.domain.inspirationcategories.dao.TransactionalInspirationCategoryDAO": TRACE
+    "com.memmee.domain.inspirations.dao.TransactionalInspirationDAO": TRACE
+    "com.memmee.domain.memmees.dao.TransactionalMemmeeDAO": TRACE
+    "com.memmee.domain.password.dao.TransactionalPasswordDAO": TRACE
+    "com.memmee.theme.dao.TransactionalThemeDAO": TRACE
+    "com.yammer.dropwizard.db.Database": TRACE
