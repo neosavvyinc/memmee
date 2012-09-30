@@ -454,10 +454,10 @@ input.rounded{
 }
 
 .blog-col.right{
-    width: 200px;
+    width: 175px;
+    padding-left: 25px;
+    background: transparent url('../img/lines-blog-col.png') 25px 0 no-repeat;
 }
-
-.blogpage #header{display: none;}
 
 .blog-nav a{
     display: block;
@@ -480,6 +480,7 @@ input.rounded{
     width: 478px;
     min-height: 50px;
     margin-bottom: 20px;
+    background: transparent url('../img/bg-blog-post-lg.png') top left repeat-y;
 }
 .blog-post.lg .tape{
     display: block;
@@ -488,8 +489,47 @@ input.rounded{
     margin: 0 auto;
     background: transparent url('../img/blog-sprite-ui.png') 0 -349px no-repeat;
 }
+.blog-post.lg .post-content{
+    position: relative;
+    bottom: -4px;
+    height: inherit;
+    margin-right: 5px;
+    padding: 0 20px 34px;
+    background: transparent url('../img/bg-blog-post-lg-content.png') bottom left repeat-x;
+}
+.blog-post.lg .post-img{
+    display: block;
+    margin: 20px 0;
+}
 .blog-post.lg .post-copy{
+    font: 14px/20px 'Crimson Text', 'Times New Roman', Times, Serif;
+    color: #323435;
+    margin-bottom: 25px;
+}
+.blog-post.lg .link.more{
+    display: block;
+}
 
+.section.blog{
+    display: block;
+    width: 162px;
+    padding: 25px 0;
+    background: transparent url('../img/lines-blog-col.png') bottom left no-repeat;
+}
+.section.blog dt{
+    display: block;
+    margin-bottom: 33px;
+    font: bold 10px/12px 'opensans', Helvetica, arial, sans-serif;
+    color: #d44e3c;
+}
+.section.blog dd{
+    display: block;
+    margin-bottom: 4px;
+    font: 12px/15px 'Crimson', 'Times New Roman', Times, serif;
+}
+.section.blog a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .clearfix:after {
@@ -514,6 +554,10 @@ html.homepage{
     min-height: 1800px;
     background: transparent url('../img/bg-homepage.jpg') top left repeat-x;
 }
+html.blogpage{
+    background-color: white;
+    background-image: none;
+}
 
 #container {
     width: 967px;
@@ -528,6 +572,11 @@ html.homepage{
     margin-bottom: 40px;
     /*padding: 0 50px;*/
     line-height: 60px;
+}
+.blogpage #header .btn.join{
+    position: absolute;
+    top: 12px;
+    right: 0;
 }
 
 #primaryNav{
@@ -1273,6 +1322,7 @@ table.calendar{
     font-style: italic;
     line-height: 12px;
     color: #70706f;
+    background: transparent;
 }
 
 .link.addStyle{
@@ -1546,6 +1596,16 @@ table.calendar{
     width: 12px;
     height: 12px;
     background-position: -12px -676px;
+}
+.btn.join{
+    width: 79px;
+    height: 30px;
+    font: bold 12px/33px 'Crimson Text', 'Times New Roman', Times, Serif;
+    text-align: center;
+    text-decoration: none;
+    color: #3d4d4f;
+    background-image: url('../img/blog-sprite-ui.png');
+    background-position: 0 -381px;
 }
 
 .icon {
