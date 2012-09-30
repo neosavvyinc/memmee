@@ -125,12 +125,14 @@ input.rounded{
 
 /*HOMEPAGE*/
 .btn.login{
+    text-indent: -9000px;
     width: 79px;
     height: 30px;
     line-height: 29px;
     background-position: -164px -338px;
 }
 .btn.signup{
+    text-indent: -9000px;
     width: 79px;
     height: 30px;
     line-height: 29px;

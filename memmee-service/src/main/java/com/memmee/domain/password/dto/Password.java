@@ -15,6 +15,7 @@ public class Password implements Serializable {
 
     public Password() {
         super();
+        this.id = -1L;
     }
 
     public Password(String value) {
