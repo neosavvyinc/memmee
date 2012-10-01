@@ -89,7 +89,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
                 broadCastService.selectedMemmee = data;
 
                 //Broadcasts Create Event
-                broadCastService.memmeeCreatedCreateModeController();
+                broadCastService.memmeeCreatedCreateModeController(broadCastService.selectedMemmee);
 
                 //Legacy Event, references will be removed
                 broadCastService.createModeCancelledCreateModeController();
