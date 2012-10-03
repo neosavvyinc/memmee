@@ -8,12 +8,16 @@
         </p>
 
         <div class="slideshow items" ng-hide="(memmees == null || memmees.length == 0)">
-            <div class="slidecard-container" ng-repeat="memmee in memmees">
-                <label ng-click="onMemmeeSelect(memmee)" class="slidecard-date opensans">{{getDisplayDate(memmee)}}</label>
-                <a ng-click="onMemmeeSelect(memmee)" ng-class="memmee.theme.listName" ng-bind-html-unsafe="memmee.text"></a>
+            <div ng-repeat="memmeeSet in memmeeSets" class="inline-block">
+                <div class="slidecard-container" ng-repeat="memmee in memmeeSet">
+                    <label ng-click="onMemmeeSelect(memmee)"
+                           class="slidecard-date opensans">{{getDisplayDate(memmee)}}</label>
+                    <a ng-click="onMemmeeSelect(memmee)" ng-class="memmee.theme.listName"
+                       ng-bind-html-unsafe="memmee.text"></a>
+                </div>
             </div>
         </div>
     </div>
 
-    <a  class="btn next">Next</a>
+    <a class="btn next">Next</a>
 </div>
