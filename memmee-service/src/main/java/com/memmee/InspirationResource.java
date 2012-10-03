@@ -38,26 +38,38 @@ public class InspirationResource extends BaseResource {
     @GET
     @Path("/getnextinspiration")
     @Produces({MediaType.APPLICATION_JSON})
-    public Inspiration getNextInspiration(@QueryParam("apiKey") String apiKey, @QueryParam("currentId") Long currentId) {
+    public Inspiration getNextInspiration(@QueryParam("apiKey") String apiKey, @QueryParam("startingId") Long startingId, @QueryParam("currentId") Long currentId) {
         validateAccess(apiKey);
+        Inspiration startingInspiration = inspirationDAO.getInspiration(startingId);
         Inspiration givenInspiration = inspirationDAO.getInspiration(currentId);
         Inspiration returnInspiration = inspirationDAO.getInspirationForInspirationCategoryAndIndex(givenInspiration.getInspirationCategory().getId(), givenInspiration.getInspirationCategoryIndex() + 1);
-        return nextInspiration(givenInspiration, returnInspiration);
+
+        if (returnInspiration == null)
+            returnInspiration = inspirationDAO.getInspirationForInspirationCategoryAndIndex(givenInspiration.getInspirationCategory().getId(), Long.parseLong("0"));
+
+        return nextInspiration(startingInspiration, givenInspiration, returnInspiration);
     }
 
 
     @GET
     @Path("/getpreviousinspiration")
     @Produces({MediaType.APPLICATION_JSON})
-    public Inspiration getPreviousInspiration(@QueryParam("apiKey") String apiKey, @QueryParam("currentId") Long currentId) {
+    public Inspiration getPreviousInspiration(@QueryParam("apiKey") String apiKey, @QueryParam("startingId") Long startingId, @QueryParam("currentId") Long currentId) {
         validateAccess(apiKey);
+        Inspiration startingInspiration = inspirationDAO.getInspiration(startingId);
         Inspiration givenInspiration = inspirationDAO.getInspiration(currentId);
         Inspiration returnInspiration = inspirationDAO.getInspirationForInspirationCategoryAndIndex(givenInspiration.getInspirationCategory().getId(), givenInspiration.getInspirationCategoryIndex() - 1);
-        return previousInspiration(givenInspiration, returnInspiration);
+
+        if (returnInspiration == null) {
+            Long highestInspirationId = inspirationDAO.getHighestInspirationForCategory(givenInspiration.getInspirationCategory().getId()).getId();
+            returnInspiration = inspirationDAO.getInspiration(highestInspirationId);
+        }
+
+        return previousInspiration(startingInspiration, givenInspiration, returnInspiration);
     }
 
-    protected Inspiration nextInspiration(Inspiration givenInspiration, Inspiration returnInspiration) {
-        if (returnInspiration == null) {
+    protected Inspiration nextInspiration(Inspiration startingInspiration, Inspiration givenInspiration, Inspiration returnInspiration) {
+        if (returnInspiration.equals(startingInspiration)) {
             InspirationCategory nextInspirationCategory = inspirationCategoryDAO.getInspirationCategoryByIndex(givenInspiration.getInspirationCategory().getIndex() + 1);
             if (nextInspirationCategory == null) {
                 nextInspirationCategory = inspirationCategoryDAO.getInspirationCategoryByIndex(Long.parseLong("0"));
@@ -67,8 +79,8 @@ public class InspirationResource extends BaseResource {
         return returnInspiration;
     }
 
-    protected Inspiration previousInspiration(Inspiration givenInspiration, Inspiration returnInspiration) {
-        if (returnInspiration == null) {
+    protected Inspiration previousInspiration(Inspiration startingInspiration, Inspiration givenInspiration, Inspiration returnInspiration) {
+        if (returnInspiration.equals(startingInspiration)) {
             InspirationCategory previousInspirationCategory = inspirationCategoryDAO.getInspirationCategoryByIndex(givenInspiration.getInspirationCategory().getIndex() - 1);
             if (previousInspirationCategory == null) {
                 previousInspirationCategory = inspirationCategoryDAO.getHighestInspirationCategory();
