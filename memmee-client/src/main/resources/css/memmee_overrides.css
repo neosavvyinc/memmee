@@ -1,3 +1,9 @@
+/*GENERAL*/
+.inline-block {
+    display: inline-block;
+}
+
+/*CONTENT*/
 .memmee-text {
     left: 130px;
 }
