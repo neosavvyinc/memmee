@@ -1024,8 +1024,10 @@ html.homepage{
 }
 .memmee-style.dropdown a{
     color: #476579;
-    display: block;
     text-decoration: none;
+}
+.dropdown.user a{
+    display: block;
 }
 .memmee-style.dropdown .btn{
     display: inline-block;
@@ -1296,6 +1298,7 @@ table.calendar{
     display: block;
     text-indent: -100000000px;
     cursor: pointer;
+    text-transform: lowercase;
     background-image: url('../img/sprite-ui.png');
     background-repeat: no-repeat;
 }
