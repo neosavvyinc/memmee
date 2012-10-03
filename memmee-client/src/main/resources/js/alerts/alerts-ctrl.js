@@ -98,7 +98,7 @@ function AlertsController($scope, $http, broadCastService, $location) {
         var shareUrl = $location.protocol() + "://" + $location.host() + "/#/share?shareKey=" + message[0].shareKey;
         console.log("location:::" + shareUrl);
         $scope.showAlert("copy and paste the link below to share.",
-            "(don't worry, your other memmees will remain private)<br><br>"+shareUrl );
+            "(don't worry, your other memmees will remain private.)<br><br>"+shareUrl );
     });
 
     //Initialization
