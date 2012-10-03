@@ -7,41 +7,41 @@
             <h1 class="title-form memmee-date lg">Complete Your Profile</h1>
             <form method="post" action="url">
                 <fieldset>
-                    <label for="name">Name</label>
+                    <label for="name" class="lowercase">Name</label>
                     <input type="text"
                            id="name"
                            name="name"
-                           placeholder="First Name"
+                           placeholder="first name"
                            ng-model="user.firstName"
                             >
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
                 <fieldset>
-                    <label for="email">Email Address</label>
+                    <label for="email" class="lowercase">Email Address</label>
                     <input type="text"
                            id="email"
                            name="email"
-                           placeholder="Email Address"
+                           placeholder="email address"
                            ng-model="user.email"
                             >
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
                 <fieldset>
-                    <label for="pwd">Password</label>
+                    <label for="pwd" class="lowercase">Password</label>
                     <input type="password"
                            id="pwd"
                            name="pwd"
-                           placeholder="Password"
+                           placeholder="password"
                            ng-model="user.password.value"
                             >
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
                 <fieldset>
-                    <label for="pwd-confirm">Confirm Password</label>
+                    <label for="pwd-confirm" class="lowercase">Confirm Password</label>
                     <input type="password"
                            id="pwd-confirm"
                            name="pwd-confirm"
-                           placeholder="Confirm"
+                           placeholder="confirm"
                            ng-model="confirmedPass"
                             >
                     <span class="feedback-form invalid"></span>

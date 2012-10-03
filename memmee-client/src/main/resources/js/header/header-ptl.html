@@ -28,8 +28,8 @@
         <li class="isRelative">
             <div  class="memmee-style container right isAbsolute" style="top: 40px; right: -50px;" ng-class="userSettingsDropdownStyle">
                 <ul class="memmee-style user dropdown crimson" ng-mouseleave="closeDropdownIfMouseOutside($event)" >
-                    <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;"><a href="#profile" ng-click="toggleSettingsDropdown();profileModeClicked()">Profile</a></li>
-                    <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;"><a ng-click="signOut()">Sign Out</a></li>
+                    <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;" class="lowercase"><a href="#profile" ng-click="toggleSettingsDropdown();profileModeClicked()">Profile</a></li>
+                    <li ng-mouseenter="cancelDropdownTimer()" style="width: 180px;" class="lowercase"><a ng-click="signOut()">Sign Out</a></li>
                 </ul>
             </div>
         </li>

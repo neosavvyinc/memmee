@@ -167,6 +167,7 @@ input.rounded{
     -ms-border-radius: 4px;
     border-radius: 4px;
     background-color: white;
+    text-transform: lowercase;
 }
 
 .home-top{
@@ -410,6 +411,7 @@ input.rounded{
     background: transparent url('../img/bg-signup-small.png') top left no-repeat;
 }
 .signup.sm .signup-title{
+    text-transform: lowercase;
     margin-bottom: 20px;
 }
 .signup.sm p{
@@ -579,7 +581,7 @@ html.homepage{
     top : 166px;
     left: 650px;
     width: 248px;
-    height: 272px;
+    height: 200px;
     padding: 15px 34px 28px 36px;
     overflow: hidden;
     background: transparent url(../img/bg-bubble.png) top left no-repeat;
@@ -1230,6 +1232,7 @@ table.calendar{
 .link{
     display: inline-block;
     text-decoration: none;
+    text-transform: lowercase;
 }
 
 .link .icon{
@@ -1591,6 +1594,10 @@ table.calendar{
     width: 17px;
     height: 20px;
     background-position: -19px -688px;
+}
+
+.lowercase {
+    text-transform: lowercase;
 }
 
 /*STATE*/
