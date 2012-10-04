@@ -1393,7 +1393,10 @@ table.calendar{
     font-size: 11px;
     color: #999;
 }
-
+.link.noMemmees{
+    text-decoration: none;
+    text-transform: lowercase;
+}
 .btn, .icon{
     display: block;
     text-indent: -100000000px;
