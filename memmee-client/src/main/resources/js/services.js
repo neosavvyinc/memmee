@@ -85,8 +85,8 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(CreateModeControllerEvents.get('CONFIRM_DISCARD'));
     };
 
-    broadCastService.memmeeCreatedCreateModeController = function () {
-        $rootScope.$broadcast(CreateModeControllerEvents.get('MEMMEE_CREATED'));
+    broadCastService.memmeeCreatedCreateModeController = function (memmee) {
+        $rootScope.$broadcast(CreateModeControllerEvents.get('MEMMEE_CREATED'), memmee);
     };
 
     broadCastService.createModeCancelledCreateModeController = function () {

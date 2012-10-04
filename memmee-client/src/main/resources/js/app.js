@@ -8,9 +8,13 @@ angular.module('memmee-app', ['memmee-app.services']).
         when('/profile', {templateUrl:'js/profile/profile-ptl.html'}).
         when('/share', {templateUrl:'js/memmee/share/share-ptl.html'}).
         otherwise({redirectTo:'/home'});
-}]).
-    config(['$locationProvider', function ($locationProvider) {
-}]).
+    }]).
+    run(['$rootScope', '$location', function( $rootScope, $location ) {
+        $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+            console.log("route is changing");
+            $rootScope.$broadcast("closeAllDropdowns");
+        });
+    }]).
     directive('fileButton', function() {
         return {
             link: function(scope, element, attributes) {

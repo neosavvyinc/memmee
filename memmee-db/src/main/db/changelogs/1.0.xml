@@ -196,7 +196,7 @@
         </insert>
         <insert tableName="inspiration">
             <column name="id" value="20"/>
-            <column name="text" value="the dog ate my ______(something you wish would disappear)___."/>
+            <column name="text" value="the dog ate my ______(something you wish would disappear)."/>
             <column name="inspirationCategoryId" value="1"/>
             <column name="inspirationCategoryIndex" value="19"/>
             <column name="creationDate" value="2012-07-10"/>
@@ -214,7 +214,7 @@
             <column name="id" value="21"/>
             <column name="text" value="the theme of today's inner monologue:"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="1"/>
+            <column name="inspirationCategoryIndex" value="0"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -222,7 +222,7 @@
             <column name="id" value="22"/>
             <column name="text" value="the best thing that happened all morning:"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="2"/>
+            <column name="inspirationCategoryIndex" value="1"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -230,7 +230,7 @@
             <column name="id" value="23"/>
             <column name="text" value="oh, it's one of those days. why don't you get something off your chest."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="3"/>
+            <column name="inspirationCategoryIndex" value="2"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -238,7 +238,7 @@
             <column name="id" value="24"/>
             <column name="text" value="you can't wait to see ..."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="4"/>
+            <column name="inspirationCategoryIndex" value="3"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -246,7 +246,7 @@
             <column name="id" value="25"/>
             <column name="text" value="you are totally obsessed with..."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="5"/>
+            <column name="inspirationCategoryIndex" value="4"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -254,7 +254,7 @@
             <column name="id" value="26"/>
             <column name="text" value="you are totally over..."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="6"/>
+            <column name="inspirationCategoryIndex" value="5"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -262,7 +262,7 @@
             <column name="id" value="27"/>
             <column name="text" value="how about a lunch highlight?"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="7"/>
+            <column name="inspirationCategoryIndex" value="6"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -270,23 +270,23 @@
             <column name="id" value="28"/>
             <column name="text" value="(fill in the blank.) he was all like, &quot;_______.&quot; and then you were all like, &quot;________.&quot;"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="8"/>
+            <column name="inspirationCategoryIndex" value="7"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
         <insert tableName="inspiration">
             <column name="id" value="29"/>
-            <column name="text" value="this week feels like a ____ (name a carnival ride)___"/>
+            <column name="text" value="this week feels like a ____ (name a carnival ride)."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="9"/>
+            <column name="inspirationCategoryIndex" value="8"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
         <insert tableName="inspiration">
             <column name="id" value="30"/>
-            <column name="text" value="and the gold medal goes to ____(your hero of the day)____"/>
+            <column name="text" value="and the gold medal goes to ____(your hero of the day)."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="10"/>
+            <column name="inspirationCategoryIndex" value="9"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -294,7 +294,7 @@
             <column name="id" value="31"/>
             <column name="text" value="best part of waking up..."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="11"/>
+            <column name="inspirationCategoryIndex" value="10"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -302,7 +302,7 @@
             <column name="id" value="32"/>
             <column name="text" value="wow! you don't know what you'd do without..."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="12"/>
+            <column name="inspirationCategoryIndex" value="11"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -310,7 +310,7 @@
             <column name="id" value="33"/>
             <column name="text" value="that made you feel weird."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="13"/>
+            <column name="inspirationCategoryIndex" value="12"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -318,15 +318,15 @@
             <column name="id" value="34"/>
             <column name="text" value="no need to get your sap on, but were you grateful for anyone or anything today?"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="14"/>
+            <column name="inspirationCategoryIndex" value="13"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
         <insert tableName="inspiration">
             <column name="id" value="35"/>
-            <column name="text" value="take a one-minute-vacation-of-the-mind. where are you going?"/>
+            <column name="text" value="take a one-minute vacation-of-the-mind. where are you going?"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="15"/>
+            <column name="inspirationCategoryIndex" value="14"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -334,7 +334,7 @@
             <column name="id" value="36"/>
             <column name="text" value="the phone is ringing. who do you hope is on the other end of the line?"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="16"/>
+            <column name="inspirationCategoryIndex" value="15"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -342,7 +342,7 @@
             <column name="id" value="37"/>
             <column name="text" value="exercising is for..."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="17"/>
+            <column name="inspirationCategoryIndex" value="16"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -350,7 +350,7 @@
             <column name="id" value="38"/>
             <column name="text" value="without _____, you are ____. and here's why."/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="18"/>
+            <column name="inspirationCategoryIndex" value="17"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -358,7 +358,7 @@
             <column name="id" value="39"/>
             <column name="text" value="who wants cake?"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="19"/>
+            <column name="inspirationCategoryIndex" value="18"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>
@@ -366,7 +366,7 @@
             <column name="id" value="40"/>
             <column name="text" value="miss someone or something today?"/>
             <column name="inspirationCategoryId" value="2"/>
-            <column name="inspirationCategoryIndex" value="20"/>
+            <column name="inspirationCategoryIndex" value="19"/>
             <column name="creationDate" value="2012-07-10"/>
             <column name="lastUpdateDate" value="2012-07-16"/>
         </insert>

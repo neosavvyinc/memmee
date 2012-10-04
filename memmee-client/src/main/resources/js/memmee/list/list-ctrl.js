@@ -4,6 +4,7 @@ function ArchiveListController($scope, $http, broadCastService) {
         /* load/tearDown */ function () {
             $scope.user = broadCastService.user;
             $scope.memmees = null;
+            $scope.memmeeSets = null;
             $scope.scrollableLeft = false;
             $scope.scrollableRight = true;
             $scope.amountScrolledRight = 0;
@@ -34,6 +35,21 @@ function ArchiveListController($scope, $http, broadCastService) {
             success(function (data, status, headers, config) {
                 console.log('your memmee has been loaded');
                 $scope.memmees = data;
+
+                if ($scope.memmees) {
+                    var memmeeSets = [
+                        []
+                    ];
+
+                    for (var i = 0; i < $scope.memmees.length; i++) {
+                        if (memmeeSets[memmeeSets.length - 1].length >= 4)
+                            memmeeSets.push([]);
+
+                        memmeeSets[memmeeSets.length - 1].push($scope.memmees[i]);
+                    }
+
+                    $scope.memmeeSets = memmeeSets;
+                }
             }).
             error(function (data, status, headers, config) {
                 console.log('error loading memmees');
@@ -89,8 +105,8 @@ function ArchiveListController($scope, $http, broadCastService) {
         }
     };
 
-    $scope.initializeScrolling = function(clazz) {
-       $(clazz).scrollable();
+    $scope.initializeScrolling = function (clazz) {
+        $(clazz).scrollable();
     }
 
     //Initialization

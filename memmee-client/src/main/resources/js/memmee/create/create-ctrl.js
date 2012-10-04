@@ -89,7 +89,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
                 broadCastService.selectedMemmee = data;
 
                 //Broadcasts Create Event
-                broadCastService.memmeeCreatedCreateModeController();
+                broadCastService.memmeeCreatedCreateModeController(broadCastService.selectedMemmee);
 
                 //Legacy Event, references will be removed
                 broadCastService.createModeCancelledCreateModeController();
@@ -223,6 +223,11 @@ function CreateMemmeesController($scope, $http, broadCastService) {
             $scope.maybeSelectMemmee = null;
         }
     });
+
+    $scope.$on( "closeAllDropdowns", function(event, next, current) {
+        $scope.closeShareDropdown();
+    });
+
 
     //UI Initialization
     $scope.initializeDatePicker = function (clazz) {

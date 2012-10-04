@@ -7,15 +7,12 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
             $scope.memmee = null;
         });
 
-    var isMemmeeValid = function()
-    {
-        if ( "You have no memmees." == $scope.memmee.text )
-        {
+    var isMemmeeValid = function () {
+        if ("You have no memmees." == $scope.memmee.text) {
             console.log("isMemmeValid():returning false");
             return false
         }
-        else
-        {
+        else {
             console.log("isMemmeValid():returning true");
             return true;
         }
@@ -37,9 +34,17 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
         }
     }
 
+    $scope.closeShareDropdown = function() {
+        $scope.shareVisibilityStyle = "isHidden";
+
+        if (closedropdownTimer) {
+            closedropdownTimer = undefined;
+        }
+    }
+
     $scope.closeShareIfMouseOutside = function () {
         console.log("mouse down outside...");
-        closedropdownTimer = $timeout($scope.toggleShareDropdown, 100);
+        closedropdownTimer = $timeout($scope.closeShareDropdown, 100);
     }
 
     $scope.cancelShareTimer = function () {
@@ -51,8 +56,7 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
 
     //Action Handlers
     $scope.onDeleteMemmee = function () {
-        if( isMemmeeValid() )
-        {
+        if (isMemmeeValid()) {
             broadCastService.confirmDeleteViewModeController();
         }
     };
@@ -72,20 +76,23 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
 
     //Service Calls
     $scope.getDefaultMemmee = function () {
-        $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
-            success(function (data, status, headers, config) {
-                console.log('your memmee has been loaded');
-                console.log("memmee: " + JSON.stringify(data));
-                $scope.memmee = broadCastService.selectedMemmee = data;
+        if (broadCastService && broadCastService.selectedMemmee) {
+            $scope.memmee = broadCastService.selectedMemmee;
+        } else {
+            $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
+                success(function (data, status, headers, config) {
+                    console.log('your memmee has been loaded');
+                    console.log("memmee: " + JSON.stringify(data));
+                    $scope.memmee = broadCastService.selectedMemmee = data;
 
-                if( !$scope.memmee.theme || !$scope.memmee.theme.name )
-                {
-                    $scope.memmee.theme = {name: "memmee-card" };
-                }
-                $scope.hideAttachmentDiv();
-            }).error(function (data, status, headers, config) {
-                console.log('error loading your doggone memmee');
-            });
+                    if (!$scope.memmee.theme || !$scope.memmee.theme.name) {
+                        $scope.memmee.theme = {name:"memmee-card" };
+                    }
+                    $scope.hideAttachmentDiv();
+                }).error(function (data, status, headers, config) {
+                    console.log('error loading your doggone memmee');
+                });
+        }
     };
 
     $scope.deleteMemmee = function (memmee) {
@@ -121,6 +128,11 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
         }
     });
 
+    $scope.$on(CreateModeControllerEvents.get('MEMMEE_CREATED'), function(event, memmee) {
+        //@TODO, should populate automatically from selected, but worthwhile fallback
+        $scope.memmee = memmee;
+    });
+
     //UI
     $scope.getDisplayDate = function () {
         return $scope.memmee.displayDate.toDateString();
@@ -138,17 +150,15 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
 
     $scope.attachmentVisible = true;
 
-    $scope.hideAttachmentDiv = function() {
+    $scope.hideAttachmentDiv = function () {
 
         console.log("ViewModeController.hideAttachmentDiv()");
 
-        if ( isMemmeeValid() )
-        {
+        if (isMemmeeValid()) {
             console.log("ViewModeController.hideAttachmentDiv() -- still a memmee left");
             $scope.attachmentVisible = true;
         }
-        else
-        {
+        else {
             console.log("ViewModeController.hideAttachmentDiv() -- no memmees left");
             $scope.attachmentVisible = false;
         }
