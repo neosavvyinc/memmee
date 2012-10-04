@@ -150,8 +150,22 @@ input.rounded{
     padding: 0 8px;
     margin-right: 8px;
 }
+#login .link.forgotPwd{
+    display: none;
+}
+#login:hover{
+    height: 80px;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+#login:hover .link.forgotPwd{
+    display: block;
+    line-height: 11px;
+    text-align: right;
+    padding-right: 57px;
+}
 #login fieldset{
-    display: inline-block;
+   float: left;
 }
 #login input {
     height: 28px;
@@ -166,7 +180,9 @@ input.rounded{
     border-radius: 4px;
     background-color: white;
 }
-
+#login .btn.login{
+    margin: 17px 0 0 12px;
+}
 .home-top{
     position: relative;
     background-color: white;
@@ -1370,6 +1386,12 @@ table.calendar{
 
 .link.bubble-close:hover .icon{
     background-position: -11px -600px;
+}
+.link.forgotPwd{
+    display: block;
+    text-decoration: none;
+    font-size: 11px;
+    color: #999;
 }
 
 .btn, .icon{
