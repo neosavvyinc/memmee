@@ -56,10 +56,11 @@
                 </div>
             </div>
 
-            <!-- TODO:a Talk to John about this -->
-            <div id="dropbox" class="controls photo" file-button ng-controller="AttachmentController">
-                <a ng-hide="files.length" class="link photo crimson"><span class="icon photo">Photo</span> Add a Photo <span class="optional">optional</span></a>
-                <a ng-click="deleteCurrentAttachment()" class="btn removePhoto"> {{files[0].webkitRelativePath || files[0].name}}</a>
+            <div id="dropbox" ng-hide="files.length" class="controls photo" file-button ng-controller="AttachmentController">
+                <a  class="link photo crimson"><span class="icon photo">Photo</span> Add a Photo <span class="optional">optional</span></a>
+            </div>
+            <div id="dropbox1" ng-show="files.length" class="controls photo" ng-controller="AttachmentController">
+                <a ng-click="deleteCurrentAttachment ()" class="btn removePhoto"> {{files[0].webkitRelativePath || files[0].name}}</a>
             </div>
 
             <div class="controls io">
