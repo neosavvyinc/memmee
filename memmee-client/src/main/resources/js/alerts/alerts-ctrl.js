@@ -101,6 +101,12 @@ function AlertsController($scope, $http, broadCastService, $location) {
             "(don't worry, your other memmees will remain private.)<br><br>"+shareUrl );
     });
 
+    $scope.$on( "closeAllDropdowns", function(event, next, current) {
+        console.log("Hiding all alerts on route changed...");
+        $scope.hideYesNoAlert();
+        $scope.hideAlert();
+    });
+
     //Initialization
     $scope.header = null;
     $scope.message = null;

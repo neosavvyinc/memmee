@@ -28,6 +28,11 @@ function BubblesController($scope, $http, broadCastService, $location) {
     //Initialization
     $scope.clearALlBubbles();
     $scope.setNewUserCreateModeStyle();
+
+    $scope.$on( "closeAllDropdowns", function(event, next, current) {
+        console.log("Hiding all alerts on route changed...");
+        $scope.clearALlBubbles();
+    });
 }
 
 BubblesController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location'];

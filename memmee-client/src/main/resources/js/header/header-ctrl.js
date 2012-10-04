@@ -72,8 +72,17 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
         broadCastService.profileOpenedProfileController();
     };
 
+    $scope.closeDropdown = function() {
+        $scope.userSettingsDropdownStyle = "isHidden";
+
+        if( closedropdownTimer )
+        {
+            closedropdownTimer = undefined;
+        }
+    }
+
     $scope.closeDropdownIfMouseOutside = function( ){
-        closedropdownTimer = $timeout( $scope.toggleSettingsDropdown, 100);
+        closedropdownTimer = $timeout( $scope.closeDropdown, 100);
     };
 
     $scope.cancelDropdownTimer = function() {
@@ -82,6 +91,10 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
             $timeout.cancel( closedropdownTimer );
         }
     };
+
+    $scope.$on( "closeAllDropdowns", function(event, next, current) {
+        $scope.closeDropdown();
+    });
 
     $scope.signOut = function()
     {
