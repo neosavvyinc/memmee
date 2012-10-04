@@ -77,34 +77,6 @@ function ArchiveListController($scope, $http, broadCastService) {
         return null;
     };
 
-    $scope.addScrollListener = function (clazz) {
-        $(clazz).scroll(function (e) {
-            $scope.amountScrolledRight = $(e.currentTarget).scrollLeft();
-        });
-    };
-
-    $scope.leftScroll = function (clazz) {
-        var scrollable = $scope.amountScrolledRight >= 300;
-        $scope.animateScroll($(clazz), "+=300px", scrollable, true)
-    };
-
-    $scope.rightScroll = function (clazz) {
-        var scrollable = $scope.amountScrolledRight < (300 * $scope.memmees.length - 700);
-        $scope.animateScroll($(clazz), "-=300px", scrollable, false);
-    };
-
-    $scope.animateScroll = function (obj, param, scrollable, left) {
-        if (scrollable) {
-            obj.animate({"margin-left":param}, 400, function () {
-                if (left) {
-                    $scope.amountScrolledRight -= 300;
-                } else {
-                    $scope.amountScrolledRight += 300;
-                }
-            });
-        }
-    };
-
     $scope.initializeScrolling = function (clazz) {
         $(clazz).scrollable();
     }

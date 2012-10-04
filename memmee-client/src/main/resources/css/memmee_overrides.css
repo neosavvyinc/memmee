@@ -64,3 +64,26 @@ table.calendar {
 .slidecard-date {
     cursor: pointer;
 }
+
+.memmee-carousel {
+    width: 871px;
+}
+
+.memmee-carousel-container {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.memmee-carousel-container .items {
+    width: 20000em;
+    position: absolute;
+}
+
+.memmee-carousel-items div {
+    display: inline-block;
+    float: left;
+    width: 872px;
+    height: 388px;
+}
