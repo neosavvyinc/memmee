@@ -34,9 +34,17 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
         }
     }
 
+    $scope.closeShareDropdown = function() {
+        $scope.shareVisibilityStyle = "isHidden";
+
+        if (closedropdownTimer) {
+            closedropdownTimer = undefined;
+        }
+    }
+
     $scope.closeShareIfMouseOutside = function () {
         console.log("mouse down outside...");
-        closedropdownTimer = $timeout($scope.toggleShareDropdown, 100);
+        closedropdownTimer = $timeout($scope.closeShareDropdown, 100);
     }
 
     $scope.cancelShareTimer = function () {
