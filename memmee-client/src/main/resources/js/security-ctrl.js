@@ -50,6 +50,11 @@ function SecurityController($scope, broadCastService, $timeout, $location, $rout
     {
         $location.path('/home');
     }
+
+    //UI Initialization
+    $scope.initializeBodyUI = function() {
+        $('body').iealert();
+    };
 }
 
 SecurityController.$inject = ['$scope', 'memmeeBroadCastService', '$timeout', '$location', '$routeParams'];
