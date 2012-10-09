@@ -3,68 +3,338 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>memmee-parent</artifactId>
         <groupId>com.memmee</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <groupId>com.memmee</groupId>
     <artifactId>memmee-client</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Memmee Client</name>
-    <url>http://maven.apache.org</url>
+    <url>http://prod.memmee.com</url>
 
     <build>
-        <plugins>
-            <!--<plugin>-->
-                <!--<groupId>net.alchim31.maven</groupId>-->
-                <!--<artifactId>yuicompressor-maven-plugin</artifactId>-->
-                <!--<version>1.1</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>compress</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-                <!--<configuration>-->
-                    <!--<excludes>-->
-                        <!--<exclude>**/angular*.js</exclude>-->
-                        <!--<exclude>**/html5*.js</exclude>-->
-                    <!--</excludes>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
 
-            <!--<plugin>-->
-                <!--<groupId>com.googlecode.jslint4java</groupId>-->
-                <!--<artifactId>jslint4java-maven-plugin</artifactId>-->
-                <!--<version>2.0.2</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>lint</id>-->
-                        <!--<phase>process-resources</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>lint</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<failOnError>false</failOnError>-->
-                            <!--<options>-->
-                                <!--<undef>true</undef>-->
-                            <!--</options>-->
-                            <!--<includes>-->
-                                <!--<include>**/*.js</include>-->
-                            <!--</includes>-->
-                            <!--<sourceFolders>-->
-                                <!--<sourceFolder>${basedir}/src/main/resources/js</sourceFolder>-->
-                            <!--</sourceFolders>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+        <!--
+        - This section defines the location of the files that are to be included in the build
+        - output. The filtering of token replacment will be applied to all resources that are
+        - in the includes section and ignored for all files in the except the ones declared
+        - in the excludes section (so that means images and binary files)
+        -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.js</include>
+                    <include>**/*.html</include>
+                    <include>**/memmee.css</include>
+                    <include>**/memmee_overrides.css</include>
+                    <include>revision.txt</include>
+                    <include>**/*.json</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>**/*.js</exclude>
+                    <exclude>**/*.html</exclude>
+                    <exclude>**/*.css</exclude>
+                    <exclude>**/*.json</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources/</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.js</include>
+                </includes>
+            </testResource>
+        </testResources>
+
+        <!--
+        - Please note THIS IS IMPORTANT!
+        - ORDER MATTERS on these plugins. They are bound to the build lifecycle and things that
+        - are bound to a specific "phase" must execute in a certain order for us to get the
+        - desired result in the target directory.
+        -->
+        <plugins>
+            <plugin>
+                <groupId>com.google.code.maven-svn-revision-number-plugin</groupId>
+                <artifactId>svn-revision-number-maven-plugin</artifactId>
+                <version>1.13</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <entries>
+                        <entry>
+                            <prefix>prefix</prefix>
+                        </entry>
+                    </entries>
+                </configuration>
+            </plugin>
+
+            <!--
+            - This plugin executes the JSLint rules against our code that was written by Memmee developers
+            - it will cause a build break if all the rules are not tolerated.
+            -->
+            <plugin>
+                <groupId>com.googlecode.jslint4java</groupId>
+                <artifactId>jslint4java-maven-plugin</artifactId>
+                <version>2.0.2</version>
+                <executions>
+                    <execution>
+                        <id>lint</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>lint</goal>
+                        </goals>
+                        <configuration>
+                            <failOnError>false</failOnError>
+                            <options>
+                                <eqeq>true</eqeq>
+                                <es5>true</es5>
+                                <plusplus>true</plusplus>
+                                <sloppy>false</sloppy>
+                                <vars>false</vars>
+                                <browser>true</browser>
+                                <indent>2</indent>
+                                <maxlen>100</maxlen>
+                            </options>
+                            <includes>
+                                <include>**/*.js</include>
+                            </includes>
+                            <sourceFolders>
+                                <sourceFolder>${basedir}/src/main/resources/js</sourceFolder>
+                            </sourceFolders>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+            - This plugin moves all contents from the src/main/resources directory into the
+            - target/classes directory and applies the filtering rules specified in the resources
+            - section above.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>resources</goal>
+                            <goal>testResources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+            - This is the plugin we use to comment out all the console.* statements which will allow
+            - the minification plugin to come back and strip out all the comments before generating the
+            - fully minified version of the Javascript.
+            -
+            - The second execution in this plugin will replace all the comments that have BeginMinifyGroup1
+            - and end with EndMinifiyGroup1 in them with one minified reference to a js file.
+            -->
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>replacer</artifactId>
+                <version>1.5.0</version>
+                <executions>
+                    <execution>
+                        <id>replace-minified-js-groups</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                        <configuration>
+                            <includes>
+                                <include>**/index.html</include>
+                            </includes>
+                            <basedir>
+                                ${project.basedir}/target/classes
+                            </basedir>
+                            <outputBasedir>
+                                ${project.basedir}/target/classes
+                            </outputBasedir>
+                            <regex>true</regex>
+                            <regexFlags><regexFlag>DOTALL</regexFlag></regexFlags>
+                            <replacements>
+                                <replacement>
+                                    <token>console.log(.*);</token>
+                                    <value>//stripped comment</value>
+                                </replacement>
+                                <replacement>
+                                    <token><![CDATA[<!-- BeginMinifyGroup1.*EndMinifyGroup1 -->]]></token>
+                                    <value><![CDATA[<script src="./js/app/memmee.js" type="text/javascript"></script>]]></value>
+                                </replacement>
+                            </replacements>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--
+            - This plugin is used to concatenate all of the JS and CSS resources.
+            - If you need to have something concatenated or minified you should add it here either
+            - with other resources that should be grouped together or if you just want to have it
+            - dynamically loaded later then you should add a new execution segment.
+            -->
+            <plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.5.2-NEOSAVVY</version>
+                <executions>
+                    <execution>
+                        <id>default-minify</id>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <verbose>true</verbose>
+                            <nomunge>false</nomunge>
+                            <preserveAllSemiColons>true</preserveAllSemiColons>
+                            <disableOptimizations>true</disableOptimizations>
+                            <linebreak>10</linebreak>
+                            <jsSourceDir>./</jsSourceDir>
+                            <jsSourceFiles>
+
+                                <!-- Constants / Utils -->
+                                <jsSourceFile>js/const/event/events.js</jsSourceFile>
+                                <jsSourceFile>js/const/message/errors.js</jsSourceFile>
+                                <jsSourceFile>js/const/message/notifications.js</jsSourceFile>
+                                <jsSourceFile>js/util/memmee_date_util.js</jsSourceFile>
+                                <jsSourceFile>js/util/misc.js</jsSourceFile>
+
+                                <!-- Main Application -->
+                                <jsSourceFile>js/app.js</jsSourceFile>
+                                <jsSourceFile>js/services.js</jsSourceFile>
+
+                                <!-- Controllers -->
+                                <jsSourceFile>js/default-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/security-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/alerts/alerts-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/memmee/common/bubbles-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/header/header-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/profile/profile-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/profile/change-password-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/home/home-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/home/login-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/home/registration-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/memmee/view/view-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/memmee/create/create-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/memmee/create/attachment-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/memmee/create/inspiration-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/memmee/share/share-ctrl.js</jsSourceFile>
+                                <jsSourceFile>js/memmee/list/list-ctrl.js</jsSourceFile>
+
+
+
+                            </jsSourceFiles>
+                            <jsTargetDir>js/app</jsTargetDir>
+                            <jsFinalFile>memmee.js</jsFinalFile>
+                            <webappSourceDir>${basedir}/target/classes</webappSourceDir>
+                            <webappTargetDir>${basedir}/target/classes</webappTargetDir>
+                        </configuration>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>rhino</groupId>
+                        <artifactId>js</artifactId>
+                        <version>1.7R1</version>
+                    </dependency>
+                </dependencies>
+
+            </plugin>
+
+
+            <!--
+            - This is the plugin used to create our zip file that will be delivered to production.
+            - It simply compiles everything in the target/classes directory into a zip file. The
+            - target/classes directory is populated as the result of running the resources plugin.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>zip-groovy</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>src/main/assembly/src.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.googlecode.jstd-maven-plugin</groupId>
+                <artifactId>jstd-maven-plugin</artifactId>
+                <version>1.3.2.5</version>
+                <configuration>
+                    <port>9876</port>
+                    <!--<server>http://localhost:9876</server>-->
+                    <!--<runnerMode>DEBUG</runnerMode>-->
+                    <!--<browser>/Applications/Firefox.app/Contents/MacOS/firefox-bin</browser>-->
+                    <browser>/Applications/Safari.app/Contents/MacOS/Safari</browser>
+                    <!--<browser>/Applications/Safari.app/Contents/MacOS/Safari,/Applications/Firefox.app/Contents/MacOS/firefox-bin</browser>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>run-tests</id>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
+
+
     </build>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.googlecode.jstd-maven-plugin</groupId>
+            <artifactId>jstd-maven-plugin</artifactId>
+            <version>1.3.2.5</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.jstestdriver</groupId>
+            <artifactId>jstestdriver</artifactId>
+            <version>1.3.4.b</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
