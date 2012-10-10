@@ -9,14 +9,6 @@ function HeaderController($scope, broadCastService, $location, $timeout) {
             $scope.visibleLoggedOutStyle = 'isVisible';
         });
 
-
-
-//    var resetStyles = function() {
-//        $scope.visibleLoggedInStyle = 'isHidden';
-//
-//        $scope.createModeStyles = "btn btn-primary disabled";
-//    }
-
     $scope.$on(LoginControllerEvents.get('LOGIN'), function() {
 
         console.log("NavigationController:handleLogin()");

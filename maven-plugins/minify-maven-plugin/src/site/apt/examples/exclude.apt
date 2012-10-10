@@ -1,0 +1,75 @@
+ ------
+ Exclude source files from WAR package
+ ------
+ Samuel Santos
+ ------
+ 2011-11-09
+ ------
+
+Exclude source files from WAR package
+
+  Sometimes we need to exclude the original source files from the final WAR package.
+
+  A possible scenario is when you do not want to make them publicly available via your site for security reasons,
+  or simply want to include only the minified (obfuscated) file resulting from the Minify Maven Plugin execution.
+
+  This example shows how that can be done.
+
+* Configure Maven WAR Plugin
+
+  Use the following configuration in your <<<pom.xml>>> plugin section to exclude source files from the WAR package.
+
++---+
+<project>
+  <!-- ... -->
+  <build>
+    <plugins>
+      <!-- ... -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <configuration>
+          <warSourceExcludes>**/file-1.css,...,**/file-n.css,**/file-1.js,...,**/file-n.js</warSourceExcludes>
+        </configuration>
+      </plugin>
+      <!-- ... -->
+      <plugin>
+        <groupId>com.samaxes.maven</groupId>
+        <artifactId>minify-maven-plugin</artifactId>
+        <version>1.5.1</version>
+        <executions>
+          <execution>
+            <id>default-minify</id>
+            <phase>process-resources</phase>
+            <configuration>
+              <cssSourceFiles>
+                <cssSourceFile>file-1.css</cssSourceFile>
+                <!-- ... -->
+                <cssSourceFile>file-n.css</cssSourceFile>
+              </cssSourceFiles>
+              <jsSourceFiles>
+                <jsSourceFile>file-1.js</jsSourceFile>
+                <!-- ... -->
+                <jsSourceFile>file-n.js</jsSourceFile>
+              </jsSourceFiles>
+            </configuration>
+            <goals>
+              <goal>minify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- ... -->
+    </plugins>
+  </build>
+  <!-- ... -->
+</project>
++---+
+
+* Invoke from the command-line
+
+  Only merged and minified files will be included in your package.
+
++---+
+mvn package
++---+

@@ -98,4 +98,4 @@ function InspirationController($scope, $http, broadCastService) {
     $scope.getRandomInspiration();
 }
 
-InspirationController.$inject = ['$scope', '$http', 'memmeeBroadCastService']
+InspirationController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];

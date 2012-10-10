@@ -19,8 +19,6 @@ function RegistrationController($scope, $http, broadCastService) {
                 broadCastService.errorSavingUserRegistrationController(data);
             });
     }
-
-
 }
 
 RegistrationController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
