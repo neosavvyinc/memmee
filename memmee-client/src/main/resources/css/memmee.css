@@ -125,19 +125,30 @@ input.rounded{
 
 /*HOMEPAGE*/
 .btn.login{
-    text-indent: -9000px;
+    text-indent: 10px;
     width: 79px;
     height: 30px;
     line-height: 29px;
     background-position: -164px -338px;
+    font-family: "Crimson Text", "Times New Roman", Times, serif;
+    text-decoration: none;
+}
+.btn.login:hover {
+    background-position: 0px -338px;
 }
 .btn.signup{
-    text-indent: -9000px;
+    text-indent: 10px;
     width: 79px;
     height: 30px;
     line-height: 29px;
     background-position: -164px -306px;
+    font-family: "Crimson Text", "Times New Roman", Times, serif;
+    text-decoration: none;
 }
+.btn.signup:hover {
+    background-position: -242px -306px;
+}
+
 #header .btn.signup{
     position: absolute;
     top: 16px;
