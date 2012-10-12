@@ -34,10 +34,10 @@ function AlertsController($scope, $http, broadCastService, $location) {
         $scope.isModalYesNoAlertPresent = "isVisible";
     };
 
-    $scope.hideYesNoAlert = function() {
+    $scope.hideYesNoAlert = function () {
         $scope.isModalPresent = "isHidden";
         $scope.isModalYesNoAlertPresent = "isHidden";
-    }
+    };
 
     $scope.yesClick = function () {
         broadCastService.yesSelectedAlertsController($scope.promptingEvent);
@@ -55,7 +55,7 @@ function AlertsController($scope, $http, broadCastService, $location) {
     /* Create Mode Controller */
     $scope.$on(CreateModeControllerEvents.get('CONFIRM_DISCARD'), function () {
         $scope.promptingEvent = CreateModeControllerEvents.get('CONFIRM_DISCARD');
-        $scope.showYesNoAlert(Notifications.get('DISCARD_MEMMEE_HEADER'), Notifications.get('DISCARD_MEMMEE_MESSAGE'), "Discard", "Cancel");
+        $scope.showYesNoAlert( Notifications.get('DISCARD_MEMMEE_HEADER'), Notifications.get('DISCARD_MEMMEE_MESSAGE'), "Discard", "Cancel");
     });
 
     $scope.$on(CreateModeControllerEvents.get('NEW_USER_LOGIN'), function () {

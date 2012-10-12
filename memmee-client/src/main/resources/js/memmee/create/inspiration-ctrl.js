@@ -1,17 +1,18 @@
 function InspirationController($scope, $http, broadCastService) {
     //Constants
+    "use strict";
     var ViewStates = (function () {
-        var private = {
-            'VIEW_INSPIRATION_STATE':'viewInspirationState',
-            'HIDDEN_INSPIRATION_STATE':'hiddenInspirationState'
+        var private_states = {
+            'VIEW_INSPIRATION_STATE': 'viewInspirationState',
+            'HIDDEN_INSPIRATION_STATE': 'hiddenInspirationState'
         };
 
         return {
-            get:function (name) {
-                return private[name];
+            get: function (name) {
+                return private_states[name];
             }
-        }
-    })();
+        };
+    }());
 
     //Super/Inherited Methods
     DefaultController($scope,

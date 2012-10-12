@@ -171,7 +171,7 @@
                         <phase>prepare-package</phase>
                         <configuration>
                             <verbose>true</verbose>
-                            <nomunge>false</nomunge>
+                            <nomunge>true</nomunge>
                             <preserveAllSemiColons>true</preserveAllSemiColons>
                             <disableOptimizations>true</disableOptimizations>
                             <linebreak>10</linebreak>

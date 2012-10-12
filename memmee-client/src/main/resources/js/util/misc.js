@@ -1,12 +1,15 @@
-window.onload = function() {
-    var txts = document.getElementsByTagName('TEXTAREA')
+window.onload = function () {
+    "use strict";
+    var txts = document.getElementsByTagName('TEXTAREA'),
+        i = 0,
+        l = txts.length;
 
-    for(var i = 0, l = txts.length; i < l; i++) {
-        if(/^[0-9]+$/.test(txts[i].getAttribute("maxlength"))) {
+    for (i = 0; i < l; i++) {
+        if (/^[0-9]+$/.test(txts[i].getAttribute("maxlength"))) {
             var func = function() {
                 var len = parseInt(this.getAttribute("maxlength"), 10);
 
-                if(this.value.length > len) {
+                if (this.value.length > len) {
                     console.log('Maximum length exceeded: ' + len);
                     this.value = this.value.substr(0, len);
                     return false;
@@ -31,8 +34,8 @@ function limitLines(obj, e) {
         keynum = e.which;
     }
 
-    if(keynum == 13) {
-        if(lines == obj.rows - 1) {
+    if(keynum === 13) {
+        if(lines === obj.rows - 1) {
             return false;
         }
     }
