@@ -1228,6 +1228,7 @@ table.calendar{
     width: 232px;
     height: 422px;
     padding: 30px 26px 0 26px;
+    list-style: disc;
     background: transparent url('../img/bg-benefits.png') top left no-repeat;
     font-family: 'Crimson Text', 'Times New Roman', Times, Serif;
 }
@@ -1235,20 +1236,16 @@ table.calendar{
     margin-bottom: 5px;
     font-size: 18px;
     line-height: 36px;
-    text-align: center;
     color: #5b574d;
 }
 .memmee-benefits li{
-    display: block;
-    list-style-type: none;
     margin-bottom: 6px;
     font-size: 14px;
     line-height: 14px;
-    text-align: center;
     color: #364a62;
 }
 .memmee-benefits li strong{
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .benefit-number{
