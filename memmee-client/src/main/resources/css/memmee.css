@@ -1228,9 +1228,11 @@ table.calendar{
     width: 232px;
     height: 422px;
     padding: 30px 26px 0 26px;
-    list-style: disc;
     background: transparent url('../img/bg-benefits.png') top left no-repeat;
     font-family: 'Crimson Text', 'Times New Roman', Times, Serif;
+}
+.memmee-benefits ul{
+    list-style: disc;
 }
 .title-benefits{
     margin-bottom: 5px;
