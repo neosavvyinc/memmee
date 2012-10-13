@@ -5,7 +5,7 @@
     <!-- Logged out Header -->
     <form id="login" method="post" ng-controller="LoginController" ng-class="visibleLoggedOutStyle">
         <fieldset>
-            <input type="text" id="email" name="email" ng-model="user.email" placeholder="Email Address"/>
+            <input type="text" id="email" name="email" ng-model="user.email" placeholder="Email Address" ng-style="forgotPasswordInputStyle"/>
             <input type="password" id="pwd" name="pwd" ng-model="user.password" placeholder="Password" />
             <a ng-click="forgotPassword()" class="link forgotPwd">Forgot Password</a>
         </fieldset>
