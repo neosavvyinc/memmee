@@ -679,8 +679,14 @@ html.homepage{
     right: -130px;
     width: 276px;
     height: 187px;
-    padding-top: 23px;
+    padding-top: 40px;
     background: transparent url('../img/bg-photo-frame.png') top left no-repeat;
+}
+.memmee-user-photo img{
+    max-width: 270px!important;
+    max-height: 170px!important;
+    display: block;
+    margin: auto;
 }
 
 .memmee-controls{
