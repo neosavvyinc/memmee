@@ -621,6 +621,9 @@ html.homepage{
 .memmee-card.style-travel .btn.inspiration{
     right: 116px;
 }
+.memmee-card.style-travel .controls.share{
+    right: 127px;
+}
 
 .memmee-bubble{
     position: absolute;
@@ -932,6 +935,8 @@ html.homepage{
     left: 96px;
     padding: 0 6px 9px;
     color: #d44e3c;
+    font-size: 16px;
+    line-height: 20px;
     text-transform: lowercase;
     background: transparent url('../img/bg-memmee-date.png') bottom left repeat-x;
 }
