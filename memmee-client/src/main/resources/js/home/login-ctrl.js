@@ -33,9 +33,13 @@ function LoginController($scope, $http, broadCastService) {
                 success(function (data, status, headers, config) {
                     $scope.forgotPasswordReminder = "A new password was sent to your email";
                     $scope.forgotPasswordSuccessStyle = {'color': '#0000FF'};
+
+                    broadCastService.forgotPasswordSuccess();
                 }).
                 error(function (data, status, headers, config) {
                     $scope.forgotPasswordReminder = "There was an error sending the new password to your email.";
+
+                    broadCastService.forgotPasswordError();
                 });
         } else {
            $scope.forgotPasswordReminder = "Please enter your email address below";

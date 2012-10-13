@@ -27,7 +27,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         broadCastService.showInitialPrompt = true;
     }
 
-    broadCastService.turnOffInitialPrompt = function() {
+    broadCastService.turnOffInitialPrompt = function () {
         broadCastService.showInitialPrompt = false;
     }
 
@@ -36,6 +36,14 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         localStorage.removeItem("user");
         $location.path('/home');
         $rootScope.$broadcast(LoginControllerEvents.get('LOGOUT'));
+    }
+
+    broadCastService.forgotPasswordSuccess = function () {
+        $rootScope.$broadcast(LoginControllerEvents.get('FORGOT_PASSWORD_SENT'));
+    }
+
+    broadCastService.forgotPasswordError = function () {
+        $rootScope.$broadcast(LoginControllerEvents.get('FORGOT_PASSWORD_ERROR'));
     }
 
     broadCastService.attachmentSuccess = function ($attachment) {
@@ -109,7 +117,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(CreateModeControllerEvents.get('CREATE_MODE_STARTED'));
     };
 
-    broadCastService.createModeNewUserLogin = function() {
+    broadCastService.createModeNewUserLogin = function () {
         $rootScope.$broadcast(CreateModeControllerEvents.get('NEW_USER_LOGIN'));
     };
 
@@ -131,7 +139,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(ProfileControllerEvents.get('UPDATE_FAILURE'));
     }
 
-    broadCastService.profileOpenedProfileController = function() {
+    broadCastService.profileOpenedProfileController = function () {
         $rootScope.$broadcast(ProfileControllerEvents.get('PROFILE_OPENED'));
     }
 

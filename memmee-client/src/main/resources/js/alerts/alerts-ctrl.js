@@ -67,6 +67,14 @@ function AlertsController($scope, $http, broadCastService, $location) {
         $scope.showAlert(Errors.get('INVALID_LOGIN_HEADER'), Errors.get('INVALID_LOGIN_MESSAGE'));
     });
 
+    $scope.$on(LoginControllerEvents.get('FORGOT_PASSWORD_SENT'), function() {
+        $scope.showAlert(Notifications.get("FORGOT_PASSWORD_SENT_HEADER"), Notifications.get("FORGOT_PASSWORD_SENT_MESSAGE"));
+    });
+
+    $scope.$on(LoginControllerEvents.get('FORGOT_PASSWORD_ERROR'), function() {
+        $scope.showAlert(Errors.get("FORGOT_PASSWORD_HEADER"), Errors.get("FORGOT_PASSWORD_MESSAGE"));
+    });
+
     /* ProfileController */
     $scope.$on(ProfileControllerEvents.get('UPDATE_SUCCESS'), function () {
         $scope.showAlert(Notifications.get('PROFILE_UPDATE_SUCCESS_HEADER'), Notifications.get('PROFILE_UPDATE_SUCCESS_MESSAGE'));

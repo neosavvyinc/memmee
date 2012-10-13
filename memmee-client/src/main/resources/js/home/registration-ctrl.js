@@ -10,6 +10,9 @@ function RegistrationController($scope, $http, broadCastService) {
 
     $scope.register = function()
     {
+        //Sets up notifications that only occur after login
+        broadCastService.firstLoginUser();
+
         $http({method: 'POST', url: '/memmeeuserrest/user', data: $scope.user}).
             success(function(data, status, headers, config) {
                 console.log('you were successfully registered');
