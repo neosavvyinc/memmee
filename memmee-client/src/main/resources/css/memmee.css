@@ -1380,9 +1380,16 @@ table.calendar{
     color: #999;
 }
 
-link.noMemmees{
+.link.noMemmees{
     text-decoration: none;
     text-transform: lowercase;
+}
+
+.link.createNewMemmee {
+    text-decoration: none;
+    text-transform: lowercase;
+    color: #4A3D31;
+    font: 14px/10px 'Crimson Text', 'Times New Roman', Times, serif;
 }
 
 .btn, .icon{
