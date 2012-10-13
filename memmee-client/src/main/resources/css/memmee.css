@@ -585,8 +585,7 @@ html.homepage{
 }
 .memmee-card.style-whimsy{
     width: 883px;
-    height: 630px;
-    top: -35px;
+    height: 582px;
     font: 22px/35px 'josefinslab', Arial, Helvetica, sans-serif;
     color: #513f48;
     background-image: url('../img/bg-card-whimsy.png');
@@ -597,8 +596,7 @@ html.homepage{
 }
 .memmee-card.style-inspiration{
     width: 885px;
-    height: 629px;
-    top: -35px;
+    height: 582px;
     font: 22px/35px 'Josefin Sans', Arial, Helvetica, sans-serif;
     color: #407280;
     background-image: url('../img/bg-card-inspiration.png');
@@ -1159,6 +1157,9 @@ html.homepage{
 .controls.calendar .btn.nextMonth{
     position: absolute;
     right: 0;
+}
+.controls.modal a{
+    float:right;
 }
 .title-month{
     display: inline-block;
