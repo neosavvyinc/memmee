@@ -86,7 +86,7 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
 
     //Service Calls
     $scope.getDefaultMemmee = function () {
-        if (broadCastService && broadCastService.selectedMemmee) {
+        if (broadCastService && broadCastService.selectedMemmee && broadCastService.selectedMemmee.id) {
             $scope.memmee = broadCastService.selectedMemmee;
         } else {
             $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).

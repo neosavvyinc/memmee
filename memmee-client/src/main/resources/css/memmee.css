@@ -968,10 +968,12 @@ html.homepage{
 
 .slidecard-date{
     display: block;
-    padding-left: 4px;
-    margin-bottom: 11px;
+    padding: 10px 0 0 4px;
+    margin-bottom: 4px;
     color: #d44e3c;
+    font: italic 12px 'Crimson Text', 'Times New Roman', Times, serif;
     text-transform: lowercase;
+    letter-spacing: 2px;
 }
 
 .slidecard{
@@ -996,7 +998,7 @@ html.homepage{
     height: 81px;
     color: #404445;
     background-position: 0 0;
-    text-align: center;
+    font-family: 'Courier New', Courier, 'Times New Roman', Times, sans-serif;
 }
 
 .slidecard.art{
@@ -1049,7 +1051,7 @@ html.homepage{
 }
 .list.steps dd{
     margin-bottom: 8px;
-    font: italic 14px/18px 'Crimson Text', 'Times New Roman', Times, serif;
+    font: italic 16px/18px 'Crimson Text', 'Times New Roman', Times, serif;
     text-align: center;
 }
 .list.steps dd:last-child{
@@ -1350,14 +1352,14 @@ table.calendar{
     height: 19px;
     font-size: 12px;
     line-height: 19px;
-    background: transparent url('../img/bg-link-today.png') 28px bottom no-repeat;
+    background: transparent url('../img/bg-link-today.png') 0px bottom repeat-x;
 }
 
 .link.bubble-close{
     position: relative;
     top: 5px;
     left: 64px;
-    font: bold 10px/12px "josefinslab", Arial, sans-serif;
+    font: bold 14px/12px "josefinslab", Arial, sans-serif;
     text-transform: lowercase;
     color: white;
 }
@@ -1392,7 +1394,7 @@ link.noMemmees{
 }
 
 .btn.newMemmee, .btn.viewMemmee {
-    color: #2B231D;
+    color: #4a3d31;
     text-decoration: none;
     font-weight: bold;
     text-indent: 55px;

@@ -8,8 +8,7 @@ function ProfileController($scope, $http, broadCastService, $location) {
             $scope.confirmedPass = '';
         });
 
-    $scope.update = function( )
-    {
+    $scope.update = function () {
 
         if( $scope.confirmedPass !== $scope.user.password.value )
         {
@@ -40,11 +39,16 @@ function ProfileController($scope, $http, broadCastService, $location) {
                 console.log('your user was loaded via API key');
                 broadCastService.loginUser(data);
                 $scope.user = data;
-                $scope.saveLoggedInUser(data);
+//                $scope.saveLoggedInUser(data);
             }).
             error(function(data, status, headers, config) {
                 console.log('unable to load your user by API key');
+                $location.path("/home");
             });
+    }
+    else
+    {
+        $location.path("/home");
     }
 }
 
