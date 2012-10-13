@@ -13,6 +13,9 @@ function LoginController($scope, $http, broadCastService) {
 
     //Action Handlers
     $scope.login = function () {
+        //Sets up notifications that only occur after login
+        broadCastService.firstLoginUser();
+
         $http({method:'POST', url:'/memmeeuserrest/user/login', data:$scope.user}).
             success(function (data, status, headers, config) {
                 console.log('you were successfully logged into memmee.com');
