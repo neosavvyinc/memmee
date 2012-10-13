@@ -28,7 +28,7 @@ function SecurityController($scope, broadCastService, $timeout, $location, $rout
         console.log("Theme is now set to default");
     });
 
-    if( localStorage.getItem("user") !== null && localStorage.getItem("user") !== "" )
+    if( localStorage.getItem("user") != null && localStorage.getItem("user") != "" )
     {
         var obj = localStorage.getItem( "user" );
         broadCastService.user = JSON.parse(obj);
@@ -36,18 +36,23 @@ function SecurityController($scope, broadCastService, $timeout, $location, $rout
         console.log("Loading a user from local storage: " + obj);
     }
 
-    if( broadCastService.user !== null )
-    {
+    if ( broadCastService.user != null ){
         $timeout(function() {
             broadCastService.loginUser( broadCastService.user );
         }, 100);
     }
-    else if( $location.path() == '/share' )
+    else if ($location.path() == '/share' )
     {
         console.log("Loading a memmee from a share key");
     }
+    else if ($location.path() == '/profile' && $location.search.apiKey )
+    {
+        console.log("$location.search('apiKey')" + $location.search.apiKey );
+        console.log("Loading your profile");
+    }
     else
     {
+        console.log("Routing you back to home....");
         $location.path('/home');
     }
 
@@ -55,6 +60,7 @@ function SecurityController($scope, broadCastService, $timeout, $location, $rout
     $scope.initializeBodyUI = function() {
         $('body').iealert();
     };
+
 }
 
 SecurityController.$inject = ['$scope', 'memmeeBroadCastService', '$timeout', '$location', '$routeParams'];
