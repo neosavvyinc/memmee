@@ -13,7 +13,7 @@
                     <label ng-click="onMemmeeSelect(memmee)"
                            class="slidecard-date opensans">{{getDisplayDate(memmee)}}</label>
                     <a ng-click="onMemmeeSelect(memmee)" ng-class="memmee.theme.listName"
-                       ng-bind-html-unsafe="memmee.text"></a>
+                       ng-bind-html-unsafe="getTruncatedText(memmee.text)"></a>
                 </div>
             </div>
         </div>

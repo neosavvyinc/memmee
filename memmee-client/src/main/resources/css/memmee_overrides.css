@@ -3,6 +3,10 @@
     display: inline-block;
 }
 
+.text-center {
+    text-align: center;
+}
+
 /*CONTENT*/
 .memmee-text {
     left: 130px;

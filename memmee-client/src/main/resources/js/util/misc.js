@@ -20,6 +20,9 @@ window.onload = function () {
             txts[i].onblur = func;
         }
     }
+
+    //Browser Compatibility
+    addStringPrototypeMethods();
 }
 
 var keynum, lines = 1;
@@ -44,5 +47,13 @@ function limitLines(obj, e) {
     lines = obj.value.match(/\n/g).length;
     if(lines == obj.rows) {
         return false;
+    }
+}
+
+function addStringPrototypeMethods() {
+    if (!String.prototype.trim) {
+        String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g,'');
+        }
     }
 }
