@@ -1,4 +1,5 @@
-function ProfileController($scope, $http, broadCastService) {
+function ProfileController($scope, $http, broadCastService, $location) {
+    "use strict";
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -7,8 +8,9 @@ function ProfileController($scope, $http, broadCastService) {
             $scope.confirmedPass = '';
         });
 
-    $scope.update = function()
+    $scope.update = function( )
     {
+
         if( $scope.confirmedPass !== $scope.user.password.value )
         {
             console.log("your password doesn't match your provided password");
@@ -19,10 +21,11 @@ function ProfileController($scope, $http, broadCastService) {
 
         $http({method: 'PUT', url: '/memmeeuserrest/user/' + $scope.user.id + '?apiKey=' + $scope.user.apiKey, data: $scope.user}).
             success(function(data, status, headers, config) {
-                console.log('your user has been updated')
+                console.log('your user has been updated');
                 broadCastService.loginUser(data);
                 broadCastService.showProfileUpdatedSuccess();
                 broadCastService.createModeStartedCreateModeController();
+                $location.path("create");
             }).
             error(function(data, status, headers, config) {
                 console.log('error while saving your user');
@@ -34,7 +37,7 @@ function ProfileController($scope, $http, broadCastService) {
     {
         $http({method: 'GET', url: '/memmeeuserrest/user/login?apiKey=' + broadCastService.apiKey}).
             success(function(data, status, headers, config) {
-                console.log('your user was loaded via API key')
+                console.log('your user was loaded via API key');
                 broadCastService.loginUser(data);
                 $scope.user = data;
                 $scope.saveLoggedInUser(data);
@@ -45,4 +48,4 @@ function ProfileController($scope, $http, broadCastService) {
     }
 }
 
-ProfileController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
+ProfileController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location'];
