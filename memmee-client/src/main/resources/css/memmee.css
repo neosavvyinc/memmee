@@ -608,8 +608,8 @@ html.homepage{
     top : 166px;
     left: 650px;
     width: 248px;
-    height: 200px;
-    padding: 15px 34px 28px 36px;
+    height: 170px;
+    padding: 45px 34px 28px 36px;
     overflow: hidden;
     background: transparent url(../img/bg-bubble.png) top left no-repeat;
 }
@@ -822,14 +822,21 @@ html.homepage{
     left: 60px;
     width: 715px;
     height: 19px;
+    padding-left: 206px;
     background: transparent url('../img/sprite-ui.png') 0 -428px no-repeat;
-    text-indent: -90000px;
+    font: 21px/1em Crimson, 'Times New Roman', Times, Serif;
+    color: #51AEC9;
 }
 
 .memmee-card .btn.inspiration{
     position: absolute;
     top: 18px;
     right: -30px;
+    height: 35px;
+    padding: 3.5px 0;
+    font: 16px/1em Crimson, 'Times New Roman', Times, Serif;
+    text-align: center;
+    text-decoration: none;
     text-indent: 0px;
     -moz-transform: rotate(-1deg);
     -webkit-transform: rotate(-1deg);
