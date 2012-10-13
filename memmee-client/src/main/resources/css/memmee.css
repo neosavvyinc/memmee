@@ -580,6 +580,7 @@ html.homepage{
     background-image: url('../img/bg-card-coffee.png');
 }
 .memmee-card.style-coffee .memmee-text{
+    color: #7c3f36;
     font: 24px/36px 'rokkitt', Arial, Helvetica, sans-serif;
 }
 .memmee-card.style-whimsy{
@@ -592,6 +593,7 @@ html.homepage{
 }
 .memmee-card.style-whimsy .memmee-text{
     font: 22px/35px 'josefinslab', Arial, Helvetica, sans-serif;
+    color: #513f48;
 }
 .memmee-card.style-inspiration{
     width: 885px;
@@ -602,6 +604,7 @@ html.homepage{
     background-image: url('../img/bg-card-inspiration.png');
 }
 .memmee-card.style-inspiration .memmee-text{
+    color: #407280;
     font: 22px/35px 'Josefin Sans', Arial, Helvetica, sans-serif;
 }
 .memmee-card.style-travel{
@@ -612,6 +615,7 @@ html.homepage{
     background-image: url('../img/bg-card-travel.png');
 }
 .memmee-card.style-travel .memmee-text{
+     color: #7f7676;
     font: 24px/36px 'Crimson Text', 'Times New Roman', Times, serif;
 }
 .memmee-card.style-travel .btn.inspiration{
