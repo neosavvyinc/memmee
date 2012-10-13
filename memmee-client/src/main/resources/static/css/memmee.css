@@ -211,7 +211,7 @@ input.rounded{
     width: 872px;
     height: 389px;
     margin-bottom: 14px;
-    padding: 16px 12px 12px 12px;
+    padding: 0px 12px 12px 12px;
     background: white;
 }
 .memmee-carousel .btn.prev{
@@ -565,7 +565,7 @@ html.blogpage{
     line-height: 60px;
 }
 .homepage #header{
-    margin-bottom: 10px;
+    margin-bottom: 23px;
 }
 .blogpage #header .btn.join{
     position: absolute;
