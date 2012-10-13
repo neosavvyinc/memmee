@@ -857,10 +857,11 @@ html.homepage{
 .memmee-card .btn.inspiration{
     position: absolute;
     top: 18px;
+    color: #1a526f;
     right: -30px;
     height: 35px;
     padding: 3.5px 0;
-    font: 16px/1em Crimson, 'Times New Roman', Times, Serif;
+    font: italic 16px/1em Crimson, 'Times New Roman', Times, Serif;
     text-align: center;
     text-decoration: none;
     text-indent: 0px;
@@ -1541,6 +1542,9 @@ link.noMemmees{
     width: 192px;
     height: 42px;
     background-position: 0 -448px;
+}
+.btn.inspiration .we-can-help {
+    font-size: 12px;
 }
 .btn.removePhoto{
     display: inline-block;
