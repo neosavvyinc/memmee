@@ -1,6 +1,7 @@
 //Use this as a place to put base/extended functionality in other controllers (search for use to see)
 function DefaultController($scope, tearDown, runTearDownOnLoad) {
-    if (runTearDownOnLoad == undefined) {
+    "use strict";
+    if (runTearDownOnLoad === undefined) {
         runTearDownOnLoad = true;
     }
 
