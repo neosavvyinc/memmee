@@ -563,7 +563,7 @@ html.homepage{
 }
 html.blogpage{
     background-color: white;
-    background-image: none;
+    background: url('../../img/blog-bg-header.png') top left repeat-x;
 }
 
 #container {

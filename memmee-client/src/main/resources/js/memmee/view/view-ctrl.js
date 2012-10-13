@@ -61,6 +61,16 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
         }
     };
 
+    $scope.getSelectedTheme = function () {
+
+        if ($scope.memmee.theme.name) {
+            return $scope.memmee.theme.name;
+        }
+        else {
+            return 'memmee-card';
+        }
+    }
+
     $scope.generateAndShowPublicLink = function () {
         $http({method:'PUT', url:'/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey, data:$scope.memmee}).
             success(function (data, status, headers, config) {

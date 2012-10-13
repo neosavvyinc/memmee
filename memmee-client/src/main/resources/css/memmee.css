@@ -1025,6 +1025,14 @@ html.homepage{
     background-position: 0 -375px;
 }
 
+.slidecard.whimsy{
+    position: relative;
+    top: -3px;
+    width: 148px;
+    height: 80px;
+    color: #513f48;
+    background-position: 0 -495px;
+}
 
 .list.steps{
     display: block;

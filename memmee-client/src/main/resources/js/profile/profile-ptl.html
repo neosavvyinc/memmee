@@ -23,6 +23,7 @@
                            name="email"
                            placeholder="email address"
                            ng-model="user.email"
+                            disabled="disabled"
                             >
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
@@ -47,7 +48,7 @@
                     <span class="feedback-form invalid"></span>
                 </fieldset>
                 <fieldset>
-                    <a href="#create" ng-click="update()" class="btn save">Save</a>
+                    <a ng-click="update()" class="btn save">Save</a>
                 </fieldset>
             </form>
         </div>

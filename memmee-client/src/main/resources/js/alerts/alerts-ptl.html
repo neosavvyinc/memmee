@@ -4,9 +4,8 @@
 
         <a class="btn modal-ext" ng-click="noClick()">×</a>
         <h1 class="modal-heading">{{header}}</h1>
-
-        <div class="controls io">
-            <p ng-bind-html-unsafe="message"></p>
+        <p ng-bind-html-unsafe="message"></p>
+        <div class="controls modal">
             <a class="btn delete" ng-click="yesClick()">Ok</a>
         </div>
     </div>
