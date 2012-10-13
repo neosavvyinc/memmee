@@ -77,6 +77,10 @@ function ArchiveListController($scope, $http, broadCastService) {
         return null;
     };
 
+    $scope.getTruncatedText = function(text) {
+       return StringUtil.truncate(text, 40, true);
+    };
+
     $scope.initializeScrolling = function (clazz) {
         $(clazz).scrollable();
     }
