@@ -55,6 +55,7 @@ var LoginControllerEvents = (function () {
         priv_events = {
             'INVALID_LOGIN': 'invalidLogin' + controllerName,
             'LOGIN': 'login' + controllerName,
+            'FIRST_LOGIN': 'firstLogin' + controllerName,
             'LOGOUT': 'logout' + controllerName
         };
 
