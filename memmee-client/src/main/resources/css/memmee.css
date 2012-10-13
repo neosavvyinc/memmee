@@ -1543,6 +1543,9 @@ link.noMemmees{
     height: 42px;
     background-position: 0 -448px;
 }
+.btn.inspiration .we-can-help {
+    font-size: 12px;
+}
 .btn.removePhoto{
     display: inline-block;
     width: 112px;
