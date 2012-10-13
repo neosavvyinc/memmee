@@ -28,21 +28,20 @@ function LoginController($scope, $http, broadCastService) {
 
     $scope.forgotPassword = function () {
         if ($scope.user['email'] != "") {
-            $scope.forgotPasswordReminder = "";
+            $scope.forgotPasswordInputStyle = null;
+
             $http({method:'POST', url:'/memmeeuserrest/user/forgotpassword?email=' + $scope.user['email']}).
                 success(function (data, status, headers, config) {
-                    $scope.forgotPasswordReminder = "A new password was sent to your email";
-                    $scope.forgotPasswordSuccessStyle = {'color': '#0000FF'};
-
                     broadCastService.forgotPasswordSuccess();
                 }).
                 error(function (data, status, headers, config) {
                     $scope.forgotPasswordReminder = "There was an error sending the new password to your email.";
 
+                    $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
                     broadCastService.forgotPasswordError();
                 });
         } else {
-           $scope.forgotPasswordReminder = "Please enter your email address below";
+            $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
         }
     }
 
