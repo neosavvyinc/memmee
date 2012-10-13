@@ -7,6 +7,7 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
     broadCastService.attachment = null;
     broadCastService.apiKey = $location.search().apiKey;
     broadCastService.selectedMemmee = null;
+    broadCastService.showInitialPrompt = false;
 
     broadCastService.loginUser = function ($user) {
         this.user = $user;
@@ -20,6 +21,14 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
             else
                 $location.url("/create");
         }
+    }
+
+    broadCastService.firstLoginUser = function () {
+        broadCastService.showInitialPrompt = true;
+    }
+
+    broadCastService.turnOffInitialPrompt = function() {
+        broadCastService.showInitialPrompt = false;
     }
 
     broadCastService.logoutUser = function ($user) {

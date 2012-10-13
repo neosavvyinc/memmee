@@ -579,6 +579,10 @@ html.homepage{
     color: #7c3f36;
     background-image: url('../img/bg-card-coffee.png');
 }
+.memmee-card.style-coffee .memmee-text{
+    color: #7c3f36;
+    font: 24px/36px 'rokkitt', Arial, Helvetica, sans-serif;
+}
 .memmee-card.style-whimsy{
     width: 883px;
     height: 630px;
@@ -586,6 +590,10 @@ html.homepage{
     font: 22px/35px 'josefinslab', Arial, Helvetica, sans-serif;
     color: #513f48;
     background-image: url('../img/bg-card-whimsy.png');
+}
+.memmee-card.style-whimsy .memmee-text{
+    font: 22px/35px 'josefinslab', Arial, Helvetica, sans-serif;
+    color: #513f48;
 }
 .memmee-card.style-inspiration{
     width: 885px;
@@ -595,6 +603,10 @@ html.homepage{
     color: #407280;
     background-image: url('../img/bg-card-inspiration.png');
 }
+.memmee-card.style-inspiration .memmee-text{
+    color: #407280;
+    font: 22px/35px 'Josefin Sans', Arial, Helvetica, sans-serif;
+}
 .memmee-card.style-travel{
     width: 979px;
     height: 597px;
@@ -602,8 +614,15 @@ html.homepage{
     color: #7f7676;
     background-image: url('../img/bg-card-travel.png');
 }
+.memmee-card.style-travel .memmee-text{
+     color: #7f7676;
+    font: 24px/36px 'Crimson Text', 'Times New Roman', Times, serif;
+}
 .memmee-card.style-travel .btn.inspiration{
     right: 116px;
+}
+.memmee-card.style-travel .controls.share{
+    right: 127px;
 }
 
 .memmee-bubble{
@@ -916,6 +935,8 @@ html.homepage{
     left: 96px;
     padding: 0 6px 9px;
     color: #d44e3c;
+    font-size: 16px;
+    line-height: 20px;
     text-transform: lowercase;
     background: transparent url('../img/bg-memmee-date.png') bottom left repeat-x;
 }
@@ -977,6 +998,7 @@ html.homepage{
     height: 81px;
     color: #404445;
     background-position: 0 0;
+    text-align: center;
 }
 
 .slidecard.art{
