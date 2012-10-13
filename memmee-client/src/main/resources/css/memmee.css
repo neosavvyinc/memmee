@@ -968,10 +968,12 @@ html.homepage{
 
 .slidecard-date{
     display: block;
-    padding-left: 4px;
-    margin-bottom: 11px;
+    padding: 10px 0 0 4px;
+    margin-bottom: 4px;
     color: #d44e3c;
+    font: italic 12px 'Crimson Text', 'Times New Roman', Times, serif;
     text-transform: lowercase;
+    letter-spacing: 2px;
 }
 
 .slidecard{
@@ -1349,7 +1351,7 @@ table.calendar{
     height: 19px;
     font-size: 12px;
     line-height: 19px;
-    background: transparent url('../img/bg-link-today.png') 28px bottom no-repeat;
+    background: transparent url('../img/bg-link-today.png') 0px bottom repeat-x;
 }
 
 .link.bubble-close{
