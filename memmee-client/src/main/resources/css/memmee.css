@@ -1356,7 +1356,7 @@ table.calendar{
     position: relative;
     top: 5px;
     left: 64px;
-    font: bold 10px/12px "josefinslab", Arial, sans-serif;
+    font: bold 14px/12px "josefinslab", Arial, sans-serif;
     text-transform: lowercase;
     color: white;
 }
@@ -1391,7 +1391,7 @@ link.noMemmees{
 }
 
 .btn.newMemmee, .btn.viewMemmee {
-    color: #2B231D;
+    color: #4a3d31;
     text-decoration: none;
     font-weight: bold;
     text-indent: 55px;
