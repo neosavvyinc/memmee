@@ -56,7 +56,8 @@ var LoginControllerEvents = (function () {
             'INVALID_LOGIN': 'invalidLogin' + controllerName,
             'LOGIN': 'login' + controllerName,
             'FIRST_LOGIN': 'firstLogin' + controllerName,
-            'LOGOUT': 'logout' + controllerName
+            'LOGOUT': 'logout' + controllerName,
+            'FORGOT_PASSWORD_SENT': 'forgotPasswordSent' + controllerName
         };
 
     return {
