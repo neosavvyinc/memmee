@@ -45,7 +45,7 @@ function SecurityController($scope, broadCastService, $timeout, $location, $rout
     {
         console.log("Loading a memmee from a share key");
     }
-    else if ($location.path() == '/profile' && $location.search.apiKey )
+    else if ($location.path() == '/profile' )
     {
         console.log("$location.search('apiKey')" + $location.search.apiKey );
         console.log("Loading your profile");
