@@ -602,6 +602,9 @@ html.homepage{
     color: #7f7676;
     background-image: url('../img/bg-card-travel.png');
 }
+.memmee-card.style-travel .btn.inspiration{
+    right: 116px;
+}
 
 .memmee-bubble{
     position: absolute;
