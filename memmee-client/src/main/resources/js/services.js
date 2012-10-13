@@ -59,7 +59,11 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast('deleteAttachmentSuccess');
     }
 
-    var createMode = true;
+    //@TODO, can be better handled in refactor
+    if ($location.path() == "/create")
+        var createMode = true;
+    else
+        var createMode = false;
 
     broadCastService.isCreateMode = function () {
         return createMode;
