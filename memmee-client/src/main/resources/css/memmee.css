@@ -968,10 +968,12 @@ html.homepage{
 
 .slidecard-date{
     display: block;
-    padding-left: 4px;
-    margin-bottom: 11px;
+    padding: 10px 0 0 4px;
+    margin-bottom: 4px;
     color: #d44e3c;
+    font: italic 12px 'Crimson Text', 'Times New Roman', Times, serif;
     text-transform: lowercase;
+    letter-spacing: 2px;
 }
 
 .slidecard{
