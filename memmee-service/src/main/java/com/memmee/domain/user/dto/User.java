@@ -9,6 +9,8 @@ import java.util.Date;
 
 public class User implements Serializable {
 
+    public static final Long NEW_USER_PASSWORD_ID = -1L;
+
     private static final long serialVersionUID = 7080674511686049053L;
 
     private Long id;

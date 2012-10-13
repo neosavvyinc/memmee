@@ -101,15 +101,12 @@ public class UserResource {
 
         try {
 
-            if( userLookup.getPassword().getId() > -1L )
-            {
+            if (userLookup.getPassword().getId() > -1L) {
                 passwordDao.update(
                         userLookup.getPassword().getId(),
                         passwordGenerator.encrypt(user.getPassword().getValue()),
                         0);
-            }
-            else
-            {
+            } else {
                 Long newPassId = passwordDao.insert(
                         passwordGenerator.encrypt(user.getPassword().getValue()),
                         0);
@@ -191,10 +188,13 @@ public class UserResource {
 
         if (user == null)
             throw new UserResourceException("There is no user that exists with that email");
-
-        String temporaryPassword = new RandPass().getPass(10);
-        passwordDao.update(user.getPassword().getId(), passwordGenerator.encrypt(temporaryPassword), 1);
-        memmeeMailSender.sendForgotPasswordEmail(user, temporaryPassword);
+        else if (user.getPassword() == null || user.getPassword().getId().equals(User.NEW_USER_PASSWORD_ID))
+            memmeeMailSender.sendConfirmationEmail(user);
+        else {
+            String temporaryPassword = new RandPass().getPass(10);
+            passwordDao.update(user.getPassword().getId(), passwordGenerator.encrypt(temporaryPassword), 1);
+            memmeeMailSender.sendForgotPasswordEmail(user, temporaryPassword);
+        }
     }
 
     @DELETE
