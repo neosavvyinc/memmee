@@ -9,7 +9,7 @@ function ProfileController($scope, $http, broadCastService) {
 
     $scope.update = function()
     {
-        if( $scope.confirmedPass != $scope.user.password.value )
+        if( $scope.confirmedPass !== $scope.user.password.value )
         {
             console.log("your password doesn't match your provided password");
             return;
