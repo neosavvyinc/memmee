@@ -933,8 +933,8 @@ html.homepage{
     left: 96px;
     padding: 0 6px 9px;
     color: #d44e3c;
-    font-size: 16px;
-    line-height: 20px;
+    font: italic 16px/20px 'Crimson Text', 'Times New Roman', Times, serif;
+    letter-spacing: 2px;
     text-transform: lowercase;
     background: transparent url('../img/bg-memmee-date.png') bottom left repeat-x;
 }
