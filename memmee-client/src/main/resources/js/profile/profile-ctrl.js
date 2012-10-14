@@ -8,10 +8,25 @@ function ProfileController($scope, $http, broadCastService, $location) {
             $scope.confirmedPass = '';
         });
 
+    $scope.validUserOrApiKey = function () {
+
+        if (!broadCastService) {
+            return false;
+        }
+
+        if (broadCastService.apiKey === undefined &&
+            broadCastService.user === undefined &&
+            (broadCastService.user.id === "" ||
+                broadCastService.user.id === undefined ||
+                broadCastService.user.id === null)) {
+            return false;
+        }
+        return true;
+    };
+
     $scope.update = function () {
 
-        if( $scope.confirmedPass !== $scope.user.password.value )
-        {
+        if ($scope.confirmedPass !== $scope.user.password.value){
             console.log("your password doesn't match your provided password");
             return;
         }
@@ -30,11 +45,11 @@ function ProfileController($scope, $http, broadCastService, $location) {
                 console.log('error while saving your user');
                 broadCastService.showProfileUpdatedError();
             });
-    }
+    };
 
-    if( broadCastService && broadCastService.apiKey )
-    {
-        $http({method: 'GET', url: '/memmeeuserrest/user/login?apiKey=' + broadCastService.apiKey}).
+    if ($scope.validUserOrApiKey()) {
+        console.log("Retrieving a user based on their apiKey");
+        $http({method: 'GET', url: '/memmeeuserrest/user/login?apiKey=' + broadCastService.user.apiKey}).
             success(function(data, status, headers, config) {
                 console.log('your user was loaded via API key');
                 broadCastService.loginUser(data);
@@ -45,9 +60,7 @@ function ProfileController($scope, $http, broadCastService, $location) {
                 console.log('unable to load your user by API key');
                 $location.path("/home");
             });
-    }
-    else
-    {
+    } else {
         $location.path("/home");
     }
 }

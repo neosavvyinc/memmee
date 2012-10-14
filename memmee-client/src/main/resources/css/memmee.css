@@ -208,9 +208,7 @@ input.rounded{
 
 }
 .home-btm{
-    position: relative;
-    min-height: 1029px;
-    padding-top: 60px;
+    width: 100%;
 }
 .home-btm .icon.free{
     bottom: 173px;
@@ -226,77 +224,71 @@ input.rounded{
 }
 .memmee-carousel{
     position: relative;
-    width: 931px;
-    height: 388px;
-    margin-bottom: 4px;
+    width: 872px;
+    height: 389px;
+    margin-bottom: 14px;
+    padding: 0px 12px 12px 12px;
+    background: white;
 }
 .memmee-carousel .btn.prev{
+    z-index: 4;
     text-indent: -100000px;
     width: 35px;
     height: 36px;
     position: absolute;
     top: 174px;
-    left: -22px;
+    left: -52px;
     background-position: 0 -844px;
 }
 .memmee-carousel .btn.prev:hover{
     background-position: 0 -880px;
 }
 .memmee-carousel .btn.next{
+    z-index: 4;
     text-indent: -100000px;
     width: 33px;
     height: 34px;
     position: absolute;
     top: 174px;
-    right: -22px;
+    right: -52px;
     background-position: -36px -846px;
 }
 .memmee-carousel .btn.next:hover{
     background-position: -36px -881px;
 }
+.carousel-img{
+    position: absolute;
+    width: 872px;
+    height: 386px;
+    overflow: hidden;
+    background-color: transparent;
+    background-position: top left;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.carousel-img * {
+    visibility: hidden;
+}
+.carousel-img-1{
+    background-image: url('../img/homepage-carousel-1.jpg');
+    z-index: 3;
+}
+.carousel-img-2{
+    background-image: url('../img/homepage-carousel-2.jpg');
+    z-index: 2;
+}
+.carousel-img-3{
+    background-image: url('../img/homepage-carousel-3.jpg');
+    z-index: 1;
+}
 .memmee-carousel-item{
     width: inherit;
     height: inherit;
-    background: transparent url('../img/bg-carousel.png')
-}
-.memmee-pts{
-    width: 450px;
-    float: left;
-    padding-left: 53px;
-    color: #eee;
-    font: 35px/58px 'Crimson Text', 'Times New Roman', Times, serif;
-}
-.memmee-pts dt{
-    padding-left: 45px;
-}
-.memmee-pts dd{
-    height: 48px;
-    padding-left: 45px;
-    background-image: url('../img/sprite-ui.png');
-    background-repeat: no-repeat;
-    font: 35px/58px 'Crimson Text', 'Times New Roman', Times, serif;
-}
-.memmee-pt-1{
-    background-position: -90px -880px;
-}
-
-.memmee-pt-2{
-    background-position: -90px -930px;
-}
-
-.memmee-pt-3{
-    background-position: -90px -975px;
-}
-
-.memmee-pt-4{
-    background-position: -90px -1027px;
-}
-
-.memmee-pt-5{
-    background-position: -90px -1027px;
 }
 .memmee-carousel-item .signup.sm{
-    float: right;
+    position: absolute;
+    right: 18px;
+    z-index: 5;
     width: 242px;
     height: 229px;
     margin-top: 35px;
@@ -359,25 +351,10 @@ input.rounded{
     background-color: white;
 }
 .memmee-beforeAfter{
-    visibility: hidden;
-    margin-bottom: 48px;
-}
-.memmee-before{
-    margin-right: 24px;
-}
-.memmee-before, .memmee-after{
-    position: relative;
+    width: 569px;
+    height: 326px;
+    background: transparent url('../img/bg-beforeAfter.jpg') top left no-repeat;
     float: left;
-    width: 458px;
-    height: 346px;
-    background: transparent url('../img/bg-beforeAfter.png') top left no-repeat;
-}
-.memmee-before h3, .memmee-after h3{
-    position: absolute;
-    top: 163px;
-    left: 150px;
-    font: 24px 'Crimson Text', 'Times New Roman', Times, serif;
-    color: #48a6c2;
 }
 .postcard{
     width: 935px;
@@ -387,16 +364,17 @@ input.rounded{
 }
 .blog-container{
     position: relative;
-    width: 100%;
-    height: 193px;
+    top: -7px;
+    float: right;
+    width: 244px;
+    height: 249px;
+    padding: 55px 32px 27px;
+    background: transparent url('../img/bg-homepage-blog.png') top left no-repeat;
 }
 .blog{
-    width: 509px;
-    height: 193px;
-    padding: 23px 40px 30px 25px;
-    margin-right: 28px;
-    background: transparent url('../img/bg-blog.png') top left no-repeat;
+
 }
+
 .title-blog{
     font: italic 28px/36px 'Crimson Text', 'Times New Roman', Times, serif;
     color: #144758;
@@ -485,7 +463,82 @@ input.rounded{
 }
 
 .blog-col.right{
-    width: 200px;
+    width: 175px;
+    padding-left: 25px;
+    background: transparent url('../img/lines-blog-col.png') 25px 0 no-repeat;
+}
+
+.blog-nav a{
+    display: block;
+    width: 162px;
+    height: 39px;
+    margin-bottom: 9px;
+    padding-left: 15px;
+    font: 18px/39px 'Crimson Text', 'Times New Roman', Times, Serif;
+    text-decoration: none;
+    color: #323435;
+    background: transparent url('../img/blog-sprite-ui.png') top left no-repeat;
+}
+
+.blog-nav a.selected{
+    width: 193px;
+    background-position: 0 -40px;
+}
+
+.blog-post.lg{
+    width: 478px;
+    min-height: 50px;
+    margin-bottom: 20px;
+    background: transparent url('../img/bg-blog-post-lg.png') top left repeat-y;
+}
+.blog-post.lg .tape{
+    display: block;
+    width: 104px;
+    height: 30px;
+    margin: 0 auto;
+    background: transparent url('../img/blog-sprite-ui.png') 0 -349px no-repeat;
+}
+.blog-post.lg .post-content{
+    position: relative;
+    bottom: -4px;
+    height: inherit;
+    margin-right: 5px;
+    padding: 0 20px 34px;
+    background: transparent url('../img/bg-blog-post-lg-content.png') bottom left repeat-x;
+}
+.blog-post.lg .post-img{
+    display: block;
+    margin: 20px 0;
+}
+.blog-post.lg .post-copy{
+    font: 14px/20px 'Crimson Text', 'Times New Roman', Times, Serif;
+    color: #323435;
+    margin-bottom: 25px;
+}
+.blog-post.lg .link.more{
+    display: block;
+}
+
+.section.blog{
+    display: block;
+    width: 162px;
+    padding: 25px 0;
+    background: transparent url('../img/lines-blog-col.png') bottom left no-repeat;
+}
+.section.blog dt{
+    display: block;
+    margin-bottom: 33px;
+    font: bold 10px/12px 'opensans', Helvetica, arial, sans-serif;
+    color: #d44e3c;
+}
+.section.blog dd{
+    display: block;
+    margin-bottom: 4px;
+    font: 12px/15px 'Crimson', 'Times New Roman', Times, serif;
+}
+.section.blog a{
+    text-decoration: none;
+    color: inherit;
 }
 
 .clearfix:after {
@@ -510,6 +563,10 @@ html.homepage{
     min-height: 1800px;
     background: transparent url('../img/bg-homepage.jpg') top left repeat-x;
 }
+html.blogpage{
+    background-color: white;
+    background: url('../../img/blog-bg-header.png') top left repeat-x;
+}
 
 #container {
     width: 967px;
@@ -524,6 +581,14 @@ html.homepage{
     margin-bottom: 40px;
     /*padding: 0 50px;*/
     line-height: 60px;
+}
+.homepage #header{
+    margin-bottom: 23px;
+}
+.blogpage #header .btn.join{
+    position: absolute;
+    top: 12px;
+    right: 0;
 }
 
 #primaryNav{
@@ -542,7 +607,7 @@ html.homepage{
     /*padding: px px px px;*/
 }
 .homepage #content{
-    width: 870px;
+    width: 898px;
 }
 .memmee-card-home{
     position: relative;
@@ -824,6 +889,13 @@ html.homepage{
 
 #footer{
     padding-top: 14px;
+}
+
+.homepage #footer{
+    height: 140px;
+}
+.homepage #footerNav{
+    margin-top: 15px;
 }
 
 #footerNav li{
@@ -1636,6 +1708,16 @@ table.calendar{
     width: 12px;
     height: 12px;
     background-position: -12px -676px;
+}
+.btn.join{
+    width: 79px;
+    height: 30px;
+    font: bold 12px/33px 'Crimson Text', 'Times New Roman', Times, Serif;
+    text-align: center;
+    text-decoration: none;
+    color: #3d4d4f;
+    background-image: url('../img/blog-sprite-ui.png');
+    background-position: 0 -381px;
 }
 
 .icon {

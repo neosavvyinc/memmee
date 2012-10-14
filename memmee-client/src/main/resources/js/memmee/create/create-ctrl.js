@@ -224,11 +224,6 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         }
     });
 
-    $scope.$on( "closeAllDropdowns", function(event, next, current) {
-        $scope.closeShareDropdown();
-    });
-
-
     //UI Initialization
     $scope.initializeDatePicker = function (clazz) {
         $(clazz).data("date", $scope.getTodaysDate());

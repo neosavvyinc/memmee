@@ -1,73 +1,52 @@
 <div id="content" ng-controller="HomeController">
-    <div class="home-top">
-        <div class="memmee-carousel">
-            <a class="btn prev" style="z-index: 10;">Previous</a>
+    <div class="memmee-carousel">
+            <a class="btn prev">Previous</a>
+            <div class="memmee-carousel-item clearfix">
 
-            <div class="memmee-carousel-container" ng-init="initializeScrolling('.memmee-carousel-container')">
-                <div class="memmee-carousel-items items">
-                    <div class="memmee-carousel-item">
-                        <dl class="memmee-pts crimson">
-                            <dt>memmee:</dt>
-                            <dd class="memmee-pt-1">can keep a secret</dd>
-                            <dd class="memmee-pt-2">is an afternoon pick-me-up</dd>
-                            <dd class="memmee-pt-3">is a way to blow off steam</dd>
-                            <dd class="memmee-pt-4">doesn't care if you're messy</dd>
-                            <dd class="memmee-pt-5">will make you laugh out loud</dd>
-                        </dl>
+                <div class="carousel-img carousel-img-1">
+                    <h1>Memmee:</h1>
+                    <ul>
+                        <li>can keep a secret</li>
+                        <li>is an afternoon pick-me-up</li>
+                        <li>is a way to blow off steam</li>
+                        <li>doesn't care if you're messy</li>
+                        <li>will make you laugh out loud</li>
+                    </ul>
+                </div>
 
-                        <div class="signup sm">
-                            <h2 class="signup-title">Sign Up Now</h2>
+                <div class="carousel-img carousel-img-2">
+                    <h1>memmee is about recording what's on your min today:</h1>
+                    <h2>it's all about the little things. a few words or lines will do. serious or sill, doesn't matter.</h2>
+                    <ul>
+                        <li>a conversation, a feeling, an encounter</li>
+                        <li>a mood, a laugh-out-loud moment</li>
+                    </ul>
+                </div>
 
-                            <form method="post" ng-controller="RegistrationController">
-                                <p>an email address is all you need to get started</p>
-                                <fieldset>
-                                    <input type="text" name="signup" value="Email Address" ng-model="user.email"/>
-                                </fieldset>
-                                <fieldset>
-                                    <a class="btn signup" ng-click="register()">Join</a>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="memmee-carousel-item">
-                        <dl class="memmee-pts crison">
-                            <dt>memmee:</dt>
-                            <dd class="memmee-pt-1">this is the other one</dd>
-                            <dd class="memmee-pt-2">other one</dd>
-                            <dd class="memmee-pt-3">this is it</dd>
-                            <dd class="memmee-pt-4">i know that guy</dd>
-                            <dd class="memmee-pt-5">this is the guy</dd>
-                        </dl>
+                <div class="carousel-img carousel-img-3">
+                    <h1>let's relive the small moments, shall we?</h1>
+                </div>
 
-                        <div class="signup sm">
-                            <h2 class="signup-title">Sign Up Now</h2>
+                <div class="signup sm">
+                    <h2 class="signup-title">Sign Up Now</h2>
 
-                            <form method="post" ng-controller="RegistrationController">
-                                <p>an email address is all you need to get started</p>
-                                <fieldset>
-                                    <input type="text" name="signup" value="Email Address" ng-model="user.email"/>
-                                </fieldset>
-                                <fieldset>
-                                    <a class="btn signup" ng-click="register()">Join</a>
-                                </fieldset>
-                            </form>
-                        </div>
-                    </div>
+                    <form id="signupTop" method="post" ng-controller="RegistrationController">
+                        <p>an email address is all you need to get started</p>
+                        <fieldset>
+                            <input type="text" name="signup" value="Email Address" ng-model="user.email"/>
+                        </fieldset>
+                        <fieldset>
+                            <a class="btn signup" ng-click="register()">Join</a>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
-
-            <a class="btn next" style="z-index: 10;">Next</a>
-        </div>
+        <a class="btn next" style="z-index: 10;">Next</a>
     </div>
 
-    <div class="home-btm">
-        <div class="memmee-beforeAfter clearfix">
-            <div class="memmee-before">
-                <h3>Before Memmee</h3>
-            </div>
-            <div class="memmee-after">
-                <h3>After Memmee</h3>
-            </div>
+    <div class="home-btm clearfix">
+        <div class="memmee-beforeAfter">
+
         </div>
 
         <div class="blog-container">
@@ -78,36 +57,25 @@
                     <span class="post-date">09.29,2012</span>
                     <dl class="blog-list">
                         <dt>hello world</dt>
-                        <dd>well, we made it. it's the first memmee blog post which means it's time for us to forget
-                            forgetting, to remember remembering, and to celebrate the little things that add up to a
-                            life worth living.
-                        </dd>
-                    </dl>
-                </div>
-                <div class="blog-post">
-                    <span class="post-date">09.29,2012</span>
-                    <dl class="blog-list">
-                        <dt>hello world</dt>
-                        <dd>Person Who Remotely Cares About My State of Being says: "Hey, what's shakin?" Me: "Nothing
-                            much. Same old, same old" STOP THE MADNESS????
-                        </dd>
+                        <dd>well, we made it. it's the first memmee blog post which means it's time for us to forget forgetting, to remember remembering, and to celebrate the little things that add up to a life worth living.</dd>
                     </dl>
                 </div>
             </div>
 
-            <div class="signup sm" ng-controller="RegistrationController">
-                <h2 class="signup-title">Sign up Now</h2>
-
-                <form id="signupLower" method="post">
-                    <p>Email address is all you need to get started</p>
-                    <fieldset>
-                        <input type="text" id="signup" name="signup" placeholder="Email Address" ng-model="user.email"/>
-                    </fieldset>
-                    <fieldset>
-                        <a class="btn signup" ng-click="register()">Signup</a>
-                    </fieldset>
-                </form>
-            </div>
         </div>
     </div>
+
+    <div class="signup stretched" ng-controller="RegistrationController">
+        <h1 class="signup-title">Sign up Now</h1>
+        <label>email address is all you need to get started</label>
+        <form id="signupLower" method="post">
+            <fieldset>
+                <input type="text" id="signup" name="signup" placeholder="Email Address" ng-model="user.email"/>
+            </fieldset>
+            <fieldset>
+                <a class="btn signup" ng-click="register()">Signup</a>
+            </fieldset>
+        </form>
+    </div>
+
 </div>
