@@ -310,7 +310,7 @@ input.rounded{
 .signup.stretched{
     display: table-cell;
     vertical-align: middle;
-    width: 851px;
+    width: 815px;
     height: 91px;
     padding-left: 52px;
     padding-right: 33px;
@@ -365,6 +365,7 @@ input.rounded{
 .blog-container{
     position: relative;
     top: -7px;
+    right: 64px;
     float: right;
     width: 244px;
     height: 249px;
@@ -388,7 +389,7 @@ input.rounded{
     margin-right: 0;
 }
 .post-date{
-    font: bold 10px/35px 'Open Sans', Arial, Helvetica, sans-serif;
+    font: italic bold 10px/35px 'Crimson Text', 'Times New Roman', Times, serif;
     color: #d44e3c;
 }
 .blog-list{
