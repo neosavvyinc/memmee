@@ -1,6 +1,6 @@
 /**
- * @license AngularJS v1.0.0rc1
- * (c) 2010-2011 AngularJS http://angularjs.org
+ * @license AngularJS v1.0.2
+ * (c) 2010-2012 Google, Inc. http://angularjs.org
  * License: MIT
  */
 (function(window) {
@@ -15,7 +15,7 @@
 
     load:
       - lib/angular-scenario.js
-      - lib/jstd-scenario-adapter-config-svc.js
+      - lib/jstd-scenario-adapter-config.js
       - lib/jstd-scenario-adapter.js
       # your test files go here #
 
@@ -26,7 +26,7 @@
  * For more information on how to configure jstd proxy, see {@link http://code.google.com/p/js-test-driver/wiki/Proxy}
  * Note the order of files - it's important !
  *
- * Example of jstd-scenario-adapter-config-svc.js
+ * Example of jstd-scenario-adapter-config.js
   <pre>
     var jstdScenarioAdapter = {
       relativeUrlPrefix: '/your-prefix/'
@@ -36,7 +36,7 @@
  * Whenever you use <code>browser().navigateTo('relativeUrl')</code> in your scenario test, the relativeUrlPrefix will be prepended.
  * You have to configure this to work together with JSTD proxy.
  *
- * Let's assume you are using the above configuration (jsTestDriver.conf and jstd-scenario-adapter-config-svc.js):
+ * Let's assume you are using the above configuration (jsTestDriver.conf and jstd-scenario-adapter-config.js):
  * Now, when you call <code>browser().navigateTo('index.html')</code> in your scenario test, the browser will open /your-prefix/index.html.
  * That matches the proxy, so JSTD will proxy this request to http://localhost:8000/index.html.
  */
