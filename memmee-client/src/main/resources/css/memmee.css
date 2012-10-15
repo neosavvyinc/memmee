@@ -159,7 +159,7 @@ input.rounded{
     display: block;
     position: absolute;
     top: 0;
-    left: 484px;
+    left: 528px;
     height: 52px;
     padding: 0 8px;
     margin-right: 8px;
@@ -272,15 +272,15 @@ input.rounded{
 }
 .carousel-img-1{
     background-image: url('../img/homepage-carousel-1.jpg');
-    z-index: 3;
+    /*z-index: 3;*/
 }
 .carousel-img-2{
     background-image: url('../img/homepage-carousel-2.jpg');
-    z-index: 2;
+    /*z-index: 2;*/
 }
 .carousel-img-3{
     background-image: url('../img/homepage-carousel-3.jpg');
-    z-index: 1;
+    /*z-index: 1;*/
 }
 .memmee-carousel-item{
     width: inherit;

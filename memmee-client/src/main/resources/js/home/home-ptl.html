@@ -1,9 +1,9 @@
 <div id="content" ng-controller="HomeController">
-    <div class="memmee-carousel" ng-init="initializeScrolling('.memmee-carousel-item')">
-            <a class="btn prev">Previous</a>
+    <div class="memmee-carousel">
+            <a class="btn prev" ng-click="clickPrevious()">Previous</a>
             <div class="memmee-carousel-item clearfix">
 
-                <div class="carousel-img carousel-img-1">
+                <div class="carousel-img carousel-img-1" ng-style="img1zindex">
                     <h1>Memmee:</h1>
                     <ul>
                         <li>can keep a secret</li>
@@ -14,7 +14,7 @@
                     </ul>
                 </div>
 
-                <div class="carousel-img carousel-img-2">
+                <div class="carousel-img carousel-img-2" ng-style="img2zindex">
                     <h1>memmee is about recording what's on your min today:</h1>
                     <h2>it's all about the little things. a few words or lines will do. serious or sill, doesn't matter.</h2>
                     <ul>
@@ -23,7 +23,7 @@
                     </ul>
                 </div>
 
-                <div class="carousel-img carousel-img-3">
+                <div class="carousel-img carousel-img-3" ng-style="img3zindex">
                     <h1>let's relive the small moments, shall we?</h1>
                 </div>
 
@@ -41,7 +41,7 @@
                     </form>
                 </div>
             </div>
-        <a class="btn next" style="z-index: 10;">Next</a>
+        <a class="btn next" ng-click="clickNext()">Next</a>
     </div>
 
     <div class="home-btm clearfix">
