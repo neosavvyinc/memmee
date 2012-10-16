@@ -311,15 +311,15 @@ input.rounded{
 .signup.stretched{
     display: table-cell;
     vertical-align: middle;
-    width: 815px;
+    width: 837px;
     height: 91px;
-    padding-left: 52px;
+    padding-left: 28px;
     padding-right: 33px;
     background: transparent url('../img/bg-signup.png') top left no-repeat;
 }
 .signup-title{
     display: inline-block;
-    margin-right: 12px;
+    margin-right: 1px;
     padding-bottom: 10px;
     font: italic 28px/36px 'Crimson Text', 'Times New Roman', Times, serif;
     color: #144758;
@@ -330,7 +330,7 @@ input.rounded{
 }
 .signup.stretched label{
     display: inline-block;
-    margin-right: 30px;
+    margin-right: 5px;
     font: 21px/1em 'Crimson Text', 'Times New Roman', Times, serif;
     color: #364a62;
 }
