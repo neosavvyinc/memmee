@@ -26,4 +26,19 @@ public class MemmeeMailSenderTest {
         mailSender.sendConfirmationEmail(user);
     }
 
+    @Test
+    public void testSendForgotPasswordEmail()
+    {
+        User user = new User();
+        user.setEmail("aparrish@neosavvy.com");
+
+        MemmeeUrlConfiguration config = new MemmeeUrlConfiguration();
+        config.setActiveEmailAddress("aparrish@neosavvy.com");
+        config.setActiveUrl("test-cases.memmee.com");
+
+
+        mailSender.setUrlConfiguration( config );
+        mailSender.sendForgotPasswordEmail(user, "testPass");
+    }
+
 }

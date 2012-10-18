@@ -65,10 +65,13 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         message.setFrom_email(memmeeUrlConfiguration.getActiveEmailAddress());
         message.setFrom_name("memmee");
         message.setHeaders(headers);
-        message.setHtml(String.format("<html><body>forgotten password<br>Your password is %s. " +
-                "login at <a href=\"http://"+ memmeeUrlConfiguration.getActiveUrl() + "/#\">memmee</a> and update your " +
-                "profile now. thanks for being a part of memmee.",
-                temporaryPassword));
+
+        String formattedText = String.format("please login at <a href='http://" + memmeeUrlConfiguration.getActiveUrl() +
+                "/#'>memmee</a> using this temporary password and update your " +
+                "profile with a new password. thank you for being part of memmee. temporary password:%s",
+                temporaryPassword);
+
+        message.setHtml(formattedText);
 
         message.setSubject("memmee - forgotten password");
         MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("New Memmee User!", user.getEmail())};
