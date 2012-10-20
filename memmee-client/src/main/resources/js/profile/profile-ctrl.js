@@ -49,7 +49,14 @@ function ProfileController($scope, $http, broadCastService, $location) {
 
     if ($scope.validUserOrApiKey()) {
         console.log("Retrieving a user based on their apiKey");
-        $http({method: 'GET', url: '/memmeeuserrest/user/login?apiKey=' + broadCastService.user.apiKey}).
+        var apiKey;
+        if (broadCastService.user && broadCastService.user.apiKey) {
+            apiKey = broadCastService.user.apiKey;
+        } else {
+            apiKey = broadCastService.apiKey;
+        }
+
+        $http({method: 'GET', url: '/memmeeuserrest/user/login?apiKey=' + apiKey}).
             success(function(data, status, headers, config) {
                 console.log('your user was loaded via API key');
                 broadCastService.loginUser(data);

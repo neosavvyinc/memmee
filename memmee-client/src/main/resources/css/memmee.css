@@ -271,15 +271,15 @@ input.rounded{
     visibility: hidden;
 }
 .carousel-img-1{
-    background-image: url('../img/homepage-carousel-1.jpg');
+    background-image: url('../img/homepage-carousel-1.png');
     /*z-index: 3;*/
 }
 .carousel-img-2{
-    background-image: url('../img/homepage-carousel-2.jpg');
+    background-image: url('../img/homepage-carousel-2.png');
     /*z-index: 2;*/
 }
 .carousel-img-3{
-    background-image: url('../img/homepage-carousel-3.jpg');
+    background-image: url('../img/homepage-carousel-3.png');
     /*z-index: 1;*/
 }
 .memmee-carousel-item{
