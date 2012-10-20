@@ -916,6 +916,14 @@ html.blogpage{
     background: transparent url('../img/icon-footerLink.png') center right no-repeat;
 }
 
+#footerSocial {
+    margin-left: 572px;
+}
+
+#footerSocial li {
+    float: right;
+}
+
 .memmee-create-heading{
     text-decoration: none;
     position: absolute;
@@ -1619,6 +1627,19 @@ table.calendar{
     height: 30px;
     background-position: 0 -398px;
 }
+.btn.facebook{
+    text-indent: -100000px;
+    width: 30px;
+    height: 30px;
+    background-position: -4px -922px
+}
+.btn.twitter{
+    text-indent: -100000px;
+    width: 30px;
+    height: 30px;
+    background-position: -44px -922px;
+}
+
 .btn.inspiration{
     text-indent: -10000px;
     width: 192px;
