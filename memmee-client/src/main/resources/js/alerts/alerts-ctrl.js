@@ -37,18 +37,21 @@ function AlertsController($scope, $http, broadCastService, $location) {
     $scope.hideYesNoAlert = function () {
         $scope.isModalPresent = "isHidden";
         $scope.isModalYesNoAlertPresent = "isHidden";
+        $scope.promptingEvent = null;
     };
 
     $scope.yesClick = function () {
         broadCastService.yesSelectedAlertsController($scope.promptingEvent);
         $scope.hideAlert();
         $scope.hideYesNoAlert();
+        $scope.promptingEvent = null;
     };
 
     $scope.noClick = function () {
         broadCastService.noSelectedAlertsController($scope.promptingEvent);
         $scope.hideAlert();
         $scope.hideYesNoAlert();
+        $scope.promptingEvent = null;
     };
 
 
