@@ -63,7 +63,10 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
 
     $scope.getSelectedTheme = function () {
 
-        if ($scope.memmee.theme.name) {
+        if (
+            $scope.memmee
+            && $scope.memmee.theme
+            && $scope.memmee.theme.name) {
             return $scope.memmee.theme.name;
         }
         else {
