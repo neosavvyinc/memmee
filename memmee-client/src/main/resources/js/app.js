@@ -1,13 +1,16 @@
 angular.module('memmee-app', ['memmee-app.services']).
     config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
-        when('/home', {templateUrl:'js/home/home-ptl.html'}).
-        when('/create', {templateUrl:'js/memmee/create/create-ptl.html'}).
-        when('/view', {templateUrl:'js/memmee/view/view-ptl.html'}).
-        when('/requiredchangepassword', {templateUrl:'js/profile/change-password-ptl.html'}).
-        when('/profile', {templateUrl:'js/profile/profile-ptl.html'}).
-        when('/share', {templateUrl:'js/memmee/share/share-ptl.html'}).
-        otherwise({redirectTo:'/home'});
+        when('/home', {templateUrl: 'js/home/home-ptl.html'}).
+        when('/create', {templateUrl: 'js/memmee/create/create-ptl.html'}).
+        when('/view', {templateUrl: 'js/memmee/view/view-ptl.html'}).
+        when('/requiredchangepassword', {templateUrl: 'js/profile/change-password-ptl.html'}).
+        when('/profile', {templateUrl: 'js/profile/profile-ptl.html'}).
+        when('/share', {templateUrl: 'js/memmee/share/share-ptl.html'}).
+        when('/about', {templateUrl: 'js/about/about-ptl.html'}).
+        when('/blog', {templateUrl: 'js/blog/blog-ptl.html'}).
+        when('/legal', {templateUrl: 'js/legal/legal-ptl.html'}).
+        otherwise({redirectTo: '/home'});
     }]).
     run(['$rootScope', '$location', function( $rootScope, $location ) {
         $rootScope.$on( "$routeChangeStart", function(event, next, current) {
