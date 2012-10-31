@@ -7,6 +7,9 @@ import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
+import com.memmee.healthchecks.DatabaseHealthCheck;
+import com.memmee.reporting.MemmeeReportingResource;
+import com.memmee.reporting.dao.MemmeeReportingDAO;
 import com.memmee.theme.dao.TransactionalThemeDAO;
 import com.memmee.util.MemmeeMailSenderImpl;
 import com.yammer.dropwizard.auth.basic.BasicAuthProvider;
@@ -52,6 +55,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         final TransactionalInspirationDAO inspirationDao = db.onDemand(TransactionalInspirationDAO.class);
         final TransactionalInspirationCategoryDAO inspirationCategoryDAO = db.onDemand(TransactionalInspirationCategoryDAO.class);
         final TransactionalThemeDAO themeDAO = db.onDemand(TransactionalThemeDAO.class);
+        final MemmeeReportingDAO reportingDAO = db.onDemand(MemmeeReportingDAO.class);
 
         environment.addProvider(new BasicAuthProvider<User>(new MemmeeAuthenticator(userDao),
                 "MEMMEE AUTHENTICATION"));
@@ -64,6 +68,10 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         ));
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao, themeDAO));
         environment.addResource(new InspirationResource(userDao, inspirationDao, inspirationCategoryDAO));
+        environment.addResource(new MemmeeReportingResource(reportingDAO));
+
+
+        environment.addHealthCheck( new DatabaseHealthCheck( db ) );
     }
 
     private void updateWithCommandLineParameters(MemmeeConfiguration userConfiguration) {

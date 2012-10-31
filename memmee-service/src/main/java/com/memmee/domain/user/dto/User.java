@@ -31,6 +31,8 @@ public class User implements Serializable {
 
     private Long loginCount;
 
+    private Long memmeeCount;
+
     public User() { super(); }
 
     public User(String firstName, String email, Password password) {
@@ -109,5 +111,13 @@ public class User implements Serializable {
 
     public void setLoginCount(Long loginCount) {
         this.loginCount = loginCount;
+    }
+
+    public Long getMemmeeCount() {
+        return memmeeCount;
+    }
+
+    public void setMemmeeCount(Long memmeeCount) {
+        this.memmeeCount = memmeeCount;
     }
 }
