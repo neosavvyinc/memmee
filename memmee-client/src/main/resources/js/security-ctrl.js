@@ -38,20 +38,16 @@ function SecurityController($scope, broadCastService, $timeout, $location, $rout
 
     if ( broadCastService.user != null ){
         $timeout(function() {
-            broadCastService.loginUser( broadCastService.user );
+            broadCastService.loginUser( broadCastService.user);
         }, 100);
-    }
-    else if ($location.path() == '/share' )
-    {
+    } else if ($location.path() == '/share') {
         console.log("Loading a memmee from a share key");
-    }
-    else if ($location.path() == '/profile' )
-    {
-        console.log("$location.search('apiKey')" + $location.search.apiKey );
+    } else if ($location.path() == '/profile') {
+        console.log("$location.search('apiKey')" + $location.search.apiKey);
         console.log("Loading your profile");
-    }
-    else
-    {
+    } else if ($location.path() == '/blog' || $location.path() == '/about' || $location.path() == '/legal') {
+        console.log("Allowing a user to go to blog or about page");
+    } else {
         console.log("Routing you back to home....");
         $location.path('/home');
     }

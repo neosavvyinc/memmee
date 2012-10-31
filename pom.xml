@@ -52,7 +52,7 @@
     </scm>
 
     <modules>
-        <module>maven-plugins</module>
+        <!--<module>maven-plugins</module>-->
         <module>memmee-db</module>
         <module>memmee-service</module>
         <module>memmee-client</module>
