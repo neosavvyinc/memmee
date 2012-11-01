@@ -1,0 +1,8 @@
+thead th {
+    background: #ffeeff;
+    text-align: left;
+}
+
+
+tbody tr:nth-child(even) {background: #FFF}
+tbody tr:nth-child(odd) {background: #CCC}
