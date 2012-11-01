@@ -1,30 +1,57 @@
 //Use this as a place to put base/extended functionality in other controllers (search for use to see)
-function ReportController($scope) {
+function ReportController($scope, reportingService ) {
     "use strict";
     console.log("Firing up the report controller");
 
+    $scope.results;
+
     $scope.onShowAllRegisteredClicked = function () {
         console.log("clicking show all");
-        //href="/reporting/users"
+        reportingService.showAllRegistered(
+            showAllResult,
+            showAllFault
+        );
     };
 
     $scope.onShowAllUsersWithCompletedProfiles = function () {
         console.log("clicking show all with completed profiles");
-        //href="/reporting/users/completed/profile"
+        reportingService.showAllUsersWithCompletedProfiles(
+            showAllResult,
+            showAllFault
+        );
     };
 
     $scope.onShowAllUsersWithoutCompletedProfiles = function () {
         console.log("clicking show all users without completed profiles");
-        //href="/reporting/users/no/profile"
+        reportingService.showAllUsersWithoutCompletedProfiles(
+            showAllResult,
+            showAllFault
+        );
     };
 
     $scope.onShowAllUsersWithMemmeeCount = function () {
         console.log("clicking show all users with memmee count");
-        //href="/reporting/users/memmeecount"
+        reportingService.showAllUsersWithMemmeeCount(
+            showAllResult,
+            showAllFault
+        );
     };
 
     $scope.onShowAllUsersWhoHaveNeverMemmeed = function () {
         console.log("clicking show all users with no memmees");
-        //href="/reporting/users/no/memmeecount"
+        reportingService.showAllUsersWhoHaveNeverMemmeed(
+            showAllResult,
+            showAllFault
+        );
     };
+
+    var showAllResult = function (data) {
+        console.log("Show all results success");
+        JSON.stringify(data);
+        $scope.results = data;
+    };
+
+    var showAllFault = function (data) {
+        console.log("Show all results failed");
+    }
 }

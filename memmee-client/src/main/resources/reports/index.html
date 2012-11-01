@@ -20,6 +20,35 @@
         <a ng-click="onShowAllUsersWithoutCompletedProfiles()">Show All Users without Completed Profiles</a><br>
         <a ng-click="onShowAllUsersWithMemmeeCount()">Show All Users with their corresponding Memmee count</a><br>
         <a ng-click="onShowAllUsersWhoHaveNeverMemmeed()">Show All Users who have never Memmee'd</a><br>
+
+        <div style="padding-top: 33px; width: 800px; height: 550px; overflow: scroll;">
+            <table width="100%" height="100%">
+                <thead style="background: #ffeeff">
+                <tr>
+                    <td>Id</td>
+                    <td>First Name</td>
+                    <td>Email</td>
+                    <td>Memmee Count</td>
+                </tr>
+                </thead>
+                <tr ng-repeat="row in results">
+                    <td>
+                    {{row.id}}
+                    </td>
+                    <td>
+                    {{row.firstName}}
+                    </td>
+                    <td>
+                    {{row.email}}
+                    </td>
+                    <td>
+                    {{row.memmeeCount}}
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
     </div>
 
     <div id="footer">
