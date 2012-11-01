@@ -1,0 +1,73 @@
+<html ng-app="reporting">
+
+<head>
+
+    <title>Memmee</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/memmee.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="reports.css" />
+
+</head>
+<body>
+
+<div id="container">
+
+
+    <div id="header">
+    </div>
+
+    <div id="content" ng-controller="ReportController" >
+        <a ng-click="onShowAllRegisteredClicked()">Show All Registered Users</a><br>
+        <a ng-click="onShowAllUsersWithCompletedProfiles()">Show All Users with Completed Profiles</a><br>
+        <a ng-click="onShowAllUsersWithoutCompletedProfiles()">Show All Users without Completed Profiles</a><br>
+        <a ng-click="onShowAllUsersWithMemmeeCount()">Show All Users with their corresponding Memmee count</a><br>
+        <a ng-click="onShowAllUsersWhoHaveNeverMemmeed()">Show All Users who have never Memmee'd</a><br>
+
+        <div style="padding-top: 33px; width: 800px; height: 550px; overflow: scroll;">
+            <table width="100%" height="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Email</th>
+                        <th>Memmee Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in results">
+                        <td>
+                        {{row.id}}
+                        </td>
+                        <td>
+                        {{row.firstName}}
+                        </td>
+                        <td>
+                        {{row.email}}
+                        </td>
+                        <td>
+                        {{row.memmeeCount}}
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+    <div id="footer">
+    </div>
+
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/angular/angular-resource.js"></script>
+
+    <!-- App -->
+    <script src="reporting.js"></script>
+    <script src="services.js"></script>
+    <script src="report-ctrl.js"></script>
+
+</div>
+
+</body>
+
+
+</html>
