@@ -56,7 +56,7 @@ table {
 }
 
 @font-face{
-    font-family: "rokkitt";
+    font-family: "Rokkitt";
     src:
         "../font/rokkitt/Rokkitt-Rregular.ttf",
         "../font/rokkitt/Rokkitt-Bold.ttf",
@@ -73,7 +73,7 @@ table {
 }
 
 @font-face{
-    font-family: "josefinslab";
+    font-family: "Josefin Slab";
     src:
         "../font/josefinslab/JosefinSlab-Regular.ttf",
         "../font/josefinslab/JosefinSlab-Bold.ttf",
@@ -94,12 +94,16 @@ table {
     font-family: "Crimson Text", "Times New Roman", Times, serif;
 }
 
+.josefin-sans{
+    font-family: "Josefin Sans", Arial, Helvetica, serif;
+}
+
 .rokkitt{
-    font-family: "rokkitt", "Times New Roman", Times, serif;
+    font-family: "Rokkitt", "Times New Roman", Times, serif;
 }
 
 .josefineslab{
-    font-family: "josefinslab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .opensans{
     font-family: "opensans", Arial, Helvetica, sans-serif;
@@ -490,10 +494,11 @@ input.rounded{
 }
 
 .blog-post.lg{
-    width: 478px;
+    width: 840px;
+    background-color: #ffffff;
     min-height: 50px;
     margin-bottom: 20px;
-    background: transparent url('../img/bg-blog-post-lg.png') top left repeat-y;
+    /*background: transparent url('../img/bg-blog-post-lg.png') top left repeat-y;*/
 }
 .blog-post.lg .tape{
     display: block;
@@ -510,6 +515,10 @@ input.rounded{
     padding: 0 20px 34px;
     background: transparent url('../img/bg-blog-post-lg-content.png') bottom left repeat-x;
 }
+.blog-post.lg .post-content p {
+    margin-bottom: 15px;
+}
+
 .blog-post.lg .post-img{
     display: block;
     margin: 20px 0;
@@ -519,6 +528,10 @@ input.rounded{
     color: #323435;
     margin-bottom: 25px;
 }
+.blog-post.lg .post-copy p {
+    padding: 20px;
+}
+
 .blog-post.lg .link.more{
     display: block;
 }
@@ -569,7 +582,7 @@ html.homepage{
 }
 html.blogpage{
     background-color: white;
-    background: url('../../img/blog-bg-header.png') top left repeat-x;
+    background: url('../img/blog-bg-header.png') top left repeat-x;
 }
 
 #container {
@@ -582,7 +595,7 @@ html.blogpage{
     position: relative;
     width: 100%;
     height: 60px;
-    margin-bottom: 0px;
+    margin-bottom: 40px;
     /*padding: 0 50px;*/
     line-height: 60px;
 }
@@ -644,23 +657,23 @@ html.blogpage{
 .memmee-card.style-coffee{
     width: 876px;
     height: 594px;
-    font: 24px/36px 'rokkitt', Arial, Helvetica, sans-serif;
+    font: 24px/36px 'Rokkitt', Arial, Helvetica, sans-serif;
     color: #7c3f36;
     background-image: url('../img/bg-card-coffee.png');
 }
 .memmee-card.style-coffee .memmee-text{
     color: #7c3f36;
-    font: 24px/36px 'rokkitt', Arial, Helvetica, sans-serif;
+    font: 24px/36px 'Rokkitt', Arial, Helvetica, sans-serif;
 }
 .memmee-card.style-whimsy{
     width: 883px;
     height: 582px;
-    font: 22px/35px 'josefinslab', Arial, Helvetica, sans-serif;
+    font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
     color: #513f48;
     background-image: url('../img/bg-card-whimsy.png');
 }
 .memmee-card.style-whimsy .memmee-text{
-    font: 22px/35px 'josefinslab', Arial, Helvetica, sans-serif;
+    font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
     color: #513f48;
 }
 .memmee-card.style-inspiration{
@@ -891,8 +904,13 @@ html.blogpage{
     line-height: 24px;
 }
 
-#footer{
-    padding-top: 14px;
+.footer{
+    padding-top: 7px;
+}
+
+.footerTerms {
+    padding-top: 20px;
+    display: inline-block;
 }
 
 .homepage #footer{
@@ -910,7 +928,7 @@ html.blogpage{
 #footerNav li a{
     display: block;
     padding-right: 19px;
-    font-size: 12px;
+    font-size: 15px;
     text-transform: lowercase;
     text-decoration: none;
     color: #5a5b50;
@@ -918,7 +936,7 @@ html.blogpage{
 }
 
 #footerSocial {
-    margin-left: 572px;
+    margin-left: 517px;
 }
 
 #footerSocial li {
@@ -1091,6 +1109,8 @@ html.blogpage{
     height: 80px;
     color: #7c3f36;
     background-position: 0 -125px;
+    font-family: "Rokkitt", "Times New Roman", Times, serif;
+
 }
 
 .slidecard.pushpin{
@@ -1100,6 +1120,7 @@ html.blogpage{
     height: 88px;
     color: #417280;
     background-position: 0 -246px;
+    font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .slidecard.luggage{
@@ -1110,6 +1131,7 @@ html.blogpage{
     padding-left: 40px;
     color: #7f7676;
     background-position: 0 -375px;
+    font-family: "Crimson Text", "Times New Roman", Times, serif;
 }
 
 .slidecard.whimsy{
@@ -1119,6 +1141,7 @@ html.blogpage{
     height: 80px;
     color: #513f48;
     background-position: 0 -495px;
+    font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .list.steps{
@@ -1130,7 +1153,7 @@ html.blogpage{
 
 .list.steps dt{
     margin-bottom: 2px;
-    font: bold 10px/21px 'Josefin Sans', 'josefinslab', Arial, sans-serif;
+    font: bold 10px/21px 'Josefin Sans', 'Josefin Slab', Arial, sans-serif;
     text-transform: lowercase;
     text-align: center;
 }
@@ -1444,7 +1467,7 @@ table.calendar{
     position: relative;
     top: 5px;
     left: 64px;
-    font: bold 14px/12px "josefinslab", Arial, sans-serif;
+    font: bold 14px/12px "Josefin Slab", Arial, sans-serif;
     text-transform: lowercase;
     color: white;
 }
