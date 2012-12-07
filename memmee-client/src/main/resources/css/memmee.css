@@ -396,8 +396,9 @@ input.rounded{
     margin-right: 0;
 }
 .post-date{
-    font: italic bold 10px/35px 'Crimson Text', 'Times New Roman', Times, serif;
+    font: italic bold 20px/35px 'Crimson Text', 'Times New Roman', Times, serif;
     color: #d44e3c;
+    text-transform: lowercase;
 }
 .blog-list{
     font-family: 'Crimson Text', 'Times New Roman', Times, serif;
@@ -509,14 +510,29 @@ input.rounded{
 }
 .blog-post.lg .post-content{
     position: relative;
-    bottom: -4px;
-    height: inherit;
-    margin-right: 5px;
-    padding: 0 20px 34px;
+    height: 660px;
+    overflow: auto;
     background: transparent url('../img/bg-blog-post-lg-content.png') bottom left repeat-x;
 }
+
+
+
 .blog-post.lg .post-content p {
     margin-bottom: 15px;
+    font: 20px/21px 'Josefin Sans', 'Josefin Slab', Arial, sans-serif;
+}
+
+.bold {
+    font: bold 20px/21px 'Josefin Sans', 'Josefin Slab', Arial, sans-serif !important;
+}
+
+
+
+.legal {
+    width: 800px;
+    height: inherit;
+    background: #ff0000;
+    padding-bottom: 25px;
 }
 
 .blog-post.lg .post-img{
@@ -909,7 +925,7 @@ html.blogpage{
 }
 
 .footerTerms {
-    padding-top: 20px;
+    padding-top: 110px;
     display: inline-block;
 }
 
