@@ -519,11 +519,12 @@ input.rounded{
 
 .blog-post.lg .post-content p {
     margin-bottom: 15px;
-    font: 20px/21px 'Josefin Sans', 'Josefin Slab', Arial, sans-serif;
+    font: 14px/20px 'Crimson Text', 'Times New Roman', Times, Serif;f;
 }
 
 .bold {
-    font: bold 20px/21px 'Josefin Sans', 'Josefin Slab', Arial, sans-serif !important;
+    color: #4b90a4;
+    font: 14px/20px 'Crimson Text', 'Times New Roman', Times, Serif;
 }
 
 
