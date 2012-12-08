@@ -15,6 +15,7 @@ import com.sun.jersey.api.client.ClientResponse;
 
 import org.junit.Test;
 
+import javax.ws.rs.core.MediaType;
 import java.util.Date;
 import java.util.List;
 
@@ -71,7 +72,9 @@ public class UserResourceTest extends ResourceIntegrationTest {
         testUser = client().resource(new MemmeeURLBuilder()
                 .setBaseURL(UserResource.BASE_URL)
                 .setMethodURL("user")
-                .build()).post(User.class, testUser);
+                .build())
+                .type(MediaType.APPLICATION_JSON)
+                .post(User.class, testUser);
 
 
         //Update their profile as if they clicked profile
@@ -81,14 +84,18 @@ public class UserResourceTest extends ResourceIntegrationTest {
                 .setBaseURL(UserResource.BASE_URL)
                 .setMethodURL("user/" + testUser.getId())
                 .setApiKeyParam(testUser.getApiKey())
-                .build()).put(testUser);
+                .build())
+                .type(MediaType.APPLICATION_JSON)
+                .put(testUser);
 
 
         //Attempt to sign them in
         User user = client().resource(new MemmeeURLBuilder().
                 setBaseURL(UserResource.BASE_URL).
                 setMethodURL("user/login").
-                build()).post(User.class, new User("Adam", "waparrish@gmail.com", new Password("newValue")));
+                build())
+                .type(MediaType.APPLICATION_JSON)
+                .post(User.class, new User("Adam", "waparrish@gmail.com", new Password("newValue")));
 
         assertThat(user, is(not(nullValue())));
         assertThat(user.getPassword(), is(not(nullValue())));
@@ -118,7 +125,9 @@ public class UserResourceTest extends ResourceIntegrationTest {
     public void testAdd() {
         User user = new User();
         user.setEmail("newemail@newemail.com");
-        client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(user);
+        client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build())
+                .type(MediaType.APPLICATION_JSON)
+                .post(user);
         List<User> users = userDAO.findAll();
 
         assertThat(users.size(), is(equalTo(1)));
@@ -134,7 +143,9 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
         User user = new User("Different Name", "trevorewen@gmail.com", new Password("pw555666"));
 
-        ClientResponse response = client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build()).post(ClientResponse.class, user);
+        ClientResponse response = client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build())
+                .type(MediaType.APPLICATION_JSON)
+                .post(ClientResponse.class, user);
         assertEquals(ClientResponse.Status.INTERNAL_SERVER_ERROR, response.getClientResponseStatus());
     }
 

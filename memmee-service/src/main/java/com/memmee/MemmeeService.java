@@ -72,6 +72,8 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
 
 
         environment.addHealthCheck( new DatabaseHealthCheck( db ) );
+
+        environment.addProvider(com.sun.jersey.multipart.impl.MultiPartReaderServerSide.class);
     }
 
     private void updateWithCommandLineParameters(MemmeeConfiguration userConfiguration) {
