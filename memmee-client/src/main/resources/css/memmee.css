@@ -389,6 +389,8 @@ input.rounded{
 }
 .blog-post{
     width: 238px;
+    height: 220px;
+    overflow: hidden;
     margin-right: 30px;
     float: left;
 }
