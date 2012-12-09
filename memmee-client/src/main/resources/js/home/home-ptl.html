@@ -49,15 +49,15 @@
 
         </div>
 
-        <div class="blog-container">
-            <div class="blog">
-                <h2 class="title-blog">our blog is coming soon...</h2>
+        <div class="blog-container" style="overflow: hidden;">
+            <div class="blog" >
+                <h2 class="title-blog">memmee blog</h2>
 
-                <div class="blog-post">
-                    <span class="post-date">fall 2012</span>
+                <div class="blog-post" ng-repeat="entry in entries">
+                    <span class="post-date">{{entry.publishedDate}}</span>
                     <dl class="blog-list">
-                        <dt>hello world</dt>
-                        <dd>welcome beta members! we're so thrilled for you to join the memmee movement. while we are working away on features, please send us thoughts and feedback at <a href="mailto:hello@memmee.com">hello@memmee.com</a>. thanks, aly & the memmee team</dd>
+                        <dt>{{entry.title}}</dt>
+                        <dd ng-bind-html-unsafe="entry.content"></dd>
                     </dl>
                 </div>
             </div>

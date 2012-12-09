@@ -1,4 +1,9 @@
-angular.module('memmee-app', ['memmee-app.services']).
+google.load("feeds", "1");
+google.setOnLoadCallback(function(){
+    angular.bootstrap(document.body, ['memmee-app']);
+});
+
+var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize']).
     config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/home', {templateUrl: 'js/home/home-ptl.html'}).
