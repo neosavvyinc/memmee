@@ -54,7 +54,7 @@
                 <h2 class="title-blog">memmee blog</h2>
 
                 <div class="blog-post" ng-repeat="entry in entries" style="height: 220px; margin-top: 10px;">
-                    <span class="post-date">{{entry.publishedDate | dateformatter:'MMMM dd, yyyy'}}</span>
+                    <span class="post-date"><a href="http://blog.memmee.com">{{entry.publishedDate | dateformatter:'MMMM dd, yyyy'}}</a></span>
                     <dl class="blog-list">
                         <dt ng-bind-html-unsafe="entry.title"></dt>
                         <dd ng-bind-html-unsafe="entry.content"></dd>
