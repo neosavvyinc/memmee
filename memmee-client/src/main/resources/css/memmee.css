@@ -398,6 +398,20 @@ input.rounded{
 .blog-post:last-child{
     margin-right: 0;
 }
+.blog-link-date {
+    text-decoration: none;
+    color: #d44e3c;
+    font: italic 20px/35px 'Crimson Text', 'Times New Roman', Times, serif;
+}
+.blog-link {
+    text-decoration: none;
+    font: italic 28px/36px 'Crimson Text', 'Times New Roman', Times, serif;
+}
+.blog-link-small{
+    text-decoration: none;
+    font: italic 20px/35px 'Crimson Text', 'Times New Roman', Times, serif;
+}
+
 .post-date{
     font: italic bold 20px/35px 'Crimson Text', 'Times New Roman', Times, serif;
     color: #d44e3c;
