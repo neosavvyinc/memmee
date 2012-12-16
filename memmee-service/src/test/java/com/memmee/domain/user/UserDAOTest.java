@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.skife.jdbi.v2.Handle;
 import org.skife.jdbi.v2.util.StringMapper;
-import sun.util.resources.LocaleNames_ga;
 
 import java.sql.SQLException;
 import java.util.Date;
