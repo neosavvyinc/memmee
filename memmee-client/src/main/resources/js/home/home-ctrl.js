@@ -1,4 +1,4 @@
-function HomeController($scope, $timeout) {
+function HomeController($scope, $timeout, $http) {
     "use strict";
     $scope.img1zindex = {"z-index": 3};
     $scope.img2zindex = {"z-index": 2};
@@ -66,10 +66,21 @@ function HomeController($scope, $timeout) {
         }
     }
 
+    $scope.getBlogPost = function() {
+        var feed = new google.feeds.Feed("http://blog.memmee.com/?feed=atom");
+        feed.load(function(result) {
+            $scope.$apply(function(){
+                $scope.entries = result.feed.entries;
+            })
+        });
+    }
 
     $timeout($scope.clickNext, 5000);
     $timeout($scope.clickNext, 10000);
 
+    $scope.getBlogPost();
+
+
 }
 
-HomeController.$inject = ['$scope', '$timeout'];
+HomeController.$inject = ['$scope', '$timeout', '$http'];

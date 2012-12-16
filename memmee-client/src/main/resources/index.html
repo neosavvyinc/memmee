@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html ng-app="memmee-app" ng-controller="SecurityController" ng-init="initializeBodyUI()">
+<html ng-controller="SecurityController" ng-init="initializeBodyUI()">
 <head>
     <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
 
-    <title>Memmee</title>
+    <title>memmee</title>
     <link rel="stylesheet" type="text/css" media="all" href="css/memmee.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/memmee_overrides.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -29,8 +29,10 @@
 
 
         <!-- Libraries -->
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script src="lib/angular/angular.js"></script>
         <script src="lib/angular/angular-resource.js"></script>
+        <script src="lib/angular/angular-sanitize.js"></script>
         <script src="lib/date.js"></script>
 
         <!-- BeginMinifyGroup1 -->
@@ -52,6 +54,7 @@
         <!-- App -->
         <script src="js/app.js"></script>
         <script src="js/services.js"></script>
+        <script src="js/util/date-filter.js"></script>
 
         <!-- Controllers -->
         <script src="js/default-ctrl.js"></script>

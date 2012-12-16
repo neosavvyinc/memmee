@@ -20,6 +20,7 @@ import org.junit.Before;
 import org.skife.jdbi.v2.Handle;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ResourceIntegrationTest extends ResourceTest {
 

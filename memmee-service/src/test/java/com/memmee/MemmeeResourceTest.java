@@ -15,10 +15,10 @@ import com.memmee.theme.dao.TransactionalThemeDAO;
 import com.memmee.util.DateUtil;
 import org.junit.*;
 
+import javax.ws.rs.core.MediaType;
 import java.util.Date;
 import java.util.List;
 
-import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.notNull;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
@@ -69,6 +69,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
 
         //add resources
         addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO, txThemeDAO));
+
     }
 
     @Test
@@ -255,7 +256,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         memmee1.setAttachment(attachment1);
         memmee1.setUserId(userId - 4);
 
-        client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee1);
+        client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).type(MediaType.APPLICATION_JSON).post(Memmee.class, memmee1);
 
         Long attTwoId = txAttachmentDAO.insert("this_is_a_file_path.path2", "this_is_a_thumb_file_path.path2", "image/jpeg");
         Long inspirationCategoryTwoId = txInspirationCategoryDAO.insert(Long.parseLong("2"), "this is a category2");
@@ -273,9 +274,13 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         memmee2.setAttachment(attachment2);
         memmee2.setUserId(userId - 4);
 
-        client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).post(Memmee.class, memmee2);
+        client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build())
+                .type(MediaType.APPLICATION_JSON)
+                .post(Memmee.class, memmee2);
 
-        List<Memmee> memmees = client().resource("/memmeerest/getmemmees?apiKey=apiKey").get(List.class);
+        List<Memmee> memmees = client().resource("/memmeerest/getmemmees?apiKey=apiKey")
+                .type(MediaType.APPLICATION_JSON)
+                .get(List.class);
         assertThat(memmees, is(notNullValue()));
         assertThat(memmees.size(), is(2));
     }
@@ -292,6 +297,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
                         .setApiKeyParam("apiKey")
                         .setIdParam(memmeeId + 75)
                         .build())
+                .type(MediaType.APPLICATION_JSON)
                 .put(Memmee.class, testMemmee);
 
         assertThat(valueFromServer.getId(), is(equalTo(testMemmee.getId())));

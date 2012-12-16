@@ -380,6 +380,7 @@ public class MemmeeResource {
     @POST
     @Path("/uploadattachment")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces({MediaType.APPLICATION_JSON})
     public Attachment uploadFile(
             @QueryParam("apiKey") String apiKey,
             @FormDataParam("file") InputStream uploadedInputStream,

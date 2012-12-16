@@ -50,16 +50,18 @@
         </div>
 
         <div class="blog-container">
-            <div class="blog">
-                <h2 class="title-blog">our blog is coming soon...</h2>
+            <div class="blog" >
+                <h2 class="title-blog"><a class="blog-link" href="http://blog.memmee.com">memmee blog</a></h2>
 
-                <div class="blog-post">
-                    <span class="post-date">fall 2012</span>
+                <div class="blog-post" ng-repeat="entry in entries" style="height: 180px; margin-top: 10px;">
+                    <span class="post-date"><a class="blog-link-date" href="http://blog.memmee.com">{{entry.publishedDate | dateformatter:'MMMM dd, yyyy'}}</a></span>
                     <dl class="blog-list">
-                        <dt>hello world</dt>
-                        <dd>welcome beta members! we're so thrilled for you to join the memmee movement. while we are working away on features, please send us thoughts and feedback at <a href="mailto:hello@memmee.com">hello@memmee.com</a>. thanks, aly & the memmee team</dd>
+                        <dt ng-bind-html-unsafe="entry.title"></dt>
+                        <dd ng-bind-html-unsafe="entry.content"></dd>
                     </dl>
+
                 </div>
+                <a class="blog-link-small" href="http://blog.memmee.com">continue &gt;</a>
             </div>
 
         </div>
