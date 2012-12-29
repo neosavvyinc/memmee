@@ -70,7 +70,9 @@ function HomeController($scope, $timeout, $http) {
         var feed = new google.feeds.Feed("http://blog.memmee.com/?feed=atom");
         feed.load(function(result) {
             $scope.$apply(function(){
-                $scope.entries = result.feed.entries;
+                var singleEntry = [];
+                singleEntry[0] = result.feed.entries[0];
+                $scope.entries = singleEntry;
             })
         });
     }
