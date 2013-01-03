@@ -20,6 +20,7 @@ public class MemmeeMapper implements ResultSetMapper<Memmee> {
         memmee.setLastUpdateDate(resultSet.getDate("lastUpdateDate"));
         memmee.setDisplayDate(resultSet.getDate("displayDate"));
         memmee.setShareKey(resultSet.getString("shareKey"));
+        memmee.setShortenedUrl(resultSet.getString("shortenedUrl"));
 
         return memmee;
     }

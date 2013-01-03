@@ -41,6 +41,7 @@ CREATE TABLE memmee (
   displayDate datetime NOT NULL,
   text varchar(4096) DEFAULT NULL,
   shareKey varchar(1024) DEFAULT NULL,
+  shortenedUrl varchar(200) DEFAULT NULL,
   themeId int(11) DEFAULT NULL,
   PRIMARY KEY (id)
 );

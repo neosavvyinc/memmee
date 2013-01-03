@@ -37,6 +37,8 @@ public class Memmee implements Serializable {
 
     private String shareKey;
 
+    private String shortenedUrl;
+
     public Memmee() {}
 
     public Memmee(Long userId, String text) {
@@ -122,6 +124,14 @@ public class Memmee implements Serializable {
 
     public void setTheme(Theme theme) {
         this.theme = theme;
+    }
+
+    public String getShortenedUrl() {
+        return shortenedUrl;
+    }
+
+    public void setShortenedUrl(String shortenedUrl) {
+        this.shortenedUrl = shortenedUrl;
     }
 
     @Override
