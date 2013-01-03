@@ -18,19 +18,20 @@ import org.skife.jdbi.v2.Handle;
 public class BaseMemmeeDAOTest extends AbstractMemmeeDAOTest {
 
     public static final String DROP_TABLE_STATEMENT = "DROP TABLE IF EXISTS memmee";
-    public static final String TABLE_DEFINITION = "CREATE TABLE `memmee` (\n" +
-            "`id` int(11) NOT NULL AUTO_INCREMENT,\n" +
-            "`userId` int(11) NOT NULL,\n" +
-            "`attachmentId` int(11) DEFAULT NULL,\n" +
-            "`inspirationId` int(11) DEFAULT NULL,\n" +
-            "`lastUpdateDate` datetime NOT NULL,\n" +
-            "`creationDate` datetime NOT NULL,\n" +
-            "`displayDate` datetime NOT NULL,\n" +
-            "`text` varchar(4096) DEFAULT NULL,\n" +
-            "`shareKey` varchar(1024) DEFAULT NULL,\n" +
-            "`themeId` int(11) DEFAULT NULL,\n" +
-            "PRIMARY KEY (`id`)\n" +
-            ") ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
+    public static final String TABLE_DEFINITION = "CREATE TABLE IF NOT EXISTS `memmee` (\n" +
+            "  `id` int(11) NOT NULL AUTO_INCREMENT,\n" +
+            "  `userId` int(11) NOT NULL,\n" +
+            "  `attachmentId` int(11) DEFAULT NULL,\n" +
+            "  `inspirationId` int(11) DEFAULT NULL,\n" +
+            "  `lastUpdateDate` datetime NOT NULL,\n" +
+            "  `creationDate` datetime NOT NULL,\n" +
+            "  `displayDate` datetime NOT NULL,\n" +
+            "  `text` varchar(4096) DEFAULT NULL,\n" +
+            "  `shareKey` varchar(1024) DEFAULT NULL,\n" +
+            "  `shortenedUrl` varchar(200) DEFAULT NULL,\n" +
+            "  `themeId` int(11) DEFAULT NULL,\n" +
+            "  PRIMARY KEY (`id`)\n" +
+            ") ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2";
 
     @Before
     public void setUp() throws Exception {

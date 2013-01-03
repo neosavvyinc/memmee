@@ -125,10 +125,43 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
 
         try {
 
-            dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1), new Long(1));
-            final int result = dao.update(new Long(1), "text2", new Date(), new Date(), "shareKey2", new Long(2), new Long(2));
+            Long id = dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1), new Long(1));
+            dao.update(id, "text2", new Date(), new Date(), "shareKey2", new Long(2), new Long(2));
 
-            assertThat(result, equalTo(1));
+            Memmee myMemmee = dao.getMemmee(id);
+
+            assertThat(myMemmee, is(not(nullValue())));
+            assertThat(myMemmee.getText(), is(equalTo("text2")));
+            assertThat(myMemmee.getShareKey(), is(equalTo("shareKey2")));
+        } finally {
+            dao.close();
+        }
+    }
+
+    @Test
+    public void testUpdateShareKey() throws Exception {
+        final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
+
+        try {
+
+            Long id = dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1), new Long(1));
+            dao.updateShareKey(id, "this is a sharekey");
+
+            assertThat(dao.getMemmee(id).getShareKey(), is(equalTo("this is a sharekey")));
+        } finally {
+            dao.close();
+        }
+    }
+
+    @Test
+    public void testUpdateShortenedUrl() throws Exception {
+        final TransactionalMemmeeDAO dao = database.open(TransactionalMemmeeDAO.class);
+
+        try {
+            Long id = dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1), new Long(1));
+            dao.updateShortenedUrl(id, "http://www.shortened.com");
+
+            assertThat(dao.getMemmee(id).getShortenedUrl(), is(equalTo("http://www.shortened.com")));
         } finally {
             dao.close();
         }

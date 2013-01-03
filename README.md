@@ -4,6 +4,12 @@ Memmee.com Setup Instructions
 Setup
 -----
 
+You will need to run a 'mvn clean install' on the maven-plugins directory within the project.
+You will need all these plugins before the memmee-client project can be built.
+
+You may need to download JsTestDriver and place it in your local maven repo. If so, get it
+from http://code.google.com/p/js-test-driver/downloads/detail?name=JsTestDriver-1.3.5.jar
+
 To setup the project and build you will need to make sure you have Maven 3.X
 installed. After you have followed the instructions for setting up Maven then
 you should be able to open a terminal and execute the following:

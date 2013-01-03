@@ -1,0 +1,48 @@
+INFO  [2013-01-03 21:53:57,607] com.yammer.dropwizard.cli.ServerCommand: Starting user
+
+ ___ .-. .-.     .--.    ___ .-. .-.    ___ .-. .-.     .--.     .--.           .--.      .--.    ___ .-. .-.
+(   )   '   \   /    \  (   )   '   \  (   )   '   \   /    \   /    \         /    \    /    \  (   )   '   \
+ |  .-.  .-. ; |  .-. ;  |  .-.  .-. ;  |  .-.  .-. ; |  .-. ; |  .-. ;       |  .-. ;  |  .-. ;  |  .-.  .-. ;
+ | |  | |  | | |  | | |  | |  | |  | |  | |  | |  | | |  | | | |  | | |       |  |(___) | |  | |  | |  | |  | |
+ | |  | |  | | |  |/  |  | |  | |  | |  | |  | |  | | |  |/  | |  |/  |       |  |      | |  | |  | |  | |  | |
+ | |  | |  | | |  ' _.'  | |  | |  | |  | |  | |  | | |  ' _.' |  ' _.'       |  | ___  | |  | |  | |  | |  | |
+ | |  | |  | | |  .'.-.  | |  | |  | |  | |  | |  | | |  .'.-. |  .'.-.  .-.  |  '(   ) | '  | |  | |  | |  | |
+ | |  | |  | | '  `-' /  | |  | |  | |  | |  | |  | | '  `-' / '  `-' / (   ) '  `-' |  '  `-' /  | |  | |  | |
+(___)(___)(___) `.__.'  (___)(___)(___)(___)(___)(___) `.__.'   `.__.'   `-'   `.__,'    `.__.'  (___)(___)(___)
+
+
+INFO  [2013-01-03 21:53:57,609] org.eclipse.jetty.server.Server: jetty-8.y.z-SNAPSHOT
+INFO  [2013-01-03 21:53:57,707] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.13 06/29/2012 05:14 PM'
+INFO  [2013-01-03 21:53:57,781] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /memmeeuserrest/user/{id} (com.memmee.UserResource)
+    GET     /memmeeuserrest/user/login (com.memmee.UserResource)
+    POST    /memmeeuserrest/user (com.memmee.UserResource)
+    POST    /memmeeuserrest/user/forgotpassword (com.memmee.UserResource)
+    POST    /memmeeuserrest/user/login (com.memmee.UserResource)
+    PUT     /memmeeuserrest/user/{id} (com.memmee.UserResource)
+    DELETE  /memmeerest/deleteattachment (com.memmee.MemmeeResource)
+    DELETE  /memmeerest/deletememmee (com.memmee.MemmeeResource)
+    GET     /memmeerest/getmemmee (com.memmee.MemmeeResource)
+    GET     /memmeerest/getmemmees (com.memmee.MemmeeResource)
+    GET     /memmeerest/open (com.memmee.MemmeeResource)
+    POST    /memmeerest/insertmemmee (com.memmee.MemmeeResource)
+    POST    /memmeerest/uploadattachment (com.memmee.MemmeeResource)
+    PUT     /memmeerest/sharememmee (com.memmee.MemmeeResource)
+    PUT     /memmeerest/updatememmee (com.memmee.MemmeeResource)
+    PUT     /memmeerest/updatememmeewithattachment (com.memmee.MemmeeResource)
+    GET     /memmeeinspirationrest/getnextinspiration (com.memmee.InspirationResource)
+    GET     /memmeeinspirationrest/getpreviousinspiration (com.memmee.InspirationResource)
+    GET     /memmeeinspirationrest/getrandominspiration (com.memmee.InspirationResource)
+    GET     /reporting/users (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/completed/profile (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/memmeecount (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/no/memmeecount (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/no/profile (com.memmee.reporting.MemmeeReportingResource)
+
+INFO  [2013-01-03 21:53:57,781] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2013-01-03 21:53:58,113] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2013-01-03 21:53:58,117] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
