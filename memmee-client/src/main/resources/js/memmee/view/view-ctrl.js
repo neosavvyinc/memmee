@@ -85,7 +85,11 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
             error(function (data, status, headers, config) {
                 console.log('there was an error generating your share link');
             });
-    }
+    };
+
+    $scope.onShareLinkOnFacebook = function() {
+
+    };
 
     //Service Calls
     $scope.getDefaultMemmee = function () {

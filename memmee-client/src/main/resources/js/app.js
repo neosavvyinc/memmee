@@ -3,7 +3,13 @@ google.setOnLoadCallback(function(){
     angular.bootstrap(document.body, ['memmee-app']);
 });
 
-var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize']).
+//Initialize Global Namespace
+var Memmee = Memmee || {};
+
+//Initialize Name Spaced Modules
+Memmee.Services = angular.module('application.services', []);
+
+var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize', 'application.services']).
     config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/home', {templateUrl: 'js/home/home-ptl.html'}).
