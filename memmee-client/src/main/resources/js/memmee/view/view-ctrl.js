@@ -1,4 +1,4 @@
-function ViewModeController($scope, $http, broadCastService, $timeout) {
+function ViewModeController($scope, $http, broadCastService, $timeout, $location) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -75,7 +75,7 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
     }
 
     $scope.generateAndShowPublicLink = function () {
-        $http({method:'PUT', url:'/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey, data:$scope.memmee}).
+        $http({method:'PUT', url:'/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey + '&sharePath=' + ($location.protocol() + "://" + $location.host()), data:$scope.memmee}).
             success(function (data, status, headers, config) {
                 console.log('you have generated a share link');
                 $scope.memmee = data;
@@ -185,4 +185,4 @@ function ViewModeController($scope, $http, broadCastService, $timeout) {
     };
 }
 
-ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$timeout'];
+ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$timeout', '$location'];

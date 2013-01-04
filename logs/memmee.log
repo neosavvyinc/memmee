@@ -1,4 +1,11 @@
-INFO  [2013-01-03 21:53:57,607] com.yammer.dropwizard.cli.ServerCommand: Starting user
+INFO  [2013-01-04 05:13:49,198] org.eclipse.jetty.server.Server: Graceful shutdown SocketConnector@0.0.0.0:8081
+INFO  [2013-01-04 05:13:49,203] org.eclipse.jetty.server.Server: Graceful shutdown InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2013-01-04 05:13:49,203] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2013-01-04 05:13:49,204] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2013-01-04 05:13:51,262] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+INFO  [2013-01-04 05:13:51,262] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+INFO  [2013-01-04 05:13:51,317] org.eclipse.jetty.util.thread.ShutdownThread: shutdown already commenced
+INFO  [2013-01-04 05:14:02,239] com.yammer.dropwizard.cli.ServerCommand: Starting user
 
  ___ .-. .-.     .--.    ___ .-. .-.    ___ .-. .-.     .--.     .--.           .--.      .--.    ___ .-. .-.
 (   )   '   \   /    \  (   )   '   \  (   )   '   \   /    \   /    \         /    \    /    \  (   )   '   \
@@ -11,9 +18,9 @@ INFO  [2013-01-03 21:53:57,607] com.yammer.dropwizard.cli.ServerCommand: Startin
 (___)(___)(___) `.__.'  (___)(___)(___)(___)(___)(___) `.__.'   `.__.'   `-'   `.__,'    `.__.'  (___)(___)(___)
 
 
-INFO  [2013-01-03 21:53:57,609] org.eclipse.jetty.server.Server: jetty-8.y.z-SNAPSHOT
-INFO  [2013-01-03 21:53:57,707] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.13 06/29/2012 05:14 PM'
-INFO  [2013-01-03 21:53:57,781] com.yammer.dropwizard.config.Environment: 
+INFO  [2013-01-04 05:14:02,242] org.eclipse.jetty.server.Server: jetty-8.y.z-SNAPSHOT
+INFO  [2013-01-04 05:14:02,359] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.13 06/29/2012 05:14 PM'
+INFO  [2013-01-04 05:14:02,439] com.yammer.dropwizard.config.Environment: 
 
     DELETE  /memmeeuserrest/user/{id} (com.memmee.UserResource)
     GET     /memmeeuserrest/user/login (com.memmee.UserResource)
@@ -40,9 +47,428 @@ INFO  [2013-01-03 21:53:57,781] com.yammer.dropwizard.config.Environment:
     GET     /reporting/users/no/memmeecount (com.memmee.reporting.MemmeeReportingResource)
     GET     /reporting/users/no/profile (com.memmee.reporting.MemmeeReportingResource)
 
-INFO  [2013-01-03 21:53:57,781] com.yammer.dropwizard.config.Environment: tasks = 
+INFO  [2013-01-04 05:14:02,439] com.yammer.dropwizard.config.Environment: tasks = 
 
     POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
 
-INFO  [2013-01-03 21:53:58,113] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
-INFO  [2013-01-03 21:53:58,117] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+INFO  [2013-01-04 05:21:04,188] com.yammer.dropwizard.cli.ServerCommand: Starting user
+
+ ___ .-. .-.     .--.    ___ .-. .-.    ___ .-. .-.     .--.     .--.           .--.      .--.    ___ .-. .-.
+(   )   '   \   /    \  (   )   '   \  (   )   '   \   /    \   /    \         /    \    /    \  (   )   '   \
+ |  .-.  .-. ; |  .-. ;  |  .-.  .-. ;  |  .-.  .-. ; |  .-. ; |  .-. ;       |  .-. ;  |  .-. ;  |  .-.  .-. ;
+ | |  | |  | | |  | | |  | |  | |  | |  | |  | |  | | |  | | | |  | | |       |  |(___) | |  | |  | |  | |  | |
+ | |  | |  | | |  |/  |  | |  | |  | |  | |  | |  | | |  |/  | |  |/  |       |  |      | |  | |  | |  | |  | |
+ | |  | |  | | |  ' _.'  | |  | |  | |  | |  | |  | | |  ' _.' |  ' _.'       |  | ___  | |  | |  | |  | |  | |
+ | |  | |  | | |  .'.-.  | |  | |  | |  | |  | |  | | |  .'.-. |  .'.-.  .-.  |  '(   ) | '  | |  | |  | |  | |
+ | |  | |  | | '  `-' /  | |  | |  | |  | |  | |  | | '  `-' / '  `-' / (   ) '  `-' |  '  `-' /  | |  | |  | |
+(___)(___)(___) `.__.'  (___)(___)(___)(___)(___)(___) `.__.'   `.__.'   `-'   `.__,'    `.__.'  (___)(___)(___)
+
+
+INFO  [2013-01-04 05:21:04,190] org.eclipse.jetty.server.Server: jetty-8.y.z-SNAPSHOT
+INFO  [2013-01-04 05:21:04,284] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.13 06/29/2012 05:14 PM'
+INFO  [2013-01-04 05:21:04,352] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /memmeeuserrest/user/{id} (com.memmee.UserResource)
+    GET     /memmeeuserrest/user/login (com.memmee.UserResource)
+    POST    /memmeeuserrest/user (com.memmee.UserResource)
+    POST    /memmeeuserrest/user/forgotpassword (com.memmee.UserResource)
+    POST    /memmeeuserrest/user/login (com.memmee.UserResource)
+    PUT     /memmeeuserrest/user/{id} (com.memmee.UserResource)
+    DELETE  /memmeerest/deleteattachment (com.memmee.MemmeeResource)
+    DELETE  /memmeerest/deletememmee (com.memmee.MemmeeResource)
+    GET     /memmeerest/getmemmee (com.memmee.MemmeeResource)
+    GET     /memmeerest/getmemmees (com.memmee.MemmeeResource)
+    GET     /memmeerest/open (com.memmee.MemmeeResource)
+    POST    /memmeerest/insertmemmee (com.memmee.MemmeeResource)
+    POST    /memmeerest/uploadattachment (com.memmee.MemmeeResource)
+    PUT     /memmeerest/sharememmee (com.memmee.MemmeeResource)
+    PUT     /memmeerest/updatememmee (com.memmee.MemmeeResource)
+    PUT     /memmeerest/updatememmeewithattachment (com.memmee.MemmeeResource)
+    GET     /memmeeinspirationrest/getnextinspiration (com.memmee.InspirationResource)
+    GET     /memmeeinspirationrest/getpreviousinspiration (com.memmee.InspirationResource)
+    GET     /memmeeinspirationrest/getrandominspiration (com.memmee.InspirationResource)
+    GET     /reporting/users (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/completed/profile (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/memmeecount (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/no/memmeecount (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/no/profile (com.memmee.reporting.MemmeeReportingResource)
+
+INFO  [2013-01-04 05:21:04,353] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2013-01-04 05:21:04,685] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2013-01-04 05:21:04,689] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+ERROR [2013-01-04 05:24:28,066] com.yammer.dropwizard.jersey.LoggingExceptionMapper: Error handling a request: 1ccfd154eabc3cf9
+! com.rosaloves.bitlyj.BitlyException: INVALID_URI
+! at com.rosaloves.bitlyj.SimpleProvider.filterErrorResponse(SimpleProvider.java:89)
+! at com.rosaloves.bitlyj.SimpleProvider.call(SimpleProvider.java:45)
+! at com.memmee.builder.ShortenedURLBuilder.build(ShortenedURLBuilder.java:19)
+! at com.memmee.MemmeeResource.shareMemmee(MemmeeResource.java:314)
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+! at java.lang.reflect.Method.invoke(Method.java:601)
+! at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+! at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$TypeOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:185)
+! at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+! at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:302)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1480)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1411)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1360)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1350)
+! at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:538)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:716)
+! at javax.servlet.http.HttpServlet.service(HttpServlet.java:848)
+! at com.yammer.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:47)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1331)
+! at com.yammer.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1302)
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:448)
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1067)
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:377)
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1001)
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at com.yammer.metrics.jetty.InstrumentedHandler.handle(InstrumentedHandler.java:200)
+! at org.eclipse.jetty.server.handler.GzipHandler.handle(GzipHandler.java:233)
+! at com.yammer.dropwizard.jetty.BiDiGzipHandler.handle(BiDiGzipHandler.java:123)
+! at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:149)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at org.eclipse.jetty.server.Server.handle(Server.java:360)
+! at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:454)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handleRequest(BlockingHttpConnection.java:47)
+! at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:900)
+! at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:954)
+! at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:851)
+! at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handle(BlockingHttpConnection.java:66)
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector$BlockingChannelEndPoint.run(BlockingChannelConnector.java:293)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:603)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:538)
+! at java.lang.Thread.run(Thread.java:722)
+INFO  [2013-01-04 05:25:35,918] org.eclipse.jetty.server.Server: Graceful shutdown SocketConnector@0.0.0.0:8081
+INFO  [2013-01-04 05:25:35,919] org.eclipse.jetty.server.Server: Graceful shutdown InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2013-01-04 05:25:35,919] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2013-01-04 05:25:35,919] org.eclipse.jetty.server.Server: Graceful shutdown o.e.j.s.ServletContextHandler{/,null}
+INFO  [2013-01-04 05:25:37,973] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+INFO  [2013-01-04 05:25:37,973] org.eclipse.jetty.server.handler.ContextHandler: stopped o.e.j.s.ServletContextHandler{/,null}
+INFO  [2013-01-04 05:25:38,026] org.eclipse.jetty.util.thread.ShutdownThread: shutdown already commenced
+INFO  [2013-01-04 05:25:40,545] com.yammer.dropwizard.cli.ServerCommand: Starting user
+
+ ___ .-. .-.     .--.    ___ .-. .-.    ___ .-. .-.     .--.     .--.           .--.      .--.    ___ .-. .-.
+(   )   '   \   /    \  (   )   '   \  (   )   '   \   /    \   /    \         /    \    /    \  (   )   '   \
+ |  .-.  .-. ; |  .-. ;  |  .-.  .-. ;  |  .-.  .-. ; |  .-. ; |  .-. ;       |  .-. ;  |  .-. ;  |  .-.  .-. ;
+ | |  | |  | | |  | | |  | |  | |  | |  | |  | |  | | |  | | | |  | | |       |  |(___) | |  | |  | |  | |  | |
+ | |  | |  | | |  |/  |  | |  | |  | |  | |  | |  | | |  |/  | |  |/  |       |  |      | |  | |  | |  | |  | |
+ | |  | |  | | |  ' _.'  | |  | |  | |  | |  | |  | | |  ' _.' |  ' _.'       |  | ___  | |  | |  | |  | |  | |
+ | |  | |  | | |  .'.-.  | |  | |  | |  | |  | |  | | |  .'.-. |  .'.-.  .-.  |  '(   ) | '  | |  | |  | |  | |
+ | |  | |  | | '  `-' /  | |  | |  | |  | |  | |  | | '  `-' / '  `-' / (   ) '  `-' |  '  `-' /  | |  | |  | |
+(___)(___)(___) `.__.'  (___)(___)(___)(___)(___)(___) `.__.'   `.__.'   `-'   `.__,'    `.__.'  (___)(___)(___)
+
+
+INFO  [2013-01-04 05:25:40,547] org.eclipse.jetty.server.Server: jetty-8.y.z-SNAPSHOT
+INFO  [2013-01-04 05:25:40,639] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.13 06/29/2012 05:14 PM'
+INFO  [2013-01-04 05:25:40,708] com.yammer.dropwizard.config.Environment: 
+
+    DELETE  /memmeeuserrest/user/{id} (com.memmee.UserResource)
+    GET     /memmeeuserrest/user/login (com.memmee.UserResource)
+    POST    /memmeeuserrest/user (com.memmee.UserResource)
+    POST    /memmeeuserrest/user/forgotpassword (com.memmee.UserResource)
+    POST    /memmeeuserrest/user/login (com.memmee.UserResource)
+    PUT     /memmeeuserrest/user/{id} (com.memmee.UserResource)
+    DELETE  /memmeerest/deleteattachment (com.memmee.MemmeeResource)
+    DELETE  /memmeerest/deletememmee (com.memmee.MemmeeResource)
+    GET     /memmeerest/getmemmee (com.memmee.MemmeeResource)
+    GET     /memmeerest/getmemmees (com.memmee.MemmeeResource)
+    GET     /memmeerest/open (com.memmee.MemmeeResource)
+    POST    /memmeerest/insertmemmee (com.memmee.MemmeeResource)
+    POST    /memmeerest/uploadattachment (com.memmee.MemmeeResource)
+    PUT     /memmeerest/sharememmee (com.memmee.MemmeeResource)
+    PUT     /memmeerest/updatememmee (com.memmee.MemmeeResource)
+    PUT     /memmeerest/updatememmeewithattachment (com.memmee.MemmeeResource)
+    GET     /memmeeinspirationrest/getnextinspiration (com.memmee.InspirationResource)
+    GET     /memmeeinspirationrest/getpreviousinspiration (com.memmee.InspirationResource)
+    GET     /memmeeinspirationrest/getrandominspiration (com.memmee.InspirationResource)
+    GET     /reporting/users (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/completed/profile (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/memmeecount (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/no/memmeecount (com.memmee.reporting.MemmeeReportingResource)
+    GET     /reporting/users/no/profile (com.memmee.reporting.MemmeeReportingResource)
+
+INFO  [2013-01-04 05:25:40,708] com.yammer.dropwizard.config.Environment: tasks = 
+
+    POST    /tasks/gc (com.yammer.dropwizard.tasks.GarbageCollectionTask)
+
+INFO  [2013-01-04 05:25:41,017] org.eclipse.jetty.server.AbstractConnector: Started InstrumentedBlockingChannelConnector@0.0.0.0:8080
+INFO  [2013-01-04 05:25:41,020] org.eclipse.jetty.server.AbstractConnector: Started SocketConnector@0.0.0.0:8081
+ERROR [2013-01-04 05:26:41,273] com.yammer.dropwizard.jersey.LoggingExceptionMapper: Error handling a request: f6814b7a5b522eeb
+! com.rosaloves.bitlyj.BitlyException: INVALID_URI
+! at com.rosaloves.bitlyj.SimpleProvider.filterErrorResponse(SimpleProvider.java:89)
+! at com.rosaloves.bitlyj.SimpleProvider.call(SimpleProvider.java:45)
+! at com.memmee.builder.ShortenedURLBuilder.build(ShortenedURLBuilder.java:19)
+! at com.memmee.MemmeeResource.shareMemmee(MemmeeResource.java:314)
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+! at java.lang.reflect.Method.invoke(Method.java:601)
+! at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+! at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$TypeOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:185)
+! at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+! at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:302)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1480)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1411)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1360)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1350)
+! at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:538)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:716)
+! at javax.servlet.http.HttpServlet.service(HttpServlet.java:848)
+! at com.yammer.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:47)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1331)
+! at com.yammer.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1302)
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:448)
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1067)
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:377)
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1001)
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at com.yammer.metrics.jetty.InstrumentedHandler.handle(InstrumentedHandler.java:200)
+! at org.eclipse.jetty.server.handler.GzipHandler.handle(GzipHandler.java:233)
+! at com.yammer.dropwizard.jetty.BiDiGzipHandler.handle(BiDiGzipHandler.java:123)
+! at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:149)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at org.eclipse.jetty.server.Server.handle(Server.java:360)
+! at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:454)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handleRequest(BlockingHttpConnection.java:47)
+! at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:900)
+! at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:954)
+! at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:851)
+! at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handle(BlockingHttpConnection.java:66)
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector$BlockingChannelEndPoint.run(BlockingChannelConnector.java:293)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:603)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:538)
+! at java.lang.Thread.run(Thread.java:722)
+ERROR [2013-01-04 05:28:05,647] com.yammer.dropwizard.jersey.LoggingExceptionMapper: Error handling a request: 6201279ac74c58e2
+! com.rosaloves.bitlyj.BitlyException: INVALID_URI
+! at com.rosaloves.bitlyj.SimpleProvider.filterErrorResponse(SimpleProvider.java:89)
+! at com.rosaloves.bitlyj.SimpleProvider.call(SimpleProvider.java:45)
+! at com.memmee.builder.ShortenedURLBuilder.build(ShortenedURLBuilder.java:19)
+! at com.memmee.MemmeeResource.shareMemmee(MemmeeResource.java:314)
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+! at java.lang.reflect.Method.invoke(Method.java:601)
+! at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+! at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$TypeOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:185)
+! at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+! at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:302)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1480)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1411)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1360)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1350)
+! at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:538)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:716)
+! at javax.servlet.http.HttpServlet.service(HttpServlet.java:848)
+! at com.yammer.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:47)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1331)
+! at com.yammer.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1302)
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:448)
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1067)
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:377)
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1001)
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at com.yammer.metrics.jetty.InstrumentedHandler.handle(InstrumentedHandler.java:200)
+! at org.eclipse.jetty.server.handler.GzipHandler.handle(GzipHandler.java:233)
+! at com.yammer.dropwizard.jetty.BiDiGzipHandler.handle(BiDiGzipHandler.java:123)
+! at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:149)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at org.eclipse.jetty.server.Server.handle(Server.java:360)
+! at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:454)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handleRequest(BlockingHttpConnection.java:47)
+! at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:900)
+! at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:954)
+! at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:851)
+! at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handle(BlockingHttpConnection.java:66)
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector$BlockingChannelEndPoint.run(BlockingChannelConnector.java:293)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:603)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:538)
+! at java.lang.Thread.run(Thread.java:722)
+ERROR [2013-01-04 05:29:01,058] com.yammer.dropwizard.jersey.LoggingExceptionMapper: Error handling a request: 373985bf90e6521b
+! com.rosaloves.bitlyj.BitlyException: INVALID_URI
+! at com.rosaloves.bitlyj.SimpleProvider.filterErrorResponse(SimpleProvider.java:89)
+! at com.rosaloves.bitlyj.SimpleProvider.call(SimpleProvider.java:45)
+! at com.memmee.builder.ShortenedURLBuilder.build(ShortenedURLBuilder.java:19)
+! at com.memmee.MemmeeResource.shareMemmee(MemmeeResource.java:314)
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+! at java.lang.reflect.Method.invoke(Method.java:601)
+! at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+! at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$TypeOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:185)
+! at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+! at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:302)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1480)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1411)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1360)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1350)
+! at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:538)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:716)
+! at javax.servlet.http.HttpServlet.service(HttpServlet.java:848)
+! at com.yammer.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:47)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1331)
+! at com.yammer.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1302)
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:448)
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1067)
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:377)
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1001)
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at com.yammer.metrics.jetty.InstrumentedHandler.handle(InstrumentedHandler.java:200)
+! at org.eclipse.jetty.server.handler.GzipHandler.handle(GzipHandler.java:233)
+! at com.yammer.dropwizard.jetty.BiDiGzipHandler.handle(BiDiGzipHandler.java:123)
+! at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:149)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at org.eclipse.jetty.server.Server.handle(Server.java:360)
+! at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:454)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handleRequest(BlockingHttpConnection.java:47)
+! at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:900)
+! at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:954)
+! at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:851)
+! at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handle(BlockingHttpConnection.java:66)
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector$BlockingChannelEndPoint.run(BlockingChannelConnector.java:293)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:603)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:538)
+! at java.lang.Thread.run(Thread.java:722)
+ERROR [2013-01-04 05:30:18,303] com.yammer.dropwizard.jersey.LoggingExceptionMapper: Error handling a request: 3ad874374b333adb
+! com.rosaloves.bitlyj.BitlyException: INVALID_URI
+! at com.rosaloves.bitlyj.SimpleProvider.filterErrorResponse(SimpleProvider.java:89)
+! at com.rosaloves.bitlyj.SimpleProvider.call(SimpleProvider.java:45)
+! at com.memmee.builder.ShortenedURLBuilder.build(ShortenedURLBuilder.java:19)
+! at com.memmee.MemmeeResource.shareMemmee(MemmeeResource.java:314)
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+! at java.lang.reflect.Method.invoke(Method.java:601)
+! at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+! at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$TypeOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:185)
+! at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+! at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:302)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1480)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1411)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1360)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1350)
+! at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:538)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:716)
+! at javax.servlet.http.HttpServlet.service(HttpServlet.java:848)
+! at com.yammer.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:47)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1331)
+! at com.yammer.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1302)
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:448)
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1067)
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:377)
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1001)
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at com.yammer.metrics.jetty.InstrumentedHandler.handle(InstrumentedHandler.java:200)
+! at org.eclipse.jetty.server.handler.GzipHandler.handle(GzipHandler.java:233)
+! at com.yammer.dropwizard.jetty.BiDiGzipHandler.handle(BiDiGzipHandler.java:123)
+! at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:149)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at org.eclipse.jetty.server.Server.handle(Server.java:360)
+! at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:454)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handleRequest(BlockingHttpConnection.java:47)
+! at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:900)
+! at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:954)
+! at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:851)
+! at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handle(BlockingHttpConnection.java:66)
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector$BlockingChannelEndPoint.run(BlockingChannelConnector.java:293)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:603)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:538)
+! at java.lang.Thread.run(Thread.java:722)
+ERROR [2013-01-04 05:32:08,888] com.yammer.dropwizard.jersey.LoggingExceptionMapper: Error handling a request: 3abdd1a5bdd03944
+! com.rosaloves.bitlyj.BitlyException: INVALID_URI
+! at com.rosaloves.bitlyj.SimpleProvider.filterErrorResponse(SimpleProvider.java:89)
+! at com.rosaloves.bitlyj.SimpleProvider.call(SimpleProvider.java:45)
+! at com.memmee.builder.ShortenedURLBuilder.build(ShortenedURLBuilder.java:19)
+! at com.memmee.MemmeeResource.shareMemmee(MemmeeResource.java:314)
+! at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+! at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+! at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+! at java.lang.reflect.Method.invoke(Method.java:601)
+! at com.sun.jersey.spi.container.JavaMethodInvokerFactory$1.invoke(JavaMethodInvokerFactory.java:60)
+! at com.sun.jersey.server.impl.model.method.dispatch.AbstractResourceMethodDispatchProvider$TypeOutInvoker._dispatch(AbstractResourceMethodDispatchProvider.java:185)
+! at com.sun.jersey.server.impl.model.method.dispatch.ResourceJavaMethodDispatcher.dispatch(ResourceJavaMethodDispatcher.java:75)
+! at com.sun.jersey.server.impl.uri.rules.HttpMethodRule.accept(HttpMethodRule.java:302)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.ResourceObjectRule.accept(ResourceObjectRule.java:100)
+! at com.sun.jersey.server.impl.uri.rules.RightHandPathRule.accept(RightHandPathRule.java:147)
+! at com.sun.jersey.server.impl.uri.rules.RootResourceClassesRule.accept(RootResourceClassesRule.java:84)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1480)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl._handleRequest(WebApplicationImpl.java:1411)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1360)
+! at com.sun.jersey.server.impl.application.WebApplicationImpl.handleRequest(WebApplicationImpl.java:1350)
+! at com.sun.jersey.spi.container.servlet.WebComponent.service(WebComponent.java:416)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:538)
+! at com.sun.jersey.spi.container.servlet.ServletContainer.service(ServletContainer.java:716)
+! at javax.servlet.http.HttpServlet.service(HttpServlet.java:848)
+! at com.yammer.dropwizard.jetty.NonblockingServletHolder.handle(NonblockingServletHolder.java:47)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1331)
+! at com.yammer.dropwizard.servlets.ThreadNameFilter.doFilter(ThreadNameFilter.java:29)
+! at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1302)
+! at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:448)
+! at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1067)
+! at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:377)
+! at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1001)
+! at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:129)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at com.yammer.metrics.jetty.InstrumentedHandler.handle(InstrumentedHandler.java:200)
+! at org.eclipse.jetty.server.handler.GzipHandler.handle(GzipHandler.java:233)
+! at com.yammer.dropwizard.jetty.BiDiGzipHandler.handle(BiDiGzipHandler.java:123)
+! at org.eclipse.jetty.server.handler.HandlerCollection.handle(HandlerCollection.java:149)
+! at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:111)
+! at org.eclipse.jetty.server.Server.handle(Server.java:360)
+! at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:454)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handleRequest(BlockingHttpConnection.java:47)
+! at org.eclipse.jetty.server.AbstractHttpConnection.content(AbstractHttpConnection.java:900)
+! at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.content(AbstractHttpConnection.java:954)
+! at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:851)
+! at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
+! at org.eclipse.jetty.server.BlockingHttpConnection.handle(BlockingHttpConnection.java:66)
+! at org.eclipse.jetty.server.nio.BlockingChannelConnector$BlockingChannelEndPoint.run(BlockingChannelConnector.java:293)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:603)
+! at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:538)
+! at java.lang.Thread.run(Thread.java:722)

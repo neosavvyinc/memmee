@@ -4,6 +4,7 @@ package com.memmee;
 import java.util.Date;
 import java.util.List;
 
+import com.memmee.builder.ShortenedURLBuilder;
 import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.domain.attachment.dto.Attachment;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
@@ -47,6 +48,7 @@ import com.sun.jersey.multipart.FormDataParam;
 @Path("/memmeerest")
 public class MemmeeResource {
     public static final String BASE_URL = "memmeerest";
+    public static final String SHARE_PATH_PARAM = "#/share?shareKey=";
 
     private final TransactionalUserDAO userDao;
     private final TransactionalMemmeeDAO memmeeDao;
@@ -275,7 +277,7 @@ public class MemmeeResource {
     @Path("/sharememmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee shareMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee) {
+    public Memmee shareMemmee(@QueryParam("apiKey") String apiKey, @QueryParam("sharePath") String sharePath, @Valid final Memmee memmee) {
 
         int count = 0;
 
@@ -286,30 +288,49 @@ public class MemmeeResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
 
-        try {
+        if (memmee.getShareKey() == null) {
+            try {
 
-            String shareKey = (UUID.randomUUID().toString());
-            count = memmeeDao.update(
-                    memmee.getId()
-                    , memmee.getText()
-                    , new Date()                     //Last Update Date is updated to server supplied
-                    , memmee.getDisplayDate()        //Updating Display Date to user supplied value
-                    , shareKey
-                    , memmee.getAttachment().getId()
-                    , memmee.getTheme().getId());
+                String shareKey = (UUID.randomUUID().toString());
+                count += memmeeDao.updateShareKey(
+                        memmee.getId(),
+                        shareKey);
 
-        } catch (DBIException dbException) {
-            LOG.error("DB EXCEPTION", dbException);
-            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+            } catch (DBIException dbException) {
+                LOG.error("DB EXCEPTION", dbException);
+                throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+            }
+
+            if (count == 0) {
+                LOG.error("MEMMEE NOT UPDATED");
+                throw new WebApplicationException(Status.NOT_MODIFIED);
+            }
         }
 
-        if (count == 0) {
-            LOG.error("MEMMEE NOT UPDATED");
-            throw new WebApplicationException(Status.NOT_MODIFIED);
+        count = 0;
+
+        if (memmee.getShortenedUrl() == null) {
+            try {
+
+                String shortenedUrl = new ShortenedURLBuilder().
+                        setUrl(sharePath + SHARE_PATH_PARAM + memmee.getShareKey()).
+                        build();
+                count += memmeeDao.updateShortenedUrl(
+                        memmee.getId(),
+                        shortenedUrl);
+
+            } catch (DBIException dbException) {
+                LOG.error("DB EXCEPTION", dbException);
+                throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+            }
+
+            if (count == 0) {
+                LOG.error("MEMMEE NOT UPDATED");
+                throw new WebApplicationException(Status.NOT_MODIFIED);
+            }
         }
 
         return memmeeDao.getMemmee(new Long(memmee.getId()));
-
     }
 
     @GET
