@@ -43,8 +43,12 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
     }
 
     $scope.closeShareIfMouseOutside = function () {
-        console.log("mouse down outside...");
-        closedropdownTimer = $timeout($scope.closeShareDropdown, 100);
+        console.log("mouse down outside...changed again?");
+        if (closedropdownTimer) {
+            $timeout.cancel(closedropdownTimer);
+        }
+        closedropdownTimer = undefined;
+        closedropdownTimer = $timeout($scope.closeShareDropdown, 500);
     }
 
     $scope.cancelShareTimer = function () {
