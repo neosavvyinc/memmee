@@ -60,7 +60,7 @@ public interface MemmeeReportingDAO extends Transactional<MemmeeReportingDAO>, G
      * select u.firstName, u.email, count(*) as memmeeCount from memmee.memmee m join memmee.user u where m.userId = u.id group by u.id order by memmeeCount DESC, u.firstName, u.email;
      *
      */
-    @SqlQuery("select u.id as id, u.firstName as firstName, u.email as email, count(*) as memmeeCount from memmee m join user u where m.userId = u.id group by u.id order by memmeeCount DESC, u.firstName, u.email")
+    @SqlQuery("select t1.id as id,t1.firstName as firstName,t1.email as email,t1.memmeeCount as memmeeCount,t2.shareCount as shareCount from (select u.id as id, u.firstName as firstName, u.email as email, count(*) as memmeeCount from user u, memmee m where u.id = m.userId group by u.id order by memmeeCount DESC, u.firstName, u.email) t1 left outer join (select userId uid, count(*) as shareCount from memmee where shareKey is not null group by uid) t2 on t1.id = t2.uid")
     @Mapper(ReportingUserMapper.class)
     List<User> getUsersWithMemmeeCount();
 

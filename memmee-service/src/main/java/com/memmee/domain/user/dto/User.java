@@ -32,6 +32,7 @@ public class User implements Serializable {
     private Long loginCount;
 
     private Long memmeeCount;
+    private long shareCount;
 
     public User() { super(); }
 
@@ -119,5 +120,13 @@ public class User implements Serializable {
 
     public void setMemmeeCount(Long memmeeCount) {
         this.memmeeCount = memmeeCount;
+    }
+
+    public void setShareCount(long shareCount) {
+        this.shareCount = shareCount;
+    }
+
+    public long getShareCount() {
+        return shareCount;
     }
 }

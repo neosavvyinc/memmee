@@ -24,6 +24,14 @@ public class ReportingUserMapper implements ResultSetMapper<User> {
             //swallow as this only matters for some of the queries
         }
 
+        try {
+            user.setShareCount(resultSet.getLong("shareCount"));
+        } catch (SQLException e )
+        {
+            //swallow as this only matters for some of the queries
+        }
+
+
         return user;
     }
 }
