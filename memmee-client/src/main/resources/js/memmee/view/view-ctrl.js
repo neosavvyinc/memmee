@@ -1,4 +1,4 @@
-function ViewModeController($scope, $http, broadCastService, $timeout, $location) {
+function ViewModeController($scope, $http, broadCastService, $timeout, $location, configuration, memmeeService) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -16,7 +16,11 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
             console.log("isMemmeValid():returning true");
             return true;
         }
-    }
+    };
+
+    var getShareUrl = function () {
+        return '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey + '&sharePath=' + ($location.protocol() + "://" + $location.host());
+    };
 
     var closedropdownTimer;
     $scope.shareVisibilityStyle = "isHidden";
@@ -34,7 +38,7 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
         }
     }
 
-    $scope.closeShareDropdown = function() {
+    $scope.closeShareDropdown = function () {
         $scope.shareVisibilityStyle = "isHidden";
 
         if (closedropdownTimer) {
@@ -69,8 +73,8 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
 
         if (
             $scope.memmee
-            && $scope.memmee.theme
-            && $scope.memmee.theme.name) {
+                && $scope.memmee.theme
+                && $scope.memmee.theme.name) {
             return $scope.memmee.theme.name;
         }
         else {
@@ -79,20 +83,18 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
     }
 
     $scope.generateAndShowPublicLink = function () {
-        $http({method:'PUT', url:'/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey + '&sharePath=' + ($location.protocol() + "://" + $location.host()), data:$scope.memmee}).
-            success(function (data, status, headers, config) {
-                console.log('you have generated a share link');
-                $scope.memmee = data;
-                broadCastService.showShareLinkViewModeController($scope.memmee);
-                $scope.toggleShareDropdown();
-            }).
-            error(function (data, status, headers, config) {
-                console.log('there was an error generating your share link');
-            });
+        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
+            $scope.memmee = result;
+            broadCastService.showShareLinkViewModeController($scope.memmee);
+            $scope.toggleShareDropdown();
+        });
     };
 
-    $scope.onShareLinkOnFacebook = function() {
-
+    $scope.onShareLinkOnFacebook = function () {
+        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
+            $scope.memmee = result;
+            window.open(configuration.API.FACEBOOK.SHARE_URL + "u=" + $scope.memmee.shortenedUrl + "&t=" + "Today's Memmee", "_blank");
+        });
     };
 
     //Service Calls
@@ -100,14 +102,14 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
         if (broadCastService && broadCastService.selectedMemmee && broadCastService.selectedMemmee.id) {
             $scope.memmee = broadCastService.selectedMemmee;
         } else {
-            $http({method:'GET', url:'/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
+            $http({method: 'GET', url: '/memmeerest/getmemmee?apiKey=' + $scope.user.apiKey}).
                 success(function (data, status, headers, config) {
                     console.log('your memmee has been loaded');
                     console.log("memmee: " + JSON.stringify(data));
                     $scope.memmee = broadCastService.selectedMemmee = data;
 
                     if (!$scope.memmee.theme || !$scope.memmee.theme.name) {
-                        $scope.memmee.theme = {name:"memmee-card" };
+                        $scope.memmee.theme = {name: "memmee-card" };
                     }
                     $scope.hideAttachmentDiv();
                 }).error(function (data, status, headers, config) {
@@ -117,7 +119,7 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
     };
 
     $scope.deleteMemmee = function (memmee) {
-        $http({method:'DELETE', url:'/memmeerest/deletememmee?apiKey=' + $scope.user.apiKey + "&id=" + memmee.id}).
+        $http({method: 'DELETE', url: '/memmeerest/deletememmee?apiKey=' + $scope.user.apiKey + "&id=" + memmee.id}).
             success(function (data, status, headers, config) {
                 console.log('your memmee has been deleted');
                 $scope.memmee = null;
@@ -139,7 +141,7 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
     $scope.$on(ViewModeControllerEvents.get('MEMMEE_DELETED'), function (event) {
         console.log("Deleting the local memmee on ViewController!");
         //this is a bug
-        $scope.memmee = broadCastService.selectedMemmee = { attachment:{ filePath:"/img/1x1.gif"}};
+        $scope.memmee = broadCastService.selectedMemmee = { attachment: { filePath: "/img/1x1.gif"}};
         $scope.getDefaultMemmee();
     });
 
@@ -149,7 +151,7 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
         }
     });
 
-    $scope.$on(CreateModeControllerEvents.get('MEMMEE_CREATED'), function(event, memmee) {
+    $scope.$on(CreateModeControllerEvents.get('MEMMEE_CREATED'), function (event, memmee) {
         //@TODO, should populate automatically from selected, but worthwhile fallback
         $scope.memmee = memmee;
     });
@@ -193,4 +195,4 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
     };
 }
 
-ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$timeout', '$location'];
+ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$timeout', '$location', 'configuration', 'memmeeService'];

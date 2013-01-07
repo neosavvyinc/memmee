@@ -5,8 +5,8 @@ import static com.rosaloves.bitlyj.Bitly.*;
 
 public class ShortenedURLBuilder {
 
-    private static final String USER_NAME = "memmee";
-    private static final String API_KEY = "R_062f7741bc427044e5a7c9a900e7bb0d";
+    private final String USER_NAME = "memmee";
+    private final String API_KEY = "R_062f7741bc427044e5a7c9a900e7bb0d";
     private String url;
 
     public ShortenedURLBuilder setUrl(String url) {

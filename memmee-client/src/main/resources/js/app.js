@@ -7,9 +7,10 @@ google.setOnLoadCallback(function(){
 var Memmee = Memmee || {};
 
 //Initialize Name Spaced Modules
-Memmee.Services = angular.module('application.services', []);
+Memmee.Constants = angular.module('memmee.constants', [])
+Memmee.Services = angular.module('memmee.services', []);
 
-var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize', 'application.services']).
+var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize', 'memmee.constants' , 'memmee.services']).
     config(['$routeProvider', function ($routeProvider) {
     $routeProvider.
         when('/home', {templateUrl: 'js/home/home-ptl.html'}).
