@@ -28,9 +28,12 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
     };
 
     //UI
-    $scope.getDisplayDate = function () {
-        return $scope.memmee.displayDate.toDateString();
-    }
+    $scope.getDisplayDate = function (memmee) {
+        if (memmee && memmee.displayDate) {
+            return MemmeeDateUtil.standardDate(new Date.parse(memmee.displayDate));
+        }
+        return null;
+    };
 
     //Initializaton
     $scope.getDefaultMemmee();
@@ -40,7 +43,7 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
             return true;
         }
         return false;
-    }
+    };
 }
 
 ShareModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location', '$routeParams'];

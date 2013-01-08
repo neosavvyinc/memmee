@@ -19,7 +19,8 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
     };
 
     var getShareUrl = function () {
-        return '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey + '&sharePath=' + ($location.protocol() + "://" + $location.host());
+        //($location.protocol() + "://" + $location.host())
+        return '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey + '&sharePath=' + "http://www.memmee.com#";
     };
 
     var closedropdownTimer;
@@ -166,9 +167,13 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
     });
 
     //UI
-    $scope.getDisplayDate = function () {
-        return $scope.memmee.displayDate.toDateString();
-    }
+    //@TODO, replace this with strftime date formatting and filters
+    $scope.getDisplayDate = function (memmee) {
+        if (memmee && memmee.displayDate) {
+            return MemmeeDateUtil.standardDate(new Date.parse(memmee.displayDate));
+        }
+        return null;
+    };
 
     //Initializaton
     $scope.getDefaultMemmee();
@@ -194,13 +199,6 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
             console.log("ViewModeController.hideAttachmentDiv() -- no memmees left");
             $scope.attachmentVisible = false;
         }
-    }
-
-    $scope.getDisplayDate = function (memmee) {
-        if (memmee && memmee.displayDate) {
-            return MemmeeDateUtil.standardDate(new Date.parse(memmee.displayDate));
-        }
-        return null;
     };
 }
 
