@@ -1,4 +1,4 @@
-function ViewModeController($scope, $http, broadCastService, $timeout, $location, configuration, memmeeService) {
+function ViewModeController($scope, $rootScope, $http, broadCastService, $timeout, $location, configuration, memmeeService) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -90,10 +90,19 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
         });
     };
 
-    $scope.onShareLinkOnFacebook = function () {
+    $scope.onShareLinkOnFacebook = function (event) {
+        //Prevent from going to the default Url
+        event.preventDefault();
+
+        //Capture the target to apply the link in the future
+        var target = event.currentTarget;
+        target.href = null;
+
+        //Get the actual facebook link to be applied to the target
         memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
             $scope.memmee = result;
-            window.open(configuration.API.FACEBOOK.SHARE_URL + "u=" + $scope.memmee.shortenedUrl + "&t=" + "Today's Memmee", "_blank");
+            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED, (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
+            $scope.toggleShareDropdown();
         });
     };
 
@@ -195,4 +204,4 @@ function ViewModeController($scope, $http, broadCastService, $timeout, $location
     };
 }
 
-ViewModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$timeout', '$location', 'configuration', 'memmeeService'];
+ViewModeController.$inject = ['$scope', '$rootScope', '$http', 'memmeeBroadCastService', '$timeout', '$location', 'configuration', 'memmeeService'];

@@ -16,6 +16,9 @@ Memmee.Constants.constant('configuration', {
         FACEBOOK: {
             SHARE_URL: "http://www.facebook.com/sharer.php?"
         }
+    },
+    EVENTS: {
+        FACEBOOK_LINK_GENERATED: "facebookLinkGenerated"
     }
 
 });
