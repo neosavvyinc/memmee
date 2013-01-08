@@ -288,10 +288,13 @@ public class MemmeeResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
 
+        String shareKey = null;
+        String shortenedUrl = null;
+
         if (memmee.getShareKey() == null) {
             try {
 
-                String shareKey = (UUID.randomUUID().toString());
+                shareKey = (UUID.randomUUID().toString());
                 count += memmeeDao.updateShareKey(
                         memmee.getId(),
                         shareKey);
@@ -305,15 +308,18 @@ public class MemmeeResource {
                 LOG.error("MEMMEE NOT UPDATED");
                 throw new WebApplicationException(Status.NOT_MODIFIED);
             }
+        } else {
+            shareKey = memmee.getShareKey();
         }
 
+        //Refresh Memmee
         count = 0;
 
         if (memmee.getShortenedUrl() == null) {
             try {
 
-                String shortenedUrl = new ShortenedURLBuilder().
-                        setUrl(sharePath + SHARE_PATH_PARAM + memmee.getShareKey()).
+                shortenedUrl = new ShortenedURLBuilder().
+                        setUrl(sharePath + SHARE_PATH_PARAM + shareKey).
                         build();
                 count += memmeeDao.updateShortenedUrl(
                         memmee.getId(),

@@ -187,6 +187,7 @@
 
                                 <!-- Main Application -->
                                 <jsSourceFile>js/app.js</jsSourceFile>
+                                <jsSourceFile>js/configuration-constants.js</jsSourceFile>
                                 <jsSourceFile>js/services.js</jsSourceFile>
 
                                 <!-- Controllers -->
@@ -207,7 +208,8 @@
                                 <jsSourceFile>js/memmee/share/share-ctrl.js</jsSourceFile>
                                 <jsSourceFile>js/memmee/list/list-ctrl.js</jsSourceFile>
 
-
+                                 <!-- Services -->
+                                <jsSourceFile>js/service/memmee-service.js</jsSourceFile>
 
                             </jsSourceFiles>
                             <jsTargetDir>js/app</jsTargetDir>

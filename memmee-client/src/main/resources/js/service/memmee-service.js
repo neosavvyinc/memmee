@@ -3,10 +3,10 @@
 Memmee.Services.factory('memmeeService', function (configuration, $q, $rootScope, $http) {
 
     return {
-        share: function(memmee) {
+        share: function(requestUrl, memmee) {
             var deferred = $q.defer();
 
-            $http.put(configuration.ENDPOINTS.MEMMEE.SHARE).
+            $http.put(requestUrl, memmee).
                 success(function (data, status, headers, config) {
                     deferred.resolve(data);
                 }).
