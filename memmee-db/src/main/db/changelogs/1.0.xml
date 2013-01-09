@@ -374,4 +374,10 @@
 
     </changeSet>
 
+    <changeSet id="facebookUpdate" author="trevor">
+        <addColumn tableName="memmee">
+            <column name="shortenedUrl" type="varchar(200)" defaultValue="NULL"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
