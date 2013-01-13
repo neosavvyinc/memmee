@@ -50,7 +50,7 @@ autoWatch = true;
 // - Firefox
 // - Opera
 // - Safari
-browsers = ['Chrome'];
+browsers = ['PhantomJS'];
 //browsers = ['Chrome', 'Firefox', 'Safari', 'PhantomJS'];
 
 // Auto run tests on start (when browsers are captured) and exit
