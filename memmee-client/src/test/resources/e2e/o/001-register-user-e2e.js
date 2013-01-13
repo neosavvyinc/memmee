@@ -10,8 +10,6 @@ describe('Register a new user', function(){
         console.log("stuff");
         console.log("stuff again");
 
-        expect(false).toBe(true);
-        expect(true).toBe(true);
     });
 
 });

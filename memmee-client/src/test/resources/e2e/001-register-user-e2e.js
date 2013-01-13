@@ -1,17 +1,9 @@
 'use strict'
 
-describe('Register a new user', function(){
+describe('The Equity Ticket', function(){
 
-    it('should have integration defined and runaaa', function(){
-        browser().navigateTo('/');
-        expect(browser().window().hash()).toMatch('');
+    it('Should verify all elements on home page', function(){
 
-
-        console.log("stuff");
-        console.log("stuff again");
-
-        expect(false).toBe(true);
-        expect(true).toBe(true);
     });
 
 });
