@@ -59,5 +59,5 @@ singleRun = false;
 urlRoot = '/__testacular/';
 
 proxies = {
-    '/': 'http://localhost:9999/'
+    '/': 'http://local.memmee.com/'
 };
