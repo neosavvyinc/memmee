@@ -28,9 +28,9 @@ public class PhantomResource {
 
     private PhantomRendererConfiguration configuration;
 
-    public PhantomResource(PhantomRendererConfiguration hboGoOriginConfiguration) {
+    public PhantomResource(PhantomRendererConfiguration phantomRendererConfiguration) {
 
-        configuration = hboGoOriginConfiguration;
+        configuration = phantomRendererConfiguration;
 
     }
 

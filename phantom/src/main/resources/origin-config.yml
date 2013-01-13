@@ -1,2 +1,6 @@
 baseUrl: http://127.0.0.1:7777
-renderJSScript: /NEOSAVVY/work/angular-phantom-renderer/src/main/resources/render.js
+renderJSScript: /NEOSAVVY/work/memmee/memmee.com/phantom/src/main/resources/render.js
+
+http:
+  port: 9090
+  adminPort: 9091
