@@ -38,6 +38,9 @@ own but they require the following settings:
     ProxyPass /memmeeinspirationrest http://127.0.0.1:8080/memmeeinspirationrest
     ProxyPassReverse /memmeeinspirationrest http://127.0.0.1:8080/memmeeinspirationrest
 
+    ProxyPass /reporting http://127.0.0.1:8080/reporting
+    ProxyPassReverse /reporting http://127.0.0.1:8080/reporting
+
     Alias /memmee /memmee/
 
 I also set my server up to be called local.memmee.com and hopefully I
@@ -117,5 +120,39 @@ I needed ImageMagick for the resizing hooks when uploading images. I used the fo
     brew link jasper
     brew link jpeg
     brew link libtiff
+
+
+Approach to merge Remote Git repositories as a sub project with read-tree
+-------------------------------------------------------------------------
+
+This is the approach that was used to merge in the phantom project.
+
+    # create new project as the parent
+    $ mkdir new_parent_project
+    $ cd new_parent_project
+    $ git init
+    $ touch .gitignore
+    $ git ci -am "initial commit"
+
+    # merge project A into subdirectory A
+    $ git remote add -f projA /path/to/projA
+    $ git merge -s ours --no-commit projA/master
+    $ git read-tree --prefix=subdirA/ -u projA/master
+    $ git ci -m "merging projA into subdirA"
+
+    # merge project B into subdirectory B
+    $ git remote add -f projB /path/to/projB
+    $ git merge -s ours --no-commit projB/master
+    $ git read-tree --prefix=subdirB/ -u projB/master
+    $ git ci -m "merging projB into subdirB"
+
+
+Setup Phantom Pre-rendering
+---------------------------
+
+Install Varnish and NGINX
+
+    brew install varnish
+    brew install nginx
 
 
