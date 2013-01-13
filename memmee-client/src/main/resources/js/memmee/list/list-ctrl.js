@@ -31,6 +31,13 @@ function ArchiveListController($scope, $http, broadCastService) {
 
     //Service Calls
     $scope.getMemmees = function () {
+
+        if( !$scope.user )
+        {
+            console.log("ERROR: No user set - probably should reroute out of here");
+            return;
+        }
+
         $http({method:'GET', url:'/memmeerest/getmemmees?apiKey=' + $scope.user.apiKey}).
             success(function (data, status, headers, config) {
                 console.log('your memmee has been loaded');

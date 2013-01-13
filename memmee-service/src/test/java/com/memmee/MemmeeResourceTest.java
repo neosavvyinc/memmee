@@ -22,6 +22,7 @@ import java.util.List;
 import static org.mockito.Matchers.notNull;
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.mock;
 
 public class MemmeeResourceTest extends ResourceIntegrationTest {
 
@@ -64,11 +65,16 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         txInspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
         txThemeDAO = database.open(TransactionalThemeDAO.class);
 
+        MemmeeUrlConfiguration mockMemmeeConfiguration = mock(MemmeeUrlConfiguration.class);
+        MemmeeConfiguration mockMemmeeConfig = mock(MemmeeConfiguration.class);
+        mockMemmeeConfiguration.setActiveEmailAddress("test-cases@nowhere.com");
+        mockMemmeeConfig.setMemmeeUrlConfiguration( mockMemmeeConfiguration );
+
         passwordId = passwordDAO.insert("password", 0);
         userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"));
 
         //add resources
-        addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO, txThemeDAO));
+        addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO, txThemeDAO, mockMemmeeConfig));
 
     }
 

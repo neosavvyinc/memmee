@@ -66,7 +66,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
                 ,new MemmeeMailSenderImpl()
                 ,userConfiguration.getMemmeeUrlConfiguration()
         ));
-        environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao, themeDAO));
+        environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao, themeDAO, userConfiguration));
         environment.addResource(new InspirationResource(userDao, inspirationDao, inspirationCategoryDAO));
         environment.addResource(new MemmeeReportingResource(reportingDAO));
 

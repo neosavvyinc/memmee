@@ -56,14 +56,21 @@ public class MemmeeResource {
     private final TransactionalInspirationDAO inspirationDAO;
     private final TransactionalThemeDAO themeDAO;
     private static final Log LOG = Log.forClass(MemmeeResource.class);
+    private final MemmeeConfiguration configuration;
 
-    public MemmeeResource(TransactionalUserDAO userDao, TransactionalMemmeeDAO memmeeDao, TransactionalAttachmentDAO attachmentDao, TransactionalInspirationDAO inspirationDao, TransactionalThemeDAO themeDao) {
+    public MemmeeResource(TransactionalUserDAO userDao,
+                          TransactionalMemmeeDAO memmeeDao,
+                          TransactionalAttachmentDAO attachmentDao,
+                          TransactionalInspirationDAO inspirationDao,
+                          TransactionalThemeDAO themeDao,
+                          MemmeeConfiguration configuration) {
         super();
         this.userDao = userDao;
         this.memmeeDao = memmeeDao;
         this.attachmentDAO = attachmentDao;
         this.inspirationDAO = inspirationDao;
         this.themeDAO = themeDao;
+        this.configuration = configuration;
     }
 
 
@@ -277,7 +284,9 @@ public class MemmeeResource {
     @Path("/sharememmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee shareMemmee(@QueryParam("apiKey") String apiKey, @QueryParam("sharePath") String sharePath, @Valid final Memmee memmee) {
+    public Memmee shareMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee) {
+
+        String sharePath = configuration.getMemmeeUrlConfiguration().getActiveUrl();
 
         int count = 0;
 

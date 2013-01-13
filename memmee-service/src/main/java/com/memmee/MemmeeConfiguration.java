@@ -27,4 +27,7 @@ public class MemmeeConfiguration extends Configuration {
         return memmeeUrlConfiguration;
     }
 
+    public void setMemmeeUrlConfiguration(MemmeeUrlConfiguration memmeeUrlConfiguration) {
+        this.memmeeUrlConfiguration = memmeeUrlConfiguration;
+    }
 }

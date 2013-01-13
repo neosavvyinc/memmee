@@ -15,7 +15,7 @@ memmeeUrlConfiguration:
   qaUrl: memmee-dev.neosavvy.com
   qaFromEmailAddress: qa.memmee@memmee.com
 
-  prodUrl: prod.memmee.com
+  prodUrl: www.memmee.com
   prodFromEmailAddress: memmee@memmee.com
 
 database:

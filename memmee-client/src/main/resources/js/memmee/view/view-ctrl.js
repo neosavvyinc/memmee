@@ -20,7 +20,7 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
 
     var getShareUrl = function () {
         //($location.protocol() + "://" + $location.host())
-        return '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey + '&sharePath=' + "http://www.memmee.com#";
+        return '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey;
     };
 
     var closedropdownTimer;
@@ -102,7 +102,8 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         //Get the actual facebook link to be applied to the target
         memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
             $scope.memmee = result;
-            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED, (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
+            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
+                (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
             $scope.toggleShareDropdown();
         });
     };
