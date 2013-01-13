@@ -1,14 +1,12 @@
 'use strict'
 
-describe('Register a new user', function(){
+describe('Placeholder - dupe this for more tests', function(){
 
-    it('should have integration defined and runaaa', function(){
-        browser().navigateTo('/');
-        expect(browser().window().hash()).toMatch('');
+    it('example test', function(){
 
+    });
 
-        console.log("stuff");
-        console.log("stuff again");
+    it('example test 1', function(){
 
     });
 
