@@ -286,7 +286,7 @@ public class MemmeeResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Memmee shareMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee) {
 
-        String sharePath = configuration.getMemmeeUrlConfiguration().getActiveUrl();
+        String sharePath = "http://" + configuration.getMemmeeUrlConfiguration().getActiveUrl();
 
         int count = 0;
 
