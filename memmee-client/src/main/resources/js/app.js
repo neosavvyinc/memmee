@@ -1,10 +1,7 @@
-google.load("feeds", "1");
-google.setOnLoadCallback(function(){
-    angular.bootstrap(document.body, ['memmee-app']);
-});
-
 //Initialize Global Namespace
 var Memmee = Memmee || {};
+
+google.load("feeds", "1");
 
 //Initialize Name Spaced Modules
 Memmee.Constants = angular.module('memmee.constants', [])

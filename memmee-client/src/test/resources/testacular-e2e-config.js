@@ -14,8 +14,7 @@ files = [
     ANGULAR_SCENARIO_ADAPTER,
 
     'test/resources/lib/angular-mocks.js',
-    'test/resources/e2e/*-e2e.js',
-    'test/resources/e2e/*/*-e2e.js'
+    'test/resources/e2e/*-e2e.js'
 ];
 
 // list of files to exclude
@@ -36,7 +35,7 @@ colors = true;
 
 // level of logging
 // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-logLevel = LOG_INFO;
+logLevel = LOG_DEBUG;
 
 // enable / disable watching file and executing tests whenever any file changes
 autoWatch = true;
@@ -50,7 +49,7 @@ autoWatch = true;
 // - Firefox
 // - Opera
 // - Safari
-browsers = ['PhantomJS'];
+browsers = ['Chrome'];
 //browsers = ['Chrome', 'Firefox', 'Safari', 'PhantomJS'];
 
 // Auto run tests on start (when browsers are captured) and exit

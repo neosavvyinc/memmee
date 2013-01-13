@@ -85,4 +85,4 @@ autoWatchInterval = 100;
 browsers = ['Chrome', 'Firefox', 'Safari'];
 
 // Auto run tests on start (when browsers are captured) and exit
-singleRun = false;
+singleRun = true;
