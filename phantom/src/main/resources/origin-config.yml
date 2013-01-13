@@ -1,0 +1,2 @@
+baseUrl: http://127.0.0.1:7777
+renderJSScript: /NEOSAVVY/work/angular-phantom-renderer/src/main/resources/render.js
