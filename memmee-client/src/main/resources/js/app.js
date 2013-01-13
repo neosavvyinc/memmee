@@ -8,7 +8,45 @@ Memmee.Constants = angular.module('memmee.constants', [])
 Memmee.Services = angular.module('memmee.services', []);
 
 var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize', 'memmee.constants' , 'memmee.services']).
-    config(['$routeProvider', function ($routeProvider) {
+    config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+
+    function getParameterByName (name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if (results == null) {
+            return "";
+        }
+        else {
+            return decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+    }
+
+    var isPushState = getParameterByName("pushState");
+    console.log("Pushstate is: " + isPushState);
+    if (isPushState === undefined || isPushState === null || isPushState === "") {
+        isPushState = false;
+    }
+
+    if (isPushState == true) {
+        console.log("Acting like push state should be active");
+        routeConfig = {
+            html5PushState: true // dev: false, prod: true
+        };
+    }
+    else {
+        console.log("Acting like push state should not be active");
+        routeConfig = {
+            html5PushState: false // dev: false, prod: true
+        };
+    }
+
+
+
+    // enable html5 push state
+    $locationProvider.html5Mode(routeConfig.html5PushState);
+
     $routeProvider.
         when('/home', {templateUrl: 'js/home/home-ptl.html'}).
         when('/create', {templateUrl: 'js/memmee/create/create-ptl.html'}).
@@ -21,10 +59,37 @@ var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize', 'me
         when('/legal', {templateUrl: 'js/legal/legal-ptl.html'}).
         otherwise({redirectTo: '/home'});
     }]).
-    run(['$rootScope', '$location', function( $rootScope, $location ) {
-        $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+    run(['$rootScope', '$location', function( $scope, $location ) {
+
+        $scope.isPushState = $location.search().pushState;
+        $scope.isMockMode = $location.search().mockMode;
+
+        $scope.routeConfig = {};
+
+        console.log("app.run() pushState=" + $scope.isPushState);
+        console.log("app.run() isMockMode=" + $scope.isMockMode);
+
+        if ($scope.isPushState === undefined || $scope.isPushState === null ||
+            $scope.isPushState === "") {
+            $scope.isPushState = false;
+        }
+
+        if ($scope.isPushState == true) {
+            console.log("Acting like push state should be active");
+            $scope.routeConfig = {
+                html5PushState: true // dev: false, prod: true
+            };
+        }
+        else {
+            console.log("Acting like push state should not be active");
+            $scope.routeConfig = {
+                html5PushState: false // dev: false, prod: true
+            };
+        }
+
+        $scope.$on( "$routeChangeStart", function(event, next, current) {
             console.log("route is changing");
-            $rootScope.$broadcast("closeAllDropdowns");
+            $scope.$broadcast("closeAllDropdowns");
         });
     }]).
     directive('fileButton', function() {
