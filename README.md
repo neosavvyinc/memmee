@@ -156,3 +156,8 @@ Install Varnish and NGINX
     brew install nginx
 
 
+Install Testacular
+------------------
+
+    brew install node
+

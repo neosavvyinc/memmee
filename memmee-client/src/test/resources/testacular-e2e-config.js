@@ -10,14 +10,12 @@ basePath = '../../'
 // list of files / patterns to load in the browser
 files = [
 
-  ANGULAR_SCENARIO,
-  ANGULAR_SCENARIO_ADAPTER,
+    ANGULAR_SCENARIO,
+    ANGULAR_SCENARIO_ADAPTER,
 
-//  'test/resources/lib/angular/angular-scenario.js',
-//  'test/resources/lib/angular/jstd-scenario-adapter.js',
-
-  'test/resources/e2e/*-e2e.js',
-  'test/resources/e2e/*/*-e2e.js'
+    'test/resources/lib/angular-mocks.js',
+    'test/resources/e2e/*-e2e.js',
+    'test/resources/e2e/*/*-e2e.js'
 ];
 
 // list of files to exclude
@@ -61,5 +59,5 @@ singleRun = false;
 urlRoot = '/__testacular/';
 
 proxies = {
-       '/': 'http://localhost:9999/'
+    '/': 'http://localhost:9999/'
 };
