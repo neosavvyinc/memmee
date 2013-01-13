@@ -19,8 +19,23 @@ sub vcl_recv {
     else if ( req.url ~"\.js") {
         set req.backend = webserver;
     }
-    else if ( req.url ~ "partial" )
+    else if ( req.url ~ "ptl" )
     {
+        set req.backend = webserver;
+    }
+    else if ( req.url ~ "^/memmeeuserrest"){
+        set req.backend = webserver;
+    }
+    else if ( req.url ~ "^/memmeerest"){
+        set req.backend = webserver;
+    }
+    else if ( req.url ~ "^/memmeeinspirationrest"){
+        set req.backend = webserver;
+    }
+    else if ( req.url ~ "^/reporting"){
+        set req.backend = webserver;
+    }
+    else if ( req.url ~ "^/memmee"){
         set req.backend = webserver;
     }
     else
