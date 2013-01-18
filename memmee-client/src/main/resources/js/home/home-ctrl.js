@@ -85,8 +85,23 @@ function HomeController($scope, $timeout, $http) {
 
     $timeout($scope.getBlogPost(), 1000);
 
-    $timeout($scope.clickNext, 5000);
-    $timeout($scope.clickNext, 10000);
+
+    // using $timeout causes e2e text execution to be delayed until
+    // timer  using setTimeout w/ $scope.$apply prevents this
+    setTimeout(function() {
+        $scope.$apply(function() {
+            $scope.clickNext();
+        });
+    }, 5000);
+
+    setTimeout(function() {
+        $scope.$apply(function() {
+            $scope.clickNext();
+        });
+    }, 10000);
+
+    //$timeout($scope.clickNext, 5000);
+   // $timeout($scope.clickNext, 10000);
 
 
 
