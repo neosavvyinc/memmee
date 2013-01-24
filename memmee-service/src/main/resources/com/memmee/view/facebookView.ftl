@@ -27,7 +27,6 @@
     <div id="header"  class="">
         <a href="#home" title="memmee"><img src="img/logo.png" alt="memmee"></a>
 
-
         <!-- Logged out Header -->
         <form id="login" method="post"  
               class=" ng-pristine ng-valid isHidden">
@@ -58,8 +57,7 @@
             </#if>
 
 
-                <span class="memmee-date lg opensans "
-                      style="width: auto; min-width: 155px;">${memmee.displayDate}</span>
+                <span class="memmee-date lg opensans " style="width: auto; min-width: 155px;">${memmee.displayDate?date}</span>
 
 
                     <div class="memmee-user-photo" style="display: none;">

@@ -116,10 +116,19 @@ public class MemmeeResource {
     }
 
     @GET
-    @Path("/facebook/{memmeeId}")
+    @Path("/facebook/{shareKey}")
     @Produces({MediaType.TEXT_HTML})
-    public FacebookMemmeeView getSharedMemmeeForFacebook(@PathParam("memmeeId") Long id) {
-        Memmee memmee = memmeeDao.getMemmee(id);
+    public FacebookMemmeeView getSharedMemmeeForFacebook(@PathParam("shareKey") String key) {
+        Memmee memmee = memmeeDao.getMemmee(key);
+
+        if (memmee == null)
+        {
+            memmee = new Memmee();
+            memmee.setDisplayDate(new Date());
+            memmee.setCreationDate(new Date());
+            memmee.setText("No memmee for share key");
+        }
+
         return new FacebookMemmeeView(memmee);
     }
 
