@@ -17,6 +17,7 @@ import com.memmee.theme.dto.Theme;
 import com.memmee.util.DateUtil;
 import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
+import com.memmee.view.FacebookMemmeeView;
 import com.yammer.dropwizard.logging.Log;
 
 import javax.validation.Valid;
@@ -112,6 +113,14 @@ public class MemmeeResource {
             return new Memmee(user.getId(), Memmee.NO_MEMMEES_TEXT);
         }
         return memmeeDao.getMemmee(id);
+    }
+
+    @GET
+    @Path("/facebook/{memmeeId}")
+    @Produces({MediaType.TEXT_HTML})
+    public FacebookMemmeeView getSharedMemmeeForFacebook(@PathParam("memmeeId") Long id) {
+        Memmee memmee = memmeeDao.getMemmee(id);
+        return new FacebookMemmeeView(memmee);
     }
 
     @POST
