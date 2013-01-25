@@ -23,7 +23,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     @Mapper(MemmeeMapper.class)
     Memmee getMemmeeMin(@Bind("id") Long id);
 
-    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, m.shortenedUrl," +
+    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, m.shortenedUrl, m.facebookUrl," +
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
             "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, " +
@@ -36,7 +36,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     @Mapper(MemmeeAttachmentInspirationMapper.class)
     Memmee getMemmee(@Bind("id") Long id);
 
-    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, m.shortenedUrl," +
+    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, m.shortenedUrl, m.facebookUrl," +
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
             "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, " +
@@ -49,7 +49,7 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
     @Mapper(MemmeeAttachmentInspirationMapper.class)
     Memmee getMemmee(@Bind("shareKey") String shareKey);
 
-    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, m.shortenedUrl," +
+    @SqlQuery("select m.id, m.userId, m.lastUpdateDate, m.creationDate, m.displayDate, m.text, m.shareKey, m.shortenedUrl, m.facebookUrl," +
             "a.id as attachmentId, a.filePath, a.thumbFilePath, a.type, " +
             "i.id as inspirationId, i.text as inspirationText, i.creationDate as inspirationCreationDate," +
             "i.lastUpdateDate as inspirationLastUpdateDate, t.id as themeId, t.name as themeName, " +
@@ -96,10 +96,11 @@ public interface TransactionalMemmeeDAO extends Transactional<TransactionalMemme
             , @Bind("shareKey") String shareKey
     );
 
-    @SqlUpdate("update memmee set shortenedUrl = :shortenedUrl where id = :id")
+    @SqlUpdate("update memmee set shortenedUrl = :shortenedUrl, facebookUrl = :facebookUrl where id = :id")
     int updateShortenedUrl(
             @Bind("id") Long id
             , @Bind("shortenedUrl") String shortenedUrl
+            , @Bind("facebookUrl") String facebookUrl
     );
 
     @SqlUpdate("delete from memmee where id = :id")

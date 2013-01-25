@@ -50,6 +50,7 @@ import com.sun.jersey.multipart.FormDataParam;
 public class MemmeeResource {
     public static final String BASE_URL = "memmeerest";
     public static final String SHARE_PATH_PARAM = "#/share?shareKey=";
+    public static final String FACEBOOK_SHARE_PATH_PARAM = "/memmeerest/facebook/";
 
     private final TransactionalUserDAO userDao;
     private final TransactionalMemmeeDAO memmeeDao;
@@ -315,8 +316,9 @@ public class MemmeeResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
 
-        String shareKey = null;
-        String shortenedUrl = null;
+        String shareKey;
+        String shortenedUrl;
+        String facebookUrl;
 
         if (memmee.getShareKey() == null) {
             try {
@@ -348,9 +350,15 @@ public class MemmeeResource {
                 shortenedUrl = new ShortenedURLBuilder().
                         setUrl(sharePath + SHARE_PATH_PARAM + shareKey).
                         build();
+                facebookUrl = new ShortenedURLBuilder().
+                        setUrl(sharePath + FACEBOOK_SHARE_PATH_PARAM + shareKey).
+                        build();
+
+
                 count += memmeeDao.updateShortenedUrl(
                         memmee.getId(),
-                        shortenedUrl);
+                        shortenedUrl,
+                        facebookUrl);
 
             } catch (DBIException dbException) {
                 LOG.error("DB EXCEPTION", dbException);

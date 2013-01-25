@@ -28,7 +28,8 @@ public class BaseMemmeeDAOTest extends AbstractMemmeeDAOTest {
             "  `displayDate` datetime NOT NULL,\n" +
             "  `text` varchar(4096) DEFAULT NULL,\n" +
             "  `shareKey` varchar(1024) DEFAULT NULL,\n" +
-            "  `shortenedUrl` varchar(200) DEFAULT NULL,\n" +
+            "  `shortenedUrl` varchar(256) DEFAULT NULL,\n" +
+            "  `facebookUrl` varchar(256) DEFAULT NULL,\n" +
             "  `themeId` int(11) DEFAULT NULL,\n" +
             "  PRIMARY KEY (`id`)\n" +
             ") ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2";

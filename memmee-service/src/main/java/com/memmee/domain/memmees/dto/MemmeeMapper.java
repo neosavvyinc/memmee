@@ -21,6 +21,7 @@ public class MemmeeMapper implements ResultSetMapper<Memmee> {
         memmee.setDisplayDate(resultSet.getDate("displayDate"));
         memmee.setShareKey(resultSet.getString("shareKey"));
         memmee.setShortenedUrl(resultSet.getString("shortenedUrl"));
+        memmee.setShortenedFacebookUrl(resultSet.getString("facebookUrl"));
 
         return memmee;
     }
