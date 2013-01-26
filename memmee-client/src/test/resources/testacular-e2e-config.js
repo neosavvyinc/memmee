@@ -15,8 +15,6 @@ files = [
 
     'test/resources/lib/angular-mocks.js',
     'test/resources/e2e/*.js'
-    //'test/resources/e2e/002-user-login-e2e.js'
-    //'test/resources/e2e/003-verify-homepage-elements-e2e.js'
 ];
 
 // list of files to exclude
