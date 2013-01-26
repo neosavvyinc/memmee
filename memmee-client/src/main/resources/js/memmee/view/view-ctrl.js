@@ -5,6 +5,9 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         /* load/tearDown */ function () {
             $scope.user = broadCastService.user;
             $scope.memmee = null;
+
+            // init facebook feed (may want to put this somewhere else... i.e. in a service)
+            FB.init({appId: "280599165382862", status: true, cookie: true });
         });
 
     var isMemmeeValid = function () {
@@ -100,6 +103,16 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         //Prevent from going to the default Url
         event.preventDefault();
 
+        var fbConfig = {
+            link: $scope.memmee.shortenedUrl, // this isn't working and/or showing up...
+            method: 'feed',
+            redirect_uri: 'http://local.memmee.com/',
+            picture: 'http://local.memmee.com/img/memmee-facebook-icon.jpg',
+            name: 'Check Out My Memmee',
+            caption: 'Memmee',
+            description: StringUtil.truncate($scope.memmee.text, 140)
+        };
+
         //Capture the target to apply the link in the future
         var target = event.currentTarget;
         target.href = null;
@@ -108,41 +121,14 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
             $scope.memmee = result;
 
-            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
-<<<<<<< HEAD
-                (configuration.API.FACEBOOK.FEED_URL +
-                    "%20app_id=280599165382862&" +
-                    "%20picture=http://www.chick-fil-a.com/Media/Img/catalog/Food/XLarge/ChickfilA-Deluxe-Chicken-Sandwich.png&" +
-                    "caption=Check%20Out%20My%20Memmee&" +
-                    "%20description=" + StringUtil.truncate($scope.memmee.text, 140) + "&" +
-                    "redirect_uri=https://local.memmee.com/"
-                    ));
-
-=======
-                (configuration.API.FACEBOOK.SHARE_URL +
-                    "s=100&p[url]=" +
-                    $scope.memmee.shortenedFacebookUrl +
-                    "&p[title]=" + "Check Out My Memmee"));
->>>>>>> 789885cb48b428639abf85a591eb8a91711526e3
-            $scope.toggleShareDropdown();
-        });
-
-//        https://www.facebook.com/dialog/feed?
-//            app_id=458358780877780&
-//                link=https://developers.facebook.com/docs/reference/dialogs/&
-//        picture=http://fbrell.com/f8.jpg&
-//        name=Facebook%20Dialogs&
-//            caption=Reference%20Documentation&
-//            description=Using%20Dialogs%20to%20interact%20with%20users.&
-//            redirect_uri=https://mighty-lowlands-6381.herokuapp.com/
-
-        //Get the actual facebook link to be applied to the target
-//        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
-//            $scope.memmee = result;
+            FB.ui(fbConfig, function(response) {
+                console.dir(response);
+            });
 //            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
 //                (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
-//            $scope.toggleShareDropdown();
-//        });
+
+            $scope.toggleShareDropdown();
+        });
     };
 
     //Service Calls
