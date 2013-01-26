@@ -2,6 +2,8 @@ function ShowAllInspirationsController($scope, adminService ) {
 
     $scope.inspirations = [{}];
 
+
+
     $scope.onShowAll = function() {
         console.log("Show all inspirations");
         adminService.showAllInspirations(

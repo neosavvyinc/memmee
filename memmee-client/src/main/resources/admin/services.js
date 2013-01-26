@@ -31,7 +31,24 @@ memmeeServices.factory('adminService', ["$http", "$rootScope", function ($http, 
                     }
                 }
             )
+        },
+
+        addCategory: function(categoryToAdd, resultHandler, faultHandler) {
+            $http({method: 'POST', url: '/memmeeinspirationrest/addCategory', data:categoryToAdd}).then(
+                function(response) {
+                    if(resultHandler) {
+                        resultHandler(response.data);
+                    }
+                },
+                function(response) {
+                    if(faultHandler) {
+                        faultHandler(response.data);
+                    }
+                }
+            )
         }
+
+
     };
 
 }]);

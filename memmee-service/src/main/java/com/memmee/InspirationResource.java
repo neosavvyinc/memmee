@@ -6,8 +6,10 @@ import com.memmee.domain.inspirationcategories.dao.TransactionalInspirationCateg
 import com.memmee.domain.inspirationcategories.domain.InspirationCategory;
 import com.memmee.domain.inspirations.dao.TransactionalInspirationDAO;
 import com.memmee.domain.inspirations.dto.Inspiration;
+import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -84,6 +86,20 @@ public class InspirationResource extends BaseResource {
     @Produces({MediaType.APPLICATION_JSON})
     public List<InspirationCategory> getAllInspirationCategories() {
         return inspirationCategoryDAO.getAllInspirations();
+    }
+
+    @POST
+    @Path("/addCategory")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public InspirationCategory insertCategory(@Valid final InspirationCategory category) {
+
+        InspirationCategory lastIndex = inspirationCategoryDAO.getHighestInspirationCategory();
+
+        category.setIndex(lastIndex.getIndex() + 1);
+        inspirationCategoryDAO.insert(category.getIndex(), category.getName());
+
+        return inspirationCategoryDAO.getInspirationCategoryByIndex(category.getIndex());
     }
 
     protected Inspiration nextInspiration(Inspiration startingInspiration, Inspiration givenInspiration, Inspiration returnInspiration) {

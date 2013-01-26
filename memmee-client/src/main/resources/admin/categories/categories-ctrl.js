@@ -1,6 +1,20 @@
 function ShowAllCategoriesController($scope, adminService ) {
 
+    $scope.categoryToAdd = {};
     $scope.categories = [{}];
+
+    $scope.onAddCategory = function() {
+        adminService.addCategory(
+            $scope.categoryToAdd,
+            function( data ) {
+                $scope.categoryToAdd = {};
+                $scope.onShowAll();
+            },
+            function( fault ) {
+                console.log("something broke when adding a new category");
+            }
+        )
+    }
 
     $scope.onShowAll = function() {
         console.log("Show all inspirations");
