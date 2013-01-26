@@ -79,6 +79,13 @@ public class InspirationResource extends BaseResource {
         return previousInspiration(startingInspiration, givenInspiration, returnInspiration);
     }
 
+    @GET
+    @Path("/getAllCategories")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<InspirationCategory> getAllInspirationCategories() {
+        return inspirationCategoryDAO.getAllInspirations();
+    }
+
     protected Inspiration nextInspiration(Inspiration startingInspiration, Inspiration givenInspiration, Inspiration returnInspiration) {
         if (returnInspiration.equals(startingInspiration)) {
             InspirationCategory nextInspirationCategory = inspirationCategoryDAO.getInspirationCategoryByIndex(givenInspiration.getInspirationCategory().getIndex() + 1);

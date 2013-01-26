@@ -11,7 +11,13 @@ import org.skife.jdbi.v2.sqlobject.mixins.CloseMe;
 import org.skife.jdbi.v2.sqlobject.mixins.GetHandle;
 import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
 
+import java.util.List;
+
 public interface TransactionalInspirationCategoryDAO extends Transactional<TransactionalInspirationCategoryDAO>, GetHandle, CloseMe {
+
+    @SqlQuery("select * from inspirationcategory")
+    @Mapper(InspirationCategoryMapper.class)
+    List<InspirationCategory> getAllInspirations();
 
     @SqlQuery("select * from inspirationcategory where id = :id")
     @Mapper(InspirationCategoryMapper.class)
