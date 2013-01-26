@@ -18,6 +18,20 @@ memmeeServices.factory('adminService', ["$http", "$rootScope", function ($http, 
             );
         },
 
+        showAllCategories: function(resultHandler, faultHandler) {
+            $http({method: 'GET', url: '/memmeeinspirationrest/getAllCategories'}).then(
+                function(response) {
+                    if(resultHandler) {
+                        resultHandler(response.data);
+                    }
+                },
+                function(response) {
+                    if(faultHandler) {
+                        faultHandler(response.data);
+                    }
+                }
+            )
+        }
     };
 
 }]);

@@ -1,0 +1,25 @@
+<div style="padding-top: 33px; width: 800px; height: 550px; overflow: scroll;" ng-controller="ShowAllCategoriesController">
+    <table width="100%">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Index</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in categories">
+            <td>
+                {{row.id}}
+            </td>
+            <td>
+                {{row.index}}
+            </td>
+            <td>
+                {{row.name}}
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>

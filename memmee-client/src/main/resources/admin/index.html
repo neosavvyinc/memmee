@@ -16,37 +16,9 @@
     </div>
 
     <div id="content" ng-controller="AdminController" >
-        <a href="#" ng-click="onShowAll()">Show All Inspirations</a><br>
+        <ng-include src="'navigation/navigation-ptl.html'"></ng-include>
 
-        <div style="padding-top: 33px; width: 800px; height: 550px; overflow: scroll;">
-            <table width="100%" height="100%">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Category</th>
-                        <th>Category Index</th>
-                        <th>Text</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="row in inspirations">
-                        <td>
-                        {{row.id}}
-                        </td>
-                        <td>
-                        {{row.inspirationCategoryId}}
-                        </td>
-                        <td>
-                        {{row.inspirationCategoryIndex}}
-                        </td>
-                        <td>
-                        {{row.text}}
-                        </td>
-                    </tr>
-                </tbody>
-
-            </table>
-        </div>
+        <ng-view></ng-view>
 
     </div>
 
@@ -60,6 +32,9 @@
     <script src="admin.js"></script>
     <script src="services.js"></script>
     <script src="admin-ctrl.js"></script>
+
+    <script src="categories/categories-ctrl.js"></script>
+    <script src="inspirations/inspiration-ctrl.js"></script>
 
 </div>
 
