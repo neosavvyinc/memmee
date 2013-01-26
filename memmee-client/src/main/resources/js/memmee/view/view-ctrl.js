@@ -102,10 +102,35 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         //Get the actual facebook link to be applied to the target
         memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
             $scope.memmee = result;
+
             $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
-                (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
+                (configuration.API.FACEBOOK.FEED_URL +
+                    "%20app_id=280599165382862&" +
+                    "%20picture=http://www.chick-fil-a.com/Media/Img/catalog/Food/XLarge/ChickfilA-Deluxe-Chicken-Sandwich.png&" +
+                    "caption=Check%20Out%20My%20Memmee&" +
+                    "%20description=" + StringUtil.truncate($scope.memmee.text, 140) + "&" +
+                    "redirect_uri=https://local.memmee.com/"
+                    ));
+
             $scope.toggleShareDropdown();
         });
+
+//        https://www.facebook.com/dialog/feed?
+//            app_id=458358780877780&
+//                link=https://developers.facebook.com/docs/reference/dialogs/&
+//        picture=http://fbrell.com/f8.jpg&
+//        name=Facebook%20Dialogs&
+//            caption=Reference%20Documentation&
+//            description=Using%20Dialogs%20to%20interact%20with%20users.&
+//            redirect_uri=https://mighty-lowlands-6381.herokuapp.com/
+
+        //Get the actual facebook link to be applied to the target
+//        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
+//            $scope.memmee = result;
+//            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
+//                (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
+//            $scope.toggleShareDropdown();
+//        });
     };
 
     //Service Calls

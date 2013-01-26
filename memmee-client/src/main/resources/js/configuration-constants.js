@@ -14,7 +14,8 @@ Memmee.Constants.constant('configuration', {
     },
     API: {
         FACEBOOK: {
-            SHARE_URL: "http://www.facebook.com/sharer.php?"
+            SHARE_URL: "http://www.facebook.com/sharer.php?",
+            FEED_URL: "https://www.facebook.com/dialog/feed?"
         }
     },
     EVENTS: {
