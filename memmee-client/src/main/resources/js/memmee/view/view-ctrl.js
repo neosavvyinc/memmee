@@ -23,6 +23,11 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         return '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey;
     };
 
+    var getFacebookShareUrl = function () {
+        //($location.protocol() + "://" + $location.host())
+        return '/memmeerest/facebook/' + $scope.memmee.shareKey;
+    };
+
     var closedropdownTimer;
     $scope.shareVisibilityStyle = "isHidden";
     $scope.toggleShareDropdown = function () {
@@ -104,6 +109,7 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
             $scope.memmee = result;
 
             $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
+<<<<<<< HEAD
                 (configuration.API.FACEBOOK.FEED_URL +
                     "%20app_id=280599165382862&" +
                     "%20picture=http://www.chick-fil-a.com/Media/Img/catalog/Food/XLarge/ChickfilA-Deluxe-Chicken-Sandwich.png&" +
@@ -112,6 +118,12 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
                     "redirect_uri=https://local.memmee.com/"
                     ));
 
+=======
+                (configuration.API.FACEBOOK.SHARE_URL +
+                    "s=100&p[url]=" +
+                    $scope.memmee.shortenedFacebookUrl +
+                    "&p[title]=" + "Check Out My Memmee"));
+>>>>>>> 789885cb48b428639abf85a591eb8a91711526e3
             $scope.toggleShareDropdown();
         });
 

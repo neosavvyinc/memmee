@@ -52,6 +52,7 @@
                 <includes>
                     <include>**/*.yml</include>
                     <include>**/*.txt</include>
+                    <include>**/*.ftl</include>
                 </includes>
             </resource>
         </resources>
@@ -154,6 +155,12 @@
         <dependency>
             <groupId>com.yammer.dropwizard</groupId>
             <artifactId>dropwizard-auth</artifactId>
+            <version>${dropwizard.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yammer.dropwizard</groupId>
+            <artifactId>dropwizard-views</artifactId>
             <version>${dropwizard.version}</version>
         </dependency>
 

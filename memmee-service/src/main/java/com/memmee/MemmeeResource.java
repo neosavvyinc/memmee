@@ -17,6 +17,7 @@ import com.memmee.theme.dto.Theme;
 import com.memmee.util.DateUtil;
 import com.memmee.util.ListUtil;
 import com.memmee.util.OsUtil;
+import com.memmee.view.FacebookMemmeeView;
 import com.yammer.dropwizard.logging.Log;
 
 import javax.validation.Valid;
@@ -49,6 +50,7 @@ import com.sun.jersey.multipart.FormDataParam;
 public class MemmeeResource {
     public static final String BASE_URL = "memmeerest";
     public static final String SHARE_PATH_PARAM = "#/share?shareKey=";
+    public static final String FACEBOOK_SHARE_PATH_PARAM = "/memmeerest/facebook/";
 
     private final TransactionalUserDAO userDao;
     private final TransactionalMemmeeDAO memmeeDao;
@@ -112,6 +114,23 @@ public class MemmeeResource {
             return new Memmee(user.getId(), Memmee.NO_MEMMEES_TEXT);
         }
         return memmeeDao.getMemmee(id);
+    }
+
+    @GET
+    @Path("/facebook/{shareKey}")
+    @Produces({MediaType.TEXT_HTML})
+    public FacebookMemmeeView getSharedMemmeeForFacebook(@PathParam("shareKey") String key) {
+        Memmee memmee = memmeeDao.getMemmee(key);
+
+        if (memmee == null)
+        {
+            memmee = new Memmee();
+            memmee.setDisplayDate(new Date());
+            memmee.setCreationDate(new Date());
+            memmee.setText("No memmee for share key");
+        }
+
+        return new FacebookMemmeeView(memmee);
     }
 
     @POST
@@ -297,8 +316,9 @@ public class MemmeeResource {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
 
-        String shareKey = null;
-        String shortenedUrl = null;
+        String shareKey;
+        String shortenedUrl;
+        String facebookUrl;
 
         if (memmee.getShareKey() == null) {
             try {
@@ -330,9 +350,15 @@ public class MemmeeResource {
                 shortenedUrl = new ShortenedURLBuilder().
                         setUrl(sharePath + SHARE_PATH_PARAM + shareKey).
                         build();
+                facebookUrl = new ShortenedURLBuilder().
+                        setUrl(sharePath + FACEBOOK_SHARE_PATH_PARAM + shareKey).
+                        build();
+
+
                 count += memmeeDao.updateShortenedUrl(
                         memmee.getId(),
-                        shortenedUrl);
+                        shortenedUrl,
+                        facebookUrl);
 
             } catch (DBIException dbException) {
                 LOG.error("DB EXCEPTION", dbException);

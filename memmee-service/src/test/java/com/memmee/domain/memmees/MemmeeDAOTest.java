@@ -159,7 +159,7 @@ public class MemmeeDAOTest extends BaseMemmeeDAOTest {
 
         try {
             Long id = dao.insert(new Long(1), "text", new Date(), new Date(), new Date(), "shareKey", new Long(1), new Long(1), new Long(1));
-            dao.updateShortenedUrl(id, "http://www.shortened.com");
+            dao.updateShortenedUrl(id, "http://www.shortened.com", "http://www.shortened.com");
 
             assertThat(dao.getMemmee(id).getShortenedUrl(), is(equalTo("http://www.shortened.com")));
         } finally {

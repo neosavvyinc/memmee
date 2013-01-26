@@ -10,6 +10,7 @@ import com.memmee.domain.user.dao.TransactionalUserDAO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/memmeeinspirationrest")
 public class InspirationResource extends BaseResource {
@@ -24,6 +25,16 @@ public class InspirationResource extends BaseResource {
         this.inspirationDAO = inspirationDAO;
         this.inspirationCategoryDAO = inspirationCategoryDAO;
     }
+
+
+
+    @GET
+    @Path("/inspirations/all")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<Inspiration> getRandomInspiration() {
+        return inspirationDAO.getAllInspirations();
+    }
+
 
     @GET
     @Path("/getrandominspiration")

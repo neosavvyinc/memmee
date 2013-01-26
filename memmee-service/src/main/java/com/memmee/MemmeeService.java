@@ -21,6 +21,7 @@ import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.Database;
 import com.yammer.dropwizard.db.DatabaseFactory;
+import com.yammer.dropwizard.views.ViewMessageBodyWriter;
 
 import java.util.TimeZone;
 
@@ -42,6 +43,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
 
         //Monitors Database Exceptions From the DAOS
         addBundle(new DBIExceptionsBundle());
+        environment.addProvider(ViewMessageBodyWriter.class);
 
         //Set Timezone
         userConfiguration.getLoggingConfiguration().getConsoleConfiguration().setTimeZone(TimeZone.getDefault());
@@ -69,6 +71,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao, themeDAO, userConfiguration));
         environment.addResource(new InspirationResource(userDao, inspirationDao, inspirationCategoryDAO));
         environment.addResource(new MemmeeReportingResource(reportingDAO));
+
 
 
         environment.addHealthCheck( new DatabaseHealthCheck( db ) );

@@ -65,9 +65,12 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         txInspirationCategoryDAO = database.open(TransactionalInspirationCategoryDAO.class);
         txThemeDAO = database.open(TransactionalThemeDAO.class);
 
-        MemmeeUrlConfiguration mockMemmeeConfiguration = mock(MemmeeUrlConfiguration.class);
-        MemmeeConfiguration mockMemmeeConfig = mock(MemmeeConfiguration.class);
+        MemmeeUrlConfiguration mockMemmeeConfiguration = new MemmeeUrlConfiguration();
+        MemmeeConfiguration mockMemmeeConfig = new MemmeeConfiguration();
+
+        mockMemmeeConfiguration.setActiveUrl("dev.test.memmee.com");
         mockMemmeeConfiguration.setActiveEmailAddress("test-cases@nowhere.com");
+
         mockMemmeeConfig.setMemmeeUrlConfiguration( mockMemmeeConfiguration );
 
         passwordId = passwordDAO.insert("password", 0);
@@ -292,7 +295,6 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     }
 
     @Test
-    @Ignore //Trevor: broken as of last commit
     public void testShareMemmee() {
         memmeeId = insertTestData();
 
@@ -309,6 +311,8 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
 
         assertThat(valueFromServer.getId(), is(equalTo(testMemmee.getId())));
         assertThat(valueFromServer.getShareKey(), is(notNullValue()));
+        assertThat(valueFromServer.getShortenedFacebookUrl(), is(notNullValue()));
+        assertThat(valueFromServer.getShortenedUrl(), is(notNullValue()));
 
 
         Memmee sharedMemmeeFromShareKey = client().resource(

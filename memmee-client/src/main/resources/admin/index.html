@@ -1,0 +1,69 @@
+<html ng-app="admin">
+
+<head>
+
+    <title>Memmee - Admin</title>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/memmee.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="admin.css" />
+
+</head>
+<body>
+
+<div id="container">
+
+
+    <div id="header">
+    </div>
+
+    <div id="content" ng-controller="AdminController" >
+        <a href="#" ng-click="onShowAll()">Show All Inspirations</a><br>
+
+        <div style="padding-top: 33px; width: 800px; height: 550px; overflow: scroll;">
+            <table width="100%" height="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Category</th>
+                        <th>Category Index</th>
+                        <th>Text</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="row in inspirations">
+                        <td>
+                        {{row.id}}
+                        </td>
+                        <td>
+                        {{row.inspirationCategoryId}}
+                        </td>
+                        <td>
+                        {{row.inspirationCategoryIndex}}
+                        </td>
+                        <td>
+                        {{row.text}}
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+    <div id="footer">
+    </div>
+
+    <script src="/lib/angular/angular.js"></script>
+    <script src="/lib/angular/angular-resource.js"></script>
+
+    <!-- App -->
+    <script src="admin.js"></script>
+    <script src="services.js"></script>
+    <script src="admin-ctrl.js"></script>
+
+</div>
+
+</body>
+
+
+</html>

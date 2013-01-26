@@ -39,6 +39,8 @@ public class Memmee implements Serializable {
 
     private String shortenedUrl;
 
+    private String shortenedFacebookUrl;
+
     public Memmee() {}
 
     public Memmee(Long userId, String text) {
@@ -132,6 +134,14 @@ public class Memmee implements Serializable {
 
     public void setShortenedUrl(String shortenedUrl) {
         this.shortenedUrl = shortenedUrl;
+    }
+
+    public String getShortenedFacebookUrl() {
+        return shortenedFacebookUrl;
+    }
+
+    public void setShortenedFacebookUrl(String shortenedFacebookUrl) {
+        this.shortenedFacebookUrl = shortenedFacebookUrl;
     }
 
     @Override
