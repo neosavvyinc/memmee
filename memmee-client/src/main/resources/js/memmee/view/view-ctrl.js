@@ -5,6 +5,9 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         /* load/tearDown */ function () {
             $scope.user = broadCastService.user;
             $scope.memmee = null;
+
+            // init facebook feed (may want to put this somewhere else... i.e. in a service)
+            FB.init({appId: "280599165382862", status: true, cookie: true });
         });
 
     var isMemmeeValid = function () {
@@ -100,6 +103,16 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         //Prevent from going to the default Url
         event.preventDefault();
 
+        var fbConfig = {
+            link: $scope.memmee.shortenedUrl, // this isn't working and/or showing up...
+            method: 'feed',
+            redirect_uri: 'http://local.memmee.com/',
+            picture: 'http://local.memmee.com/img/memmee-facebook-icon.jpg',
+            name: 'Check Out My Memmee',
+            caption: 'Memmee',
+            description: StringUtil.truncate($scope.memmee.text, 140)
+        };
+
         //Capture the target to apply the link in the future
         var target = event.currentTarget;
         target.href = null;
@@ -107,11 +120,13 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         //Get the actual facebook link to be applied to the target
         memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
             $scope.memmee = result;
-            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
-                (configuration.API.FACEBOOK.SHARE_URL +
-                    "s=100&p[url]=" +
-                    $scope.memmee.shortenedFacebookUrl +
-                    "&p[title]=" + "Check Out My Memmee"));
+
+            FB.ui(fbConfig, function(response) {
+                console.dir(response);
+            });
+//            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
+//                (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
+
             $scope.toggleShareDropdown();
         });
     };
