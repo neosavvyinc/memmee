@@ -106,8 +106,8 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         var fbConfig = {
             link: $scope.memmee.shortenedUrl, // this isn't working and/or showing up...
             method: 'feed',
-            redirect_uri: 'http://local.memmee.com/',
-            picture: 'http://local.memmee.com/img/memmee-facebook-icon.jpg',
+            redirect_uri: $location.protocol() + "://" + $location.host(),
+            picture: $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg',
             name: 'Check Out My Memmee',
             caption: 'Memmee',
             description: StringUtil.truncate($scope.memmee.text, 140)
