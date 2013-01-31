@@ -6,8 +6,9 @@ google.load("feeds", "1");
 //Initialize Name Spaced Modules
 Memmee.Constants = angular.module('memmee.constants', [])
 Memmee.Services = angular.module('memmee.services', []);
+Memmee.Directives = angular.module('memmee.directives', []);
 
-var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize', 'memmee.constants' , 'memmee.services']).
+var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize', 'memmee.constants' , 'memmee.services', 'memmee.directives']).
     config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
     function getParameterByName (name) {

@@ -1,8 +1,8 @@
 
 var email,
     password,
-    currentText = null,
     memmeeText = "";
+
 
 email = 'aparrish@neosavvy.com';
 password = 'test';
@@ -21,9 +21,7 @@ var logout = function() {
 
 describe("Memmee creation", function() {
 
-
     it("Should allow a user to access the create page", function() {
-
         browser().navigateTo('/');
         login(email, password);
         expect(browser().location().path()).toBe('/create');
@@ -37,35 +35,39 @@ describe("Memmee creation", function() {
             "inspiration? hit the arrow on the right for writing prompts."
         );
 
-        currentText = element('div.flipper p').text();
     });
 
     it("Should allow a user to select the next inspirational prompt by clicking the right arrow button", function(){
-        element('a.btn.next-arrow').click();
+        var originalTextElem = element('div.flipper p');
 
-        // element() returns a future, which is problematic for comparing saved
-        // values to current values in expect(). calling execute (with empty 'done' callback)
-        // on currentText will fulfill the promise, thus allowing for assertion to take place
-        //
-        // that being said, this feels like a hack... maybe there's a better way to do this?
-        currentText.execute(function(){});
+        originalTextElem.query(function(elem, done) {
+            // click next button, assert that new text that appears after clicking is:
+            //      not undefined
+            //      not equal to original text
+            element('a.btn.next-arrow').click();
+            expect(element('div.flipper p').text()).not().toEqual(undefined);
+            expect(element('div.flipper p').text()).not().toEqual(elem.text());
+            done();
+        });
 
-        expect(element('div.flipper p').text()).not().toEqual(currentText.value);
-        expect(element('div.flipper p').text()).not().toEqual(undefined);
     });
 
     it("Should allow a user to click the back button on inspirations to select the previous prompt", function(){
-        // save current inspiration text, click next, click previous, assert that
-        // previously saved inspiration text is the same as current inspiration text
-        currentText = element('div.flipper p').text();
-        element('a.btn.next-arrow').click();
-        element('a.btn.prev-arrow').click();
+        // save current inspiration text, click next, save next text element, click previous,
+        // assert that:
+        //      previously saved inspiration text is the same as current inspiration text,
+        //      next text is NOT the same as current text
+        var originalTextElem = element('div.flipper p');
 
-        // currentText was reset to another future, so need call execute again (see previous test)
-        currentText.execute(function(){});
+        originalTextElem.query(function(elem, done) {
+            element('a.btn.next-arrow').click();
+            var nextTextElem = element('div.flipper p');
+            element('a.btn.prev-arrow').click();
+            expect(element('div.flipper p').text()).toEqual(elem.text());
+            expect(element('div.flipper p').text()).not().toEqual(nextTextElem.text());
+            done();
+        });
 
-        expect(element('div.flipper p').text()).toEqual(currentText.value);
-        expect(element('div.flipper p').text()).not().toEqual(undefined);
     });
 
     it("Should allow the user to type some test text in the memmee and click create", function(){
@@ -87,11 +89,17 @@ describe("Memmee creation", function() {
         // assert that save controls are hidden/we are in view mode
         expect(element('div.memmee-controls').attr('class')).toContain('isHidden');
 
+        // move elsewhere
         logout();
     });
 
     xit("Should add the newly typed in memmee to the archive list after clicking create and should be in view mode",function(){
         // TO DO
+        var count = repeater('a').count();
+
+        console.log(count);
+
+        expect(repeater('a').row(count-1)).toEqual(2);
 //        memmeeSets
     });
 
