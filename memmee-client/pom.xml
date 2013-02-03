@@ -184,6 +184,7 @@
                                 <jsSourceFile>js/const/message/notifications.js</jsSourceFile>
                                 <jsSourceFile>js/util/memmee_date_util.js</jsSourceFile>
                                 <jsSourceFile>js/util/misc.js</jsSourceFile>
+                                <jsSourceFile>js/memmee-directives.js</jsSourceFile>
 
                                 <!-- Main Application -->
                                 <jsSourceFile>js/app.js</jsSourceFile>
