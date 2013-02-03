@@ -72,14 +72,14 @@ describe("Memmee creation", function() {
 
     it("Should allow the user to type some test text in the memmee and click create", function(){
         memmee_text =
+            Math.random(): +
             'Bacon ipsum dolor sit amet labore officia consequat aute sint' +
             'andouille mollit pork loin nostrud. Rump frankfurter cow, jerky' +
             'ham flank ut pork chop deserunt jowl elit reprehenderit fugiat' +
             'bresaola. Tempor leberkas corned beef est fugiat doner rump pork' +
             'chop, venison exercitation mollit ground round. Bacon filet mignon' +
             'fatback ribeye tail. Biltong leberkas cow doner kielbasa brisket' +
-            'laborum boudin ex spare ribs proident voluptate culpa in dolore: ' +
-            Math.random();
+            'laborum boudin ex spare ribs proident voluptate culpa in dolore';
 
         input('memmee.text').enter(memmee_text);
         element('a.btn.save').click();
