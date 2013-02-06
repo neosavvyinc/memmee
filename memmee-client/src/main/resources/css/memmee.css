@@ -741,7 +741,7 @@ html.blogpage{
 }
 
 .memmee-card.style-valentines {
-    width: 979px;
+    width: 885px;
     height: 597px;
     font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
     color: #7f7676;
@@ -1190,6 +1190,16 @@ html.blogpage{
     color: #513f48;
     background-position: 0 -495px;
     font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.slidecard.valentines{
+    position: relative;
+    top: -3px;
+    width: 148px;
+    height: 80px;
+    color: #7f7676;
+    background-position: 0 -620px;
+    font-family: 'Antic Slab', 'Times New Roman', Times, serif;
 }
 
 .list.steps{
