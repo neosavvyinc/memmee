@@ -45,7 +45,9 @@ describe("Memmee view mode features", function(){
             done();
         });
 
-//        expect(element('p.memmee-text').text()).toEqual(currentText.value);
+        // TO DO
+        // assert that text in view area contains text in the the selected archived memmee
+        // expect(element('p.memmee-text').text()).toEqual(currentText.value);
 
     });
 
@@ -69,8 +71,8 @@ describe("Memmee view mode features", function(){
         element('a.btn.share').click();
         element('ul.memmee-style.dropdown:eq(1) li:eq(1) a').click();
 
-        //pause();
-        // click facebook share link
+        // TO DO
+        // facebook dialog does not seem to be loading properly, need to fix this.
     });
 
     it("Should support deleting the memmee that is being viewed and should prompt to make sure a user really wants to do this", function(){
@@ -83,6 +85,9 @@ describe("Memmee view mode features", function(){
         expect(element('div.modal.discard-memmee:eq(1)').attr('class')).toContain('isHidden');
         element('a.btn.trash').click();
         expect(element('div.modal.discard-memmee:eq(1)').attr('class')).toContain('isVisible');
+        
+        // TO DO
+        // delete selected, assert that list of memmees contains one less entry than before
 
     });
 
