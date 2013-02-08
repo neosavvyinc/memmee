@@ -16,6 +16,7 @@ public class ReportingUserMapper implements ResultSetMapper<User> {
         user.setId(resultSet.getLong("id"));
         user.setEmail(resultSet.getString("email"));
         user.setFirstName(resultSet.getString("firstName"));
+        user.setCreationDate(resultSet.getDate("creationDate"));
 
         try {
             user.setMemmeeCount(resultSet.getLong("memmeeCount"));

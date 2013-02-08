@@ -159,6 +159,10 @@ function CreateMemmeesController($scope, $http, broadCastService) {
                 $scope.selectedTheme = "memmee-card style-whimsy";
                 $scope.selectedListTheme = "slidecard whimsy";
                 break;
+            case 5:
+                $scope.selectedTheme = "memmee-card style-valentines";
+                $scope.selectedListTheme = "slidecard valentines";
+                break;
             default:
                 $scope.selectedTheme = "memmee-card";
                 $scope.selectedListTheme = "slidecard note crimson"
@@ -234,6 +238,8 @@ function CreateMemmeesController($scope, $http, broadCastService) {
     if (broadCastService.user && broadCastService.user.loginCount < 3) {
         broadCastService.createModeNewUserLogin();
     }
+
+    $scope.setTheme(5);
 }
 
 CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];

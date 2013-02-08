@@ -740,6 +740,19 @@ html.blogpage{
     right: 127px;
 }
 
+.memmee-card.style-valentines {
+    width: 885px;
+    height: 597px;
+    font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
+    color: #7f7676;
+    background-image: url('../img/bg-card-valentine.png');
+}
+
+.memmee-card.style-valentines .memmee-text{
+    color: #7f7676;
+    font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
+}
+
 .memmee-bubble{
     position: absolute;
     top : 166px;
@@ -1179,6 +1192,16 @@ html.blogpage{
     font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.slidecard.valentines{
+    position: relative;
+    top: -3px;
+    width: 148px;
+    height: 80px;
+    color: #7f7676;
+    background-position: 0 -620px;
+    font-family: 'Antic Slab', 'Times New Roman', Times, serif;
+}
+
 .list.steps{
     display: block;
 
@@ -1264,6 +1287,10 @@ html.blogpage{
 .memmee-style.dropdown .btn.style-pushPin{
     margin-right: 30px;
 }
+.memmee-style.dropdown .btn.style-valentines{
+    margin-right: 8px;
+}
+
 
 .scrollbar-container{
     position: absolute;
@@ -1635,14 +1662,24 @@ table.calendar{
     background-position: -95px -645px;
 }
 .btn.style-saleTag{
-    width: 37px;
-    height: 22px;
-    background-position: -120px -624px;
-}
+     width: 37px;
+     height: 22px;
+     background-position: -120px -624px;
+ }
 .btn.style-saleTag:hover{
     width: 37px;
     height: 23px;
     background-position: -120px -646px;
+}
+.btn.style-valentines{
+    width: 37px;
+    height: 22px;
+    background-position: -170px -624px;
+}
+.btn.style-valentines:hover{
+    width: 37px;
+    height: 23px;
+    background-position: -170px -646px;
 }
 .btn.save{
     color: #4E5F61;
