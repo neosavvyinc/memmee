@@ -109,7 +109,7 @@ function AlertsController($scope, $http, broadCastService, $location, configurat
         var shareUrl = message[0].shortenedUrl;
         console.log("location:::" + shareUrl);
         $scope.showAlert("copy and paste the link below to share.",
-            "(don't worry, your other memmees will remain private.)<br><br>" + shareUrl);
+            "(don't worry, your other memmees will remain private.)<br><br><a href='" + shareUrl + "' target='_blank'>" + shareUrl + "</a>");
     });
 
     $scope.$on(configuration.EVENTS.FACEBOOK_LINK_GENERATED, function (event, link) {
