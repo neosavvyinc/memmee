@@ -1,8 +1,7 @@
 
 var email,
     password,
-    memmeeText = "";
-
+    memmee_text = '';
 
 email = 'aparrish@neosavvy.com';
 password = 'test';
@@ -14,7 +13,6 @@ var login = function(email, password) {
 };
 
 var logout = function() {
-    //element('#primaryNav a.link.more:first').click();
     element('li:eq(2) a').click();
     element('li:eq(4) ul li:eq(1) a').click();
 };
@@ -71,38 +69,26 @@ describe("Memmee creation", function() {
     });
 
     it("Should allow the user to type some test text in the memmee and click create", function(){
-        memmee_text =
-            Math.random(): +
-            'Bacon ipsum dolor sit amet labore officia consequat aute sint' +
-            'andouille mollit pork loin nostrud. Rump frankfurter cow, jerky' +
-            'ham flank ut pork chop deserunt jowl elit reprehenderit fugiat' +
-            'bresaola. Tempor leberkas corned beef est fugiat doner rump pork' +
-            'chop, venison exercitation mollit ground round. Bacon filet mignon' +
-            'fatback ribeye tail. Biltong leberkas cow doner kielbasa brisket' +
-            'laborum boudin ex spare ribs proident voluptate culpa in dolore';
 
+        memmee_text = "\"" + Math.random() + "\"";
         input('memmee.text').enter(memmee_text);
         element('a.btn.save').click();
 
         // assert that text-area shows memmee_text
         expect(element('p.memmee-text').text()).toEqual(memmee_text);
+
         // assert that save controls are hidden/we are in view mode
         expect(element('div.memmee-controls').attr('class')).toContain('isHidden');
 
-        // move elsewhere
+    });
+
+    it("Should add the newly typed in memmee to the archive list after clicking create and should be in view mode",function(){
+
+        expect(repeater('.memmeeThing div a').row(0)).toEqual([memmee_text]);
+
+        // last test in block, logout
         logout();
     });
-
-    xit("Should add the newly typed in memmee to the archive list after clicking create and should be in view mode",function(){
-        // TO DO
-        var count = repeater('a').count();
-
-        console.log(count);
-
-        expect(repeater('a').row(count-1)).toEqual(2);
-//        memmeeSets
-    });
-
 
 });
 
