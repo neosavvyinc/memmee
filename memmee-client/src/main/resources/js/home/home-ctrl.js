@@ -14,7 +14,6 @@ function HomeController($scope, $timeout, $http) {
 
 
     $scope.clickNext = function () {
-        console.log("Clicking next");
 
         if ($scope.carouselState < 3) {
             $scope.carouselState++;
@@ -41,8 +40,6 @@ function HomeController($scope, $timeout, $http) {
     }
 
     $scope.clickPrevious = function () {
-        console.log("Clicking previous");
-
         if ($scope.carouselState > 1) {
             $scope.carouselState--;
         }
@@ -77,7 +74,6 @@ function HomeController($scope, $timeout, $http) {
                 })
             });
         } else {
-            console.log("delaying for google");
             $timeout($scope.getBlogPost(), 1000);
         }
     }
