@@ -68,7 +68,6 @@ function HomeController($scope, $timeout, $http) {
 
     $scope.getBlogPost = function() {
         if( google && google.feeds && google.feeds.Feed ) {
-            console.log("yup snaggin google");
             var feed = new google.feeds.Feed("http://blog.memmee.com/?feed=atom");
             feed.load(function(result) {
                 $scope.$apply(function(){
