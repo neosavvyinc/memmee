@@ -8,7 +8,7 @@
         </p>
 
         <div class="slideshow items" ng-hide="(memmees == null || memmees.length == 0)">
-            <div ng-repeat="memmeeSet in memmeeSets" class="inline-block">
+            <div ng-repeat="memmeeSet in memmeeSets" class="inline-block memmeeSet">
                 <div class="slidecard-container" ng-repeat="memmee in memmeeSet">
                     <label ng-click="onMemmeeSelect(memmee)"
                            class="slidecard-date opensans">{{getDisplayDate(memmee)}}</label>
