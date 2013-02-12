@@ -79,15 +79,18 @@ describe("Memmee view mode features", function(){
 
         // select the first memmee in the list
         element('a.slidecard:eq(0)').click();
-        element('a.btn.share').click();
-        element('ul.memmee-style.dropdown:eq(1) li:eq(1) a').click();
+
+        var currentMemmeeElement = element('p.memmee-text');
 
         expect(element('div.modal.discard-memmee:eq(1)').attr('class')).toContain('isHidden');
         element('a.btn.trash').click();
         expect(element('div.modal.discard-memmee:eq(1)').attr('class')).toContain('isVisible');
-        
+
         // TO DO
         // delete selected, assert that list of memmees contains one less entry than before
+
+        //element('a.btn.delete').click();
+
 
     });
 

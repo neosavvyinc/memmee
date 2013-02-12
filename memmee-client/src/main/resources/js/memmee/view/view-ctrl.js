@@ -1,4 +1,4 @@
-function ViewModeController($scope, $rootScope, $http, broadCastService, $timeout, $location, configuration, memmeeService) {
+function ViewModeController($scope, $rootScope, $http, broadCastService, $timeout, $location, configuration, memmeeService, facebookService) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -6,8 +6,6 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
             $scope.user = broadCastService.user;
             $scope.memmee = null;
 
-            // init facebook feed (may want to put this somewhere else... i.e. in a service)
-            FB.init({appId: "280599165382862", status: true, cookie: true });
         });
 
     var isMemmeeValid = function () {
@@ -113,22 +111,25 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
             description: StringUtil.truncate($scope.memmee.text, 140)
         };
 
-        //Capture the target to apply the link in the future
-        var target = event.currentTarget;
-        target.href = null;
+        facebookService.postMemmee(fbConfig);
 
-        //Get the actual facebook link to be applied to the target
-        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
-            $scope.memmee = result;
-
-            FB.ui(fbConfig, function(response) {
-                console.dir(response);
-            });
-//            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
-//                (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
-
-            $scope.toggleShareDropdown();
-        });
+//
+//        //Capture the target to apply the link in the future
+//        var target = event.currentTarget;
+//        target.href = null;
+//
+//        //Get the actual facebook link to be applied to the target
+//        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
+//            $scope.memmee = result;
+//
+//            FB.ui(fbConfig, function(response) {
+//                console.dir(response);
+//            });
+////            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
+////                (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
+//
+//            $scope.toggleShareDropdown();
+//        });
     };
 
     //Service Calls
@@ -226,4 +227,4 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
     };
 }
 
-ViewModeController.$inject = ['$scope', '$rootScope', '$http', 'memmeeBroadCastService', '$timeout', '$location', 'configuration', 'memmeeService'];
+ViewModeController.$inject = ['$scope', '$rootScope', '$http', 'memmeeBroadCastService', '$timeout', '$location', 'configuration', 'memmeeService', 'facebookService'];
