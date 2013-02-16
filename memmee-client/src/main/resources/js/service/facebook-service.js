@@ -1,43 +1,49 @@
 'use strict'
 
-Memmee.Services.factory('facebookService', ['memmeeService', '$q', 'configuration', function (memmeeService, $q, configuration) {
+Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration', function ($rootScope, $q, configuration) {
 
+
+    var login,
+        getLoginStatus,
+        postToFacebook;
 
     // init facebook feed when service is injected
     FB.init({
-        appId: configuration.API.APP_ID,
+        appId: configuration.API.FACEBOOK.APP_ID_DEV,
         status: true,
         cookie: true
     });
 
-    var login = function(deferred) {
-
-        FB.login(function(response) {
+    login = function (deferred) {
+        FB.login(function (response) {
             if (response.authResponse) {
-                console.log('successfully logged in');
-                deferred.resolve('oh boy');
+                // resolve promise and propagate via digest
+                $rootScope.$apply(function() {
+                    deferred.resolve('successfully logged in');
+                });
             } else {
-                console.log('ah, dang, rejected');
-                deferred.reject('failed to login');
+                // reject promise and propagate via digest
+                $rootScope.$apply(function() {
+                    deferred.reject({msg : 'failed to login', response : response});
+                });
             }
         });
 
-        return loginStatus.promise;
+        return deferred;
     };
 
-    var getLoginStatus = function() {
+    getLoginStatus = function () {
+
         var deferred = $q.defer();
 
-        FB.getLoginStatus(function(response) {
+        FB.getLoginStatus(function (response) {
             if (response.status === 'connected') {
-                
                 // login promise resolved
                 deferred.resolve('connected');
 
             } else if (response.status === 'not_authorized') {
                 // not authorized
                 console.log('user is not authorized, attempting to log in');
-
                 login(deferred);
             } else {
                 // not logged in
@@ -46,10 +52,10 @@ Memmee.Services.factory('facebookService', ['memmeeService', '$q', 'configuratio
             }
         });
 
-        return userStatus.promise;
+        return deferred.promise;
     };
 
-    var postToFacebook = function(config) {
+    postToFacebook = function(config) {
         FB.ui(config, function(response) {
             console.dir(response);
         });
@@ -60,16 +66,13 @@ Memmee.Services.factory('facebookService', ['memmeeService', '$q', 'configuratio
             getLoginStatus().then(
                 // user successfully authenticated
                 function(success) {
-                    console.log(success);
-                    console.dir(config);
-
-                    //postToFacebook(config);
+                    postToFacebook(config);
                 },
                 // user not logged in and/or not authenticated, handle error...
-                function(failureMessage) {
-
-                    console.log(failureMessage);
-                });
+                function(failure) {
+                    console.log(failure);
+                }
+            );
         }
     }
 }]);

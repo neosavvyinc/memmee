@@ -32,7 +32,9 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
     var closedropdownTimer;
     $scope.shareVisibilityStyle = "isHidden";
     $scope.toggleShareDropdown = function () {
-        console.log("mouse over happening.")
+
+        console.log("mouse over happening.");
+
         if ($scope.shareVisibilityStyle == "isHidden") {
             $scope.shareVisibilityStyle = "isVisible";
         }
@@ -113,23 +115,9 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
 
         facebookService.postMemmee(fbConfig);
 
-//
-//        //Capture the target to apply the link in the future
-//        var target = event.currentTarget;
-//        target.href = null;
-//
-//        //Get the actual facebook link to be applied to the target
-//        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
-//            $scope.memmee = result;
-//
-//            FB.ui(fbConfig, function(response) {
-//                console.dir(response);
-//            });
-////            $rootScope.$broadcast(configuration.EVENTS.FACEBOOK_LINK_GENERATED,
-////                (configuration.API.FACEBOOK.SHARE_URL + "s=100&p[url]=" + $scope.memmee.shortenedUrl + "&p[title]=" + "Check Out My Memmee"));
-//
-//            $scope.toggleShareDropdown();
-//        });
+        //Capture the target to apply the link in the future
+        var target = event.currentTarget;
+        target.href = null;
     };
 
     //Service Calls
