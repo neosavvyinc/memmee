@@ -2,7 +2,6 @@
 
 Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration', function ($rootScope, $q, configuration) {
 
-
     var login,
         getLoginStatus,
         postToFacebook;
@@ -19,15 +18,22 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
             if (response.authResponse) {
                 // resolve promise and propagate via digest
                 $rootScope.$apply(function() {
-                    deferred.resolve('successfully logged in');
+                    deferred.resolve({msg : 'successfully logged in', response : response});
                 });
+
+                // get response.authResponse.userID & accessToken, etc... save to localStorage?
+                // followup: looks like this is easily accessible via FB API
+                //
+                // ...
+                //
+
             } else {
                 // reject promise and propagate via digest
                 $rootScope.$apply(function() {
                     deferred.reject({msg : 'failed to login', response : response});
                 });
             }
-        });
+        }, { auth_type : 'reauthenticate' });
 
         return deferred;
     };
@@ -39,15 +45,15 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
         FB.getLoginStatus(function (response) {
             if (response.status === 'connected') {
                 // login promise resolved
-                deferred.resolve('connected');
+                deferred.resolve({msg : 'connected', response : response });
 
             } else if (response.status === 'not_authorized') {
                 // not authorized
-                console.log('user is not authorized, attempting to log in');
+                console.log({msg : 'user is not authorized, attempting to log in', response : response});
                 login(deferred);
             } else {
                 // not logged in
-                console.log('user is not logged in, attempting to log in');
+                console.log({msg : 'user is not logged in, attempting to log in', response : response});
                 login(deferred);
             }
         });
@@ -67,6 +73,7 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
                 // user successfully authenticated
                 function(success) {
                     postToFacebook(config);
+                    console.log(success);
                 },
                 // user not logged in and/or not authenticated, handle error...
                 function(failure) {
