@@ -93,3 +93,12 @@ logging:
 
     # The timezone used to format dates. HINT: USE THE DEFAULT, UTC.
     timeZone: UTC
+
+quartzSettings:
+  instanceName: MyQuartzScheduler
+  threadPoolClass: org.quartz.simpl.SimpleThreadPool
+  threadCount: 5
+  threadPriority: 5
+  jobStoreClass: org.quartz.simpl.RAMJobStore
+  # A comma separated list of XML files
+  jobFiles: memmee-service/src/main/resources/com/memmee/scheduled/mail-monitor.xml
