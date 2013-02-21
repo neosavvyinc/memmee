@@ -22,6 +22,9 @@ import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.Database;
 import com.yammer.dropwizard.db.DatabaseFactory;
 import com.yammer.dropwizard.views.ViewMessageBodyWriter;
+import org.quartz.SchedulerException;
+import org.quartz.SchedulerFactory;
+import org.quartz.impl.StdSchedulerFactory;
 
 import java.util.TimeZone;
 
@@ -77,6 +80,17 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         environment.addHealthCheck( new DatabaseHealthCheck( db ) );
 
         environment.addProvider(com.sun.jersey.multipart.impl.MultiPartReaderServerSide.class);
+
+
+        addScheduledProcesses(userConfiguration, environment);
+    }
+
+    private void addScheduledProcesses(MemmeeConfiguration userConfiguration, Environment environment) throws SchedulerException {
+        // Create a Quartz scheduler factory from properties in the Service YML config
+        SchedulerFactory sf = new StdSchedulerFactory(userConfiguration.getSchedulerFactoryProperties());
+        QuartzManager qm = new QuartzManager(sf); // A Dropwizard Managed Object
+        environment.manage(qm); // Assign the management of the object to the Service
+//        environment.addHealthCheck(new QuartzHealthCheck(qm));  // Add the health check to the service
     }
 
     private void updateWithCommandLineParameters(MemmeeConfiguration userConfiguration) {
