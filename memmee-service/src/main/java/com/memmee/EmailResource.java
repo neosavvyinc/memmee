@@ -116,7 +116,7 @@ public class EmailResource {
                                     System.out.println("memmeeMessage = " + mpMessage);
                                 }
                                 Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
-                                        null, null, null, null);
+                                        null, null, 1L, null);
                                 rc++;
                                 System.out.println("Memmee inserted!  Success!  Now deleting the email");
                                  //mark the message as deleted, only if the insert was successful
