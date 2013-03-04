@@ -101,20 +101,7 @@ public class UserResource {
 
         try {
 
-            if (userLookup.getPassword().getId() > -1L) {
-                passwordDao.update(
-                        userLookup.getPassword().getId(),
-                        passwordGenerator.encrypt(user.getPassword().getValue()),
-                        0);
-            } else {
-                Long newPassId = passwordDao.insert(
-                        passwordGenerator.encrypt(user.getPassword().getValue()),
-                        0);
-
-                user.getPassword().setId(newPassId);
-            }
-
-
+            updatePassword(user, userLookup);
             userDao.update(
                     id,
                     user.getFirstName(),
@@ -134,6 +121,21 @@ public class UserResource {
         userLookup.hidePassword();
 
         return userLookup;
+    }
+
+    private void updatePassword(User user, User userLookup) {
+        if (userLookup.getPassword().getId() > -1L) {
+            passwordDao.update(
+                    userLookup.getPassword().getId(),
+                    passwordGenerator.encrypt(user.getPassword().getValue()),
+                    0);
+        } else {
+            Long newPassId = passwordDao.insert(
+                    passwordGenerator.encrypt(user.getPassword().getValue()),
+                    0);
+
+            user.getPassword().setId(newPassId);
+        }
     }
 
 
@@ -167,7 +169,18 @@ public class UserResource {
                         new Date(),
                         Long.parseLong("1")
                 );
-                user = userDao.getUser(userId);
+                User userLookup = userDao.getUser(userId);
+
+                updatePassword(user, userLookup);
+                userDao.update(
+                        userId,
+                        user.getFirstName(),
+                        user.getEmail(),
+                        user.getPassword().getId(),
+                        user.getApiKey(),
+                        new Date(),
+                        user.getLoginCount());
+
             }
 
 

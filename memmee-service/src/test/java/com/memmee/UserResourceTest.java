@@ -41,8 +41,9 @@ public class UserResourceTest extends ResourceIntegrationTest {
         passwordGenerator = new PasswordGeneratorImpl();
 
         //add resources
-        MemmeeUrlConfiguration mockMemmeeConfiguration = mock(MemmeeUrlConfiguration.class);
+        MemmeeUrlConfiguration mockMemmeeConfiguration = new MemmeeUrlConfiguration();
         mockMemmeeConfiguration.setActiveEmailAddress("test-cases@nowhere.com");
+        memmeeMailSender.setUrlConfiguration(mockMemmeeConfiguration);
         addResource(new UserResource(userDAO, passwordDAO, passwordGenerator, memmeeMailSender, mockMemmeeConfiguration));
     }
 
@@ -67,6 +68,8 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
         User testUser = new User();
         testUser.setEmail("waparrish@gmail.com");
+        testUser.setPassword(new Password("testPass"));
+        testUser.setFirstName("Adam");
 
         //Add the user as if they are signing up
         testUser = client().resource(new MemmeeURLBuilder()
@@ -77,17 +80,6 @@ public class UserResourceTest extends ResourceIntegrationTest {
                 .post(User.class, testUser);
 
 
-        //Update their profile as if they clicked profile
-        testUser.setPassword(new Password());
-        testUser.getPassword().setValue("newValue");
-        client().resource(new MemmeeURLBuilder()
-                .setBaseURL(UserResource.BASE_URL)
-                .setMethodURL("user/" + testUser.getId())
-                .setApiKeyParam(testUser.getApiKey())
-                .build())
-                .type(MediaType.APPLICATION_JSON)
-                .put(testUser);
-
 
         //Attempt to sign them in
         User user = client().resource(new MemmeeURLBuilder().
@@ -95,12 +87,12 @@ public class UserResourceTest extends ResourceIntegrationTest {
                 setMethodURL("user/login").
                 build())
                 .type(MediaType.APPLICATION_JSON)
-                .post(User.class, new User("Adam", "waparrish@gmail.com", new Password("newValue")));
+                .post(User.class, new User("Adam", "waparrish@gmail.com", new Password("testPass")));
 
         assertThat(user, is(not(nullValue())));
         assertThat(user.getPassword(), is(not(nullValue())));
         assertThat(user.getPassword().getValue(), is(nullValue()));
-        assertThat(user.getLoginCount(), is(equalTo(Long.parseLong("2"))));
+        assertThat(user.getLoginCount(), is(equalTo(Long.parseLong("1"))));
     }
 
     @Test
@@ -125,6 +117,9 @@ public class UserResourceTest extends ResourceIntegrationTest {
     public void testAdd() {
         User user = new User();
         user.setEmail("newemail@newemail.com");
+        user.setFirstName("Adam");
+        user.setPassword(new Password("testPassword"));
+
         client().resource(new MemmeeURLBuilder().setBaseURL(UserResource.BASE_URL).setMethodURL("user").build())
                 .type(MediaType.APPLICATION_JSON)
                 .post(user);
@@ -134,7 +129,7 @@ public class UserResourceTest extends ResourceIntegrationTest {
         assertThat(users.get(0).getEmail(), is(equalTo("newemail@newemail.com")));
 
         assertThat(users.get(0).getPassword(), is(not(nullValue())));
-        assertThat(users.get(0).getPassword().getValue(), is(nullValue()));
+        assertThat(users.get(0).getPassword().getValue(), is(not(nullValue())));
     }
 
     @Test
