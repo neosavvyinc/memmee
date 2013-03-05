@@ -36,11 +36,9 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         message.setFrom_email(memmeeUrlConfiguration.getActiveEmailAddress());
         message.setFrom_name("memmee");
         message.setHeaders(headers);
-        message.setHtml("<html><body>we're so excited for you to join memmee!<br> to seal the deal, click on this " +
-                "<a href=\"http://" + memmeeUrlConfiguration.getActiveUrl() + "/#/profile?apiKey="
-                + user.getApiKey() + "\">link</a> and confirm your email address.</body></html>");
-        message.setSubject("confirm your memmee membership!");
-        MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("New Memmee User!", user.getEmail())};
+        message.setHtml("<html><body>we're so excited for you to join memmee!<br><br>you should receive a welcome email within 24 hours.");
+        message.setSubject("welcome to memmee!");
+        MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("new memmee user!", user.getEmail())};
         message.setTo(recipients);
         message.setTrack_clicks(true);
         message.setTrack_opens(true);
