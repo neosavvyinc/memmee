@@ -1,4 +1,4 @@
-function RegistrationController($scope, $http, broadCastService) {
+function RegistrationController($scope, $http, broadCastService, userService) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -22,6 +22,29 @@ function RegistrationController($scope, $http, broadCastService) {
                 broadCastService.errorSavingUserRegistrationController(data);
             });
     }
+
+    $scope.forgotPassword = function () {
+        if ($scope.user['email'] != "") {
+            $scope.forgotPasswordInputStyle = null;
+
+            userService.forgotPassword(
+                $scope.user,
+                function(data) {
+                    $scope.forgotPasswordReminder = "There was an error sending the new password to your email.";
+                    $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
+
+                },
+                function(fault) {
+                    $scope.forgotPasswordReminder = "There was an error sending the new password to your email.";
+                    $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
+                }
+            )
+
+
+        } else {
+            $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
+        }
+    }
 }
 
-RegistrationController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
+RegistrationController.$inject = ['$scope', '$http', 'memmeeBroadCastService', 'userService'];

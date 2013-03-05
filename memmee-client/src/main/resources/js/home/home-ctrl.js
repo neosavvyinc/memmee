@@ -1,4 +1,4 @@
-function HomeController($scope, $timeout, $http) {
+function HomeController($scope, $timeout) {
     "use strict";
     $scope.img1zindex = {"z-index": 3};
     $scope.img2zindex = {"z-index": 2};
@@ -95,12 +95,10 @@ function HomeController($scope, $timeout, $http) {
         });
     }, 10000);
 
-    //$timeout($scope.clickNext, 5000);
-   // $timeout($scope.clickNext, 10000);
 
 
 
 
 }
 
-HomeController.$inject = ['$scope', '$timeout', '$http'];
+HomeController.$inject = ['$scope', '$timeout'];
