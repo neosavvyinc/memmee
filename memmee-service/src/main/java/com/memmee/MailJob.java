@@ -18,6 +18,7 @@ public class MailJob implements Job {
     public void execute(JobExecutionContext context) throws JobExecutionException {
 
         int returnCode = 0;
+
         try {
             returnCode = EmailResource.checkForEmail();
         } catch (MessagingException e) {
