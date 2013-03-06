@@ -192,11 +192,11 @@ public class EmailResource {
 
                             if (attachmentId != Long.parseLong("-1")) {
                                 Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
-                                        null, attachmentId, null, null);
+                                        null, attachmentId, 1L, null);
                             }
                             else {
                                 Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
-                                        null, null, null, null);
+                                        null, null, 1L, null);
                             }
                             rc++;
                             System.out.println("Memmee inserted!  Success!  Now deleting the email");
