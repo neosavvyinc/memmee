@@ -108,8 +108,8 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
             method: 'feed',
             redirect_uri: $location.protocol() + "://" + $location.host(),
             picture: $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg',
-            name: 'Check Out My Memmee',
-            caption: 'Memmee',
+            name: 'take a peak at my memmee',
+            caption: 'memmee',
             description: StringUtil.truncate($scope.memmee.text, 140)
         };
 

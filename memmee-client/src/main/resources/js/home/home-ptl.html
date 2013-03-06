@@ -28,16 +28,21 @@
                 </div>
 
                 <div class="signup sm">
-                    <h2 class="signup-title">sign up now</h2>
+                    <h2 class="signup-title">it takes 2 seconds<br/>to get started</h2>
 
                     <form id="signupTop" method="post" ng-controller="RegistrationController">
-                        <p>an email address is all you need to get started</p>
                         <fieldset>
-                            <input type="text" name="signup" value="Email Address" ng-model="user.email"/>
+                            <input type="text" name="signup" placeholder="Email Address" value="Email Address" ng-model="user.email"/>
+                            <input type="password" name="password" placeholder="Password" value="Password" ng-model="user.password"/>
+                            <input type="text" name="name" placeholder="Name (optional)" value="Name" ng-model="user.firstName"/>
                         </fieldset>
-                        <fieldset>
-                            <a class="btn signup" ng-click="register()">Join</a>
-                        </fieldset>
+
+                        <div>
+                            <a style="float: left;" class="btn signup" ng-click="register()">Join</a>
+                            <a style="float: right; padding-top: 10px; padding-right: 20px;"  ng-click="forgotPassword()" class="link forgotPwd">Forgot Password</a>
+                        </div>
+
+
                     </form>
                 </div>
             </div>
@@ -68,16 +73,16 @@
     </div>
 
     <div class="signup stretched" ng-controller="RegistrationController">
-        <h1 class="signup-title">Sign up Now</h1>
-        <label>join the memmee movement...</label>
-        <form id="signupLower" method="post">
-            <fieldset>
-                <input type="text" id="signup" name="signup" placeholder="Email Address" ng-model="user.email"/>
-            </fieldset>
-            <fieldset>
-                <a class="btn signup" ng-click="register()">join</a>
-            </fieldset>
-        </form>
+        <!--<h1 class="signup-title">Sign up Now</h1>-->
+        <!--<label>join the memmee movement...</label>-->
+        <!--<form id="signupLower" method="post">-->
+            <!--<fieldset>-->
+                <!--<input type="text" id="signup" name="signup" placeholder="Email Address" ng-model="user.email"/>-->
+            <!--</fieldset>-->
+            <!--<fieldset>-->
+                <!--<a class="btn signup" ng-click="register()">join</a>-->
+            <!--</fieldset>-->
+        <!--</form>-->
     </div>
 
 </div>

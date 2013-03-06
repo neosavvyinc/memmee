@@ -1,4 +1,4 @@
-function LoginController($scope, $http, broadCastService) {
+function LoginController($scope, $http, broadCastService, userService) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -30,16 +30,20 @@ function LoginController($scope, $http, broadCastService) {
         if ($scope.user['email'] != "") {
             $scope.forgotPasswordInputStyle = null;
 
-            $http({method:'POST', url:'/memmeeuserrest/user/forgotpassword?email=' + $scope.user['email']}).
-                success(function (data, status, headers, config) {
-                    broadCastService.forgotPasswordSuccess();
-                }).
-                error(function (data, status, headers, config) {
+            userService.forgotPassword(
+                $scope.user,
+                function(data) {
                     $scope.forgotPasswordReminder = "There was an error sending the new password to your email.";
-
                     $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
-                    broadCastService.forgotPasswordError();
-                });
+
+                },
+                function(fault) {
+                    $scope.forgotPasswordReminder = "There was an error sending the new password to your email.";
+                    $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
+                }
+            )
+
+
         } else {
             $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
         }
@@ -47,4 +51,4 @@ function LoginController($scope, $http, broadCastService) {
 
 }
 
-LoginController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
+LoginController.$inject = ['$scope', '$http', 'memmeeBroadCastService', 'userService'];
