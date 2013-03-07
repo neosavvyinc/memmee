@@ -126,7 +126,7 @@ public class EmailResource {
                             InputStream is;
                             Long attachmentId = Long.parseLong("-1");
                             Multipart mp = (Multipart) msg.getContent();
-
+                            boolean gotAttachment = false;
 
                             if (msg.isMimeType("MULTIPART/MIXED")) {
 
@@ -138,28 +138,35 @@ public class EmailResource {
                                     System.out.println("disposition " + j + " = " + disposition);
                                     if (disposition != null
                                             && ( disposition.equalsIgnoreCase( Part.ATTACHMENT )
-                                            || ( disposition.equalsIgnoreCase( Part.INLINE )) ) ) {
+                                            || ( disposition.equalsIgnoreCase( Part.INLINE )) ) && !gotAttachment ) {
                                         // do something with part
                                         System.out.println("Got the part " + part.getFileName());
 
-                                        if (OsUtil.isWindows()) {
-                                            baseFileDirectory = "c://memmee/temp/" + user.getId() + "/";
-                                        } else if (OsUtil.isMac()) {
-                                            baseFileDirectory = "/memmee/" + user.getId() + "/";
-                                        } else if (OsUtil.isUnix()) {
-                                            baseFileDirectory = "/memmee/" + user.getId() + "/";
+                                        if (part.getFileName().endsWith(".jpg") || part.getFileName().endsWith(".jpeg")
+                                                || part.getFileName().endsWith(".png")) {
+                                            if (OsUtil.isWindows()) {
+                                                baseFileDirectory = "c://memmee/temp/" + user.getId() + "/";
+                                            } else if (OsUtil.isMac()) {
+                                                baseFileDirectory = "/memmee/" + user.getId() + "/";
+                                            } else if (OsUtil.isUnix()) {
+                                                baseFileDirectory = "/memmee/" + user.getId() + "/";
+                                            }
+                                            System.out.println("baseFileDirectory = " + baseFileDirectory);
+                                            ensureParentDirectory(baseFileDirectory);
+                                            String uploadedFileLocationToWrite = baseFileDirectory + part.getFileName().toLowerCase();
+                                            writeToFile(is, uploadedFileLocationToWrite);
+                                            String uploadedThumbFileLocation = writeThumbnailImage(uploadedFileLocationToWrite);
+                                            attachmentId = attachmentDao.insert(uploadedFileLocationToWrite, uploadedThumbFileLocation, "Image");
+                                            gotAttachment = true;
                                         }
-                                        System.out.println("baseFileDirectory = " + baseFileDirectory);
-                                        ensureParentDirectory(baseFileDirectory);
-                                        String uploadedFileLocationToWrite = baseFileDirectory + part.getFileName().toLowerCase();
-                                        writeToFile(is, uploadedFileLocationToWrite);
-                                        String uploadedThumbFileLocation = writeThumbnailImage(uploadedFileLocationToWrite);
-                                        attachmentId = attachmentDao.insert(uploadedFileLocationToWrite, uploadedThumbFileLocation, "Image");
+
                                     }
                                     else {
-                                        mpMessage = getText(part);
-                                        if (mpMessage.length() > 500) {
-                                            mpMessage = mpMessage.substring(0, 499);
+                                        if (mpMessage.length() == 0) {
+                                            mpMessage = getText(part);
+                                            if (mpMessage.length() > 500) {
+                                                mpMessage = mpMessage.substring(0, 499);
+                                            }
                                         }
 
                                         System.out.println("finalMessage = " + mpMessage);
