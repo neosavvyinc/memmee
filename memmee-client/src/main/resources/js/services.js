@@ -38,13 +38,6 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(LoginControllerEvents.get('LOGOUT'));
     }
 
-    broadCastService.forgotPasswordSuccess = function () {
-        $rootScope.$broadcast(LoginControllerEvents.get('FORGOT_PASSWORD_SENT'));
-    }
-
-    broadCastService.forgotPasswordError = function () {
-        $rootScope.$broadcast(LoginControllerEvents.get('FORGOT_PASSWORD_ERROR'));
-    }
 
     broadCastService.attachmentSuccess = function ($attachment) {
         this.attachment = $attachment;
