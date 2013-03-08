@@ -112,6 +112,10 @@ function AlertsController($scope, $http, broadCastService, $location, configurat
             "(don't worry, your other memmees will remain private.)<br><br><a href='"+ shareUrl +"'>" + shareUrl + "</a>");
     });
 
+    $scope.$on(ViewModeControllerEvents.get('SHOW_FB_POST_SUCCESS'), function() {
+        $scope.showAlert("You successfully posted your memmee to Facebook!");
+    });
+
     $scope.$on(configuration.EVENTS.FACEBOOK_LINK_GENERATED, function (event, link) {
         $scope.showAlert("follow the link below to post on facebook.",
             "(don't worry, your other memmees will remain private.)<br><br><a href='" + link + "' target='_blank'>post my memmee</a>");
