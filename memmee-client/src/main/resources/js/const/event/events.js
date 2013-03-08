@@ -104,7 +104,8 @@ var ViewModeControllerEvents = (function () {
             'CONFIRM_DELETE': 'confirmDelete' + controllerName,
             'DELETE_CONFIRMED': 'deleteConfirmed' + controllerName,
             'SHOW_SHARE_LINK': 'showShareLink' + controllerName,
-            'MEMMEE_DELETED': 'memmeeDeleted' + controllerName
+            'MEMMEE_DELETED': 'memmeeDeleted' + controllerName,
+            'SHOW_FB_POST_SUCCESS': 'showPostSuccess' + controllerName
         };
 
     return {
