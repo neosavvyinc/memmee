@@ -17,4 +17,10 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="UserResourceUpdateAddPhoneColumn" author="James">
+        <addColumn tableName="user">
+            <column name="phone" type="varchar(1024)" defaultValue="NULL"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
