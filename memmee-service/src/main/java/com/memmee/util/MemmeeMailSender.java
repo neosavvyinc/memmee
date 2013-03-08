@@ -15,4 +15,6 @@ public interface MemmeeMailSender {
     public void sendForgotPasswordEmail(User user, String temporaryPassword);
 
     public void setUrlConfiguration(MemmeeUrlConfiguration memmeeUrlConfiguration);
+
+    public void sendInvalidEmailInvitation(String email);
 }

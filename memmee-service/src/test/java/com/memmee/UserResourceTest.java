@@ -176,6 +176,6 @@ public class UserResourceTest extends ResourceIntegrationTest {
 
     protected Long insertTestData() {
         Long passwordId = passwordDAO.insert(passwordGenerator.encrypt("abc123"), 0);
-        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date(), Long.parseLong("1"));
+        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date(), Long.parseLong("1"), "9195551212");
     }
 }

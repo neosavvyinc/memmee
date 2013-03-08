@@ -88,6 +88,37 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
     }
 
     @Override
+    public void sendInvalidEmailInvitation(String email) {
+        loadMandrill();
+
+        MandrillMessageRequest mmr = new MandrillMessageRequest();
+        MandrillHtmlMessage message = new MandrillHtmlMessage();
+        Map<String, String> headers = new HashMap<String, String>();
+        message.setFrom_email(memmeeUrlConfiguration.getActiveEmailAddress());
+        message.setFrom_name("memmee");
+        message.setHeaders(headers);
+
+        message.setHtml("<html><body>You know, we got an email from you, but we don't have your email address on record<br>" +
+                "<br>is there another email associated with your memmee account?  Do you want to create an account?<br>" +
+                "<br>Just let us know... we'll be glad to help");
+        message.setSubject("Oops! memmee doesn't know who you are!  Help us out?");
+
+        MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("new memmee user!", email)};
+        message.setTo(recipients);
+        message.setTrack_clicks(true);
+        message.setTrack_opens(true);
+        String[] tags = new String[]{"newUserEmail"};
+        message.setTags(tags);
+        mmr.setMessage(message);
+
+        try {
+            SendMessageResponse response = messagesRequest.sendMessage(mmr);
+        } catch (RequestFailedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void setUrlConfiguration(MemmeeUrlConfiguration memmeeUrlConfiguration) {
         this.memmeeUrlConfiguration = memmeeUrlConfiguration;
     }

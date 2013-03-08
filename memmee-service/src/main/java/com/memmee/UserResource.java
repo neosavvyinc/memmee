@@ -109,7 +109,8 @@ public class UserResource {
                     user.getPassword().getId(),
                     user.getApiKey(),
                     new Date(),
-                    user.getLoginCount()
+                    user.getLoginCount(),
+                    user.getPhone()
             );
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
@@ -167,7 +168,8 @@ public class UserResource {
                         user.getApiKey(),
                         new Date(),
                         new Date(),
-                        Long.parseLong("1")
+                        Long.parseLong("1"),
+                        user.getPhone()
                 );
                 User userLookup = userDao.getUser(userId);
 
@@ -179,7 +181,9 @@ public class UserResource {
                         user.getPassword().getId(),
                         user.getApiKey(),
                         new Date(),
-                        user.getLoginCount());
+                        user.getLoginCount(),
+                        user.getPhone()
+                );
 
             }
 

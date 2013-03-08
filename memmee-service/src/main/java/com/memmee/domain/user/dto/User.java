@@ -31,6 +31,8 @@ public class User implements Serializable {
 
     private Long loginCount;
 
+    private String phone;
+
     private Long memmeeCount;
     private long shareCount;
 
@@ -112,6 +114,14 @@ public class User implements Serializable {
 
     public void setLoginCount(Long loginCount) {
         this.loginCount = loginCount;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Long getMemmeeCount() {

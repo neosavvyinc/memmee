@@ -4,6 +4,7 @@ import com.memmee.domain.attachment.dao.TransactionalAttachmentDAO;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
+import com.memmee.util.MemmeeMailSender;
 import com.memmee.util.OsUtil;
 
 import com.sun.mail.imap.IMAPFolder;
@@ -36,15 +37,25 @@ public class EmailResource {
     private static TransactionalMemmeeDAO memmeeDao = null;
     private static TransactionalAttachmentDAO attachmentDao = null;
     private static final Log LOG = Log.forClass(MemmeeResource.class);
+    private static MemmeeMailSender memmeeMailSender;
+    private MemmeeUrlConfiguration memmeeUrlConfiguration;
 
     private static boolean textIsHtml = false;
 
-    public EmailResource (TransactionalUserDAO userDAO, TransactionalMemmeeDAO memmeeDAO, TransactionalAttachmentDAO attachmentDAO) {
+    public EmailResource (
+            TransactionalUserDAO userDAO,
+            TransactionalMemmeeDAO memmeeDAO,
+            TransactionalAttachmentDAO attachmentDAO,
+            MemmeeMailSender memmeeMail,
+            MemmeeUrlConfiguration memmeeUrlConfiguration) {
         super();
         this.userDao = userDAO;
         this.memmeeDao = memmeeDAO;
         this.attachmentDao = attachmentDAO;
+        this.memmeeMailSender = memmeeMail;
+        this.memmeeUrlConfiguration = memmeeUrlConfiguration;
 
+        this.memmeeMailSender.setUrlConfiguration(memmeeUrlConfiguration);
     }
 
     public static int checkForEmail() throws MessagingException, IOException {
@@ -59,6 +70,7 @@ public class EmailResource {
 
         String from;
         String[] splitFrom;
+        String[] splitText;
 
         Properties props = System.getProperties();
         props.setProperty("mail.store.protocol", "imaps");
@@ -90,20 +102,22 @@ public class EmailResource {
 
                 // Parse email address only from "from", Set, & then print
                 from = msg.getFrom()[0].toString();
+                System.out.println("from = " + from);
+
+                splitFrom = from.split("<");
+                from = splitFrom[1];
+                splitFrom = from.split(">");
+                from = splitFrom[0];
+
                 if (from.endsWith("@txt.voice.google.com")) {
-                    splitFrom = from.split(".");
-                    from = splitFrom[1];
-                    //user = userDao.getUserByPhone(from);
-
-
+                    System.out.println("from = " + from);
+                    splitText = from.split("\\.");
+                    from = splitText[1];
+                    user = userDao.getUserByPhone(from);
+                    System.out.println("from = " + from);
                 }
                 else {
-                    splitFrom = from.split("<");
-                    from = splitFrom[1];
-                    splitFrom = from.split(">");
-                    from = splitFrom[0];
                     user = userDao.getUserByEmail(from);
-
                 }
 
                 System.out.println("From: " + from);
@@ -217,13 +231,23 @@ public class EmailResource {
                             ex.printStackTrace();
                         }
                     }
+                    else {
+                        String mpMessage = msg.getContent().toString();
+                        System.out.println("mpMessage = " + mpMessage);
+                        Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
+                                null, null, 1L, null);
+                        rc++;
+                        System.out.println("Memmee inserted!  Success!  Now deleting the text");
+                        //mark the message as deleted, only if the insert was successful
+                        msg.setFlag(Flags.Flag.DELETED, true);
+                        //TODO send email stating SUCCESS!!!
+
+                    }
                 }
                 else {
-                    //throw new UserResourceException("There is no user that exists with that email");
-                    System.out.println("There is no user that exists with that email");
-
-                    //TODO send an email and redirect to the sign up page... or change the email address
-                    // on record
+                    System.out.println("There is no user that exists with that email " + from);
+                    memmeeMailSender.sendInvalidEmailInvitation(from);
+                    msg.setFlag(Flags.Flag.DELETED, true);
                 }
                 // TODO We may need to handle other content types, e.g. "text/plain" and "text/html"
                 //   but Multipart is probably the most common instance

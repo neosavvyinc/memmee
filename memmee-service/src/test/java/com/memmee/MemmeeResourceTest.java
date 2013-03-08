@@ -74,7 +74,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         mockMemmeeConfig.setMemmeeUrlConfiguration( mockMemmeeConfiguration );
 
         passwordId = passwordDAO.insert("password", 0);
-        userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"));
+        userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"), "2135550000");
 
         //add resources
         addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO, txThemeDAO, mockMemmeeConfig));
