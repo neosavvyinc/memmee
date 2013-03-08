@@ -104,16 +104,23 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         event.preventDefault();
 
         var fbConfig = {
-            link: $scope.memmee.shortenedUrl, // this isn't working and/or showing up...
             method: 'feed',
-            redirect_uri: $location.protocol() + "://" + $location.host(),
+            name: 'take a peek at my memmee',
+            link: $scope.memmee.shortenedUrl, // this isn't working and/or showing up...
             picture: $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg',
-            name: 'take a peak at my memmee',
             caption: 'memmee',
             description: StringUtil.truncate($scope.memmee.text, 140)
         };
 
-        facebookService.postMemmee(fbConfig);
+        console.log(fbConfig);
+
+        facebookService.postMemmee(fbConfig).then(
+            function (success) {
+                broadCastService.showFacebookPostViewModeController();
+            },
+            function (failure) {
+                console.log(failure);
+            });
 
         //Capture the target to apply the link in the future
         var target = event.currentTarget;

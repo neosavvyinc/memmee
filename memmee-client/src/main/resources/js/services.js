@@ -170,6 +170,9 @@ memmeeServices.factory("memmeeBroadCastService", function ($rootScope, $location
         $rootScope.$broadcast(ViewModeControllerEvents.get('SHOW_SHARE_LINK'), [memmee])
     }
 
+    broadCastService.showFacebookPostViewModeController = function () {
+        $rootScope.$broadcast(ViewModeControllerEvents.get('SHOW_FB_POST_SUCCESS') )
+    }
     /**
      * Initialization
      */
