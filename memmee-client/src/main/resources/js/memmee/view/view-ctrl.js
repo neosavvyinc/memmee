@@ -119,7 +119,7 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
                 broadCastService.showFacebookPostViewModeController();
             },
             function (failure) {
-                console.log(failure);
+                console.error(failure);
             });
 
         //Capture the target to apply the link in the future

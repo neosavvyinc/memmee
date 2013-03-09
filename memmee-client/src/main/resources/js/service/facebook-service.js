@@ -1,10 +1,11 @@
 'use strict'
 
-Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration', function ($rootScope, $q, configuration) {
+Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration', 'facebookLibService', function ($rootScope, $q, configuration, facebookLibService) {
 
     var login,
-        getLoginStatus,
-        postToFacebook;
+        ensureUserLoggedIn,
+        postToFacebook,
+        FB = facebookLibService;
 
     // init facebook feed when service is injected
     FB.init({
@@ -14,86 +15,104 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
     });
 
     login = function (promise) {
+
+        var deferred = $q.defer();
+
         FB.login(function (response) {
             if (response.authResponse) {
                 // resolve promise and propagate via digest
                 $rootScope.$apply(function() {
-                    promise.resolve({msg : 'successfully logged in', response : response});
+                    deferred.resolve({msg : 'successfully logged in', response : response});
                 });
-
-                // get response.authResponse.userID & accessToken, etc... save to localStorage?
-                // followup: looks like this is easily accessible via FB API
-                //
-                // ...
-                //
-
             } else {
                 // reject promise and propagate via digest
                 $rootScope.$apply(function() {
-                    promise.reject({msg : 'failed to login', response : response});
+                    deferred.reject({msg : 'failed to login', response : response});
                 });
             }
         });
 
-        return promise;
+        return deferred.promise;
     };
 
-    getLoginStatus = function () {
+    ensureUserLoggedIn = function () {
 
-        var loginStatusDeferred = $q.defer();
+        var deferred = $q.defer();
 
         FB.getLoginStatus(function (response) {
             if (response.status === 'connected') {
                 // login promise resolved
-                loginStatusDeferred.resolve({msg : 'connected', response : response });
-
+                deferred.resolve({msg : 'connected', response : response });
             } else if (response.status === 'not_authorized') {
                 // not authorized
-                console.log({msg : 'user is not authorized, attempting to log in', response : response});
-                login(loginStatusDeferred);
+                login().then(
+                    function (logInSuccess) {
+                        deferred.resolve({msg : 'logged in', response : logInSuccess });
+                    },
+                    function (logInFailure) {
+                        deferred.reject({msg : 'failed to log in', response : logInFailure});
+                    }
+                );
             } else {
                 // not logged in
-                console.log({msg : 'user is not logged in, attempting to log in', response : response});
-                login(loginStatusDeferred);
+                login().then(
+                    function (logInSuccess) {
+                        deferred.resolve({msg : 'logged in', response : logInSuccess });
+                    },
+                    function (logInFailure) {
+                        deferred.reject({msg : 'failed to log in', response : logInFailure});
+                    }
+                );
             }
         });
 
-        return loginStatusDeferred.promise;
+        return deferred.promise;
     };
 
     postToFacebook = function(config, promise) {
-        FB.ui(config, function(response) {
 
+        var deferred = $q.defer();
+
+        FB.ui(config, function(response) {
             if (response && response.post_id) {
                 $rootScope.$apply(function() {
-                    promise.resolve({msg: 'successfully posted to facebook', response : response });
+                    deferred.resolve({msg: 'successfully posted to facebook', response : response });
                 });
             } else {
                 $rootScope.$apply(function() {
-                    promise.reject({msg : 'facebook post failed', response : response });
+                    deferred.reject({msg : 'facebook post failed', response : response });
                 });
             }
         });
+
+        return deferred.promise;
     };
 
     return {
         postMemmee : function(config) {
 
-            var postStatusDeferred = $q.defer();
+            var deferred = $q.defer();
 
-            getLoginStatus().then(
+            ensureUserLoggedIn().then(
                 // user successfully authenticated
-                function(success) {
-                    postToFacebook(config, postStatusDeferred);
+                function(logInSuccess) {
+                    postToFacebook(config).then( 
+                        function(postSuccess) {
+                            deferred.resolve({msg : 'success', response : postSuccess});
+                        },
+                        function(postFail) {
+                            deferred.reject({msg : 'failed', response : postFail});
+                        }
+                    );
                 },
                 // user not logged in and/or not authenticated, handle error...
-                function(failure) {
-                    console.log(failure);
-                    postStatusDeferred.reject({msg : 'facebook post failed', response : failure });
+                function(logInFailure) {
+                    console.error(logInFailure);
+                    deferred.reject({msg : 'facebook post failed', response : logInFailure });
                 }
             );
 
-            return postStatusDeferred.promise;
+            return deferred.promise;
         }
     }
 }]);
