@@ -9,7 +9,7 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
 
     // init facebook feed when service is injected
     FB.init({
-        appId: configuration.API.FACEBOOK.APP_ID_DEV,
+        appId: configuration.API.FACEBOOK.APP_ID,
         status: true,
         cookie: true
     });

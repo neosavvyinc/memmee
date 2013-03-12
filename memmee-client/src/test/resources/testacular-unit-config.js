@@ -18,14 +18,20 @@ files = [
     'main/resources/lib/jquery.tools.min.js',
     'main/resources/lib/angular/angular.js',
     'main/resources/lib/angular/angular-resource.js',
-    'test/resources/lib/angular/angular-mocks.js',
+    'test/resources/lib/angular-mocks.js',
+    'test/resources/lib/facebook.js',
+    'https://www.google.com/jsapi',
 
     //resource
+    
     'main/resources/js/util/misc.js',
     'main/resources/js/app.js',
+    'main/resources/js/configuration-constants.js',
     'main/resources/js/default-ctrl.js',
     'main/resources/js/security-ctrl.js',
     'main/resources/js/services.js',
+    'main/resources/js/service/facebook-lib-service.js',
+    'main/resources/js/service/facebook-service.js',
     'main/resources/js/alerts/alerts-ctrl.js',
     'main/resources/js/const/event/events.js',
     'main/resources/js/const/message/errors.js',
