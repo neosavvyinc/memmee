@@ -106,7 +106,7 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         var fbConfig = {
             method: 'feed',
             name: 'got a moment? take a peek...',
-            link: $scope.memmee.shortenedUrl, // this isn't working and/or showing up...
+            link: getShareUrl(),
             picture: $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg',
             caption: 'memmee',
             description: StringUtil.truncate($scope.memmee.text, 140)
