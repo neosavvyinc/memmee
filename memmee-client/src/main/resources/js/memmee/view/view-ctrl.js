@@ -103,28 +103,33 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
         //Prevent from going to the default Url
         event.preventDefault();
 
-        var fbConfig = {
-            method: 'feed',
-            name: 'got a moment? take a peek...',
-            link: $scope.memmee.shortenedUrl, // this isn't working and/or showing up...
-            picture: $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg',
-            caption: 'memmee',
-            description: StringUtil.truncate($scope.memmee.text, 140)
-        };
+        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
+            $scope.memmee = result;
 
-        console.log(fbConfig);
+            var fbConfig = {
+                method: 'feed',
+                name: 'got a moment? take a peek...',
+                link: $scope.memmee.shortenedUrl,
+                picture: $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg',
+                caption: 'memmee',
+                description: StringUtil.truncate($scope.memmee.text, 140)
+            };
 
-        facebookService.postMemmee(fbConfig).then(
-            function (success) {
-                broadCastService.showFacebookPostViewModeController();
-            },
-            function (failure) {
-                console.error(failure);
-            });
+            console.log(fbConfig);
 
-        //Capture the target to apply the link in the future
-        var target = event.currentTarget;
-        target.href = null;
+            facebookService.postMemmee(fbConfig).then(
+                function (success) {
+                    broadCastService.showFacebookPostViewModeController();
+                },
+                function (failure) {
+                    console.error(failure);
+                });
+
+            //Capture the target to apply the link in the future
+            var target = event.currentTarget;
+            target.href = null;
+
+        });
     };
 
     //Service Calls
