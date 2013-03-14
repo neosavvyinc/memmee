@@ -28,6 +28,17 @@
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
                 <fieldset>
+                    <label for="phone" class="lowercase">Cell Phone (just so we know who's texting us... we'll never call it)</label>
+                    <input type="text"
+                           id="phone"
+                           name="phone"
+                           placeholder="phone number"
+                           ng-model="user.phone"
+                           onkeypress="return autoMask(this,event, '(###)###-####');"
+                            >
+                    <!--<span class="feedback-form valid">ok</span>-->
+                </fieldset>
+                <fieldset>
                     <label for="pwd" class="lowercase">Password</label>
                     <input type="password"
                            id="pwd"
