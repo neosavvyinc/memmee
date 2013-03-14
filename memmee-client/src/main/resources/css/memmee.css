@@ -1390,7 +1390,7 @@ table.calendar{
 }
 .memmee-profile .memmee-date.lg{
     position: static;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
 }
 .memmee-form{
     float: left;
@@ -1402,7 +1402,7 @@ table.calendar{
 }
 .memmee-form fieldset{
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: -2px;
 }
 .memmee-form label{
     display: block;
