@@ -40,13 +40,14 @@
                 <a ng-click="toggleMemmeeThemeSelection()" class="link addStyle crimson">Style your Memmee: </a>
 
                 <div class="memmee-style container left" ng-class="memmeeStyleSelectorVisibilityStyle">
-                    <ul class="memmee-style dropdown crimson">
-                        <li ng-click="setTheme(5)"><a class="btn style-valentines"></a> <a class="lowercase">Love</a></li>
+                    <ul class="memmee-style dropdown crimson" style="overflow-y: scroll; height: 140px">
+
                         <li ng-click="setTheme(0)"><a class="btn style-news"></a> <a class="lowercase">Quick Note</a></li>
                         <li ng-click="setTheme(1)"><a class="btn style-coffee"></a> <a class="lowercase">Daydream</a></li>
                         <li ng-click="setTheme(2)"><a class="btn style-saleTag"></a> <a class="lowercase">On the Go</a></li>
                         <li ng-click="setTheme(3)"><a class="btn style-pushPin"></a> <a class="lowercase">Inspiration</a></li>
-                        <!--<li ng-click="setTheme(4)"><a class="btn style-pushPin"></a> <a class="lowercase">Pure Whimsy</a></li>-->
+                        <li ng-click="setTheme(4)"><a class="btn style-pushPin"></a> <a class="lowercase">Pure Whimsy</a></li>
+                        <li ng-click="setTheme(5)"><a class="btn style-valentines"></a> <a class="lowercase">Love</a></li>
                     </ul>
 
                     <!--<div class="scrollbar-container">-->

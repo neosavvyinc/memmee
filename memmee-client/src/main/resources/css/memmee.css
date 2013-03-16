@@ -215,12 +215,104 @@ input.rounded{
 }
 .home-btm{
     width: 100%;
+    margin-bottom: 20px;
 }
 .home-btm .icon.free{
     bottom: 173px;
     right: -80px;
     z-index: 10;
 }
+
+.fourpoint-callout{
+ float: left;
+ width: 528px;
+ height: 285px;
+ padding: 20px;
+ background: white;
+ background-size: 100% 100%;
+ box-shadow: 0px 0px 12px #dfe0df;
+}
+
+.fourpoint-callout h2{
+    font: 26px/1em 'Crimson Text';
+    color: #184757;
+    margin-bottom: 50px;
+}
+
+.fourpoint-callout li{
+    float: left;
+    width: 117px;
+    margin-right: 15px;
+    font: 14px/18px 'Crimson Text';
+    color: #666;
+}
+
+.callout-point{
+    display: block;
+    margin: 0 auto;
+    background-image: url('../img/sprite-ui.png');
+    background-color: transparent;
+    background-repeat: no-repeat;
+}
+
+.callout-point.couple{
+    width: 73px;
+    height: 50px;
+    background-position: 0px -1215px;
+    margin-bottom: 40px;
+}
+
+.callout-point.pen{
+    width: 76px;
+    height: 60px;
+    background-position: -74px -1215px;
+    margin-bottom: 30px;
+}
+
+.callout-point.star{
+    width: 46px;
+    height: 50px;
+    background-position: -150px -1215px;
+    margin-bottom: 36px;
+}
+
+.callout-point.clock{
+    width: 56px;
+    height: 54px;
+    background-position: -202px -1218px;
+    margin-bottom: 34px;
+}
+
+.home-cards {
+    margin-bottom: 20px;
+}
+
+.home-cards h2{
+    margin-bottom: 20px;
+    padding-left: 24px;
+    font: 26px/1em 'Crimson Text';
+    color: #184757;
+}
+
+.home-cards ul{
+    width: inherit;
+    list-style-type: none;
+    clear: left;
+}
+
+.home-cards li{
+    float: left;
+    width: 468px;
+}
+
+.public-memmee-text {
+    color: #184757;
+    font: 18px/24px 'Crimson Text', 'Times New Roman', Times, serif;
+}
+
+
+
+
 .icon.free{
     cursor: none;
     position: absolute;
@@ -606,8 +698,7 @@ input.rounded{
 }
 
 html{
-    min-height: 941px;
-    background: #d0ebe4 url('../img/bg-page.png') top left repeat-x;
+    background: white url('../img/bg-page.png') top left repeat-x;
     text-align: center;
 }
 html.homepage{
@@ -953,7 +1044,18 @@ html.blogpage{
 }
 
 .footer{
-    padding-top: 7px;
+    width: 100%;
+    height: 80px;
+    background: #d0ebe3 url('../img/bg-footer.png') top left repeat-x;
+}
+
+.footer-inner{
+    position: relative;
+    width: 967px;
+    height: 60px;
+    margin: 0 auto;
+    padding-top: 20px;
+    text-align: left;
 }
 
 .footerTerms {
@@ -984,11 +1086,14 @@ html.blogpage{
 }
 
 #footerSocial {
-    margin-left: 517px;
+    position: absolute;
+    right: 38px;
+    top: 20px;
 }
 
 #footerSocial li {
-    float: right;
+    float: left;
+    margin-left: 20px;
 }
 
 .memmee-create-heading{
@@ -1734,6 +1839,12 @@ table.calendar{
     width: 30px;
     height: 30px;
     background-position: -44px -922px;
+}
+.btn.pinterest{
+    text-indent: -100000px;
+    width: 30px;
+    height: 30px;
+    background-position: -84px -922px;
 }
 
 .btn.inspiration{
