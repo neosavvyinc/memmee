@@ -30,7 +30,7 @@
     };
 
     $.fn.extend({
-        //Helper Function for Caret positioning
+        //Helper Function for Caret position
         caret: function(begin, end) {
             var range;
 
