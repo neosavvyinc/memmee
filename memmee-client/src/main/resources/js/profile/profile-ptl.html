@@ -32,9 +32,9 @@
                     <input type="text"
                            id="phone"
                            name="phone"
-                           placeholder="phone number"
+                           placeholder="(___) ___-____"
                            ng-model="user.phone"
-                            >
+                     >
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
                 <fieldset>
@@ -102,4 +102,11 @@
     </div>
     </div>
 
+    <script type="text/javascript" src="http://digitalbush.com/wp-content/uploads/2013/01/jquery.maskedinput-1.3.1.min_.js"></script>
+    <script type="text/javascript">// <![CDATA[
+jQuery(function($) {
+    $.mask.definitions['~']='[+-]';
+    $('#phone').mask('(999) 999-9999');
+});
+// ]]&gt;</script>
 </div>

@@ -25,108 +25,112 @@
         <div class="content" ng-view>
         </div> <!-- /container -->
 
+        <ng-include src="'js/footer/footer-ptl.html'"></ng-include>
         <ng-include src="'js/memmee/common/bubbles-ptl.html'"></ng-include>
 
+
+        <!-- Libraries -->
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/angular/angular-resource.js"></script>
+        <script src="lib/angular/angular-sanitize.js"></script>
+        <script src="lib/date.js"></script>
+        <script src="lib/strftime-min-1.3.js"></script>
+        <script src="lib/facebook.js"></script>
+
+        <!-- BeginMinifyGroup1 -->
+        <!--- IMPORTANT!!!!!! --->
+        <!--- THE FILES BELOW ARE REPLACED AT BUILD TIME AND MINIFIED INTO A GROUP -->
+        <!--- PLEASE DON'T EDIT LINES BELOW UNLESS YOU WANT IT REMOVED AT BUILD TIME -->
+
+        <!--- ALSO NOTE: YOU MUST ADD A jsSourceFile ELEMENT TO the POM.XML FOR ANY -->
+        <!--- AND ALL NEW JS FILES BELOW -->
+
+        <!-- Constants/Utils -->
+        <script src="js/const/event/events.js"></script>
+        <script src="js/const/message/errors.js"></script>
+        <script src="js/const/message/notifications.js"></script>
+        <script src="js/util/memmee_date_util.js"></script>
+        <script src="js/util/string_util.js"></script>
+        <script src="js/util/misc.js"></script>
+        
+        <!-- App -->
+        <script src="js/app.js"></script>
+        <script src="js/configuration-constants.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/util/date-filter.js"></script>
+
+        <!-- Controllers -->
+        <script src="js/default-ctrl.js"></script>
+        <script src="js/security-ctrl.js"></script>
+        <script src="js/alerts/alerts-ctrl.js"></script>
+        <script src="js/memmee/common/bubbles-ctrl.js"></script>
+        <script src="js/header/header-ctrl.js"></script>
+        <script src="js/footer/footer-ctrl.js"></script>
+        <script src="js/profile/profile-ctrl.js"></script>
+        <script src="js/profile/change-password-ctrl.js"></script>
+        <script src="js/home/home-ctrl.js"></script>
+        <script src="js/home/login-ctrl.js"></script>
+        <script src="js/home/registration-ctrl.js"></script>
+        <script src="js/memmee/view/view-ctrl.js"></script>
+        <script src="js/memmee/create/create-ctrl.js"></script>
+        <script src="js/memmee/create/attachment-ctrl.js"></script>
+        <script src="js/memmee/create/inspiration-ctrl.js"></script>
+        <script src="js/memmee/share/share-ctrl.js"></script>
+        <script src="js/memmee/list/list-ctrl.js"></script>
+
+        <!-- Services -->
+        <script src="js/service/memmee-service.js"></script>
+        <script src="js/service/facebook-service.js"></script>
+        <script src="js/service/user-service.js"></script>
+        <script src="js/service/facebook-lib-service.js"></script>
+
+
+        <!-- Directives -->
+        <script src="js/memmee-directives.js"></script>
+
+        <!-- EndMinifyGroup1 -->
+
+        <!-- jQuery and UI -->
+        <script src="lib/jquery-1.8.1.js"></script>
+        <script src="lib/jquery.tools.min.js"></script>
+        <script src="lib/memmee-datepicker.js"></script>
+        <script src="lib/iealert.min.js"></script>
+
+        <script src="jquery.js" type="text/javascript"></script>
+        <script src="lib/jquery.maskedinput.js" type="text/javascript"></script>
+
+        <!-- memmee-dev.neosavvy.com -->
+        <!--<script type="text/javascript">-->
+
+            <!--var _gaq = _gaq || [];-->
+            <!--_gaq.push(['_setAccount', 'UA-35647876-1']);-->
+            <!--_gaq.push(['_trackPageview']);-->
+
+            <!--(function() {-->
+                <!--var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;-->
+                <!--ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';-->
+                <!--var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);-->
+            <!--})();-->
+
+        <!--</script>-->
+
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-38394906-1']);
+            _gaq.push(['_setDomainName', 'memmee.com']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
     </div>
 
-    <ng-include src="'js/footer/footer-ptl.html'"></ng-include>
+
 </body>
-
-<!-- Libraries -->
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script src="lib/angular/angular.js"></script>
-<script src="lib/angular/angular-resource.js"></script>
-<script src="lib/angular/angular-sanitize.js"></script>
-<script src="lib/date.js"></script>
-<script src="lib/strftime-min-1.3.js"></script>
-<script src="lib/facebook.js"></script>
-
-<!-- BeginMinifyGroup1 -->
-<!--- IMPORTANT!!!!!! --->
-<!--- THE FILES BELOW ARE REPLACED AT BUILD TIME AND MINIFIED INTO A GROUP -->
-<!--- PLEASE DON'T EDIT LINES BELOW UNLESS YOU WANT IT REMOVED AT BUILD TIME -->
-
-<!--- ALSO NOTE: YOU MUST ADD A jsSourceFile ELEMENT TO the POM.XML FOR ANY -->
-<!--- AND ALL NEW JS FILES BELOW -->
-
-<!-- Constants/Utils -->
-<script src="js/const/event/events.js"></script>
-<script src="js/const/message/errors.js"></script>
-<script src="js/const/message/notifications.js"></script>
-<script src="js/util/memmee_date_util.js"></script>
-<script src="js/util/string_util.js"></script>
-<script src="js/util/misc.js"></script>
-
-<!-- App -->
-<script src="js/app.js"></script>
-<script src="js/configuration-constants.js"></script>
-<script src="js/services.js"></script>
-<script src="js/util/date-filter.js"></script>
-
-<!-- Controllers -->
-<script src="js/default-ctrl.js"></script>
-<script src="js/security-ctrl.js"></script>
-<script src="js/alerts/alerts-ctrl.js"></script>
-<script src="js/memmee/common/bubbles-ctrl.js"></script>
-<script src="js/header/header-ctrl.js"></script>
-<script src="js/footer/footer-ctrl.js"></script>
-<script src="js/profile/profile-ctrl.js"></script>
-<script src="js/profile/change-password-ctrl.js"></script>
-<script src="js/home/home-ctrl.js"></script>
-<script src="js/home/login-ctrl.js"></script>
-<script src="js/home/registration-ctrl.js"></script>
-<script src="js/memmee/view/view-ctrl.js"></script>
-<script src="js/memmee/create/create-ctrl.js"></script>
-<script src="js/memmee/create/attachment-ctrl.js"></script>
-<script src="js/memmee/create/inspiration-ctrl.js"></script>
-<script src="js/memmee/share/share-ctrl.js"></script>
-<script src="js/memmee/list/list-ctrl.js"></script>
-
-<!-- Services -->
-<script src="js/service/memmee-service.js"></script>
-<script src="js/service/facebook-service.js"></script>
-<script src="js/service/user-service.js"></script>
-<script src="js/service/facebook-lib-service.js"></script>
-
-
-<!-- Directives -->
-<script src="js/memmee-directives.js"></script>
-
-<!-- EndMinifyGroup1 -->
-
-<!-- jQuery and UI -->
-<script src="lib/jquery-1.8.1.js"></script>
-<script src="lib/jquery.tools.min.js"></script>
-<script src="lib/memmee-datepicker.js"></script>
-<script src="lib/iealert.min.js"></script>
-
-<!-- memmee-dev.neosavvy.com -->
-<!--<script type="text/javascript">-->
-
-<!--var _gaq = _gaq || [];-->
-<!--_gaq.push(['_setAccount', 'UA-35647876-1']);-->
-<!--_gaq.push(['_trackPageview']);-->
-
-<!--(function() {-->
-<!--var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;-->
-<!--ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';-->
-<!--var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);-->
-<!--})();-->
-
-<!--</script>-->
-
-<script type="text/javascript">
-
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-38394906-1']);
-    _gaq.push(['_setDomainName', 'memmee.com']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
-</script>
 </html>
