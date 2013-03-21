@@ -58,7 +58,7 @@ public class EmailResource {
         this.memmeeMailSender.setUrlConfiguration(memmeeUrlConfiguration);
     }
 
-    public static int checkForEmail() throws MessagingException, IOException {
+    public static int checkForEmail(String mailbox) throws MessagingException, IOException {
 
 
         int rc = 0;
@@ -79,7 +79,7 @@ public class EmailResource {
 
         store = session.getStore("imaps");
         store.connect(IMAP_FOLDER, USERNAME, PASSWORD);
-        folder = (IMAPFolder) store.getFolder("inbox");
+        folder = (IMAPFolder) store.getFolder(mailbox);
 
         User user = null;
 
@@ -220,10 +220,14 @@ public class EmailResource {
                                         null, null, 1L, null);
                             }
                             rc++;
-                            System.out.println("Memmee inserted!  Success!  Now deleting the email");
                             //mark the message as deleted, only if the insert was successful
-                            msg.setFlag(Flags.Flag.DELETED, true);
-                            //TODO send email stating SUCCESS!!!
+                            if (mailbox.equalsIgnoreCase("inbox")) {
+                                System.out.println("Memmee inserted!  Success!  Now deleting the email");
+                                msg.setFlag(Flags.Flag.DELETED, true);
+                            }
+                            else {
+                                System.out.println("Memmee inserted!  Success!");
+                            }
 
                         }
                         catch (Exception ex) {
@@ -237,17 +241,23 @@ public class EmailResource {
                         Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
                                 null, null, 1L, null);
                         rc++;
-                        System.out.println("Memmee inserted!  Success!  Now deleting the text");
                         //mark the message as deleted, only if the insert was successful
-                        msg.setFlag(Flags.Flag.DELETED, true);
-                        //TODO send email stating SUCCESS!!!
+                        if (mailbox.equalsIgnoreCase("inbox")) {
+                            System.out.println("Memmee inserted!  Success!  Now deleting the text");
+                            msg.setFlag(Flags.Flag.DELETED, true);
+                        }
+                        else {
+                            System.out.println("Memmee inserted!  Success!");
+                        }
 
                     }
                 }
                 else {
                     System.out.println("There is no user that exists with that email " + from);
                     memmeeMailSender.sendInvalidEmailInvitation(from);
-                    msg.setFlag(Flags.Flag.DELETED, true);
+                    if (mailbox.equalsIgnoreCase("inbox")) {
+                        msg.setFlag(Flags.Flag.DELETED, true);
+                    }
                 }
                 // TODO We may need to handle other content types, e.g. "text/plain" and "text/html"
                 //   but Multipart is probably the most common instance

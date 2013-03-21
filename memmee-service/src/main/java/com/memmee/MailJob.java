@@ -20,7 +20,7 @@ public class MailJob implements Job {
         int returnCode = 0;
 
         try {
-            returnCode = EmailResource.checkForEmail();
+            returnCode = EmailResource.checkForEmail("inbox");
         } catch (MessagingException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         } catch (IOException e) {
