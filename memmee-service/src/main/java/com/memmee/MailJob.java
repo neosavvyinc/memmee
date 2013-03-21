@@ -28,7 +28,7 @@ public class MailJob implements Job {
         }
 
         if (returnCode >= 0) {
-            System.out.println("processed " + returnCode + " emails.");
+            //System.out.println("processed " + returnCode + " emails.");
         }
         else {
             System.out.println("There's been an error... better call somebody");
