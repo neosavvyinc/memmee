@@ -137,7 +137,7 @@ public class MemmeeResource {
     @Path("/insertmemmee")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, @Valid final Memmee memmee) {
+    public Memmee insertMemmee(@QueryParam("apiKey") String apiKey, final Memmee memmee) {
 
         long memmeeId = -1;
 
