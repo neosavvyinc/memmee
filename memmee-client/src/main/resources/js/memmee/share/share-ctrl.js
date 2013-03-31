@@ -69,6 +69,7 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
             };
 
             console.log(fbConfig);
+            console.log("reshareUrl>>>>>" + getShareUrl() + '&reshare=true')
 
             facebookService.postMemmee(fbConfig).then(
                 function (success) {
