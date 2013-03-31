@@ -21,6 +21,9 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
             success(function (data, status, headers, config) {
                 console.log('your memmee has been loaded');
                 $scope.memmee = data;
+                if( isReshare ) {
+                    $scope.onShareLinkOnFacebook();
+                }
             }).error(function (data, status, headers, config) {
                 console.log('error loading your doggone memmee');
                 $scope.errorMode = true;
@@ -52,7 +55,6 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
 
     $scope.onShareLinkOnFacebook = function () {
 
-
             var fbConfig = {
                 method: 'feed',
                 name: 'got a moment? take a peek...',
@@ -83,9 +85,7 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
     };
 
     var isReshare = $location.search().reshare;
-    if( isReshare ) {
-        $scope.onShareLinkOnFacebook();
-    }
+
 }
 
 ShareModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location', '$routeParams', 'memmeeService', 'facebookService'];
