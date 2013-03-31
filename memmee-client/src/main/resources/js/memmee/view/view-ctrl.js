@@ -101,7 +101,8 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
 
     $scope.onShareLinkOnFacebook = function (event) {
         //Prevent from going to the default Url
-        event.preventDefault();
+        if( event )
+            event.preventDefault();
 
         memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
             $scope.memmee = result;
@@ -115,9 +116,7 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
                 description: StringUtil.truncate($scope.memmee.text, 140),
                 actions: [{
                     name: 'Re-Share',
-                    link: 'http://www.facebook.com/sharer.php?u=' + $scope.memmee.shortenedUrl +
-                        '&p[title]=got%20;a%20;moment?%20;take%20;a%20;peek...&p[summary]=' + StringUtil.truncate($scope.memmee.text, 140) +
-                        '&p[images][0]=' + $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg'
+                    link: $scope.memmee.shortenedUrl + '&reshare=true'
                 }]
             };
 
@@ -231,6 +230,11 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
             $scope.attachmentVisible = false;
         }
     };
+
+    var isReshare = $location.search().reshare;
+    if( isReshare ) {
+        $scope.onShareLinkOnFacebook();
+    }
 }
 
 ViewModeController.$inject = ['$scope', '$rootScope', '$http', 'memmeeBroadCastService', '$timeout', '$location', 'configuration', 'memmeeService', 'facebookService'];
