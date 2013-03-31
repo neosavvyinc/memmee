@@ -112,7 +112,11 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
                 link: $scope.memmee.shortenedUrl,
                 picture: $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg',
                 caption: 'memmee',
-                description: StringUtil.truncate($scope.memmee.text, 140)
+                description: StringUtil.truncate($scope.memmee.text, 140),
+                actions: [{
+                    name: 'Share',
+                    link: 'http://www.facebook.com/sharer.php?u=' + $scope.memmee.shortenedUrl
+                }]
             };
 
             console.log(fbConfig);
