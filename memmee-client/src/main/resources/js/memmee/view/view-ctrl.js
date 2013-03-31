@@ -114,8 +114,10 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
                 caption: 'memmee',
                 description: StringUtil.truncate($scope.memmee.text, 140),
                 actions: [{
-                    name: 'Share',
-                    link: 'http://www.facebook.com/sharer.php?u=' + $scope.memmee.shortenedUrl
+                    name: 'Re-Share',
+                    link: 'http://www.facebook.com/sharer.php?u=' + $scope.memmee.shortenedUrl +
+                        '&p[title]=got%20;a%20;moment?%20;take%20;a%20;peek...&p[summary]=' + StringUtil.truncate($scope.memmee.text, 140) +
+                        '&p[images][0]=' + $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg'
                 }]
             };
 
