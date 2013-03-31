@@ -47,16 +47,11 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
 
     var getShareUrl = function () {
         //($location.protocol() + "://" + $location.host())
-        return '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey;
+        return $location.absUrl();
     };
 
-    $scope.onShareLinkOnFacebook = function (event) {
-        //Prevent from going to the default Url
-        if( event )
-            event.preventDefault();
+    $scope.onShareLinkOnFacebook = function () {
 
-        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
-            $scope.memmee = result;
 
             var fbConfig = {
                 method: 'feed',
@@ -85,7 +80,6 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
             var target = event.currentTarget;
             target.href = null;
 
-        });
     };
 
     var isReshare = $location.search().reshare;
