@@ -116,7 +116,7 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
                 description: StringUtil.truncate($scope.memmee.text, 140),
                 actions: [{
                     name: 'Re-Share',
-                    link: $scope.memmee.shortenedUrl + '&reshare=true'
+                    link: getShareUrl() + '&reshare=true'
                 }]
             };
 
