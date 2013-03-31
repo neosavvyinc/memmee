@@ -230,11 +230,6 @@ function ViewModeController($scope, $rootScope, $http, broadCastService, $timeou
             $scope.attachmentVisible = false;
         }
     };
-
-    var isReshare = $location.search().reshare;
-    if( isReshare ) {
-        $scope.onShareLinkOnFacebook();
-    }
 }
 
 ViewModeController.$inject = ['$scope', '$rootScope', '$http', 'memmeeBroadCastService', '$timeout', '$location', 'configuration', 'memmeeService', 'facebookService'];

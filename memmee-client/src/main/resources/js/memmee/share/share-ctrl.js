@@ -1,4 +1,4 @@
-function ShareModeController($scope, $http, broadCastService, $location, $routeParams) {
+function ShareModeController($scope, $http, broadCastService, $location, $routeParams, memmeeService, facebookService) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -44,6 +44,54 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
         }
         return false;
     };
+
+    var getShareUrl = function () {
+        //($location.protocol() + "://" + $location.host())
+        return '/memmeerest/sharememmee/?apiKey=' + $scope.user.apiKey;
+    };
+
+    $scope.onShareLinkOnFacebook = function (event) {
+        //Prevent from going to the default Url
+        if( event )
+            event.preventDefault();
+
+        memmeeService.share(getShareUrl(), $scope.memmee).then(function (result) {
+            $scope.memmee = result;
+
+            var fbConfig = {
+                method: 'feed',
+                name: 'got a moment? take a peek...',
+                link: $scope.memmee.shortenedUrl,
+                picture: $location.protocol() + "://" + $location.host() + '/img/memmee-facebook-icon.jpg',
+                caption: 'memmee',
+                description: StringUtil.truncate($scope.memmee.text, 140),
+                actions: [{
+                    name: 'Re-Share',
+                    link: $scope.memmee.shortenedUrl + '&reshare=true'
+                }]
+            };
+
+            console.log(fbConfig);
+
+            facebookService.postMemmee(fbConfig).then(
+                function (success) {
+                    broadCastService.showFacebookPostViewModeController();
+                },
+                function (failure) {
+                    console.error(failure);
+                });
+
+            //Capture the target to apply the link in the future
+            var target = event.currentTarget;
+            target.href = null;
+
+        });
+    };
+
+    var isReshare = $location.search().reshare;
+    if( isReshare ) {
+        $scope.onShareLinkOnFacebook();
+    }
 }
 
-ShareModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location', '$routeParams'];
+ShareModeController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location', '$routeParams', 'memmeeService', 'facebookService'];
