@@ -29,9 +29,9 @@ import java.util.Properties;
  * To change this template use File | Settings | File Templates.
  */
 public class EmailResource {
-    public static final String USERNAME = "memmeetest@gmail.com";
-    public static final String PASSWORD = "m3mm33T3st";
-    public static final String IMAP_FOLDER = "imap.googlemail.com";
+    public static String username = "";
+    public static String password = "";
+    public static String server = "";
 
     private static TransactionalUserDAO userDao = null;
     private static TransactionalMemmeeDAO memmeeDao = null;
@@ -39,21 +39,29 @@ public class EmailResource {
     private static final Log LOG = Log.forClass(MemmeeResource.class);
     private static MemmeeMailSender memmeeMailSender;
     private MemmeeUrlConfiguration memmeeUrlConfiguration;
+    private MemmeeEmailConfiguration memmeeEmailConfiguration;
 
     private static boolean textIsHtml = false;
 
-    public EmailResource (
+    public EmailResource(
             TransactionalUserDAO userDAO,
             TransactionalMemmeeDAO memmeeDAO,
             TransactionalAttachmentDAO attachmentDAO,
             MemmeeMailSender memmeeMail,
-            MemmeeUrlConfiguration memmeeUrlConfiguration) {
+            MemmeeUrlConfiguration memmeeUrlConfiguration,
+            MemmeeEmailConfiguration memmeeEmailConfiguration
+            ) {
         super();
         this.userDao = userDAO;
         this.memmeeDao = memmeeDAO;
         this.attachmentDao = attachmentDAO;
         this.memmeeMailSender = memmeeMail;
         this.memmeeUrlConfiguration = memmeeUrlConfiguration;
+        this.memmeeEmailConfiguration = memmeeEmailConfiguration;
+
+        username = memmeeEmailConfiguration.getActiveUsername();
+        password = memmeeEmailConfiguration.getActivePassword();
+        server = memmeeEmailConfiguration.getActiveServer();
 
         this.memmeeMailSender.setUrlConfiguration(memmeeUrlConfiguration);
     }
@@ -76,9 +84,12 @@ public class EmailResource {
         props.setProperty("mail.store.protocol", "imaps");
 
         Session session = Session.getDefaultInstance(props, null);
+        LOG.info("username = " + username);
+        //LOG.info("password = " + password);
+        LOG.info("server = " + server);
 
         store = session.getStore("imaps");
-        store.connect(IMAP_FOLDER, USERNAME, PASSWORD);
+        store.connect(server, username, password);
         folder = (IMAPFolder) store.getFolder(mailbox);
 
         User user = null;
@@ -87,22 +98,22 @@ public class EmailResource {
             folder.open(Folder.READ_WRITE);
             messages = folder.getMessages();
 
-            System.out.print("No of Messages : " + folder.getMessageCount());
-            System.out.println("\tNo of Unread Messages : " + folder.getUnreadMessageCount());
+            LOG.info("No of Messages : " + folder.getMessageCount());
+            LOG.info("\tNo of Unread Messages : " + folder.getUnreadMessageCount());
 
             for (int i=0; i < messages.length;i++) {
-                System.out.println("*****************************************************************************");
-                System.out.println("MESSAGE " + (i + 1) + ":");
+                LOG.info("*****************************************************************************");
+                LOG.info("MESSAGE " + (i + 1) + ":");
                 Message msg =  messages[i];
 
 
                 // Set & Print the subject
                 subject = msg.getSubject();
-                System.out.println("Subject: " + subject);
+                LOG.info("Subject: " + subject);
 
                 // Parse email address only from "from", Set, & then print
                 from = msg.getFrom()[0].toString();
-                System.out.println("from = " + from);
+                LOG.info("from = " + from);
 
                 splitFrom = from.split("<");
                 from = splitFrom[1];
@@ -110,28 +121,28 @@ public class EmailResource {
                 from = splitFrom[0];
 
                 if (from.endsWith("@txt.voice.google.com")) {
-                    System.out.println("from = " + from);
+                    LOG.info("from = " + from);
                     splitText = from.split("\\.");
                     from = splitText[1];
                     user = userDao.getUserByPhone(from);
-                    System.out.println("from = " + from);
+                    LOG.info("from = " + from);
                 }
                 else {
                     user = userDao.getUserByEmail(from);
                 }
 
-                System.out.println("From: " + from);
-                System.out.println("Content Type = " + msg.getContentType());
-                System.out.println("Content = " + msg.getContent());
+                LOG.info("From: " + from);
+                LOG.info("Content Type = " + msg.getContentType());
+                LOG.info("Content = " + msg.getContent());
                 if (user != null) {
                     Long userId = user.getId();
 
                     // Set & Print date received
                     Date allDates = msg.getReceivedDate();
-                    System.out.println("Date: " + allDates);
+                    LOG.info("Date: " + allDates);
 
                     // Parse the actual email text from "getContent", then print
-                    System.out.println(msg.getContentType());
+                    LOG.info(msg.getContentType());
                     if (msg.getContent() instanceof Multipart) {
                         try {
                             String mpMessage = "";
@@ -149,12 +160,12 @@ public class EmailResource {
                                 is = part.getInputStream();
 
                                     String disposition = part.getDisposition();
-                                    System.out.println("disposition " + j + " = " + disposition);
+                                    LOG.info("disposition " + j + " = " + disposition);
                                     if (disposition != null
                                             && ( disposition.equalsIgnoreCase( Part.ATTACHMENT )
                                             || ( disposition.equalsIgnoreCase( Part.INLINE )) ) && !gotAttachment ) {
                                         // do something with part
-                                        System.out.println("Got the part " + part.getFileName());
+                                        LOG.info("Got the part " + part.getFileName());
 
                                         if (part.getFileName().endsWith(".jpg") || part.getFileName().endsWith(".jpeg")
                                                 || part.getFileName().endsWith(".png")) {
@@ -165,7 +176,7 @@ public class EmailResource {
                                             } else if (OsUtil.isUnix()) {
                                                 baseFileDirectory = "/memmee/" + user.getId() + "/";
                                             }
-                                            System.out.println("baseFileDirectory = " + baseFileDirectory);
+                                            LOG.info("baseFileDirectory = " + baseFileDirectory);
                                             ensureParentDirectory(baseFileDirectory);
                                             String uploadedFileLocationToWrite = baseFileDirectory + part.getFileName().toLowerCase();
                                             writeToFile(is, uploadedFileLocationToWrite);
@@ -183,7 +194,7 @@ public class EmailResource {
                                             }
                                         }
 
-                                        System.out.println("finalMessage = " + mpMessage);
+                                        LOG.info("finalMessage = " + mpMessage);
                                    }
                                 }
                             }
@@ -205,7 +216,7 @@ public class EmailResource {
                                         if (mpMessage.length() > 500) {
                                             mpMessage = mpMessage.substring(0, 499);
                                         }
-                                        System.out.println("memmeeMessage = " + mpMessage);
+                                        LOG.info("memmeeMessage = " + mpMessage);
                                     }
                                 }
                             }
@@ -222,38 +233,37 @@ public class EmailResource {
                             rc++;
                             //mark the message as deleted, only if the insert was successful
                             if (mailbox.equalsIgnoreCase("inbox")) {
-                                System.out.println("Memmee inserted!  Success!  Now deleting the email");
+                                LOG.info("Memmee inserted!  Success!  Now deleting the email");
                                 msg.setFlag(Flags.Flag.DELETED, true);
                             }
                             else {
-                                System.out.println("Memmee inserted!  Success!");
+                                LOG.info("Memmee inserted!  Success!");
                             }
 
                         }
                         catch (Exception ex) {
-                            System.out.println("Exception arise at get Content");
-                            ex.printStackTrace();
+                            LOG.error(ex, "Exception arise at get Content");
                         }
                     }
                     else {
                         String mpMessage = msg.getContent().toString();
-                        System.out.println("mpMessage = " + mpMessage);
+                        LOG.info("mpMessage = " + mpMessage);
                         Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
                                 null, null, 1L, null);
                         rc++;
                         //mark the message as deleted, only if the insert was successful
                         if (mailbox.equalsIgnoreCase("inbox")) {
-                            System.out.println("Memmee inserted!  Success!  Now deleting the text");
+                            LOG.info("Memmee inserted!  Success!  Now deleting the text");
                             msg.setFlag(Flags.Flag.DELETED, true);
                         }
                         else {
-                            System.out.println("Memmee inserted!  Success!");
+                            LOG.info("Memmee inserted!  Success!");
                         }
 
                     }
                 }
                 else {
-                    System.out.println("There is no user that exists with that email " + from);
+                    LOG.info("There is no user that exists with that email " + from);
                     memmeeMailSender.sendInvalidEmailInvitation(from);
                     if (mailbox.equalsIgnoreCase("inbox")) {
                         msg.setFlag(Flags.Flag.DELETED, true);

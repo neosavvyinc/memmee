@@ -102,3 +102,23 @@ quartzSettings:
   jobStoreClass: org.quartz.simpl.RAMJobStore
   # A comma separated list of XML files
   jobFiles: memmee-service/src/main/resources/com/memmee/scheduled/mail-monitor.xml
+
+memmeeEmailConfiguration:
+  # Valid options are:
+  # - development
+  # - qualityAssurance
+  # - production
+  # right now, I'm keying off of the selectedEnvironment setting in the memmeeUrlConfiguration section
+  selectedEnvironment: development
+
+  devUsername: memmeetest
+  devPassword: m3mm33T3st
+  devServer: imap.googlemail.com
+
+  qaUsername: memmeetest
+  qaPassword: m3mm33T3st
+  qaServer: imap.googlemail.com
+
+  prodUsername: mymoment@memmee.com
+  prodPassword: mobilememmee
+  prodServer: imap.gmail.com

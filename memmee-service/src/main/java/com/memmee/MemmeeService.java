@@ -74,7 +74,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
         environment.addResource(new MemmeeResource(userDao, memmeeDao, attachmentDao, inspirationDao, themeDAO, userConfiguration));
         environment.addResource(new InspirationResource(userDao, inspirationDao, inspirationCategoryDAO));
         environment.addResource(new MemmeeReportingResource(reportingDAO));
-        environment.addResource(new EmailResource(userDao, memmeeDao, attachmentDao, new MemmeeMailSenderImpl(), userConfiguration.getMemmeeUrlConfiguration()));
+        environment.addResource(new EmailResource(userDao, memmeeDao, attachmentDao, new MemmeeMailSenderImpl(), userConfiguration.getMemmeeUrlConfiguration(), userConfiguration.getMemmeeEmailConfiguration()));
 
 
         environment.addHealthCheck(new DatabaseHealthCheck(db));
@@ -96,6 +96,7 @@ public class MemmeeService extends Service<MemmeeConfiguration> {
     private void updateWithCommandLineParameters(MemmeeConfiguration userConfiguration) {
 
         userConfiguration.getMemmeeUrlConfiguration().setActiveEnvironmentUrl(userConfiguration);
+        userConfiguration.getMemmeeEmailConfiguration().setActiveEmailEnvironment(userConfiguration);
 
     }
 

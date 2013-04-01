@@ -22,6 +22,11 @@ public class MemmeeConfiguration extends Configuration {
     @JsonProperty
     private MemmeeUrlConfiguration memmeeUrlConfiguration = new MemmeeUrlConfiguration();
 
+    @Valid
+    @NotNull
+    @JsonProperty
+    private MemmeeEmailConfiguration memmeeEmailConfiguration = new MemmeeEmailConfiguration();
+
     public DatabaseConfiguration getDatabase() {
         return database;
     }
@@ -34,7 +39,13 @@ public class MemmeeConfiguration extends Configuration {
         this.memmeeUrlConfiguration = memmeeUrlConfiguration;
     }
 
+    public MemmeeEmailConfiguration getMemmeeEmailConfiguration() {
+        return memmeeEmailConfiguration;
+    }
 
+    public void setMemmeeEmailConfiguration(MemmeeEmailConfiguration memmeeEmailConfiguration) {
+        this.memmeeEmailConfiguration = memmeeEmailConfiguration;
+    }
     @Valid
     @JsonProperty
     private Map<String,String> quartzSettings = new HashMap<String, String>();
@@ -57,6 +68,7 @@ public class MemmeeConfiguration extends Configuration {
         sfProps.setProperty("org.quartz.threadPool.threadPriority", quartzSettings.get("threadPriority"));
         sfProps.setProperty("org.quartz.jobStore.class", quartzSettings.get("jobStoreClass"));
         sfProps.setProperty("org.quartz.plugin.jobInitializer.fileNames", quartzSettings.get("jobFiles"));
+
 
         return sfProps;
     }
