@@ -26,11 +26,11 @@
             '*': "[A-Za-z0-9]"
         },
         dataName: "rawMaskFn",
-        placeholder: ' '
+        placeholder: '_',
     };
 
     $.fn.extend({
-        //Helper Function for Caret position
+        //Helper Function for Caret positioning
         caret: function(begin, end) {
             var range;
 

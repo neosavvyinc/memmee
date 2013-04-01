@@ -12,8 +12,7 @@
                            id="name"
                            name="name"
                            placeholder="first name"
-                           ng-model="user.firstName"
-                            >
+                           ng-model="user.firstName">
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
                 <fieldset>
@@ -23,28 +22,26 @@
                            name="email"
                            placeholder="email address"
                            ng-model="user.email"
-                            disabled="disabled"
-                            >
+                           disabled="disabled">
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
-                <!--<fieldset>-->
-                    <!--<label for="phone" class="lowercase">Cell Phone</label>-->
-                    <!--<input type="text"-->
-                           <!--id="phone"-->
-                           <!--name="phone"-->
-                           <!--placeholder="(___) ___-____"-->
-                           <!--ng-model="user.phone"-->
-                     <!-->-->
+                <fieldset>
+                    <label for="phone" class="lowercase">Cell Phone</label>
+                    <input type="text"
+                           id="phone"
+                           ui-mask="(999) 999-9999"
+                           placeholder="(___) ___-____"
+                           name="phone"
+                           ng-model="user.phone">
                     <!--<span class="feedback-form valid">ok</span>-->
-                <!--</fieldset>-->
+                </fieldset>
                 <fieldset>
                     <label for="pwd" class="lowercase">Password</label>
                     <input type="password"
                            id="pwd"
                            name="pwd"
                            placeholder="password"
-                           ng-model="user.password.value"
-                            >
+                           ng-model="user.password.value">
                     <!--<span class="feedback-form valid">ok</span>-->
                 </fieldset>
                 <fieldset>
@@ -53,8 +50,7 @@
                            id="pwd-confirm"
                            name="pwd-confirm"
                            placeholder="confirm"
-                           ng-model="confirmedPass"
-                            >
+                           ng-model="confirmedPass">
                     <span class="feedback-form invalid"></span>
                 </fieldset>
                 <fieldset style="padding-top: 10px;">
@@ -102,11 +98,4 @@
     </div>
     </div>
 
-    <script type="text/javascript" src="http://digitalbush.com/wp-content/uploads/2013/01/jquery.maskedinput-1.3.1.min_.js"></script>
-    <script type="text/javascript">// <![CDATA[
-jQuery(function($) {
-    $.mask.definitions['~']='[+-]';
-    $('#phone').mask('(999) 999-9999');
-});
-// ]]&gt;</script>
 </div>
