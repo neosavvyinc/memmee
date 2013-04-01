@@ -71,7 +71,7 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
             console.log(fbConfig);
             console.log("reshareUrl>>>>>" + getShareUrl() + '&reshare=true')
 
-            facebookService.postMemmee(fbConfig).then(
+            facebookService.postMemmee(fbConfig, true).then(
                 function (success) {
                     broadCastService.showFacebookPostViewModeController();
                 },
@@ -81,7 +81,9 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
 
             //Capture the target to apply the link in the future
             var target = event.currentTarget;
-            target.href = null;
+            if( target ) {
+                target.href = null;
+            }
 
     };
 

@@ -2,10 +2,7 @@
 
 Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration', 'facebookLibService', function ($rootScope, $q, configuration, facebookLibService) {
 
-    var login,
-        ensureUserLoggedIn,
-        postToFacebook,
-        FB = facebookLibService;
+    var FB = facebookLibService;
 
     // init facebook feed when service is injected
     FB.init({
@@ -14,18 +11,20 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
         cookie: true
     });
 
-    login = function (promise) {
+    var login = function (promise) {
 
         var deferred = $q.defer();
 
         FB.login(function (response) {
             if (response.authResponse) {
                 // resolve promise and propagate via digest
+                console.log("========= FB: user logged in after determining not authorized")
                 $rootScope.$apply(function() {
                     deferred.resolve({msg : 'successfully logged in', response : response});
                 });
             } else {
                 // reject promise and propagate via digest
+                console.log("========= FB: user failed to login")
                 $rootScope.$apply(function() {
                     deferred.reject({msg : 'failed to login', response : response});
                 });
@@ -35,16 +34,31 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
         return deferred.promise;
     };
 
-    ensureUserLoggedIn = function () {
+    var ensureUserLoggedIn = function (shared) {
 
         var deferred = $q.defer();
 
         FB.getLoginStatus(function (response) {
             if (response.status === 'connected') {
                 // login promise resolved
-                deferred.resolve({msg : 'connected', response : response });
+
+                console.log("========= FB: user logged in");
+
+                // hack as this doesn't work without $rootScope.apply from the share page
+                if( shared ) {
+                    $rootScope.$apply(function() {
+                        deferred.resolve({msg : 'connected', response : response });
+                    });
+                }
+                else
+                {
+                    //however this works on non share pages - def a bug
+                    deferred.resolve({msg : 'connected', response : response });
+                }
+
             } else if (response.status === 'not_authorized') {
                 // not authorized
+                console.log("========= FB: user not authorized")
                 login().then(
                     function (logInSuccess) {
                         deferred.resolve({msg : 'logged in', response : logInSuccess });
@@ -55,6 +69,7 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
                 );
             } else {
                 // not logged in
+                console.log("========= FB: user not logged in")
                 login().then(
                     function (logInSuccess) {
                         deferred.resolve({msg : 'logged in', response : logInSuccess });
@@ -69,7 +84,7 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
         return deferred.promise;
     };
 
-    postToFacebook = function(config, promise) {
+    var postToFacebook = function(config, promise) {
 
         var deferred = $q.defer();
 
@@ -89,14 +104,16 @@ Memmee.Services.factory('facebookService', ['$rootScope', '$q', 'configuration',
     };
 
     return {
-        postMemmee : function(config) {
+
+
+        postMemmee : function(config, shared) {
 
             var deferred = $q.defer();
 
-            ensureUserLoggedIn().then(
+            ensureUserLoggedIn(shared).then(
                 // user successfully authenticated
                 function(logInSuccess) {
-                    postToFacebook(config).then( 
+                    postToFacebook(config).then(
                         function(postSuccess) {
                             deferred.resolve({msg : 'success', response : postSuccess});
                         },
