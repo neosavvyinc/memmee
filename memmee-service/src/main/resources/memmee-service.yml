@@ -108,7 +108,7 @@ memmeeEmailConfiguration:
   # - development
   # - qualityAssurance
   # - production
-  # right now, I'm keying off of the selectedEnvironment setting in the memmeeUrlConfiguration section
+  # right now, I key off of the selectedEnvironment setting in the memmeeUrlConfiguration section
   selectedEnvironment: development
 
   devUsername: memmeedev
