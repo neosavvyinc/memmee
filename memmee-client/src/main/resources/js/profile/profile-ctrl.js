@@ -8,6 +8,10 @@ function ProfileController($scope, $http, broadCastService, $location) {
             $scope.confirmedPass = '';
         });
 
+    $scope.$watch('user.phone', function() {
+        console.log("phone value changed: " + $scope.user.phone);
+    })
+
     $scope.validUserOrApiKey = function () {
 
         if (!broadCastService) {
@@ -70,6 +74,7 @@ function ProfileController($scope, $http, broadCastService, $location) {
     } else {
         $location.path("/home");
     }
+
 }
 
 ProfileController.$inject = ['$scope', '$http', 'memmeeBroadCastService', '$location'];

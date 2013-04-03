@@ -124,6 +124,9 @@ public class EmailResource {
                     LOG.info("from = " + from);
                     splitText = from.split("\\.");
                     from = splitText[1];
+                    from = from.replaceAll("\\D", "");
+                    LOG.info("from after split and regexp: " + from);
+
                     user = userDao.getUserByPhone(from);
                     LOG.info("from = " + from);
                 }
