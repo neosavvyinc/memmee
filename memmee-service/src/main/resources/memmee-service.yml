@@ -111,8 +111,8 @@ memmeeEmailConfiguration:
   # right now, I'm keying off of the selectedEnvironment setting in the memmeeUrlConfiguration section
   selectedEnvironment: development
 
-  devUsername: memmeetest
-  devPassword: m3mm33T3st
+  devUsername: memmeedev
+  devPassword: m3mm33d3v
   devServer: imap.googlemail.com
 
   qaUsername: memmeetest
