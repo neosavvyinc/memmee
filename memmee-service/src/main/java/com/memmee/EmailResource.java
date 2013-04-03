@@ -170,9 +170,9 @@ public class EmailResource {
                                         // do something with part
                                         LOG.info("Got the part " + part.getFileName());
 
-                                        if (part.getFileName().toLowerCase().endsWith(".jpg")
-                                                || part.getFileName().toLowerCase().endsWith(".jpeg")
-                                                || part.getFileName().toLowerCase().endsWith(".png")) {
+                                        if (part.getFileName().endsWith(".jpg") || part.getFileName().endsWith(".JPG")
+                                                || part.getFileName().toLowerCase().endsWith(".jpeg") || part.getFileName().endsWith(".JPEG")
+                                                || part.getFileName().toLowerCase().endsWith(".png") || part.getFileName().endsWith(".PNG")) {
                                             if (OsUtil.isWindows()) {
                                                 baseFileDirectory = "c://memmee/temp/" + user.getId() + "/";
                                             } else if (OsUtil.isMac()) {
@@ -193,9 +193,9 @@ public class EmailResource {
                                     else {
                                         if (mpMessage.length() == 0) {
                                             mpMessage = getText(part);
-                                            if (mpMessage.startsWith("/<p/>") && mpMessage.endsWith("/<\\p/>")) {
-                                                mpMessage = mpMessage.substring(3, mpMessage.length()-4);
-                                            }
+                                            //if (mpMessage.startsWith("/<p/>") && mpMessage.endsWith("/<\\p/>")) {
+                                            //    mpMessage = mpMessage.substring(3, mpMessage.length()-4);
+                                            //}
                                                 if (mpMessage.length() > 500) {
                                                 mpMessage = mpMessage.substring(0, 499);
                                             }
