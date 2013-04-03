@@ -171,7 +171,8 @@ public class EmailResource {
                                         LOG.info("Got the part " + part.getFileName());
 
                                         if (part.getFileName().endsWith(".jpg") || part.getFileName().endsWith(".jpeg")
-                                                || part.getFileName().endsWith(".png")) {
+                                                || part.getFileName().endsWith(".png") || part.getFileName().endsWith(".JPG")
+                                                || part.getFileName().endsWith(".PNG") || part.getFileName().endsWith(".JPEG")) {
                                             if (OsUtil.isWindows()) {
                                                 baseFileDirectory = "c://memmee/temp/" + user.getId() + "/";
                                             } else if (OsUtil.isMac()) {

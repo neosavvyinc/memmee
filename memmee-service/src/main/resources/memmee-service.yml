@@ -109,16 +109,20 @@ memmeeEmailConfiguration:
   # - qualityAssurance
   # - production
   # right now, I key off of the selectedEnvironment setting in the memmeeUrlConfiguration section
-  selectedEnvironment: development
+  selectedEnvironment: qualityAssurance
 
   devUsername: memmeedev
   devPassword: m3mm33d3v
   devServer: imap.googlemail.com
 
-  qaUsername: memmeetest
+  qaUsername: memmeetest2
   qaPassword: m3mm33T3st
   qaServer: imap.googlemail.com
 
-  prodUsername: mymoment@memmee.com
-  prodPassword: mobilememmee
-  prodServer: imap.gmail.com
+  prodUsername: memmeetest
+  prodPassword: m3mm33T3st
+  prodServer: imap.googlemail.com
+
+  #prodUsername: mymoment@memmee.com
+  #prodPassword: mobilememmee
+  #prodServer: imap.gmail.com
