@@ -115,14 +115,10 @@ memmeeEmailConfiguration:
   devPassword: m3mm33d3v
   devServer: imap.googlemail.com
 
-  qaUsername: memmeedev
-  qaPassword: m3mm33d3v
-  qaServer: imap.googlemail.com
-
   qaUsername: memmeetest
   qaPassword: m3mm33T3st
   qaServer: imap.googlemail.com
 
-  #prodUsername: mymoment@memmee.com
-  #prodPassword: mobilememmee
-  #prodServer: imap.gmail.com
+  prodUsername: mymoment@memmee.com
+  prodPassword: mobilememmee
+  prodServer: imap.gmail.com
