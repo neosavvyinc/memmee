@@ -175,7 +175,7 @@ public class MemmeeEmailConfiguration {
 
     public void setActiveEmailEnvironment(MemmeeConfiguration memmeeConfiguration) {
 
-        if( "development".equals(memmeeConfiguration.getMemmeeUrlConfiguration().getSelectedEnvironment() ) )
+        if( "development".equals(memmeeConfiguration.getMemmeeEmailConfiguration().getSelectedEnvironment() ) )
         {
             memmeeConfiguration.getMemmeeEmailConfiguration().setActiveUsername(
                     memmeeConfiguration.getMemmeeEmailConfiguration().getDevUsername()
@@ -189,7 +189,7 @@ public class MemmeeEmailConfiguration {
                     memmeeConfiguration.getMemmeeEmailConfiguration().getDevServer()
             );
         }
-        else if( "qualityAssurance".equals(memmeeConfiguration.getMemmeeUrlConfiguration().getSelectedEnvironment() ) )
+        else if( "qualityAssurance".equals(memmeeConfiguration.getMemmeeEmailConfiguration().getSelectedEnvironment() ) )
         {
             memmeeConfiguration.getMemmeeEmailConfiguration().setActiveUsername(
                     memmeeConfiguration.getMemmeeEmailConfiguration().getQaUsername()
@@ -203,7 +203,7 @@ public class MemmeeEmailConfiguration {
                     memmeeConfiguration.getMemmeeEmailConfiguration().getQaServer()
             );
         }
-        else if( "production".equals(memmeeConfiguration.getMemmeeUrlConfiguration().getSelectedEnvironment() ) )
+        else if( "production".equals(memmeeConfiguration.getMemmeeEmailConfiguration().getSelectedEnvironment() ) )
         {
             memmeeConfiguration.getMemmeeEmailConfiguration().setActiveUsername(
                     memmeeConfiguration.getMemmeeEmailConfiguration().getProdUsername()
