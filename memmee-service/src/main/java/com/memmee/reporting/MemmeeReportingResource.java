@@ -60,4 +60,11 @@ public class MemmeeReportingResource  {
         return reportingDAO.getUsersWithNoMemmees();
     }
 
+    @GET
+    @Path("/users/usercount")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Integer getNumUsers() {
+        return reportingDAO.getNumUsers();
+    }
+
 }

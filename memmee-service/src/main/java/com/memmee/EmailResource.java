@@ -50,7 +50,7 @@ public class EmailResource {
             MemmeeMailSender memmeeMail,
             MemmeeUrlConfiguration memmeeUrlConfiguration,
             MemmeeEmailConfiguration memmeeEmailConfiguration
-            ) {
+    ) {
         super();
         this.userDao = userDAO;
         this.memmeeDao = memmeeDAO;
@@ -94,17 +94,17 @@ public class EmailResource {
 
         User user = null;
 
-        if(!folder.isOpen()) {
+        if (!folder.isOpen()) {
             folder.open(Folder.READ_WRITE);
             messages = folder.getMessages();
 
             LOG.info("No of Messages : " + folder.getMessageCount());
             LOG.info("\tNo of Unread Messages : " + folder.getUnreadMessageCount());
 
-            for (int i=0; i < messages.length;i++) {
+            for (int i = 0; i < messages.length; i++) {
                 LOG.info("*****************************************************************************");
                 LOG.info("MESSAGE " + (i + 1) + ":");
-                Message msg =  messages[i];
+                Message msg = messages[i];
 
 
                 // Set & Print the subject
@@ -129,8 +129,7 @@ public class EmailResource {
 
                     user = userDao.getUserByPhone(from);
                     LOG.info("from = " + from);
-                }
-                else {
+                } else {
                     user = userDao.getUserByEmail(from);
                 }
 
@@ -158,15 +157,15 @@ public class EmailResource {
 
                             if (msg.isMimeType("MULTIPART/MIXED")) {
 
-                                for( int j = 0; j < mp.getCount(); j++ ) {
-                                MimeBodyPart part = (MimeBodyPart) mp.getBodyPart(j);
-                                is = part.getInputStream();
+                                for (int j = 0; j < mp.getCount(); j++) {
+                                    MimeBodyPart part = (MimeBodyPart) mp.getBodyPart(j);
+                                    is = part.getInputStream();
 
                                     String disposition = part.getDisposition();
                                     LOG.info("disposition " + j + " = " + disposition);
                                     if (disposition != null
-                                            && ( disposition.equalsIgnoreCase( Part.ATTACHMENT )
-                                            || ( disposition.equalsIgnoreCase( Part.INLINE )) ) && !gotAttachment ) {
+                                            && (disposition.equalsIgnoreCase(Part.ATTACHMENT)
+                                            || (disposition.equalsIgnoreCase(Part.INLINE))) && !gotAttachment) {
                                         // do something with part
                                         LOG.info("Got the part " + part.getFileName());
 
@@ -189,23 +188,21 @@ public class EmailResource {
                                             gotAttachment = true;
                                         }
 
-                                    }
-                                    else {
+                                    } else {
                                         if (mpMessage.length() == 0) {
                                             mpMessage = getText(part);
                                             //if (mpMessage.startsWith("/<p/>") && mpMessage.endsWith("/<\\p/>")) {
                                             //    mpMessage = mpMessage.substring(3, mpMessage.length()-4);
                                             //}
-                                                if (mpMessage.length() > 500) {
+                                            if (mpMessage.length() > 500) {
                                                 mpMessage = mpMessage.substring(0, 499);
                                             }
                                         }
 
                                         LOG.info("finalMessage = " + mpMessage);
-                                   }
+                                    }
                                 }
-                            }
-                            else if (msg.isMimeType("MULTIPART/ALTERNATIVE")) {
+                            } else if (msg.isMimeType("MULTIPART/ALTERNATIVE")) {
                                 for (int b = 0; b < 1; b++) {
                                     Part p = mp.getBodyPart(b);
                                     is = p.getInputStream();
@@ -232,8 +229,7 @@ public class EmailResource {
                             if (attachmentId != Long.parseLong("-1")) {
                                 Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
                                         null, attachmentId, 1L, null);
-                            }
-                            else {
+                            } else {
                                 Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
                                         null, null, 1L, null);
                             }
@@ -242,17 +238,14 @@ public class EmailResource {
                             if (mailbox.equalsIgnoreCase("inbox")) {
                                 LOG.info("Memmee inserted!  Success!  Now deleting the email");
                                 msg.setFlag(Flags.Flag.DELETED, true);
-                            }
-                            else {
+                            } else {
                                 LOG.info("Memmee inserted!  Success!");
                             }
 
-                        }
-                        catch (Exception ex) {
+                        } catch (Exception ex) {
                             LOG.error(ex, "Exception arise at get Content");
                         }
-                    }
-                    else {
+                    } else {
                         String mpMessage = msg.getContent().toString();
                         LOG.info("mpMessage = " + mpMessage);
                         Long insertMemmee = memmeeDao.insert(userId, mpMessage, allDates, allDates, allDates,
@@ -262,14 +255,14 @@ public class EmailResource {
                         if (mailbox.equalsIgnoreCase("inbox")) {
                             LOG.info("Memmee inserted!  Success!  Now deleting the text");
                             msg.setFlag(Flags.Flag.DELETED, true);
-                        }
-                        else {
+                        } else {
                             LOG.info("Memmee inserted!  Success!");
                         }
 
                     }
-                }
-                else {
+
+                    memmeeMailSender.sendMemmeeReceivedConfirmationMail(user);
+                } else {
                     LOG.info("There is no user that exists with that email " + from);
                     memmeeMailSender.sendInvalidEmailInvitation(from);
                     if (mailbox.equalsIgnoreCase("inbox")) {
@@ -306,7 +299,7 @@ public class EmailResource {
 
     // save uploaded file to new location
     private static void writeToFile(InputStream uploadedInputStream,
-                            String uploadedFileLocation) {
+                                    String uploadedFileLocation) {
         try {
             OutputStream out;
             int read = 0;
@@ -369,14 +362,14 @@ public class EmailResource {
     private static String getText(Part p) throws
             MessagingException, IOException {
         if (p.isMimeType("text/*")) {
-            String s = (String)p.getContent();
+            String s = (String) p.getContent();
             textIsHtml = p.isMimeType("text/html");
             return s;
         }
 
         if (p.isMimeType("multipart/alternative")) {
             // prefer html text over plain text
-            Multipart mp = (Multipart)p.getContent();
+            Multipart mp = (Multipart) p.getContent();
             String text = null;
             for (int i = 0; i < mp.getCount(); i++) {
                 Part bp = mp.getBodyPart(i);
@@ -394,7 +387,7 @@ public class EmailResource {
             }
             return text;
         } else if (p.isMimeType("multipart/*")) {
-            Multipart mp = (Multipart)p.getContent();
+            Multipart mp = (Multipart) p.getContent();
             for (int i = 0; i < mp.getCount(); i++) {
                 String s = getText(mp.getBodyPart(i));
                 if (s != null)

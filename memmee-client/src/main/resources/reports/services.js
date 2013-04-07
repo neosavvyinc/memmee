@@ -72,6 +72,22 @@ memmeeServices.factory('reportingService', ["$http", "$rootScope", function ($ht
                     }
                 }
             );
+        },
+        findUserCount: function( resultHandler, faultHandler ) {
+
+            $http({method: 'GET', url: '/reporting/users/usercount'}).then(
+                function(response) {
+                    if( resultHandler ) {
+                        resultHandler(response.data);
+                    }
+                },
+                function(response) {
+                    if(faultHandler) {
+                        faultHandler(response.data);
+                    }
+                }
+            )
+
         }
 
     };

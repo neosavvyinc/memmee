@@ -21,6 +21,9 @@
         <a ng-click="onShowAllUsersWithoutCompletedProfiles()">Show All Users without Completed Profiles</a><br>
         <a ng-click="onShowAllUsersWithMemmeeCount()">Show All Users with their corresponding Memmee count</a><br>
         <a ng-click="onShowAllUsersWhoHaveNeverMemmeed()">Show All Users who have never Memmee'd</a><br>
+        <a ng-click="findUserCount()">Refresh User Count</a><br>
+
+        Memmee has a grand total of: <label ng-bind="usercount"></label> users
 
         <div style="padding-top: 33px; width: 800px; height: 550px; overflow: scroll;">
             <table width="100%" height="100%">

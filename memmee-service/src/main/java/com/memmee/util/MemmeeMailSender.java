@@ -17,4 +17,6 @@ public interface MemmeeMailSender {
     public void setUrlConfiguration(MemmeeUrlConfiguration memmeeUrlConfiguration);
 
     public void sendInvalidEmailInvitation(String email);
+
+    public void sendMemmeeReceivedConfirmationMail(User user);
 }

@@ -74,4 +74,7 @@ public interface MemmeeReportingDAO extends Transactional<MemmeeReportingDAO>, G
     @SqlQuery("select u.id as id, u.firstName as firstName, u.email as email, u.creationDate as creationDate from user u where u.id not in ( select u.id  from memmee m join user u where m.userId = u.id group by u.id)" )
     @Mapper(ReportingUserMapper.class)
     List<User> getUsersWithNoMemmees();
+
+    @SqlQuery("select count(*) from user" )
+    Integer getNumUsers();
 }

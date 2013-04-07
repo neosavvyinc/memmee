@@ -66,7 +66,7 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
 
         String formattedText = String.format("please login at <a href='http://" + memmeeUrlConfiguration.getActiveUrl() +
                 "/#'>memmee</a> using this temporary password and update your " +
-                "profile with a new password. thank you for being part of memmee. temporary password:%s",
+                "profile with a new password. thank you for being part of memmee. temporary password: %s",
                 temporaryPassword);
 
         message.setHtml(formattedText);
@@ -107,7 +107,37 @@ public class MemmeeMailSenderImpl implements MemmeeMailSender {
         message.setTo(recipients);
         message.setTrack_clicks(true);
         message.setTrack_opens(true);
-        String[] tags = new String[]{"newUserEmail"};
+        String[] tags = new String[]{"invalidEmailInvitation"};
+        message.setTags(tags);
+        mmr.setMessage(message);
+
+        try {
+            SendMessageResponse response = messagesRequest.sendMessage(mmr);
+        } catch (RequestFailedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Override
+    public void sendMemmeeReceivedConfirmationMail(User user) {
+        loadMandrill();
+
+        MandrillMessageRequest mmr = new MandrillMessageRequest();
+        MandrillHtmlMessage message = new MandrillHtmlMessage();
+        Map<String, String> headers = new HashMap<String, String>();
+        message.setFrom_email(memmeeUrlConfiguration.getActiveEmailAddress());
+        message.setFrom_name("memmee");
+        message.setHeaders(headers);
+
+        message.setHtml("<html><body>your memmee on the go has been received, it's safe with us. you'll see it next time you login to memmee. email <a href=\"mailto:hello@memmee.com\">hello@memmee.com</a> for problems.</body></html>");
+        message.setSubject("we totally got your memmee moment!");
+
+        MandrillRecipient[] recipients = new MandrillRecipient[]{new MandrillRecipient("memmee on the go!", user.getEmail())};
+        message.setTo(recipients);
+        message.setTrack_clicks(true);
+        message.setTrack_opens(true);
+        String[] tags = new String[]{"memmeeOnTheGo"};
         message.setTags(tags);
         mmr.setMessage(message);
 

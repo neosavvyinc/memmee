@@ -54,4 +54,18 @@ function ReportController($scope, reportingService ) {
     var showAllFault = function (data) {
         console.log("Show all results failed");
     }
+
+    $scope.usercount = 0;
+    $scope.findUserCount = function() {
+        reportingService.findUserCount(
+            function( data ) {
+                $scope.usercount = data;
+            },
+            function( error ) {
+                console.log("Error while determining user count...");
+            }
+        )
+    }
+
+    $scope.findUserCount();
 }
