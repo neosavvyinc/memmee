@@ -84,6 +84,18 @@ public class UserResource {
         return returnValue;
     }
 
+    @PUT
+    @Path("/user/reset/back/door/")
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    public void reset(User user) {
+
+        User userFromDB = userDao.getUserByEmail(user.getEmail());
+        updatePassword(user, userFromDB);
+
+    }
+
+
 
     @PUT
     @Path("/user/{id}")
