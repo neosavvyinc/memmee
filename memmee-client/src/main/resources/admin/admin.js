@@ -4,6 +4,7 @@ angular.module('admin', ['admin.services']).
         when('/', {templateUrl: 'home/admin-home.html'}).
         when('/showAllInspirations', {templateUrl: 'inspirations/show-all-inspirations.html'}).
         when('/showAllCategories', {templateUrl: 'categories/show-all-categories.html'}).
+        when('/passwordReset', {templateUrl: 'password/reset-password-ptl.html'}).
         otherwise({redirectTo: '/'});
     }]).
     run(['$rootScope', '$location', function( $rootScope, $location ) {
