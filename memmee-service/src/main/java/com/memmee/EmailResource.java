@@ -18,6 +18,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.io.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Properties;
 
@@ -64,6 +66,36 @@ public class EmailResource {
         server = memmeeEmailConfiguration.getActiveServer();
 
         this.memmeeMailSender.setUrlConfiguration(memmeeUrlConfiguration);
+    }
+
+    public static String generateUniqueFileName(String fileLocation) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        md.update(fileLocation.getBytes());
+
+        byte byteData[] = md.digest();
+
+        //convert the byte to hex format method 1
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < byteData.length; i++) {
+            sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }
+
+        System.out.println("Hex format : " + sb.toString());
+
+        //convert the byte to hex format method 2
+        StringBuffer hexString = new StringBuffer();
+        for (int i=0;i<byteData.length;i++) {
+            String hex=Integer.toHexString(0xff & byteData[i]);
+            if(hex.length()==1) hexString.append('0');
+            hexString.append(hex);
+        }
+
+        return hexString.toString();
     }
 
     public static int checkForEmail(String mailbox) throws MessagingException, IOException {
@@ -181,7 +213,9 @@ public class EmailResource {
                                             }
                                             LOG.info("baseFileDirectory = " + baseFileDirectory);
                                             ensureParentDirectory(baseFileDirectory);
-                                            String uploadedFileLocationToWrite = baseFileDirectory + part.getFileName().toLowerCase();
+                                            String uploadedFileLocationToWrite = baseFileDirectory +
+                                                    generateUniqueFileName(part.getFileName().toLowerCase() + (new Date()).toString());
+
                                             writeToFile(is, uploadedFileLocationToWrite);
                                             String uploadedThumbFileLocation = writeThumbnailImage(uploadedFileLocationToWrite);
                                             attachmentId = attachmentDao.insert(uploadedFileLocationToWrite, uploadedThumbFileLocation, "Image");
