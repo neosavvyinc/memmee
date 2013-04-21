@@ -836,8 +836,9 @@ html.blogpage{
     font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
     color: #000000;
     background-image: url('../img/bg-card-mom.png');
+    box-shadow: 0px 2px 0px #dfe0df;
 }
-.memmee-card.style-whimsy .memmee-text{
+.memmee-card.style-mom .memmee-text{
     font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
     color: #000000;
 }
@@ -1418,6 +1419,10 @@ html.blogpage{
     margin-right: 8px;
 }
 
+.memmee-style.dropdown .btn.style-mom{
+    margin-right: 8px;
+}
+
 
 .scrollbar-container{
     position: absolute;
@@ -1798,12 +1803,12 @@ table.calendar{
     height: 23px;
     background-position: -120px -646px;
 }
-.btn.style-valentines{
+.btn.style-valentines, .btn.style-mom{
     width: 37px;
     height: 22px;
     background-position: -170px -624px;
 }
-.btn.style-valentines:hover{
+.btn.style-valentines:hover, .btn.style-mom:hover{
     width: 37px;
     height: 23px;
     background-position: -170px -646px;
