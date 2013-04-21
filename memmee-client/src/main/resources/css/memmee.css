@@ -830,6 +830,19 @@ html.blogpage{
 .memmee-card.style-travel .controls.share{
     right: 127px;
 }
+.memmee-card.style-mom{
+    width: 883px;
+    height: 582px;
+    font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
+    color: #000000;
+    background-image: url('../img/bg-card-mom.png');
+}
+.memmee-card.style-whimsy .memmee-text{
+    font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
+    color: #000000;
+}
+
+
 
 .memmee-card.style-valentines {
     width: 885px;
@@ -1304,6 +1317,15 @@ html.blogpage{
     height: 80px;
     color: #7f7676;
     background-position: 0 -620px;
+    font-family: 'Antic Slab', 'Times New Roman', Times, serif;
+}
+.slidecard.mom{
+    position: relative;
+    top: -3px;
+    width: 148px;
+    height: 80px;
+    color: #000000;
+    background-position: 0 -745px;
     font-family: 'Antic Slab', 'Times New Roman', Times, serif;
 }
 
