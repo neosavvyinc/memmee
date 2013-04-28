@@ -243,7 +243,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         broadCastService.createModeNewUserLogin();
     }
 
-    $scope.setTheme(0);
+    $scope.setTheme(6);
 }
 
 CreateMemmeesController.$inject = ['$scope', '$http', 'memmeeBroadCastService'];
