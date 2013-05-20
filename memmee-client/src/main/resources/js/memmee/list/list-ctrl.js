@@ -48,6 +48,8 @@ function ArchiveListController($scope, $http, broadCastService) {
                         []
                     ];
 
+                    console.log("Memmees returned: "+ $scope.memmees.length);
+
                     for (var i = 0; i < $scope.memmees.length; i++) {
                         if (memmeeSets[memmeeSets.length - 1].length >= 4)
                             memmeeSets.push([]);

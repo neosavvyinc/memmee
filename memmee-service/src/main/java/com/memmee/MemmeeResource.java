@@ -472,7 +472,7 @@ public class MemmeeResource {
             }
             ensureParentDirectory(baseFileDirectory);
 
-            uploadedFileLocation = fileDetail.getFileName().toLowerCase();
+            uploadedFileLocation = UUID.randomUUID().toString() + fileDetail.getFileName().toLowerCase();
 
             // save it
             String uploadedFileLocationToWrite = baseFileDirectory + uploadedFileLocation;

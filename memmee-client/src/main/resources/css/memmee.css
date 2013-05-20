@@ -1233,7 +1233,7 @@ html.blogpage{
 }
 
 .slideshow{
-    width: 20000px; /*dynamic value to set via js.*/
+    width: 80000px; /*dynamic value to set via js.*/
 }
 
 .slidecard-date{
