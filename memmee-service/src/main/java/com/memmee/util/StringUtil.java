@@ -30,10 +30,18 @@ public class StringUtil {
         Matcher emailOnlyMatcher = emailPattern.matcher(emailAddress);
         Matcher firstNameEmailEmbeddedMatcher = nameWithEmailPattern.matcher(emailAddress);
         if( emailOnlyMatcher.matches() ) {
-            return emailOnlyMatcher.group(1);
+
+            System.out.println("["+emailOnlyMatcher.group(0)+"]");
+            System.out.println("["+emailOnlyMatcher.group(1)+"]");
+            System.out.println("["+emailOnlyMatcher.group(2)+"]");
+            System.out.println("["+emailOnlyMatcher.group(3)+"]");
+            System.out.println("["+emailOnlyMatcher.group(4)+"]");
+            System.out.println("["+emailOnlyMatcher.group(5)+"]");
+
+            return emailOnlyMatcher.group(0);
         }
         else if( firstNameEmailEmbeddedMatcher.matches() ) {
-
+            System.out.println(">>>>>>");
             System.out.println(firstNameEmailEmbeddedMatcher.group(0));
             System.out.println(firstNameEmailEmbeddedMatcher.group(1));
             System.out.println(firstNameEmailEmbeddedMatcher.group(2));
@@ -53,7 +61,7 @@ public class StringUtil {
                     + "([A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$)";
 
     private static final String NAME_WITH_EMAIL_EMBEDDED =
-            "((\\w*)\\s*)*<(\\w*)@((\\w*)(\\.\\w*))>";
+            "((\\w*)\\s*)*<((\\w*)@((\\w*)(\\.\\w*)))>";
     private static Pattern emailPattern = Pattern.compile(EMAIL_PATTERN);
     private static Pattern nameWithEmailPattern = Pattern.compile(NAME_WITH_EMAIL_EMBEDDED);
 
