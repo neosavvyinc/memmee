@@ -23,5 +23,38 @@ public class StringUtilTest {
         assertThat(StringUtil.nullOrEmpty("0"), is(false));
     }
 
+    @Test
+    public void testPlainOldEmailAddress() {
+        String normal = "aparrish@neosavvy.com";
+        String user = StringUtil.findUserNameFromEmail(normal);
+        assertThat(user, is("aparrish"));
+    }
+
+    @Test
+    public void testEmailAndNameEmbedded() {
+        String input = "William Adam Parrish <aparrish@neosavvy.com>";
+        String returnVal = StringUtil.findUserNameFromEmail(input);
+        assertThat(returnVal, is("aparrish"));
+    }
+
+    @Test
+    public void testEmailAndSingleNameEmbedded() {
+        String input = "Adam <aparrish@neosavvy.com>";
+        String returnVal = StringUtil.findUserNameFromEmail(input);
+        assertThat(returnVal, is("aparrish"));
+    }
+
+    @Test
+    public void testEmailAndTwoNameEmbedded() {
+        String input = "Adam Parrish <aparrish@neosavvy.com>";
+        String returnVal = StringUtil.findUserNameFromEmail(input);
+        assertThat(returnVal, is("aparrish"));
+    }
+
+    public void testPhoneNumber() {
+        String input = "4142480161@pm.sprint.com";
+        String returnVal = StringUtil.findUserNameFromEmail(input);
+        assertThat(returnVal, is("4142480161"));
+    }
 
 }

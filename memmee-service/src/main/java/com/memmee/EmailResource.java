@@ -7,6 +7,7 @@ import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
 import com.memmee.util.OsUtil;
 
+import com.memmee.util.StringUtil;
 import com.sun.mail.imap.IMAPFolder;
 import com.yammer.dropwizard.logging.Log;
 import org.im4java.core.ConvertCmd;
@@ -98,7 +99,6 @@ public class EmailResource {
         Message[] messages;
 
         String from;
-        String[] splitFrom;
         String[] splitText;
 
         Properties props = System.getProperties();
@@ -136,8 +136,7 @@ public class EmailResource {
                 from = msg.getFrom()[0].toString();
                 LOG.info("from = " + from);
 
-                from = from.replace("<", "");
-                from = from.replace(">", "");
+                from = StringUtil.findUserNameFromEmail(from);
 
                 if (from.endsWith("@txt.voice.google.com")) {
                     LOG.info("from = " + from);
