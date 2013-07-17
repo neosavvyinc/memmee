@@ -136,10 +136,8 @@ public class EmailResource {
                 from = msg.getFrom()[0].toString();
                 LOG.info("from = " + from);
 
-                splitFrom = from.split("<");
-                from = splitFrom[1];
-                splitFrom = from.split(">");
-                from = splitFrom[0];
+                from = from.replace("<", "");
+                from = from.replace(">", "");
 
                 if (from.endsWith("@txt.voice.google.com")) {
                     LOG.info("from = " + from);
