@@ -27,28 +27,28 @@ public class StringUtilTest {
     public void testPlainOldEmailAddress() {
         String normal = "aparrish@neosavvy.com";
         String user = StringUtil.findUserNameFromEmail(normal);
-        assertThat(user, is("aparrish"));
+        assertThat(user, is("aparrish@neosavvy.com"));
     }
 
     @Test
     public void testEmailAndNameEmbedded() {
         String input = "William Adam Parrish <aparrish@neosavvy.com>";
         String returnVal = StringUtil.findUserNameFromEmail(input);
-        assertThat(returnVal, is("aparrish"));
+        assertThat(returnVal, is("aparrish@neosavvy.com"));
     }
 
     @Test
     public void testEmailAndSingleNameEmbedded() {
         String input = "Adam <aparrish@neosavvy.com>";
         String returnVal = StringUtil.findUserNameFromEmail(input);
-        assertThat(returnVal, is("aparrish"));
+        assertThat(returnVal, is("aparrish@neosavvy.com"));
     }
 
     @Test
     public void testEmailAndTwoNameEmbedded() {
         String input = "Adam Parrish <aparrish@neosavvy.com>";
         String returnVal = StringUtil.findUserNameFromEmail(input);
-        assertThat(returnVal, is("aparrish"));
+        assertThat(returnVal, is("aparrish@neosavvy.com"));
     }
 
     public void testPhoneNumber() {

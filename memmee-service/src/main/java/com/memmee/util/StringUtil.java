@@ -40,6 +40,7 @@ public class StringUtil {
             System.out.println(firstNameEmailEmbeddedMatcher.group(3));
             System.out.println(firstNameEmailEmbeddedMatcher.group(4));
             System.out.println(firstNameEmailEmbeddedMatcher.group(5));
+            System.out.println(firstNameEmailEmbeddedMatcher.group(6));
 
             return firstNameEmailEmbeddedMatcher.group(3);
         }
@@ -52,7 +53,7 @@ public class StringUtil {
                     + "([A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$)";
 
     private static final String NAME_WITH_EMAIL_EMBEDDED =
-            "((\\w*)\\s*)*<(\\w*)@(\\w*)(\\.\\w*)>";
+            "((\\w*)\\s*)*<(\\w*)@((\\w*)(\\.\\w*))>";
     private static Pattern emailPattern = Pattern.compile(EMAIL_PATTERN);
     private static Pattern nameWithEmailPattern = Pattern.compile(NAME_WITH_EMAIL_EMBEDDED);
 
