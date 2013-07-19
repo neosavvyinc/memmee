@@ -141,11 +141,11 @@ function CreateMemmeesController($scope, $http, broadCastService) {
         switch (number) {
             case 0:
                 $scope.selectedTheme = "memmee-card";
-                $scope.selectedListTheme = "slidecard note crimson"
+                $scope.selectedListTheme = "slidecard note crimson";
                 break;
             case 1:
                 $scope.selectedTheme = "memmee-card style-coffee";
-                $scope.selectedListTheme = "slidecard art rokkitt"
+                $scope.selectedListTheme = "slidecard art rokkitt";
                 break;
             case 2:
                 $scope.selectedTheme = "memmee-card style-travel";
@@ -169,7 +169,7 @@ function CreateMemmeesController($scope, $http, broadCastService) {
                 break;
             default:
                 $scope.selectedTheme = "memmee-card";
-                $scope.selectedListTheme = "slidecard note crimson"
+                $scope.selectedListTheme = "slidecard note crimson";
                 break;
         }
         $scope.toggleMemmeeThemeSelection();

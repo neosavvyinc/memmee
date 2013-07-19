@@ -1399,12 +1399,18 @@ html.blogpage{
     display: block;
 }
 .memmee-style.dropdown .btn{
+    position: relative;
+    left: -10px;
     display: inline-block;
 }
 .memmee-style.dropdown .btn.style-news{
+    position: relative;
+    left: -10px;
     margin-right: 13px;
 }
 .memmee-style.dropdown .btn.style-coffee{
+    position: relative;
+    left: -10px;
     margin-right: 13px;
 }
 .memmee-style.dropdown .btn.style-saleTag{
@@ -1413,13 +1419,19 @@ html.blogpage{
     margin-right: 8px;
 }
 .memmee-style.dropdown .btn.style-pushPin{
+    position: relative;
+    left: -10px;
     margin-right: 30px;
 }
 .memmee-style.dropdown .btn.style-valentines{
+    position: relative;
+    left: -10px;
     margin-right: 8px;
 }
 
 .memmee-style.dropdown .btn.style-mom{
+    position: relative;
+    left: -10px;
     margin-right: 8px;
 }
 
