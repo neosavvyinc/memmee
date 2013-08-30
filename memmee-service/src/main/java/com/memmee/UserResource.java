@@ -173,7 +173,7 @@ public class UserResource {
                 throw new WebApplicationException(new UserResourceException(UserResourceException.IN_USE_EMAIL));
             } else {
                 user.setApiKey(UUID.randomUUID().toString());
-                memmeeMailSender.sendConfirmationEmail(user);
+//                memmeeMailSender.sendConfirmationEmail(user);
                 Long userId = userDao.insert(user.getFirstName(),
                         user.getEmail(),
                         -1L,
