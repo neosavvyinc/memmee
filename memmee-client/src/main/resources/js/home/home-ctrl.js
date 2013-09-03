@@ -1,8 +1,9 @@
 function HomeController($scope, $timeout) {
     "use strict";
-    $scope.img1zindex = {"z-index": 3};
-    $scope.img2zindex = {"z-index": 2};
-    $scope.img3zindex = {"z-index": 1};
+    $scope.img1zindex = {"z-index": 4};
+    $scope.img2zindex = {"z-index": 3};
+    $scope.img3zindex = {"z-index": 2};
+    $scope.img4zindex = {"z-index": 1};
 
     $scope.carouselState = "1";
 
@@ -15,27 +16,38 @@ function HomeController($scope, $timeout) {
 
     $scope.clickNext = function () {
 
-        if ($scope.carouselState < 3) {
+        if ($scope.carouselState < 4) {
             $scope.carouselState++;
         }
 
         switch ($scope.carouselState) {
-        case 1:
-            $scope.img1zindex = {"z-index": 3};
-            $scope.img2zindex = {"z-index": 2};
-            $scope.img3zindex = {"z-index": 1};
-            break;
-        case 2:
-            $scope.img1zindex = {"z-index": 1};
-            $scope.img2zindex = {"z-index": 3};
-            $scope.img3zindex = {"z-index": 2};
-            break;
+            case 1:
+                $scope.img1zindex = {"z-index": 4};
+                $scope.img2zindex = {"z-index": 3};
+                $scope.img3zindex = {"z-index": 2};
+                $scope.img4zindex = {"z-index": 1};
+                break;
+            case 2:
+                $scope.img1zindex = {"z-index": 1};
+                $scope.img2zindex = {"z-index": 4};
+                $scope.img3zindex = {"z-index": 3};
+                $scope.img4zindex = {"z-index": 2};
+                break;
 
-        case 3:
-            $scope.img1zindex = {"z-index": 1};
-            $scope.img2zindex = {"z-index": 2};
-            $scope.img3zindex = {"z-index": 3};
-            break;
+            case 3:
+                $scope.img1zindex = {"z-index": 2};
+                $scope.img2zindex = {"z-index": 1};
+                $scope.img3zindex = {"z-index": 4};
+                $scope.img4zindex = {"z-index": 3};
+                break;
+
+            case 4:
+                $scope.img1zindex = {"z-index": 3};
+                $scope.img2zindex = {"z-index": 2};
+                $scope.img3zindex = {"z-index": 1};
+                $scope.img4zindex = {"z-index": 4};
+                break;
+
         }
     }
 
@@ -45,21 +57,32 @@ function HomeController($scope, $timeout) {
         }
 
         switch ($scope.carouselState) {
-        case 1:
-            $scope.img1zindex = {"z-index": 3};
-            $scope.img2zindex = {"z-index": 2};
-            $scope.img3zindex = {"z-index": 1};
-            break;
-        case 2:
-            $scope.img1zindex = {"z-index": 1};
-            $scope.img2zindex = {"z-index": 3};
-            $scope.img3zindex = {"z-index": 2};
-            break;
-        case 3:
-            $scope.img1zindex = {"z-index": 1};
-            $scope.img2zindex = {"z-index": 2};
-            $scope.img3zindex = {"z-index": 3};
-            break;
+            case 1:
+                $scope.img1zindex = {"z-index": 4};
+                $scope.img2zindex = {"z-index": 3};
+                $scope.img3zindex = {"z-index": 2};
+                $scope.img4zindex = {"z-index": 1};
+                break;
+            case 2:
+                $scope.img1zindex = {"z-index": 1};
+                $scope.img2zindex = {"z-index": 4};
+                $scope.img3zindex = {"z-index": 3};
+                $scope.img4zindex = {"z-index": 2};
+                break;
+
+            case 3:
+                $scope.img1zindex = {"z-index": 2};
+                $scope.img2zindex = {"z-index": 1};
+                $scope.img3zindex = {"z-index": 4};
+                $scope.img4zindex = {"z-index": 3};
+                break;
+
+            case 4:
+                $scope.img1zindex = {"z-index": 3};
+                $scope.img2zindex = {"z-index": 2};
+                $scope.img3zindex = {"z-index": 1};
+                $scope.img4zindex = {"z-index": 4};
+                break;
         }
     }
 
@@ -83,17 +106,17 @@ function HomeController($scope, $timeout) {
 
     // using $timeout causes e2e text execution to be delayed until
     // timer  using setTimeout w/ $scope.$apply prevents this
-    setTimeout(function() {
-        $scope.$apply(function() {
-            $scope.clickNext();
-        });
-    }, 5000);
-
-    setTimeout(function() {
-        $scope.$apply(function() {
-            $scope.clickNext();
-        });
-    }, 10000);
+//    setTimeout(function() {
+//        $scope.$apply(function() {
+//            $scope.clickNext();
+//        });
+//    }, 5000);
+//
+//    setTimeout(function() {
+//        $scope.$apply(function() {
+//            $scope.clickNext();
+//        });
+//    }, 10000);
 
 
 
