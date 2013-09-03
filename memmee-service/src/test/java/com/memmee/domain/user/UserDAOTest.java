@@ -30,6 +30,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
             "  `creationDate` datetime NOT NULL,\n" +
             "  `loginCount` int(11) DEFAULT NULL,\n" +
             "  `phone` varchar(1024) DEFAULT NULL,\n" +
+            "  `mobileRegistration` tinyint(1) DEFAULT 0,\n" +
             "  PRIMARY KEY (`id`)\n" +
             ") ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3";
 
@@ -105,8 +106,8 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
         try {
 
-            Long id = dao.insert("Adam", "aparrish@neosavvy.com", Long.parseLong("2"), "apiKey", new Date(), new Date(), Long.parseLong("1"), "8005552222");
-            final int result = dao.update(id, "Luke", "lukelappin@gmail.com", Long.parseLong("1"), "apiKey", new Date(), Long.parseLong("2"), "8005553333");
+            Long id = dao.insert("Adam", "aparrish@neosavvy.com", Long.parseLong("2"), "apiKey", new Date(), new Date(), Long.parseLong("1"), "8005552222", 0);
+            final int result = dao.update(id, "Luke", "lukelappin@gmail.com", Long.parseLong("1"), "apiKey", new Date(), Long.parseLong("2"), "8005553333", 0);
 
             assertThat(result, equalTo(1));
         } finally {
@@ -232,7 +233,7 @@ public class UserDAOTest extends AbstractMemmeeDAOTest {
 
     protected Long insertTestData(TransactionalUserDAO dao, TransactionalPasswordDAO passwordDAO) {
         Long passwordId = passwordDAO.insert("password", 0);
-        return dao.insert("Adam", "aparrish@neosavvy.com", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"), "8005553333");
+        return dao.insert("Adam", "aparrish@neosavvy.com", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"), "8005553333", 0);
     }
 }
 

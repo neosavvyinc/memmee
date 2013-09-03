@@ -36,6 +36,8 @@ public class User implements Serializable {
     private Long memmeeCount;
     private long shareCount;
 
+    private Boolean mobileRegistration = false;
+
     public User() { super(); }
 
     public User(String firstName, String email, Password password) {
@@ -138,5 +140,13 @@ public class User implements Serializable {
 
     public long getShareCount() {
         return shareCount;
+    }
+
+    public Boolean getMobileRegistration() {
+        return mobileRegistration;
+    }
+
+    public void setMobileRegistration(Boolean mobileRegistration) {
+        this.mobileRegistration = mobileRegistration;
     }
 }

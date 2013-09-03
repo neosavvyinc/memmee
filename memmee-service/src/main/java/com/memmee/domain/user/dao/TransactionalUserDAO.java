@@ -62,8 +62,8 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
             @Bind("password") String password);
 
 
-    @SqlUpdate("insert into user (firstName, email, passwordId, apiKey, apiDate, creationDate, loginCount, phone)" +
-            " values (:firstName, :email, :passwordId, :apiKey, :apiDate, :creationDate, :loginCount, :phone)")
+    @SqlUpdate("insert into user (firstName, email, passwordId, apiKey, apiDate, creationDate, loginCount, phone, mobileRegistration)" +
+            " values (:firstName, :email, :passwordId, :apiKey, :apiDate, :creationDate, :loginCount, :phone, :mobileRegistration)")
     @GetGeneratedKeys
     Long insert(
             @Bind("firstName") String firstName
@@ -74,9 +74,9 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
             , @Bind("creationDate") Date creationDate
             , @Bind("loginCount") Long loginCount
             , @Bind("phone") String phone
-    );
+            , @Bind("mobileRegistration") Number mobileRegistration);
 
-    @SqlUpdate("update user set firstName = :firstName, email = :email, passwordId = :passwordId, " +
+    @SqlUpdate("update user set firstName = :firstName, email = :email, passwordId = :passwordId, mobileRegistration = :mobileRegistration," +
             "apiKey = :apiKey, apiDate = :apiDate , loginCount = :loginCount, phone = :phone where id = :id")
     int update(
             @Bind("id") Long id
@@ -87,7 +87,7 @@ public interface TransactionalUserDAO extends Transactional<TransactionalUserDAO
             , @Bind("apiDate") Date apiDate
             , @Bind("loginCount") Long loginCount
             , @Bind("phone") String phone
-    );
+            , @Bind("mobileRegistration") Number mobileRegistration);
 
     @SqlUpdate("update user set loginCount = loginCount + 1 where id = :id")
     int incrementLoginCount(

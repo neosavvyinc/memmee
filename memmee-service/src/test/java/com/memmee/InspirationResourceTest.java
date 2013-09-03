@@ -183,7 +183,7 @@ public class InspirationResourceTest extends ResourceIntegrationTest {
 
     protected Long insertTestUser() {
         Long passwordId = passwordDAO.insert(passwordGenerator.encrypt("abc123"), 0);
-        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date(), Long.parseLong("1"), "9105551111");
+        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date(), Long.parseLong("1"), "9105551111", 0);
     }
 
 }

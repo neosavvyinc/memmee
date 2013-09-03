@@ -23,4 +23,11 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="mobileRegistrationFlag" author="adam">
+        <addColumn tableName="user">
+            <column name="mobileRegistration" type="boolean" defaultValueBoolean="false"/>
+        </addColumn>
+    </changeSet>
+
+
 </databaseChangeLog>

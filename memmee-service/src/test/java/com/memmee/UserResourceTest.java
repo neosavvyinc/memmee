@@ -174,8 +174,33 @@ public class UserResourceTest extends ResourceIntegrationTest {
         assertThat(caseException, is(not(nullValue())));
     }
 
+    @Test
+    public void insertUserFromMobile() {
+        Password p = new Password();
+        p.setValue("test");
+
+        User u = new User();
+        u.setFirstName("Adam");
+        u.setMobileRegistration(true);
+        u.setPassword(p);
+        u.setEmail("test@something.com");
+
+        try {
+            client().resource(
+                    new MemmeeURLBuilder().
+                        setBaseURL(UserResource.BASE_URL).
+                        setMethodURL("user").
+                        build()
+                    )
+                    .type(MediaType.APPLICATION_JSON)
+                    .post(User.class, u);
+        } catch (UserResourceException e) {
+
+        }
+    }
+
     protected Long insertTestData() {
         Long passwordId = passwordDAO.insert(passwordGenerator.encrypt("abc123"), 0);
-        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date(), Long.parseLong("1"), "9195551212");
+        return userDAO.insert("Adam", "trevorewen@gmail.com", passwordId, "apiKey500", new Date(), new Date(), Long.parseLong("1"), "9195551212", 0);
     }
 }

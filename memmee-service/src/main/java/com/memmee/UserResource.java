@@ -7,7 +7,6 @@ import com.memmee.error.UserResourceException;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
 import com.memmee.domain.user.dto.User;
 import com.memmee.util.MemmeeMailSender;
-import com.memmee.util.StringUtil;
 import com.yammer.dropwizard.logging.Log;
 import org.apache.commons.validator.EmailValidator;
 import org.skife.jdbi.v2.exceptions.DBIException;
@@ -122,8 +121,8 @@ public class UserResource {
                     user.getApiKey(),
                     new Date(),
                     user.getLoginCount(),
-                    user.getPhone()
-            );
+                    user.getPhone(),
+                    user.getMobileRegistration() ? 1 : 0);
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
@@ -181,7 +180,8 @@ public class UserResource {
                         new Date(),
                         new Date(),
                         Long.parseLong("1"),
-                        user.getPhone()
+                        user.getPhone(),
+                        user.getMobileRegistration() ? 1 : 0
                 );
                 User userLookup = userDao.getUser(userId);
 
@@ -194,7 +194,8 @@ public class UserResource {
                         user.getApiKey(),
                         new Date(),
                         user.getLoginCount(),
-                        user.getPhone()
+                        user.getPhone(),
+                        user.getMobileRegistration() ? 1 : 0
                 );
 
             }

@@ -10,7 +10,9 @@ import com.memmee.domain.inspirations.dto.Inspiration;
 import com.memmee.domain.memmees.dao.TransactionalMemmeeDAO;
 import com.memmee.domain.memmees.dto.Memmee;
 import com.memmee.domain.password.dao.TransactionalPasswordDAO;
+import com.memmee.domain.password.dto.Password;
 import com.memmee.domain.user.dao.TransactionalUserDAO;
+import com.memmee.domain.user.dto.User;
 import com.memmee.theme.dao.TransactionalThemeDAO;
 import com.memmee.util.DateUtil;
 import org.junit.*;
@@ -74,7 +76,7 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         mockMemmeeConfig.setMemmeeUrlConfiguration( mockMemmeeConfiguration );
 
         passwordId = passwordDAO.insert("password", 0);
-        userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"), "2135550000");
+        userId = userDAO.insert("memmee_resource_test", "user", passwordId, "apiKey", new Date(), new Date(), Long.parseLong("1"), "2135550000", 0);
 
         //add resources
         addResource(new MemmeeResource(userDAO, txMemmeeDAO, txAttachmentDAO, txInspirationDAO, txThemeDAO, mockMemmeeConfig));
@@ -326,6 +328,8 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
         assertThat(equals, is(true));
 
     }
+
+
 
     protected Long insertTestData() {
         attachmentId = txAttachmentDAO.insert("this_is_a_file_path.path", "this_is_a_thumb_file_path.path", "image/jpeg");
