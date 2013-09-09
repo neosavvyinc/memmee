@@ -79,7 +79,11 @@ public class MemmeeResource {
     @GET
     @Path("/getmemmees")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Memmee> getMemmees(@QueryParam("apiKey") String apiKey) {
+    public List<Memmee> getMemmees(@QueryParam("apiKey") String apiKey, @QueryParam("isMobile") Boolean isMobile) {
+
+        if( isMobile == null ) {
+            isMobile = false;
+        }
 
         User user = userDao.getUserByApiKey(apiKey);
 
@@ -89,6 +93,12 @@ public class MemmeeResource {
         }
 
         List<Memmee> memmeesbyUser = memmeeDao.getMemmeesbyUser(user.getId());
+
+        if( isMobile ) {
+            for (Memmee memmee : memmeesbyUser) {
+                memmee.setText(memmee.getText().replaceAll("<br />", "\n"));
+            }
+        }
 
         return memmeesbyUser;
     }
