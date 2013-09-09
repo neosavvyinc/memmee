@@ -863,6 +863,20 @@ html.blogpage{
     font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
 }
 
+
+.memmee-card.style-chalkboard {
+    width: 885px;
+    height: 597px;
+    font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
+    color: #7f7676;
+    background-image: url('../img/bg-card-chalkboard.png');
+}
+
+.memmee-card.style-chalkboard .memmee-text{
+    color: #7f7676;
+    font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
+}
+
 .memmee-bubble{
     position: absolute;
     top : 166px;
@@ -1326,6 +1340,16 @@ html.blogpage{
     font-family: 'Antic Slab', 'Times New Roman', Times, serif;
 }
 .slidecard.mom{
+    position: relative;
+    top: -3px;
+    width: 148px;
+    height: 80px;
+    color: #000000;
+    background-position: 0 -745px;
+    font-family: "Josefin Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.slidecard.chalkboard{
     position: relative;
     top: -3px;
     width: 148px;

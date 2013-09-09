@@ -167,6 +167,10 @@ function CreateMemmeesController($scope, $http, broadCastService) {
                 $scope.selectedTheme = "memmee-card style-mom";
                 $scope.selectedListTheme = "slidecard mom";
                 break;
+            case 7:
+                $scope.selectedTheme = "memmee-card style-chalkboard";
+                $scope.selectedListTheme = "slidecard chalkboard";
+                break;
             default:
                 $scope.selectedTheme = "memmee-card";
                 $scope.selectedListTheme = "slidecard note crimson";
