@@ -106,17 +106,23 @@ function HomeController($scope, $timeout) {
 
     // using $timeout causes e2e text execution to be delayed until
     // timer  using setTimeout w/ $scope.$apply prevents this
-//    setTimeout(function() {
-//        $scope.$apply(function() {
-//            $scope.clickNext();
-//        });
-//    }, 5000);
-//
-//    setTimeout(function() {
-//        $scope.$apply(function() {
-//            $scope.clickNext();
-//        });
-//    }, 10000);
+    setTimeout(function() {
+        $scope.$apply(function() {
+            $scope.clickNext();
+        });
+    }, 5000);
+
+    setTimeout(function() {
+        $scope.$apply(function() {
+            $scope.clickNext();
+        });
+    }, 10000);
+
+    setTimeout(function() {
+        $scope.$apply(function() {
+            $scope.clickNext();
+        });
+    }, 15000);
 
 
 
