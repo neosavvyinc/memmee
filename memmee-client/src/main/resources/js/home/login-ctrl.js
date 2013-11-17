@@ -49,6 +49,16 @@ function LoginController($scope, $http, broadCastService, userService) {
         }
     }
 
+    $scope.checkUserLoggedIn = function() {
+        var user = localStorage.getItem("user");
+        if( user === undefined || user === "" ) {
+            //user is not logged in
+        } else {
+            broadCastService.loginUser(JSON.parse(user));
+        }
+    }
+
+    $scope.checkUserLoggedIn();
 }
 
 LoginController.$inject = ['$scope', '$http', 'memmeeBroadCastService', 'userService'];

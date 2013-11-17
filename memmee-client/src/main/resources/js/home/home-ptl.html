@@ -1,100 +1,36 @@
-<div id="content" ng-controller="HomeController">
-    <div class="memmee-carousel">
-            <a class="btn prev" ng-click="clickPrevious()">Previous</a>
-            <div class="memmee-carousel-item clearfix">
-
-                <div class="carousel-img carousel-img-1" ng-style="img1zindex">
-                    <h1>Memmee:</h1>
-                    <ul>
-                        <li>can keep a secret</li>
-                        <li>is an afternoon pick-me-up</li>
-                        <li>is a way to blow off steam</li>
-                        <li>doesn't care if you're messy</li>
-                        <li>will make you laugh out loud</li>
-                    </ul>
-                </div>
-
-                <div class="carousel-img carousel-img-2" ng-style="img2zindex">
-                    <h1>memmee is about recording what's on your min today:</h1>
-                    <h2>it's all about the little things. a few words or lines will do. serious or sill, doesn't matter.</h2>
-                    <ul>
-                        <li>a conversation, a feeling, an encounter</li>
-                        <li>a mood, a laugh-out-loud moment</li>
-                    </ul>
-                </div>
-
-                <div class="carousel-img carousel-img-3" ng-style="img3zindex">
-                    <h1>let's relive the small moments, shall we?</h1>
-                </div>
-
-                <div class="carousel-img carousel-img-4" ng-style="img4zindex">
-                    <div>cosmo</div>
-                </div>
-
-                <div class="signup sm">
-                    <h2 class="signup-title">it takes 2 seconds<br/>to get started</h2>
-
-                    <form id="signupTop" method="post" ng-controller="RegistrationController">
-                        <fieldset>
-                            <input type="text" name="signup" placeholder="Email Address" value="Email Address" ng-model="user.email"/>
-                            <input type="password" name="password" placeholder="Password" value="Password" ng-model="user.password"/>
-                            <input type="text" name="name" placeholder="Name (optional)" value="Name" ng-model="user.firstName"/>
-                        </fieldset>
-
-                        <div>
-                            <a style="float: left;" class="btn signup" ng-click="register()">Join</a>
-                            <a style="float: right; padding-top: 10px; padding-right: 20px;"  ng-click="forgotPassword()" class="link forgotPwd">Forgot Password</a>
-                        </div>
+<div id="content" ng-controller="LoginController">
+    <div >
+        <div class="clearfix">
+            <div class="memmee-form">
+                <form method="post" action="url">
+                    <fieldset>
+                        <label for="email" class="lowercase">Login</label>
+                        <input type="text"
+                               id="email"
+                               name="email"
+                               placeholder="email"
+                               ng-model="user.email">
+                        <!--<span class="feedback-form valid">ok</span>-->
+                    </fieldset>
+                    <fieldset>
+                        <label for="password" class="lowercase">Password</label>
+                        <input type="password"
+                               id="password"
+                               name="password"
+                               placeholder="password"
+                               ng-model="user.password">
+                        <!--<span class="feedback-form valid">ok</span>-->
+                    </fieldset>
+                    <fieldset style="padding-top: 10px;">
+                        <a ng-click="login()" class="btn save">Login</a>
+                    </fieldset>
 
 
-                    </form>
-                </div>
-            </div>
-        <a class="btn next" ng-click="clickNext()">Next</a>
-    </div>
-    <div class="home-btm clearfix">
-        <div class="fourpoint-callout">
-            <h2>find your voice and start remembering</h2>
 
-            <ol class="clearfix">
-                <li><a class="callout-point couple"></a>1. what's worth remembering today?</li>
-                <li><a class="callout-point pen"></a>2. use our writing prompts to jot down a thought on one of our hand drawn cards</li>
-                <li><a class="callout-point star"></a>3. all notes will stay private unless you want to share them</li>
-                <li><a class="callout-point clock"></a>4. your collected moments will remind you to celebrate the little things in life</li>
-            </ol>
-        </div>
-
-        <div class="blog-container">
-            <div class="blog" >
-                <h2 class="title-blog"><a class="blog-link" href="http://blog.memmee.com">memmee blog</a></h2>
-
-                <div class="blog-post" ng-repeat="entry in entries" style="height: 180px; margin-top: 10px;">
-                    <span class="post-date"><a class="blog-link-date" href="http://blog.memmee.com">{{entry.publishedDate | dateformatter:'MMMM dd, yyyy'}}</a></span>
-                    <dl class="blog-list">
-                        <dt ng-bind-html-unsafe="entry.title"></dt>
-                        <dd ng-bind-html-unsafe="entry.content"></dd>
-                    </dl>
-
-                </div>
-                <a class="blog-link-small" href="http://blog.memmee.com">continue &gt;</a>
+                </form>
             </div>
 
         </div>
-    </div>
-
-    <div class="home-cards clearfix">
-        <h2>what are we memmeeing about?</h2>
-
-        <ul class="clearfix">
-            <li><a href="http://www.memmee.com/#/share?shareKey=0a0f4a73-18c4-4165-a08f-92ed17fc50f7"><img src="img/home/bg-card-valentine.png" class="notecard-valentine" alt=""/></a></li>
-            <li><a href="http://www.memmee.com/#/share?shareKey=58b3f25f-1a46-4fd9-9b87-b2455e73ad06 "><img src="img/home/bg-card-travel-1.png" class="notecard-travel" alt=""/></a></li>
-        </ul>
-        <ul class="clearfix">
-            <li><a href="http://www.memmee.com/#/share?shareKey=448cd11e-b171-4fb4-b3ca-b143499ad417"><img src="img/home/bg-card-note.png" class="notecard-note" alt=""/></a></li>
-            <li><a href="http://www.memmee.com/#/share?shareKey=e5ac2d91-3517-4370-bca2-71296b3375e7"><img src="img/home/bg-card-coffee.png" class="notecard-coffee" alt=""/></a></li>
-        </ul>
-
-        <p class="public-memmee-text">wanna see your memmee featured here? submit your memmee link to <a href="mailto:hello@memmee.com">hello@memmee.com</a></p>
     </div>
 
 </div>
