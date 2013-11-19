@@ -1,5 +1,5 @@
 /**
- * @license AngularJS v1.0.2
+ * @license AngularJS v1.0.7
  * (c) 2010-2012 Google, Inc. http://angularjs.org
  * License: MIT
  */
@@ -15,7 +15,7 @@ directive.dropdownToggle =
     return {
       restrict: 'C',
       link: function(scope, element, attrs) {
-        scope.$watch(function(){return $location.path();}, function() {
+        scope.$watch(function dropdownTogglePathWatch(){return $location.path();}, function dropdownTogglePathWatchAction() {
           close && close();
         });
 
@@ -149,6 +149,14 @@ directive.tabbable = function() {
   };
 };
 
+directive.table = function() {
+  return {
+    restrict: 'E',
+    link: function(scope, element, attrs) {
+      element[0].className = 'table table-bordered table-striped code-table';
+    }
+  };
+};
 
 directive.tabPane = function() {
   return {
@@ -162,5 +170,6 @@ directive.tabPane = function() {
 
 
 angular.module('bootstrap', []).directive(directive);
+
 
 })(window, window.angular);

@@ -50,6 +50,7 @@ var app = angular.module('memmee-app', ['memmee-app.services', 'ngSanitize', 'me
 
     $routeProvider.
         when('/home', {templateUrl: 'js/home/home-ptl.html'}).
+        when('/signup', {templateUrl: 'js/home/signup-ptl.html'}).
         when('/create', {templateUrl: 'js/memmee/create/create-ptl.html'}).
         when('/view', {templateUrl: 'js/memmee/view/view-ptl.html'}).
         when('/requiredchangepassword', {templateUrl: 'js/profile/change-password-ptl.html'}).

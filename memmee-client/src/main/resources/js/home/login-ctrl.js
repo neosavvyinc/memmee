@@ -1,4 +1,4 @@
-function LoginController($scope, $http, broadCastService, userService) {
+function LoginController($scope, $http, broadCastService, userService, $rootScope) {
 
     //Super/Inherited Methods
     DefaultController($scope,
@@ -14,6 +14,8 @@ function LoginController($scope, $http, broadCastService, userService) {
     //Action Handlers
     $scope.login = function () {
         //Sets up notifications that only occur after login
+        console.log("login?")
+
         broadCastService.firstLoginUser();
 
         $http({method:'POST', url:'/memmeeuserrest/user/login', data:$scope.user}).
@@ -48,17 +50,6 @@ function LoginController($scope, $http, broadCastService, userService) {
             $scope.forgotPasswordInputStyle = {'border-color': "#D84133"};
         }
     }
-
-    $scope.checkUserLoggedIn = function() {
-        var user = localStorage.getItem("user");
-        if( user === undefined || user === "" ) {
-            //user is not logged in
-        } else {
-            broadCastService.loginUser(JSON.parse(user));
-        }
-    }
-
-    $scope.checkUserLoggedIn();
 }
 
-LoginController.$inject = ['$scope', '$http', 'memmeeBroadCastService', 'userService'];
+LoginController.$inject = ['$scope', '$http', 'memmeeBroadCastService', 'userService', '$rootScope'];
