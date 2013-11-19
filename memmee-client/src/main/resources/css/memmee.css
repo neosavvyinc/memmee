@@ -788,46 +788,46 @@ html.blogpage{
 .memmee-card.style-coffee{
     width: 876px;
     height: 594px;
-    font: 24px/36px 'Rokkitt', Arial, Helvetica, sans-serif;
+    font: 22px/30px 'Rokkitt', Arial, Helvetica, sans-serif;
     color: #7c3f36;
     background-image: url('../img/bg-card-coffee.png');
 }
 .memmee-card.style-coffee .memmee-text{
     color: #7c3f36;
-    font: 24px/36px 'Rokkitt', Arial, Helvetica, sans-serif;
+    font: 22px/30px 'Rokkitt', Arial, Helvetica, sans-serif;
 }
 .memmee-card.style-whimsy{
     width: 883px;
     height: 582px;
-    font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
+    font: 22px/30px 'Josefin Slab', Arial, Helvetica, sans-serif;
     color: #513f48;
     background-image: url('../img/bg-card-whimsy.png');
 }
 .memmee-card.style-whimsy .memmee-text{
-    font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
+    font: 22px/30px 'Josefin Slab', Arial, Helvetica, sans-serif;
     color: #513f48;
 }
 .memmee-card.style-inspiration{
     width: 885px;
     height: 582px;
-    font: 22px/35px 'Josefin Sans', Arial, Helvetica, sans-serif;
+    font: 22px/30px 'Josefin Sans', Arial, Helvetica, sans-serif;
     color: #407280;
     background-image: url('../img/bg-card-inspiration.png');
 }
 .memmee-card.style-inspiration .memmee-text{
     color: #407280;
-    font: 22px/35px 'Josefin Sans', Arial, Helvetica, sans-serif;
+    font: 22px/30px 'Josefin Sans', Arial, Helvetica, sans-serif;
 }
 .memmee-card.style-travel{
     width: 979px;
     height: 597px;
-    font: 24px/36px 'Crimson Text', 'Times New Roman', Times, serif;
+    font: 22px/30px 'Crimson Text', 'Times New Roman', Times, serif;
     color: #7f7676;
     background-image: url('../img/bg-card-travel.png');
 }
 .memmee-card.style-travel .memmee-text{
      color: #7f7676;
-    font: 24px/36px 'Crimson Text', 'Times New Roman', Times, serif;
+    font: 22px/30px 'Crimson Text', 'Times New Roman', Times, serif;
 }
 .memmee-card.style-travel .btn.inspiration{
     right: 116px;
@@ -838,13 +838,13 @@ html.blogpage{
 .memmee-card.style-mom{
     width: 883px;
     height: 582px;
-    font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
+    font: 22px/30px 'Josefin Slab', Arial, Helvetica, sans-serif;
     color: #000000;
     background-image: url('../img/bg-card-mom.png');
     box-shadow: 0px 2px 0px #dfe0df;
 }
 .memmee-card.style-mom .memmee-text{
-    font: 22px/35px 'Josefin Slab', Arial, Helvetica, sans-serif;
+    font: 22px/30px 'Josefin Slab', Arial, Helvetica, sans-serif;
     color: #000000;
 }
 
@@ -853,28 +853,28 @@ html.blogpage{
 .memmee-card.style-valentines {
     width: 885px;
     height: 597px;
-    font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
+    font: 22px/30px 'Antic Slab', 'Times New Roman', Times, serif;
     color: #7f7676;
     background-image: url('../img/bg-card-valentine.png');
 }
 
 .memmee-card.style-valentines .memmee-text{
     color: #7f7676;
-    font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
+    font: 22px/30px 'Antic Slab', 'Times New Roman', Times, serif;
 }
 
 
 .memmee-card.style-chalkboard {
     width: 885px;
     height: 597px;
-    font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
+    font: 22px/30px 'Antic Slab', 'Times New Roman', Times, serif;
     color: #FFFFFF;
     background-image: url('../img/bg-card-chalkboard.png');
 }
 
 .memmee-card.style-chalkboard .memmee-text{
     color: #FFFFFF;
-    font: 24px/36px 'Antic Slab', 'Times New Roman', Times, serif;
+    font: 22px/30px 'Antic Slab', 'Times New Roman', Times, serif;
 }
 
 .memmee-bubble{
