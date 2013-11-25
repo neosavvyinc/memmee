@@ -149,6 +149,8 @@ input.rounded{
     background-position: -164px -306px;
     font-family: "Crimson Text", "Times New Roman", Times, serif;
     text-decoration: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .btn.signup:hover {
     background-position: -242px -306px;
@@ -1605,6 +1607,50 @@ table.calendar{
 .memmee-form input.invalid{
     color: #c56659;
 }
+
+
+
+.memmee-register-signup-form{
+    float: left;
+    width: 305px;
+    height: 332px;
+    margin-left: 274px;
+    padding: 70px 23px 46px 70px;
+    background: transparent url('../img/blue_background.png') top left no-repeat;
+}
+.memmee-register-signup-form fieldset{
+    display: block;
+    margin-bottom: -2px;
+}
+.memmee-register-signup-form label{
+    display: block;
+    color: #797a79;
+    font: 14px/30px 'Crimson Text', 'Times New Roman', Times, Serif;
+}
+
+.memmee-register-signup-form input{
+    width: 214px;
+    height: 27px;
+    margin-right: 16px;
+    padding: 0 16px;
+    line-height: 27px;
+    color: black;
+    font: italic 18px/27px 'Crimson Text', 'Times New Roman', Times, Serif;
+    background-color: white;
+    border: none;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -ms-border-radius: 8px;
+    border-radius: 8px;
+}
+.memmee-register-signup-form input:focus{
+    border: none;
+    background-color: white;
+}
+.memmee-register-signup-form input.invalid{
+    color: #c56659;
+}
+
 
 .feedback-form{
     display: inline-block;

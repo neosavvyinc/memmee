@@ -1,7 +1,14 @@
 <div id="content" ng-controller="LoginController">
     <div >
+
         <div class="clearfix">
-            <div class="memmee-form">
+            <div class="memmee-register-signup-form">
+
+                <div style="padding-left: 50px">
+                    <a href="#/home" style="font-size: 28px; cursor: pointer; text-decoration: none" >login</a>
+                    <a href="#/signup" style="font-size: 28px; padding-left: 20px; cursor: pointer; text-decoration: none">signup</a>
+                </div>
+
                 <form method="post" action="url">
                     <fieldset>
                         <label for="email" class="lowercase">Login</label>
@@ -21,23 +28,13 @@
                                ng-model="user.password">
                         <!--<span class="feedback-form valid">ok</span>-->
                     </fieldset>
-                    <fieldset style="padding-top: 10px;">
-                        <a ng-click="login()" class="btn save">Login</a>
-                    </fieldset>
-
-                    <fieldset style="padding-top: 10px;">
-                        <a ng-click="forgotPassword()" style="cursor: pointer" >forgot password?</a>
-                    </fieldset>
-
-                    <fieldset style="padding-top: 10px;">
-                        <a href="#/signup" style="cursor: pointer; text-decoration: none" >sign up?</a>
-                    </fieldset>
-
-
-
                 </form>
+                <div>
+                    <a ng-click="login()" key-handler fnName="login" class="btn signup">Login</a>
+                    <a ng-click="forgotPassword()" style="cursor: pointer" >forgot password?</a>
+                </div>
+                <img style="padding-left: 45px; padding-top: 25px" src="/img/appstore.png">
             </div>
-
         </div>
     </div>
 
