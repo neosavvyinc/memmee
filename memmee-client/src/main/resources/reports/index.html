@@ -16,14 +16,14 @@
     </div>
 
     <div id="content" ng-controller="ReportController" >
-        <a ng-click="onShowAllRegisteredClicked()">Show All Registered Users</a><br>
-        <a ng-click="onShowAllRegisteredMobileClicked()">Show All Mobile Registered Users</a><br>
-        <a ng-click="onShowAllRegisteredWebClicked()">Show All Web Registered Users</a><br>
-        <a ng-click="onShowAllUsersWithCompletedProfiles()">Show All Users with Completed Profiles</a><br>
-        <a ng-click="onShowAllUsersWithoutCompletedProfiles()">Show All Users without Completed Profiles</a><br>
-        <a ng-click="onShowAllUsersWithMemmeeCount()">Show All Users with their corresponding Memmee count</a><br>
-        <a ng-click="onShowAllUsersWhoHaveNeverMemmeed()">Show All Users who have never Memmee'd</a><br>
-        <a ng-click="findUserCount()">Refresh User Count</a><br>
+        <a style="cursor: hand" ng-click="onShowAllRegisteredClicked()">Show All Registered Users</a><br>
+        <a style="cursor: hand" ng-click="onShowAllRegisteredMobileClicked()">Show All Mobile Registered Users</a><br>
+        <a style="cursor: hand" ng-click="onShowAllRegisteredWebClicked()">Show All Web Registered Users</a><br>
+        <a style="cursor: hand" ng-click="onShowAllUsersWithCompletedProfiles()">Show All Users with Completed Profiles</a><br>
+        <a style="cursor: hand" ng-click="onShowAllUsersWithoutCompletedProfiles()">Show All Users without Completed Profiles</a><br>
+        <a style="cursor: hand" ng-click="onShowAllUsersWithMemmeeCount()">Show All Users with their corresponding Memmee count</a><br>
+        <a style="cursor: hand" ng-click="onShowAllUsersWhoHaveNeverMemmeed()">Show All Users who have never Memmee'd</a><br>
+        <a style="cursor: hand" ng-click="findUserCount()">Refresh User Count</a><br>
 
         Memmee has a grand total of: <label ng-bind="usercount"></label> users
 
