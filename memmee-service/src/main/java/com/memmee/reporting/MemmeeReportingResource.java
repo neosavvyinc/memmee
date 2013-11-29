@@ -33,6 +33,20 @@ public class MemmeeReportingResource  {
     }
 
     @GET
+    @Path("/users/web")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<User> getUsersForWeb() {
+        return reportingDAO.getUsersForWeb();
+    }
+
+    @GET
+    @Path("/users/mobile")
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<User> getUsersForMobile() {
+        return reportingDAO.getUsersForMobile();
+    }
+
+    @GET
     @Path("/users/completed/profile")
     @Produces({MediaType.APPLICATION_JSON})
     public List<User> getUsersWithCompletedProfiles() {

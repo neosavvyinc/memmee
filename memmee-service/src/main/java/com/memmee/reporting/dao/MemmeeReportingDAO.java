@@ -55,6 +55,28 @@ public interface MemmeeReportingDAO extends Transactional<MemmeeReportingDAO>, G
 
     /**
      *
+     * Report Query to show all users regardless of profile completeness
+     *
+     * select distinct memmee.user.id, memmee.user.email, coalesce(memmee.user.firstName, '_No Name') as name from memmee.user ORDER BY name;
+     *
+     */
+    @SqlQuery("select distinct user.id as id, user.email as email, coalesce(user.firstName, '_No Name') as firstName, user.creationDate as creationDate from user WHERE mobileRegistration = 1 ORDER BY firstName")
+    @Mapper(ReportingUserMapper.class)
+    List<User> getUsersForMobile();
+
+    /**
+     *
+     * Report Query to show all users regardless of profile completeness
+     *
+     * select distinct memmee.user.id, memmee.user.email, coalesce(memmee.user.firstName, '_No Name') as name from memmee.user ORDER BY name;
+     *
+     */
+    @SqlQuery("select distinct user.id as id, user.email as email, coalesce(user.firstName, '_No Name') as firstName, user.creationDate as creationDate from user WHERE mobileRegistration = 0 ORDER BY firstName")
+    @Mapper(ReportingUserMapper.class)
+    List<User> getUsersForWeb();
+
+    /**
+     *
      * Report Query to show all users how have memmee'd and how many times
      *
      * select u.firstName, u.email, count(*) as memmeeCount from memmee.memmee m join memmee.user u where m.userId = u.id group by u.id order by memmeeCount DESC, u.firstName, u.email;

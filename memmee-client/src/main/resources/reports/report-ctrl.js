@@ -13,6 +13,22 @@ function ReportController($scope, reportingService ) {
         );
     };
 
+    $scope.onShowAllRegisteredWebClicked = function () {
+        console.log("clicking show all (web)");
+        reportingService.showAllRegisteredWeb(
+            showAllResult,
+            showAllFault
+        );
+    };
+
+    $scope.onShowAllRegisteredMobileClicked = function () {
+        console.log("clicking show all (mobile)");
+        reportingService.showAllRegisteredMobile(
+            showAllResult,
+            showAllFault
+        );
+    };
+
     $scope.onShowAllUsersWithCompletedProfiles = function () {
         console.log("clicking show all with completed profiles");
         reportingService.showAllUsersWithCompletedProfiles(

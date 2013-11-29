@@ -3,6 +3,34 @@ var memmeeServices = angular.module('reporting.services', ['ngResource']);
 memmeeServices.factory('reportingService', ["$http", "$rootScope", function ($http, $scope) {
     'use strict';
     return {
+        showAllRegisteredMobile: function (resultHandler, faultHandler) {
+            $http({method: 'GET', url: '/reporting/users/mobile' }).then(
+                function (response) {
+                    if (resultHandler) {
+                        resultHandler(response.data);
+                    }
+                },
+                function (response) {
+                    if (faultHandler) {
+                        faultHandler(response.data);
+                    }
+                }
+            );
+        },
+        showAllRegisteredWeb: function (resultHandler, faultHandler) {
+            $http({method: 'GET', url: '/reporting/users/web' }).then(
+                function (response) {
+                    if (resultHandler) {
+                        resultHandler(response.data);
+                    }
+                },
+                function (response) {
+                    if (faultHandler) {
+                        faultHandler(response.data);
+                    }
+                }
+            );
+        },
         showAllRegistered: function (resultHandler, faultHandler) {
             $http({method: 'GET', url: '/reporting/users' }).then(
                 function (response) {
