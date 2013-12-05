@@ -50,7 +50,7 @@ function ShareModeController($scope, $http, broadCastService, $location, $routeP
 
     var getShareUrl = function () {
         //($location.protocol() + "://" + $location.host())
-        return $location.absUrl();
+        return $location.absUrl().replace("www","app");
     };
 
     $scope.onShareLinkOnFacebook = function () {
