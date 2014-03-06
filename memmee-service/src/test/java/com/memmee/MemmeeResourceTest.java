@@ -297,6 +297,43 @@ public class MemmeeResourceTest extends ResourceIntegrationTest {
     }
 
     @Test
+    public void testInsertWithAttachmentThenUpdate()
+    {
+        Long attOneId = txAttachmentDAO.insert("this_is_a_file_path.path1", "this_is_a_thumb_file_path.path1", "image/jpeg");
+        Long inspirationCategoryOneId = txInspirationCategoryDAO.insert(Long.parseLong("1"), "this is a category1");
+        Long inspirationOneId = txInspirationDAO.insert("this is the inspiration text1", inspirationCategoryOneId, Long.parseLong("1"), new Date(), new Date());
+
+        Attachment attachment1 = txAttachmentDAO.getAttachment(attOneId);
+        Inspiration inspiration1 = txInspirationDAO.getInspiration(inspirationOneId);
+
+        Memmee memmee1 = new Memmee();
+        memmee1.setText("Memmee1");
+        memmee1.setDisplayDate(DateUtil.getDate(2012, 8, 9));
+        memmee1.setInspiration(inspiration1);
+        memmee1.setShareKey("myShareKey08101981");
+        memmee1.setAttachment(attachment1);
+        memmee1.setUserId(userId - 4);
+
+        Memmee inserted = client().resource(new MemmeeURLBuilder().setMethodURL("insertmemmee").setApiKeyParam("apiKey").build()).type(MediaType.APPLICATION_JSON).post(Memmee.class, memmee1);
+
+        Date initial = DateUtil.getDate(2014, 8, 10);
+
+        inserted.setText("Updated Memmee1");
+        inserted.setDisplayDate(initial);
+        Memmee updated = client().resource(new MemmeeURLBuilder().setMethodURL("updatememmeewithattachment").setApiKeyParam("apiKey").build()).type(MediaType.APPLICATION_JSON).put(Memmee.class, inserted);
+
+        List<Memmee> memmees = client().resource("/memmeerest/getmemmees?apiKey=apiKey")
+                .type(MediaType.APPLICATION_JSON)
+                .get(List.class);
+
+        assertThat(memmees, is(notNullValue()));
+        assertThat(memmees.size(), is(1));
+
+        assertThat(updated.getId(), equalTo(inserted.getId()));
+        assertThat(updated.getText(), equalTo("Updated Memmee1"));
+    }
+
+    @Test
     public void testShareMemmee() {
         memmeeId = insertTestData();
 

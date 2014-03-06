@@ -247,8 +247,14 @@ public class MemmeeResource {
             count = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                 public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
 
-                    int count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                            new Date(), new Date(), memmee.getShareKey(), attachment.getId(), themeId);
+                    int count = memmeeDao.update(
+                            memmee.getId(),
+                            memmee.getText(),
+                            new Date(),
+                            memmee.getDisplayDate(),
+                            memmee.getShareKey(),
+                            attachment.getId(),
+                            themeId);
 
                     memmeeDao.updateAttachment(attachment.getId(), attachment.getFilePath(), attachment.getType());
 
