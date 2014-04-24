@@ -1,1 +1,1 @@
-ssh ec2-user@memmee.com
+ssh ec2-user@app.memmee.com

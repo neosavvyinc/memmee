@@ -296,9 +296,13 @@ public class MemmeeResource {
 
         try {
 
-
-            count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                    new Date(), new Date(), memmee.getShareKey(), memmee.getAttachment().getId(), memmee.getTheme().getId());
+            if( memmee.getAttachment() == null ) {
+                count = memmeeDao.update(memmee.getId(), memmee.getText(),
+                        new Date(), new Date(), memmee.getShareKey(), null, memmee.getTheme().getId());
+            } else {
+                count = memmeeDao.update(memmee.getId(), memmee.getText(),
+                        new Date(), new Date(), memmee.getShareKey(), memmee.getAttachment().getId(), memmee.getTheme().getId());
+            }
 
         } catch (DBIException dbException) {
             LOG.error("DB EXCEPTION", dbException);
