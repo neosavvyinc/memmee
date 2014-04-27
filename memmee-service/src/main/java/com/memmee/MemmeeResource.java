@@ -243,7 +243,7 @@ public class MemmeeResource {
         try {
 
             final Attachment attachment = memmee.getAttachment();
-            final Long themeId = memmee.getTheme() != null ? memmee.getTheme().getId() : null;
+            final Long themeId = getOrCreateMemmeeTheme(memmee.getTheme());
             count = memmeeDao.inTransaction(new Transaction<Integer, TransactionalMemmeeDAO>() {
                 public Integer inTransaction(TransactionalMemmeeDAO tx, TransactionStatus status) throws Exception {
 
@@ -296,7 +296,7 @@ public class MemmeeResource {
 
         try {
 
-            final Long themeId = memmee.getTheme() != null ? memmee.getTheme().getId() : null;
+            final Long themeId = getOrCreateMemmeeTheme(memmee.getTheme());
 
             if( memmee.getAttachment() == null ) {
                 count = memmeeDao.update(memmee.getId(), memmee.getText(),
