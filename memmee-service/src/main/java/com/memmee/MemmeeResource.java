@@ -296,12 +296,14 @@ public class MemmeeResource {
 
         try {
 
+            final Long themeId = memmee.getTheme() != null ? memmee.getTheme().getId() : null;
+
             if( memmee.getAttachment() == null ) {
                 count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                        new Date(), new Date(), memmee.getShareKey(), null, memmee.getTheme().getId());
+                        new Date(), new Date(), memmee.getShareKey(), null, themeId);
             } else {
                 count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                        new Date(), new Date(), memmee.getShareKey(), memmee.getAttachment().getId(), memmee.getTheme().getId());
+                        new Date(), new Date(), memmee.getShareKey(), memmee.getAttachment().getId(), themeId);
             }
 
         } catch (DBIException dbException) {
