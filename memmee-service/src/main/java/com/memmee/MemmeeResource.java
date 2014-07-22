@@ -300,10 +300,10 @@ public class MemmeeResource {
 
             if( memmee.getAttachment() == null ) {
                 count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                        new Date(), new Date(), memmee.getShareKey(), null, themeId);
+                        new Date(), memmee.getDisplayDate(), memmee.getShareKey(), null, themeId);
             } else {
                 count = memmeeDao.update(memmee.getId(), memmee.getText(),
-                        new Date(), new Date(), memmee.getShareKey(), memmee.getAttachment().getId(), themeId);
+                        new Date(), memmee.getDisplayDate(), memmee.getShareKey(), memmee.getAttachment().getId(), themeId);
             }
 
         } catch (DBIException dbException) {
